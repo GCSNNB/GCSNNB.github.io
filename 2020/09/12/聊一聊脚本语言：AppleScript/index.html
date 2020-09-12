@@ -20,28 +20,39 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Leoolin">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="前言 笔者学习AppleScript的起因，是因为本人键盘修饰键的使用习惯和其他同事不同，笔者习惯于将「大小写修饰键」和「Ctrl键」互调位置，以至于习惯默认修饰键配置的同事在我的电脑上进行调试，总是忍不住感叹一声：“这TM是人用的吗？”相信了解iOS开发的小伙伴们都知道，Ctrl + Command + 上下，可以切换.h和.m文件，但是在笔者的键盘上，执行这一操作时，不但没有任何的效果，还会把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊一聊脚本语言：AppleScript">
+<meta property="og:url" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/index.html">
 <meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="前言 笔者学习AppleScript的起因，是因为本人键盘修饰键的使用习惯和其他同事不同，笔者习惯于将「大小写修饰键」和「Ctrl键」互调位置，以至于习惯默认修饰键配置的同事在我的电脑上进行调试，总是忍不住感叹一声：“这TM是人用的吗？”相信了解iOS开发的小伙伴们都知道，Ctrl + Command + 上下，可以切换.h和.m文件，但是在笔者的键盘上，执行这一操作时，不但没有任何的效果，还会把">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/1.png">
+<meta property="og:image" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/2.png">
+<meta property="og:image" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/3.png">
+<meta property="og:image" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/5.png">
+<meta property="og:image" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/6.png">
+<meta property="article:published_time" content="2020-09-12T13:59:16.000Z">
+<meta property="article:modified_time" content="2020-09-12T16:10:33.165Z">
 <meta property="article:author" content="林辰">
+<meta property="article:tag" content="AppleScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/1.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Leoolin</title>
+  <title>聊一聊脚本语言：AppleScript | Leoolin</title>
   
 
 
@@ -139,9 +150,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -157,10 +169,9 @@
       <meta itemprop="name" content="Leoolin">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/" class="post-title-link" itemprop="url">聊一聊脚本语言：AppleScript</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          聊一聊脚本语言：AppleScript
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -211,7 +222,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>笔者学习AppleScript的起因，是因为本人键盘修饰键的使用习惯和其他同事不同，笔者习惯于将「大小写修饰键」和「Ctrl键」互调位置，以至于习惯默认修饰键配置的同事在我的电脑上进行调试，总是忍不住感叹一声：<br>“这TM是人用的吗？”<br>相信了解iOS开发的小伙伴们都知道，Ctrl + Command + 上下，可以切换.h和.m文件，但是在笔者的键盘上，执行这一操作时，不但没有任何的效果，还会把键盘设置成了大写模式，在一次又一次，同事怒吼的咆哮后，笔者痛定思通，决心要解决这个问题，在如何不改变自己键盘使用习惯的前提下，让来调试代码的同事们也感到如使用自己键盘般的流畅和丝滑呢？</p>
 <p>于是，就有就有了这篇<code>聊一聊脚本语言：AppleScript</code></p>
 </blockquote>
@@ -366,161 +377,40 @@
 <p>参考资料：</p>
 <p><a target="_blank" rel="noopener" href="https://sspai.com/post/43758">手把手教你用 AppleScript 模拟鼠标键盘操作，实现 macOS 系统的自动化操作</a></p>
 <h3 id><a href="#" class="headerlink" title></a></h3>
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/AppleScript/" rel="tag"># AppleScript</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" class="post-title-link" itemprop="url">App Clip离落地有多远？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-09-10 18:18:36 / Modified: 21:08:07" itemprop="dateCreated datePublished" datetime="2020-09-10T18:18:36+08:00">2020-09-10</time>
-            </span>
-
-          
-            <span id="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" class="post-meta-item leancloud_visitors" data-flag-title="App Clip离落地有多远？" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一：前言"><a href="#一：前言" class="headerlink" title="一：前言"></a>一：前言</h2><p>之前也陆陆续续看过一些介绍App Clip的技术文章，发现这些文章几乎千篇一律，差不多都是「苹果技术文档」和「WWDC视频截图」的拼装，以及「WWDC视频讲解」和「网上同类文章」的复述，却很少谈及<em>App Clip</em>真正落地的业务场景和涉及的技术问题。</p>
-<p>App Clip发布后，我开始负责App Clip的技术调研工作，也是沾团队的光，约到了一个App Clip lab，感受了一把白天看WWDC，晚上和WWDC讲解人一对一交流的体验，虽然我们团队最后决定先暂停App Clip的开发，但是在调研App Clip的过程中，也确实发现了很多值得思考之处。</p>
-<p>先说一个结论：不要因为看了WWDC和一些技术文章，就对App Clip有过分美好的幻想，至少从目前来看，App Clip的坑还很多。</p>
-<h2 id="二：业务原因"><a href="#二：业务原因" class="headerlink" title="二：业务原因"></a>二：业务原因</h2><h3 id="2-1-业务场景少"><a href="#2-1-业务场景少" class="headerlink" title="2.1 业务场景少"></a>2.1 业务场景少</h3><ol>
-<li><p>线下支付</p>
-<p>看过WWDC视频的小伙伴们可能已经察觉到了，视频中介绍的场景90%以上都是线下支付的场景，不知道苹果的本意是不是希望通过App Clip去抢占o2o市场，虽然说的是「不用安装商家App」即可通过App Clip享受便捷服务，快速完成下单。可在中国，用户绝大部分的时候本来就不需要下载商家App，难道小程序不香嘛？况且就算真的有这种需求，目前能够满足的也仅仅是iOS 14系统以上的iOS用户。所以这种线下支付的场景，至少在目前看来，App Clip甚至称不上现有方案的一个<em>有效替代方案</em>。</p>
-</li>
-<li><p>线上拉新</p>
-<p>既然线下支付推进困难重重，那肯定很多人会把目光重新看向线上场景。因为App Clip具备「及时可用」的特点，让用户不用下载完整的App即可享受到App的部分功能，那不妨就把App Clip做为一个拉新的入口，把Clip当做「试用装」吸引用户，等用户习惯了，再引导用户下载App。理想虽然很美好，可现实中怎么把「试用装」交到用户手中呢？我们知道，App Clip的调用场景目前主要就5种，二维码、Safari Smart Banner、NFC、Map和Message。</p>
-<p>其中NFC需要物理介质，Map需要实体店，它们对于纯线上的App来说很难找到应用的场景。</p>
-<p>Message更不用说了，首先国人对Message聊天的需求本来就不大，也总不能群发带Clip的短信给用户吧？</p>
-<p>对二维码，我们是抱有美好的期待的，希望用户通过第三方SDK将二维码分享给好友，然后好友通过二维码调起App Clip，逻辑满分。但尴尬的是，App Clip的二维码，只能通过「系统相机」才能调起。我相信绝大部分的人看到二维码，第一反应都是拿微信去扫一扫，想要培养用户使用「系统相机」扫码的习惯恐怕很难。</p>
-<p>那最后剩下的就是Safari这种方式了，这就需要我们想方设法的让用户在Safari里打开这个链接，注意，必须是Safari里打开，在第三方App里的WebView是没有办法显示Smart Banner的，自然也就没办法调起App Clip。</p>
-</li>
-</ol>
-<h3 id="2-2-操作路径长"><a href="#2-2-操作路径长" class="headerlink" title="2.2 操作路径长"></a>2.2 操作路径长</h3><p>即便Safari貌似是纯线上App最适用的场景了，但是这种方式还存在一个问题，那就是用户的操作路径过长。以第三方分享为例，用户在第三方App接受到好友分享的链接后，打开Clip最短的操作路径可能如下：</p>
-<ul>
-<li>打开好友分享的链接，进入到内容页；</li>
-<li>点击更多按钮，选择在Safari中打开；</li>
-<li>点击Safari中Smart Banner上的Open按钮，调起Clip Card；</li>
-<li>点击Clip Card上的Open按钮，调起App Clip；</li>
-</ul>
-<p>在引导用户通过Safari打开这步估计就足够劝退大部分的用户了…</p>
-<h2 id="三：技术原因"><a href="#三：技术原因" class="headerlink" title="三：技术原因"></a>三：技术原因</h2><p>即便我们不考虑业务场景，单纯从技术角度看，实现一个App Clip本身恐怕也不会是一个轻松的过程。</p>
-<ol>
-<li><p>代码拆分</p>
-<p>苹果希望App Clip和App提供一致的体验，刚看完WWDC的视频，一开始真的会给人一种实现一个App Clip 「So Easy」的感觉，只要复用原有的工程，随便勾勾选选，把文件加到Clip的Target下，一个精美小巧的App Clip就呈现在眼前了。</p>
-<p>可事实上呢？通常我们需要尽可能复用现有的业务来开发Clip，可除非你所在的项目业务足够简单，或者组件化做的足够彻底，否则你会发现摘Clip的代码是一件几乎无法实现的事情，很可能需要先做大量的技术重构。当然你也可以将原有代码复制出来，重写一份，可是这样下来，为了保持与完整App的功能一致性，就需要付出维护两套代码的时间成本。</p>
-</li>
-<li><p>包大小限制</p>
-<p>10M是App Clip包大小的上限，对于现在动辄一二百M的应用来说，如何用10M来完成目标功能，也是一个不小的挑战。一方面还是上面提到的代码拆分的问题，如果组件化时，基础层划分的颗粒度不够细致，很可能导致上层业务依赖的基础组件过多，从而影响包大小。另一方面，如果App Clip的功能一直是增量的，那必然会导致未来的某一天会超过10M的限制，为避免这一问题，还需要根据新增功能对包大小的影响，配合产品完成现有业务功能的调整。</p>
-</li>
-<li><p>后台活动</p>
-<p>App Clip不支持后台处理活动，这里的后台活动不单指<code>beginBackgroundTaskWithExpirationHandler:</code>这种后台任务，经过实际测试，甚至连「正常的网络请求」以及「NSData转 NSString」等操作，在后台执行都是不是完全可靠的，再结合视频里说的：</p>
-<blockquote>
-<p>In addition, app Clip can’t perform background activity, such as doing background networking with URLSession or maintaining Bluetooth connections when the app clip isn’t in use.</p>
-</blockquote>
-<p>对于不能执行的<code>background activity</code>目前包括什么，咱无从得知，但从安全的角度看，尽量不在后台搞事情，肯定是第一原则，只是不知道把后台的监听都去掉，你的项目是否还能work~</p>
-</li>
-<li><p>唯一标识</p>
-<p>如果想把App Clip当做拉新的手段，那可能就会涉及到一个问题：如果识别出当前App用户曾是App Clip用户？</p>
-<p>我们知道如果用户手机上存在App Clip的情况下，又下载了对应的App，是可以进行数据迁移的。那如果用户的Clip因为一段时间未使用被系统自动删除了，此后用户又下载了App，该怎么设置用户的唯一标识呢？</p>
-<p>要知道Clip在被系统删除时，也会清空其存储在Keychain中的数据，至于IDFA，Shared Keychain那就更别想了，Clip压根不开放这个能力。当然肯定还是有一些其他方式能够对用户进行唯一标识，比如有些防作弊的SDK，就可以标识唯一的设备ID，这就看大家各显神通了。当然，如果不关心这种case的话就另说了。</p>
-</li>
-<li><p>第三方App调起</p>
-<p>App Clip可以通过Url Scheme或者Universal Link调起第三方App，但是第三方App却不能通过Url Scheme和Universal Link调起App Clip，说白了就是能调出去但是回不来。第三方登录、第三方分享、第三方支付可能都会受到影响。</p>
-</li>
-<li><p>不支持企业包</p>
-<p>企业证书是没法配置App Clip的，如果项目是使用同一个工程，通过不同的configuration切换企业版和正式版，可能还需要注意一个额外的问题，App Clip是通过<code>Build Phases</code>中的<code>Embed App Clip</code>集成到主Target中的，而<code>Build Phases</code>又没办法区分configuration，如果想区分版本去添加<code>Embed App Clip</code>，就只能打企业包时，单独去修改Project文件了。</p>
-</li>
-<li><p>Pods</p>
-<p>可能目前CocoaPods对App Clip的支持还不够完善，写Demo时发现如果App Clip需要依赖Pods的话，<code>pod install</code>后，在<code>Build Phases</code>中是不会自动生成<code>Embed Pods Frameworks</code>的，这就会导致编译时报<code>image not found</code>的错误，目前解决的办法就是手动添加一下<code>Embed Pods Frameworks</code>。</p>
-</li>
-</ol>
-<h2 id="四：结语"><a href="#四：结语" class="headerlink" title="四：结语"></a>四：结语</h2><p>当然，对于App Clip的最终落地来说，技术原因终归是次要的，最关键还要看如何找到适合自己产品的业务场景。在苹果线上培训的时候，认识了一个团队的开发，说他们想用App Clip做AR，当时我就觉得这个想法还挺好的。可能对于很多产品来说没有这么新颖的玩法，其实倒也不必太在意，对于苹果来说他们也很清楚目前的现状，据他们自己说也在和美国总部沟通，当然结果如何，咱不得而知，但毕竟留个念想嘛，万一未来App Clip的入口放开了呢~</p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" rel="prev" title="App Clip离落地有多远？">
+      <i class="fa fa-chevron-left"></i> App Clip离落地有多远？
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -567,6 +457,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AppleScript%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">AppleScript的实践应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%BF%98%E5%8E%9F%E4%BF%AE%E9%A5%B0%E9%94%AE%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">实践：还原修饰键默认设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AppleScript%E7%9A%84%E5%B8%B8%E7%94%A8%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">AppleScript的常用概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AppleScript%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">4.</span> <span class="nav-text">AppleScript基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9D%97"><span class="nav-number">4.1.</span> <span class="nav-text">1.基本模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">4.1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="nav-number">4.1.2.</span> <span class="nav-text">变量和属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.1.3.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.1.4.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-%E6%95%B0%E7%BB%84"><span class="nav-number">4.1.5.</span> <span class="nav-text">List(数组)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Record%EF%BC%88%E9%94%AE%E5%80%BC%E5%AF%B9%EF%BC%89"><span class="nav-number">4.1.6.</span> <span class="nav-text">Record（键值对）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.2.</span> <span class="nav-text">2.控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#considering-ignoring"><span class="nav-number">4.2.1.</span> <span class="nav-text">considering&#x2F;ignoring</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#try-error"><span class="nav-number">4.2.2.</span> <span class="nav-text">try-error</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if"><span class="nav-number">4.2.3.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repeat-exit"><span class="nav-number">4.2.4.</span> <span class="nav-text">repeat-exit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repeat-number-times"><span class="nav-number">4.2.5.</span> <span class="nav-text">repeat (number) times</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repeat-while-%E5%BD%93%E5%9E%8B%E5%BE%AA%E7%8E%AF"><span class="nav-number">4.2.6.</span> <span class="nav-text">repeat while(当型循环)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%BE%AA%E7%8E%AF"><span class="nav-number">4.2.7.</span> <span class="nav-text">数值循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-to-List"><span class="nav-number">4.2.8.</span> <span class="nav-text">String to List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#record%E9%81%8D%E5%8E%86"><span class="nav-number">4.2.9.</span> <span class="nav-text">record遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%87%BD%E6%95%B0%E6%9E%84%E9%80%A0"><span class="nav-number">4.3.</span> <span class="nav-text">3.函数构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%84%9A%E6%9C%AC%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.4.</span> <span class="nav-text">4.脚本对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E7%BB%93%E5%B0%BE"><span class="nav-number">5.</span> <span class="nav-text">写在结尾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
