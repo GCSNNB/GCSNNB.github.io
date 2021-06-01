@@ -20,13 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="标准输入输出123456789#include &lt;iostream&gt;int main() &amp;#123;    std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;    int v1 &#x3D; 0, v2 &#x3D; 0;    std::cin &gt;&gt; v1 &gt;&gt; v2;    std::c">
+<meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer学习笔记">
 <meta property="og:url" content="http://example.com/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="标准输入输出123456789#include &lt;iostream&gt;int main() &amp;#123;    std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;    int v1 &#x3D; 0, v2 &#x3D; 0;    std::cin &gt;&gt; v1 &gt;&gt; v2;    std::c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-01T06:48:46.000Z">
-<meta property="article:modified_time" content="2021-06-01T06:49:51.247Z">
+<meta property="article:modified_time" content="2021-06-01T10:15:27.856Z">
 <meta property="article:author" content="林辰">
 <meta name="twitter:card" content="summary">
 
@@ -172,7 +174,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-01 14:48:46 / Modified: 14:49:51" itemprop="dateCreated datePublished" datetime="2021-06-01T14:48:46+08:00">2021-06-01</time>
+              <time title="Created: 2021-06-01 14:48:46 / Modified: 18:15:27" itemprop="dateCreated datePublished" datetime="2021-06-01T14:48:46+08:00">2021-06-01</time>
             </span>
 
           
@@ -207,7 +209,92 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">int</span> v1 = <span class="number">0</span>, v2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1 &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2 &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>cin（see-in）：标准输入</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入v1的值</span></span><br><span class="line"><span class="keyword">int</span> v1 = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; v1;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cout(see-out)：标准输出</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出字符串&quot;Enter two numbers:&quot;</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="命名空间（namespace）"><a href="#命名空间（namespace）" class="headerlink" title="命名空间（namespace）"></a>命名空间（namespace）</h1></li>
+</ul>
+<p>命名空间的出现是为了避免如下的问题：</p>
+<p>我们声明了同名函数<code>dance</code>，那么如何调用指定的某个函数呢？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Somebody &#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Somebody dances&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;I dance&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用命名空间，指定调用的函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dance(); <span class="comment">// 输出：I dance</span></span><br><span class="line">    Somebody::dance(); <span class="comment">// 输出: Somebody dances</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="引用（References）"><a href="#引用（References）" class="headerlink" title="引用（References）"></a>引用（References）</h1><blockquote>
+<p>引用就是一个对象的别名</p>
+<p>A reference is not an object. Instead, a reference is just another name for an already existing object.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line">    <span class="keyword">int</span> &amp;refVal = ival;</span><br><span class="line">    refVal = <span class="number">512</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ival &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 512</span></span><br><span class="line">    <span class="keyword">int</span> &amp;refVal2; <span class="comment">// error: references must be initialized.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>引用必须初始化</li>
+<li>一旦初始化，不可以再将引用指向其他对象</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;refVal4 = <span class="number">10</span>; <span class="comment">// error: initializer must be an object </span></span><br><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal5 = dval; <span class="comment">// error: initializer must be an int object</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercises Section 2.3.1</strong></p>
+<p><strong>Exercise 2.15:</strong> Which of the following definitions, if any, are invalid? Why?</p>
+<p><strong>(a)</strong> int ival = 1.01;</p>
+<p><strong>(b)</strong> int &amp;rval1 = 1.01;</p>
+<p><strong>(c)</strong> int &amp;rval2 = ival;</p>
+<p><strong>(d)</strong> int &rval3;</p>
+</blockquote>
+<p>(a) ✅（b）❌  初始化赋值必须是int对象</p>
+<p> (c)  ✅ （d）❌ 引用必须被初始化</p>
+<h1 id="指针（Pointers）"><a href="#指针（Pointers）" class="headerlink" title="指针（Pointers）"></a>指针（Pointers）</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip1, *ip2; <span class="comment">// both ip1 and ip2 are pointers to int </span></span><br><span class="line"><span class="keyword">double</span> dp, *dp2; <span class="comment">// dp2 is a pointer to double; dp is a double</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>与引用不同，指针本身就是一个对象</li>
+<li>在指针的生命周期中，可以指向不同的对象</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p holds the address of ival; p is a pointer to ival</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指针存放的值是另一个对象的地址</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval;</span><br><span class="line"><span class="keyword">double</span> *pd = &amp;dval; <span class="comment">// ok: initializer is the address of a double</span></span><br><span class="line"><span class="keyword">double</span> *pd2 = pd; <span class="comment">// ok: initializer is a pointer to double</span></span><br><span class="line"><span class="keyword">int</span> *pi = pd; <span class="comment">// error: types of pi and pd differ</span></span><br><span class="line">pi = &amp;dval; <span class="comment">// error: assigning the address of a double to a pointer to int</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指针类型必须和其指向的地址中存放的对象的类型相同</li>
+</ul>
+<blockquote>
+<p>注：&amp; 和 * 有多种含义</p>
+<p>&amp;、*可以当做声明使用，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span>&amp;r=i; <span class="comment">//&amp; *followsatypeandispartofadeclaration; r is a *reference*</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p; <span class="comment">// * *follows a type and is part of a declaration; p is a *pointer*</span></span><br></pre></td></tr></table></figure>
+
+<p>&amp;也可以作取地址符使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = &amp;i； <span class="comment">// &amp; is used in an expression as the address-of operator.</span></span><br></pre></td></tr></table></figure>
+
+<p>*可以作取值符号使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*p = i; <span class="comment">// * is used in an expression as the dereference operator</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = *p; <span class="comment">// &amp; is part of the declaration; * is the dereference operator</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol>
+<li><p>使用指针访问一个对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p holds the address of ival; p is a pointer to ival </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">// * yields the object to which p points; prints 42</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用指针指向空指针（Null Pointers）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>; <span class="comment">// equivalent to int *p1 = 0;</span></span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>; <span class="comment">// directly initializes p2 from the literal constant 0 </span></span><br><span class="line"><span class="comment">// must #include cstdlib</span></span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>; <span class="comment">// equivalent to int *p3 = 0;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="void指针（void-Pointers）"><a href="#void指针（void-Pointers）" class="headerlink" title="void指针（void* Pointers）"></a>void指针（void* Pointers）</h2><p>void指针能够指向任意类型的对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> obj = <span class="number">3.14</span>, *pd = &amp;obj;</span><br><span class="line"><span class="comment">// ok: void* can hold the address value of any data pointer type</span></span><br><span class="line"><span class="keyword">void</span> *pv = &amp;obj; <span class="comment">// obj can be an object of any type</span></span><br><span class="line">pv = pd; <span class="comment">// pv can hold a pointer to any type</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercise 2.20:</strong> What does the following program do?</p>
+<p>int i = 42;<br>int *p1 = &i; </p>
+<p>*p1 = *p1 * *p1;</p>
+</blockquote>
+<p>*p1 = 42 * 42</p>
+
     </div>
 
     
@@ -225,7 +312,10 @@
     <a href="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/" rel="prev" title="聊一聊脚本语言：AppleScript">
       <i class="fa fa-chevron-left"></i> 聊一聊脚本语言：AppleScript
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="汇编语言学习笔记">
+      汇编语言学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -285,6 +375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">标准输入输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%EF%BC%88namespace%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">命名空间（namespace）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%EF%BC%88References%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">引用（References）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E9%92%88%EF%BC%88Pointers%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">指针（Pointers）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#void%E6%8C%87%E9%92%88%EF%BC%88void-Pointers%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">void指针（void* Pointers）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -298,7 +389,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
