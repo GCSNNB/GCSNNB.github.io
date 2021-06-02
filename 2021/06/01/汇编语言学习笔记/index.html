@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png">
 <meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png">
 <meta property="article:published_time" content="2021-06-01T06:56:22.000Z">
-<meta property="article:modified_time" content="2021-06-01T16:27:21.836Z">
+<meta property="article:modified_time" content="2021-06-02T02:05:21.464Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-02 00:27:21" itemprop="dateModified" datetime="2021-06-02T00:27:21+08:00">2021-06-02</time>
+                <time title="Modified: 2021-06-02 10:05:21" itemprop="dateModified" datetime="2021-06-02T10:05:21+08:00">2021-06-02</time>
               </span>
 
           
@@ -270,7 +270,28 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2>
+<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2><p>错误认识：</p>
+<p>内存被划分成了一个一个的段，每一个段有一个段地址</p>
+<p>其实：</p>
+<p>内存并没有分段，段的划分来自于CPU，由于8086CPU用“段地址 ✖️ 16 + 偏移地址 = 物理地址”的方式给出内存单元的物理地址，使得我们可以用分段的方式来管理内存。</p>
+<ul>
+<li>段地址 ✖️ 16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；</li>
+<li>偏移地址为16，16位的地址的寻址能力为64k，所以一个段的长度最大为64k。</li>
+</ul>
+<blockquote>
+<p>如果给定一个段地址，仅通过变化偏移地址来进行寻址，最多可以定位多少内存单元？</p>
+<p>结论：偏移地址16位，变化范围为0~FFFFH，仅用偏移地址来寻址最多可寻64k个内存单元。</p>
+<p>比如：给定段地址1000H，用偏移地址寻址，CPU的寻址范围为：10000H ~ 1FFFFH。</p>
+</blockquote>
+<p>数据在21F60H内存中。对于8086PC机的两种描述：</p>
+<ol>
+<li>数据存在内存2000：1F60单元中；</li>
+<li>数据存在内存的2000段中的1F60H单元中。</li>
+</ol>
+<blockquote>
+<p>注：段是可以人为定义的，可根据需要，将地址连续、起始地址为16的倍数的一组内存单元定义为一个段。</p>
+</blockquote>
+
     </div>
 
     
@@ -368,7 +389,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

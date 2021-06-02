@@ -145,6 +145,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（二）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-02 10:06:54 / Modified: 10:26:49" itemprop="dateCreated datePublished" datetime="2021-06-02T10:06:54+08:00">2021-06-02</time>
+            </span>
+
+          
+            <span id="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（二）" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> *pi = &amp;ival; <span class="comment">// pi points to an int</span></span><br><span class="line"><span class="keyword">int</span> **ppi = &amp;pi; <span class="comment">// ppi points to a pointer to an int</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-02 上午10.14.16"></p>
+<h1 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;<span class="comment">//p isa pointer to int </span></span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;<span class="comment">// r is a reference to the pointer p</span></span><br><span class="line">r = &amp;i; <span class="comment">// r refers to a pointer; assigning &amp;i to r makes p point to i</span></span><br><span class="line">*r = <span class="number">0</span>; <span class="comment">// dereferencing r yields i, the object to which p points; changes i to 0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如何理解<code>int *&amp;r = p;</code>？</p>
+<p>从右往左看，最靠近<code>r</code>的是<code>&amp;</code>，说明<code>r</code>是一个引用，然后是<code>*</code>，说明<code>r</code>指向指针，最后是<code>int</code>，说明r是一个指向int类型指针的引用。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Exercises Section 2.3.3<br>Exercise 2.25:</strong> Determine the types and values of each of the following variables.</p>
+<p><strong>(a)</strong> int* ip, &amp;r = ip;</p>
+<p><strong>(b)</strong> int i, *ip = 0; </p>
+<p><strong>(c)</strong> int* ip, ip2;</p>
+<p>(a) ip：int类型的指针,r：指向int类型指针的引用</p>
+<p>(b) i：int类型的变量，ip：int类型的指针</p>
+<p>(c)ip：int类型的指针，ip2：int类型的变量</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -254,7 +352,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-02 00:27:21" itemprop="dateModified" datetime="2021-06-02T00:27:21+08:00">2021-06-02</time>
+                <time title="Modified: 2021-06-02 10:05:21" itemprop="dateModified" datetime="2021-06-02T10:05:21+08:00">2021-06-02</time>
               </span>
 
           
@@ -339,7 +437,28 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2>
+<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2><p>错误认识：</p>
+<p>内存被划分成了一个一个的段，每一个段有一个段地址</p>
+<p>其实：</p>
+<p>内存并没有分段，段的划分来自于CPU，由于8086CPU用“段地址 ✖️ 16 + 偏移地址 = 物理地址”的方式给出内存单元的物理地址，使得我们可以用分段的方式来管理内存。</p>
+<ul>
+<li>段地址 ✖️ 16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；</li>
+<li>偏移地址为16，16位的地址的寻址能力为64k，所以一个段的长度最大为64k。</li>
+</ul>
+<blockquote>
+<p>如果给定一个段地址，仅通过变化偏移地址来进行寻址，最多可以定位多少内存单元？</p>
+<p>结论：偏移地址16位，变化范围为0~FFFFH，仅用偏移地址来寻址最多可寻64k个内存单元。</p>
+<p>比如：给定段地址1000H，用偏移地址寻址，CPU的寻址范围为：10000H ~ 1FFFFH。</p>
+</blockquote>
+<p>数据在21F60H内存中。对于8086PC机的两种描述：</p>
+<ol>
+<li>数据存在内存2000：1F60单元中；</li>
+<li>数据存在内存的2000段中的1F60H单元中。</li>
+</ol>
+<blockquote>
+<p>注：段是可以人为定义的，可根据需要，将地址连续、起始地址为16的倍数的一组内存单元定义为一个段。</p>
+</blockquote>
+
       
     </div>
 
@@ -957,7 +1076,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
