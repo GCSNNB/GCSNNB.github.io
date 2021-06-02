@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-02 10:06:54 / Modified: 10:26:49" itemprop="dateCreated datePublished" datetime="2021-06-02T10:06:54+08:00">2021-06-02</time>
+              <time title="Created: 2021-06-02 10:06:54 / Modified: 19:24:51" itemprop="dateCreated datePublished" datetime="2021-06-02T10:06:54+08:00">2021-06-02</time>
             </span>
 
           
@@ -224,6 +224,132 @@
 <p>(b) i：int类型的变量，ip：int类型的指针</p>
 <p>(c)ip：int类型的指针，ip2：int类型的变量</p>
 </blockquote>
+<h1 id="常量限定符（const）"><a href="#常量限定符（const）" class="headerlink" title="常量限定符（const）"></a>常量限定符（const）</h1><ul>
+<li>const修饰的对象不可修改</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> bufSize = <span class="number">512</span>; <span class="comment">// input buffer size</span></span><br><span class="line">bufSize = <span class="number">512</span>; <span class="comment">// error: attempt to write to const object</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>const修饰的对象必须初始化</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = get_size(); <span class="comment">// ok: initialized at run time</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> j = <span class="number">42</span>; <span class="comment">// ok: initialized at compile time </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> k; <span class="comment">// error: k is uninitialized const</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在多个文件中使用const修饰的对象</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file_1.cc defines and initializes a const that is accessible to other files </span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">int</span> bufSize = fcn();</span><br><span class="line"><span class="comment">// file_1.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">int</span> bufSize; <span class="comment">// same bufSize as defined in file_1.cc</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercises Section 2.4<br> Exercise 2.26:</strong> Which of the following are legal? For those that are illegal,</p>
+<p>explain why.</p>
+<p><strong>(a)</strong> const int buf;</p>
+<p><strong>(b)</strong> int cnt = 0;</p>
+<p><strong>(c)</strong> const int sz = cnt; </p>
+<p><strong>(d)</strong> ++cnt; ++sz;</p>
+<p>(a)：❌ (d)：++cnt;（✅）++sz;（❌)</p>
+</blockquote>
+<h2 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">1024</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = ci; <span class="comment">// ok: both reference and underlying object are const </span></span><br><span class="line">r1 = <span class="number">42</span>; <span class="comment">// error: r1 is a reference to const</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = ci; <span class="comment">// error: non const reference to a const object</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常量引用不可修改值</li>
+<li>非常量引用不可指向常量对象</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = i; <span class="comment">// we can bind a const int&amp; to a plain int object const int &amp;r2 = 42; // ok: r1 is a reference to const</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r3 = r1 * <span class="number">2</span>; <span class="comment">// ok: r3 is a reference to const</span></span><br><span class="line"><span class="keyword">int</span> &amp;r4 = r * <span class="number">2</span>; <span class="comment">// error: r4 is a plain, non const reference</span></span><br></pre></td></tr></table></figure>
+
+<p>常量引用可以指向 <em>非常量对象</em>、<em>字面量</em>、<em>通用表达式</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ri = dval;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常量引用会自动强制类型转化</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> temp = dval; <span class="comment">// create a temporary const int from the double </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ri = temp; <span class="comment">// bind ri to that temporary</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常量指针（pointer-to-const）"><a href="#常量指针（pointer-to-const）" class="headerlink" title="常量指针（pointer to const）"></a>常量指针（pointer to const）</h2><blockquote>
+<p>指向常量的指针，指针地址可以修改，但地址存放的值不可以修改</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> pi = <span class="number">3.14</span>; <span class="comment">// pi is const; its value may not be changed</span></span><br><span class="line"><span class="keyword">double</span> *ptr = &amp;pi; <span class="comment">// error: ptr is a plain pointer</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *cptr = &amp;pi; <span class="comment">// ok: cptr may point to a double that is const </span></span><br><span class="line">*cptr = <span class="number">42</span>; <span class="comment">// error: cannot assign to *cptr</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指向常量的指针地址存放的值不可修改</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>; <span class="comment">// dval is a double; its value can be changed</span></span><br><span class="line">cptr = &amp;dval; <span class="comment">// ok: but can&#x27;t change dval through cptr</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指向常量的指针可以指向非常量对象</li>
+</ul>
+<h2 id="指针常量（const-Pointers）"><a href="#指针常量（const-Pointers）" class="headerlink" title="指针常量（const Pointers）"></a>指针常量（const Pointers）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> errNumb = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> curErr = &amp;errNumb; <span class="comment">// curErr will always point to errNumb const </span></span><br><span class="line"><span class="keyword">double</span> pi = <span class="number">3.14159</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *<span class="keyword">const</span> pip = &amp;pi; <span class="comment">// pip is a const pointer to a const object</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从右往左看：<code>curErr</code>被<code>const</code>修饰，不可修改</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*pip = <span class="number">2.72</span>; <span class="comment">// error: pip is a pointer to const</span></span><br><span class="line"><span class="comment">// if the object to which curErr points (i.e., errNumb) is nonzero </span></span><br><span class="line"><span class="keyword">if</span> (*curErr) &#123;</span><br><span class="line">*curErr = <span class="number">0</span>; <span class="comment">// ok: reset the value of the object to which curErr is bound &#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercises Section 2.4.2<br> Exercise 2.27:</strong> Which of the following initializations are legal? Explain why.</p>
+<p> <strong>(a)</strong> int i = -1, &amp;r = 0;<br> <strong>(b)</strong> int <em>const p2 = &i2;<br> <strong>(c)</strong> const int i = -1, &amp;r = 0;<br> <strong>(d)</strong> const int *const p3 = &i2;<br> *</em>(e)** const int *p1 = &i2;<br> <strong>(f)</strong> const int &amp;const r2;<br> <strong>(g)</strong> const int i2 = i, &amp;r = i;</p>
+<p>(a)❌ 引用必须指向一个对象</p>
+<p>(f)  ❌常量必须初始化</p>
+</blockquote>
+<blockquote>
+<p><strong>Exercise 2.28:</strong> Explain the following definitions. Identify any that are illegal. </p>
+<p><strong>(a)</strong> int i, *const cp;<br><strong>(b)</strong> int *p1, *const p2;</p>
+<p><strong>(c)</strong> const int ic, &amp;r = ic; </p>
+<p><strong>(d)</strong> const int *const p3;</p>
+<p><strong>(e)</strong> const int *p;</p>
+<p>原因：常量初始化没有赋值</p>
+</blockquote>
+<h2 id="常量表达式"><a href="#常量表达式" class="headerlink" title="常量表达式"></a>常量表达式</h2><blockquote>
+<p>常量表达式是指能够在编译时确定值</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> max_files = <span class="number">20</span>; <span class="comment">// max_files is a constant expression</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> limit = max_files + <span class="number">1</span>; <span class="comment">// limit is a constant expression </span></span><br><span class="line"><span class="keyword">int</span> staff_size = <span class="number">27</span>; <span class="comment">// staff_size is not a constant expression</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sz = get_size(); <span class="comment">// sz is not a constant expression</span></span><br></pre></td></tr></table></figure>
+
+<p>尽管sz是一个常量，但是它的值只有在运行时才能确定，因此sz不是一个常量表达式</p>
+<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> mf = <span class="number">20</span>; <span class="comment">// 20 is a constant expression </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> limit = mf + <span class="number">1</span>; <span class="comment">// mf + 1 is a constant expression </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> sz = size(); <span class="comment">// ok only if size is a constexpr function</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>constexpr避免了出现上述<code>sz</code>的情况</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = <span class="literal">nullptr</span>; <span class="comment">// p is a pointer to a const int </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *q = <span class="literal">nullptr</span>; <span class="comment">// q is a const pointer to int</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>constexpr是top-level const，即指针本身是常量（low-level const是指针指向常量对象）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *np = <span class="literal">nullptr</span>; <span class="comment">// np is a constant pointer to int that is null</span></span><br><span class="line"><span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> i = <span class="number">42</span>; <span class="comment">// type of i is const int</span></span><br><span class="line"><span class="comment">// i and j must be defined outside any function</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i; <span class="comment">// p is a constant pointer to the const int i </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *p1 = &amp;j; <span class="comment">// p1 is a constant pointer to the int j</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
