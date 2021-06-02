@@ -20,17 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="计算机组成原理学习笔记">
-<meta property="og:url" content="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+  <meta name="description" content="2.9 段寄存器段地址存储在段寄存器  8086CPU有4个段寄存器 CS、DS、SS、ES  当8086CPU要访问内存时，由这4个段寄存器提供内存单元的段地址 2.10 CS和IPCS和IP是8086CPU中最关键的寄存器，他们指示当前要读取指令的地址。 CS：代码段寄存器 IP：指令指针寄存器  从CS:IP指向内存单元读取指令，读取的指令进入指令缓存器； IP &#x3D; IP + 所读取指令的长">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编语言学习笔记（二）">
+<meta property="og:url" content="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="2.9 段寄存器段地址存储在段寄存器  8086CPU有4个段寄存器 CS、DS、SS、ES  当8086CPU要访问内存时，由这4个段寄存器提供内存单元的段地址 2.10 CS和IPCS和IP是8086CPU中最关键的寄存器，他们指示当前要读取指令的地址。 CS：代码段寄存器 IP：指令指针寄存器  从CS:IP指向内存单元读取指令，读取的指令进入指令缓存器； IP &#x3D; IP + 所读取指令的长">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-01T06:56:34.000Z">
-<meta property="article:modified_time" content="2021-06-01T06:56:34.286Z">
+<meta property="og:image" content="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png">
+<meta property="og:image" content="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png">
+<meta property="article:published_time" content="2021-06-02T14:26:11.000Z">
+<meta property="article:modified_time" content="2021-06-02T15:41:22.505Z">
 <meta property="article:author" content="林辰">
+<meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png">
 
-<link rel="canonical" href="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -43,7 +49,7 @@
   };
 </script>
 
-  <title>计算机组成原理学习笔记 | Leoolin</title>
+  <title>汇编语言学习笔记（二） | Leoolin</title>
   
 
 
@@ -148,7 +154,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -161,7 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          计算机组成原理学习笔记
+          汇编语言学习笔记（二）
         </h1>
 
         <div class="post-meta">
@@ -170,12 +176,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-06-01 14:56:34" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:34+08:00">2021-06-01</time>
+              <time title="Created: 2021-06-02 22:26:11 / Modified: 23:41:22" itemprop="dateCreated datePublished" datetime="2021-06-02T22:26:11+08:00">2021-06-02</time>
             </span>
 
           
-            <span id="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记" title="Views">
+            <span id="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（二）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -190,8 +197,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -206,7 +213,86 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="2-9-段寄存器"><a href="#2-9-段寄存器" class="headerlink" title="2.9 段寄存器"></a>2.9 段寄存器</h2><p>段地址存储在段寄存器</p>
+<blockquote>
+<p>8086CPU有4个段寄存器</p>
+<p>CS、DS、SS、ES</p>
+</blockquote>
+<p>当8086CPU要访问内存时，由这4个段寄存器提供内存单元的段地址</p>
+<h2 id="2-10-CS和IP"><a href="#2-10-CS和IP" class="headerlink" title="2.10 CS和IP"></a>2.10 CS和IP</h2><p>CS和IP是8086CPU中最关键的寄存器，他们指示当前要读取指令的地址。</p>
+<p>CS：代码段寄存器</p>
+<p>IP：指令指针寄存器</p>
+<ol>
+<li>从CS:IP指向内存单元读取指令，读取的指令进入指令缓存器；</li>
+<li>IP = IP + 所读取指令的长度，从而指向下一条指令；</li>
+<li>执行指令。转到步骤1，重复这个过程。</li>
+</ol>
+<blockquote>
+<p>8086PC工作过程的简要描述</p>
+<ul>
+<li>在8086CPU加电或复位后（CPU刚开始工作时）CP和IP被设置为CS=FFFFH，IP=0000H。</li>
+<li>即在8086PC机刚启动时，CPU从内存FFFF0H单元中读取指令执行。</li>
+<li>FFFF0H单元中的指令是8086PC机开机后执行的第一条指令。</li>
+</ul>
+</blockquote>
+<ul>
+<li>在任何时候，CPU将CS、IP中的内容当作指令的段地址和偏移地址，用它们合成指令的物理地址，到内存中读取指令码，再执行。</li>
+</ul>
+<ul>
+<li>如果说，内存中的一段信息曾被CPU执行过，那么它所在的内存单元必然被CS:IP指向过。</li>
+</ul>
+<h2 id="2-11-修改CS、IP的指令"><a href="#2-11-修改CS、IP的指令" class="headerlink" title="2.11 修改CS、IP的指令"></a>2.11 修改CS、IP的指令</h2><ul>
+<li>在CPU中，程序员能够用指令读写的部件只有寄存器，程序员可以通过改变寄存器中的内容实现对CPU的控制。</li>
+<li>CPU从何处执行指令是由CS、IP中的内容决定的，程序员可以通过改变CS、IP中的内容来控制CPU执行目标指令。</li>
+</ul>
+<blockquote>
+<p>如何修改AX中的值？</p>
+<p>mov指令可以改变8086CPU大部分寄存器的值：传送指令</p>
+<ul>
+<li>mov指令不能用于设置CS、IP的值，8086CPU没有提供这样的功能</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>jmp段地址：偏移地址</p>
+<p>同时修改CS、IP的内容</p>
+<blockquote>
+<p>功能：用指令中给出的段地址修改CS，偏移地址修改IP。</p>
+</blockquote>
+<p>jmp 2AE3:3 &gt;&gt; 2AE33H</p>
+<p>jmp 3:0B16 &gt;&gt; 0B46H</p>
+</li>
+<li><p>仅修改IP的内容</p>
+<p>jmp某一合法寄存器</p>
+<p>jmp ax （类似于mov IP, ax）</p>
+<blockquote>
+<p>功能：用寄存器中的值修改IP</p>
+</blockquote>
+</li>
+</ul>
+<p>问题分析：CPU运行的流程</p>
+<p>（初始：CS=2000H，IP=0000H）</p>
+<p><img src="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-02 下午11.08.40"></p>
+<ol>
+<li>mov ax, 6622H    ;ax=6622H</li>
+<li>jmp 1000:3      ;CS=1000,IP=3</li>
+<li>mov ax,0000  ;ax=0000H</li>
+<li>mov bx,ax   ;bx=0000H</li>
+<li>jum bx ;IP=0000H</li>
+<li>mov ax,0123H ;ax=0123H</li>
+<li>转到第三步执行（死循环 ）</li>
+</ol>
+<h2 id="2-12-代码段"><a href="#2-12-代码段" class="headerlink" title="2.12 代码段"></a>2.12 代码段</h2><p>对于8086PC机，可以将长度为N(N&lt;=64kb)的一组代码，存在一组地址连续、起始地址为16的倍数的内存单元，这段内存是用来存放代码的，从而定义了一个代码段。</p>
+<p>例如：</p>
+<p>这段长度为10字节的字节的指令，存在从123B0H<del>123B9H的一组内存单元中，我们就可以认为，123B0H</del>123B9H这段内存单元是用来存放代码的，是一个代码段，它的段地址为123BH，长度为10字节。</p>
+<p><img src="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png" alt="截屏2021-06-02 下午11.24.18"></p>
+<h2 id="检测点2-3："><a href="#检测点2-3：" class="headerlink" title="检测点2.3："></a>检测点2.3：</h2><blockquote>
+<p>下面的3条指令执行后，CPU几次修改IP？都是什么时候？最后IP中的值是多少？</p>
+<p>mov ax,bx</p>
+<p>sub ax, ax</p>
+<p>jmp ax</p>
+</blockquote>
+<p>4次（第三次：读取jmp ax之后；第四次：执行jmp ax修改IP）, ax=0000H，IP=ax；</p>
+
     </div>
 
     
@@ -214,6 +300,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag"># 计算机基础</a>
+          </div>
 
         
 
@@ -221,13 +310,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="汇编语言学习笔记">
-      <i class="fa fa-chevron-left"></i> 汇编语言学习笔记
+    <a href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="C++ Primer学习笔记（二）">
+      <i class="fa fa-chevron-left"></i> C++ Primer学习笔记（二）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next" title="C++ Primer学习笔记（二）">
-      C++ Primer学习笔记（二） <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -287,6 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">2.9 段寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-CS%E5%92%8CIP"><span class="nav-number">2.</span> <span class="nav-text">2.10 CS和IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-11-%E4%BF%AE%E6%94%B9CS%E3%80%81IP%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">2.11 修改CS、IP的指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-12-%E4%BB%A3%E7%A0%81%E6%AE%B5"><span class="nav-number">4.</span> <span class="nav-text">2.12 代码段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E7%82%B92-3%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">检测点2.3：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
