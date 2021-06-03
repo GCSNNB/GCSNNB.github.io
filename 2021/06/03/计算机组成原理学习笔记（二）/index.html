@@ -20,24 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2.4 物理地址CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。 2.5 16位结构的CPU16位结构描述了一个CPU具有以下几个方面特征：  运算器一次最多可以处理16位的数据 寄存器的最大宽度为16位 寄存器和运算器之间的通路是16位的  2.6 8086CPU给出物理地址的方法8086有20位地址总线，可传送20位地址，寻址能力为1M 8086内部为16位结构，只">
+  <meta name="description" content="机器编程处理器和架构集的历史Inter x86处理器 精简指令集计算机RISC （Reduced  instruction set computer）  复杂指令集计算机 CISC（Complex instruction set computer）  RISC出现前，称以前的指令集为CISC（是一种嘲讽）    C, 汇编，机器码   c源文件(.c) – 编译器（Compiler）–&gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编语言学习笔记">
-<meta property="og:url" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="计算机组成原理学习笔记（二）">
+<meta property="og:url" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
-<meta property="og:description" content="2.4 物理地址CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。 2.5 16位结构的CPU16位结构描述了一个CPU具有以下几个方面特征：  运算器一次最多可以处理16位的数据 寄存器的最大宽度为16位 寄存器和运算器之间的通路是16位的  2.6 8086CPU给出物理地址的方法8086有20位地址总线，可传送20位地址，寻址能力为1M 8086内部为16位结构，只">
+<meta property="og:description" content="机器编程处理器和架构集的历史Inter x86处理器 精简指令集计算机RISC （Reduced  instruction set computer）  复杂指令集计算机 CISC（Complex instruction set computer）  RISC出现前，称以前的指令集为CISC（是一种嘲讽）    C, 汇编，机器码   c源文件(.c) – 编译器（Compiler）–&gt;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png">
-<meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png">
-<meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png">
-<meta property="article:published_time" content="2021-06-01T06:56:22.000Z">
-<meta property="article:modified_time" content="2021-06-02T02:05:21.464Z">
+<meta property="og:image" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png">
+<meta property="og:image" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png">
+<meta property="article:published_time" content="2021-06-03T00:35:15.000Z">
+<meta property="article:modified_time" content="2021-06-03T06:41:19.822Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png">
+<meta name="twitter:image" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png">
 
-<link rel="canonical" href="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -50,7 +49,7 @@
   };
 </script>
 
-  <title>汇编语言学习笔记 | Leoolin</title>
+  <title>计算机组成原理学习笔记（二） | Leoolin</title>
   
 
 
@@ -155,7 +154,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          汇编语言学习笔记
+          计算机组成原理学习笔记（二）
         </h1>
 
         <div class="post-meta">
@@ -177,19 +176,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-06-01 14:56:22" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:22+08:00">2021-06-01</time>
+              <time title="Created: 2021-06-03 08:35:15 / Modified: 14:41:19" itemprop="dateCreated datePublished" datetime="2021-06-03T08:35:15+08:00">2021-06-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-02 10:05:21" itemprop="dateModified" datetime="2021-06-02T10:05:21+08:00">2021-06-02</time>
-              </span>
 
           
-            <span id="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记" title="Views">
+            <span id="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记（二）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -204,8 +197,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -220,76 +213,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="2-4-物理地址"><a href="#2-4-物理地址" class="headerlink" title="2.4 物理地址"></a>2.4 物理地址</h2><p>CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。</p>
-<h2 id="2-5-16位结构的CPU"><a href="#2-5-16位结构的CPU" class="headerlink" title="2.5 16位结构的CPU"></a>2.5 16位结构的CPU</h2><p>16位结构描述了一个CPU具有以下几个方面特征：</p>
-<ul>
-<li>运算器一次最多可以处理16位的数据</li>
-<li>寄存器的最大宽度为16位</li>
-<li>寄存器和运算器之间的通路是16位的</li>
+        <h1 id="机器编程"><a href="#机器编程" class="headerlink" title="机器编程"></a>机器编程</h1><h2 id="处理器和架构集的历史"><a href="#处理器和架构集的历史" class="headerlink" title="处理器和架构集的历史"></a>处理器和架构集的历史</h2><h3 id="Inter-x86处理器"><a href="#Inter-x86处理器" class="headerlink" title="Inter x86处理器"></a>Inter x86处理器</h3><ul>
+<li><p>精简指令集计算机RISC （Reduced  instruction set computer）</p>
+</li>
+<li><p>复杂指令集计算机 CISC（Complex instruction set computer）</p>
+</li>
+<li><p>RISC出现前，称以前的指令集为CISC（是一种嘲讽）</p>
+<p><img src="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-03 上午10.01.42"></p>
+</li>
 </ul>
-<h2 id="2-6-8086CPU给出物理地址的方法"><a href="#2-6-8086CPU给出物理地址的方法" class="headerlink" title="2.6 8086CPU给出物理地址的方法"></a>2.6 8086CPU给出物理地址的方法</h2><p>8086有20位地址总线，可传送20位地址，寻址能力为1M</p>
-<p>8086内部为16位结构，只能传送16位的地址，寻址能力却只有64k。</p>
+<h2 id="C-汇编，机器码"><a href="#C-汇编，机器码" class="headerlink" title="C, 汇编，机器码"></a>C, 汇编，机器码</h2><p> <img src="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png" alt="截屏2021-06-03 上午10.29.32"></p>
+<ul>
+<li>c源文件(.c) – <em>编译器</em>（Compiler）–&gt;  汇编文件(.s) –<em>汇编器</em> (Assembler)–&gt;目标文件（.o）–<em>链接器(Linker)</em> + 静态库（Static libraries）–&gt; 可执行文件</li>
+</ul>
+<p>将c源文件转化成汇编</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Og -S 指针.cpp</span><br></pre></td></tr></table></figure>
+
+<p>机器指令示例：</p>
+<ul>
+<li>C语言</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*dest &#x3D; t;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>汇编</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movq %rax, (%rbx)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>8086CPU采用一种在内部用两个16位地址合成的方法来形成一个20位的物理空间</p>
+<p>t： %rax</p>
+<p>dest: %rbx</p>
+<p>*dest: M[%rbx] </p>
 </blockquote>
-<ol>
-<li>cpu中的相关部件提供两个16位的地址，一个称为断地址，一个称为偏移地址；</li>
-<li>段地址和偏移地址通过内部总线送入一个称为 <strong>地址加法器</strong> 的部件</li>
-<li>地址加法器将两个16位地址合并成一个20位的地址</li>
-</ol>
-<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png" alt="截屏2021-06-02 上午12.02.00"></p>
-<h3 id="地址加法器的工作原理"><a href="#地址加法器的工作原理" class="headerlink" title="地址加法器的工作原理"></a>地址加法器的工作原理</h3><p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png" alt="截屏2021-06-02 上午12.06.06"></p>
+<ul>
+<li>指令编码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x40059e: 48 89 03</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>段地址 * 16，即数据左移4位</p>
-</blockquote>
-<ul>
-<li>一个数据的十六进制形式左移1位，相当于乘以16；</li>
-<li>一个数据的十进制形式左移1位，相当于乘以10；</li>
-<li>一个数据的X进制形式左移1位，相当于乘以X；</li>
-</ul>
-<h2 id="2-7-段地址-✖️16-偏移地址-物理地址的本质含义"><a href="#2-7-段地址-✖️16-偏移地址-物理地址的本质含义" class="headerlink" title="2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义"></a>2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义</h2><ul>
-<li><p>第一个比喻：</p>
-<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png" alt="截屏2021-06-02 上午12.09.59"></p>
-<ul>
-<li>从学校走2826m到图书馆。这2826可以认为是图书馆的物理地址。</li>
-<li>可以分解为从学校走2000m到体育馆，从体育馆再走826m到图书馆<ul>
-<li>第一个距离2000m是相当于起点的基础地址</li>
-<li>第二个距离826m是相对于基础地址的偏移地址</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>第二个比喻：</p>
-<p>用纸条通讯，询问图书馆的地址（目前只有两张可以容纳3位数据的纸条）</p>
-<ul>
-<li><p>第一张：200</p>
-</li>
-<li><p>第二张：826</p>
-<p>规则：第一张 ✖️10 + 第二张，即可得到地址。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2><p>错误认识：</p>
-<p>内存被划分成了一个一个的段，每一个段有一个段地址</p>
-<p>其实：</p>
-<p>内存并没有分段，段的划分来自于CPU，由于8086CPU用“段地址 ✖️ 16 + 偏移地址 = 物理地址”的方式给出内存单元的物理地址，使得我们可以用分段的方式来管理内存。</p>
-<ul>
-<li>段地址 ✖️ 16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；</li>
-<li>偏移地址为16，16位的地址的寻址能力为64k，所以一个段的长度最大为64k。</li>
-</ul>
-<blockquote>
-<p>如果给定一个段地址，仅通过变化偏移地址来进行寻址，最多可以定位多少内存单元？</p>
-<p>结论：偏移地址16位，变化范围为0~FFFFH，仅用偏移地址来寻址最多可寻64k个内存单元。</p>
-<p>比如：给定段地址1000H，用偏移地址寻址，CPU的寻址范围为：10000H ~ 1FFFFH。</p>
-</blockquote>
-<p>数据在21F60H内存中。对于8086PC机的两种描述：</p>
-<ol>
-<li>数据存在内存2000：1F60单元中；</li>
-<li>数据存在内存的2000段中的1F60H单元中。</li>
-</ol>
-<blockquote>
-<p>注：段是可以人为定义的，可根据需要，将地址连续、起始地址为16的倍数的一组内存单元定义为一个段。</p>
+<p>3byte指令</p>
+<p>指令存储在0x40059e处</p>
 </blockquote>
 
     </div>
@@ -309,13 +272,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="C++ Primer学习笔记">
-      <i class="fa fa-chevron-left"></i> C++ Primer学习笔记
+    <a href="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="汇编语言学习笔记（二）">
+      <i class="fa fa-chevron-left"></i> 汇编语言学习笔记（二）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="计算机组成原理学习笔记">
-      计算机组成原理学习笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -375,7 +335,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">2.4 物理地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-16%E4%BD%8D%E7%BB%93%E6%9E%84%E7%9A%84CPU"><span class="nav-number">2.</span> <span class="nav-text">2.5 16位结构的CPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-8086CPU%E7%BB%99%E5%87%BA%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">2.6 8086CPU给出物理地址的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">地址加法器的工作原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-%E6%AE%B5%E5%9C%B0%E5%9D%80-%E2%9C%96%EF%B8%8F16-%E5%81%8F%E7%A7%BB%E5%9C%B0%E5%9D%80-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%90%AB%E4%B9%89"><span class="nav-number">4.</span> <span class="nav-text">2.7 段地址 ✖️16 + 偏移地址 &#x3D; 物理地址的本质含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-%E6%AE%B5%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">5.</span> <span class="nav-text">2.8 段的概念</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">机器编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%92%8C%E6%9E%B6%E6%9E%84%E9%9B%86%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="nav-number">1.1.</span> <span class="nav-text">处理器和架构集的历史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inter-x86%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">Inter x86处理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E6%B1%87%E7%BC%96%EF%BC%8C%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">C, 汇编，机器码</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
