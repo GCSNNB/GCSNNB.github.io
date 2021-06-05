@@ -168,16 +168,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-06-05 13:08:41" itemprop="dateCreated datePublished" datetime="2021-06-05T13:08:41+08:00">2021-06-05</time>
+              <time title="Created: 2021-06-05 13:08:41 / Modified: 22:58:14" itemprop="dateCreated datePublished" datetime="2021-06-05T13:08:41+08:00">2021-06-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-04 20:21:41" itemprop="dateModified" datetime="2021-06-04T20:21:41+08:00">2021-06-04</time>
-              </span>
 
           
             <span id="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（四）" title="Views">
@@ -242,11 +236,13 @@
 <p><strong>Exercise 2.37:</strong> <strong>Assignment is an example of an expression that yields a reference type. The type is a reference to the type of the left-hand operand. That is, if i is an int, then the type of the expression i = x is int&amp;.</strong> Using that knowledge, determine the type and value of each variable in this code:</p>
 <p>int a = 3, b = 4;</p>
 <p>decltype(a) c = a;</p>
-<p>decltype(a = b) </p>
-<p> d = a; </p>
+<p>decltype(a = b) d = a; </p>
+<p> 答：c : int ; d : int &amp; </p>
 </blockquote>
 <blockquote>
 <p><strong>Exercise 2.38:</strong> Describe the differences in type deduction between decltype and auto. Give an example of an expression where auto and decltype will deduce the same type and an example where they will deduce differing types.</p>
+<p>答：针对引用类型，如下： a是int类型，b是int &amp;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, &amp;r = i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> a = r;</span><br><span class="line"></span><br><span class="line"><span class="keyword">decltype</span>(r) b = i;</span><br></pre></td></tr></table></figure>
 </blockquote>
 
       
