@@ -20,24 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2.4 物理地址CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。 2.5 16位结构的CPU16位结构描述了一个CPU具有以下几个方面特征：  运算器一次最多可以处理16位的数据 寄存器的最大宽度为16位 寄存器和运算器之间的通路是16位的  2.6 8086CPU给出物理地址的方法8086有20位地址总线，可传送20位地址，寻址能力为1M 8086内部为16位结构，只">
+  <meta name="description" content="decltype 有时我们想将某一个表达式的结果的类型作为变量的类型  1decltype(f()) sum &#x3D; x; &#x2F;&#x2F; sum has whatever type f returns.  1234const int ci &#x3D; 0, &amp;cj &#x3D; ci;decltype(ci) x &#x3D; 0; &#x2F;&#x2F; x has type const intdecltype(c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编语言学习笔记">
-<meta property="og:url" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="C++ Primer学习笔记（四）">
+<meta property="og:url" content="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
-<meta property="og:description" content="2.4 物理地址CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。 2.5 16位结构的CPU16位结构描述了一个CPU具有以下几个方面特征：  运算器一次最多可以处理16位的数据 寄存器的最大宽度为16位 寄存器和运算器之间的通路是16位的  2.6 8086CPU给出物理地址的方法8086有20位地址总线，可传送20位地址，寻址能力为1M 8086内部为16位结构，只">
+<meta property="og:description" content="decltype 有时我们想将某一个表达式的结果的类型作为变量的类型  1decltype(f()) sum &#x3D; x; &#x2F;&#x2F; sum has whatever type f returns.  1234const int ci &#x3D; 0, &amp;cj &#x3D; ci;decltype(ci) x &#x3D; 0; &#x2F;&#x2F; x has type const intdecltype(c">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png">
-<meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png">
-<meta property="og:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png">
-<meta property="article:published_time" content="2021-06-01T06:56:22.000Z">
-<meta property="article:modified_time" content="2021-06-02T02:05:21.464Z">
+<meta property="article:published_time" content="2021-06-05T05:08:41.000Z">
+<meta property="article:modified_time" content="2021-06-04T12:21:41.506Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png">
 
-<link rel="canonical" href="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -50,7 +46,7 @@
   };
 </script>
 
-  <title>汇编语言学习笔记 | Leoolin</title>
+  <title>C++ Primer学习笔记（四） | Leoolin</title>
   
 
 
@@ -155,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          汇编语言学习笔记
+          C++ Primer学习笔记（四）
         </h1>
 
         <div class="post-meta">
@@ -178,18 +174,18 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-06-01 14:56:22" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:22+08:00">2021-06-01</time>
+              <time title="Created: 2021-06-05 13:08:41" itemprop="dateCreated datePublished" datetime="2021-06-05T13:08:41+08:00">2021-06-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-02 10:05:21" itemprop="dateModified" datetime="2021-06-02T10:05:21+08:00">2021-06-02</time>
+                <time title="Modified: 2021-06-04 20:21:41" itemprop="dateModified" datetime="2021-06-04T20:21:41+08:00">2021-06-04</time>
               </span>
 
           
-            <span id="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记" title="Views">
+            <span id="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（四）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -204,8 +200,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -220,76 +216,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="2-4-物理地址"><a href="#2-4-物理地址" class="headerlink" title="2.4 物理地址"></a>2.4 物理地址</h2><p>CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。</p>
-<h2 id="2-5-16位结构的CPU"><a href="#2-5-16位结构的CPU" class="headerlink" title="2.5 16位结构的CPU"></a>2.5 16位结构的CPU</h2><p>16位结构描述了一个CPU具有以下几个方面特征：</p>
-<ul>
-<li>运算器一次最多可以处理16位的数据</li>
-<li>寄存器的最大宽度为16位</li>
-<li>寄存器和运算器之间的通路是16位的</li>
-</ul>
-<h2 id="2-6-8086CPU给出物理地址的方法"><a href="#2-6-8086CPU给出物理地址的方法" class="headerlink" title="2.6 8086CPU给出物理地址的方法"></a>2.6 8086CPU给出物理地址的方法</h2><p>8086有20位地址总线，可传送20位地址，寻址能力为1M</p>
-<p>8086内部为16位结构，只能传送16位的地址，寻址能力却只有64k。</p>
-<blockquote>
-<p>8086CPU采用一种在内部用两个16位地址合成的方法来形成一个20位的物理空间</p>
+        <h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><blockquote>
+<p>有时我们想将某一个表达式的结果的类型作为变量的类型</p>
 </blockquote>
-<ol>
-<li>cpu中的相关部件提供两个16位的地址，一个称为断地址，一个称为偏移地址；</li>
-<li>段地址和偏移地址通过内部总线送入一个称为 <strong>地址加法器</strong> 的部件</li>
-<li>地址加法器将两个16位地址合并成一个20位的地址</li>
-</ol>
-<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png" alt="截屏2021-06-02 上午12.02.00"></p>
-<h3 id="地址加法器的工作原理"><a href="#地址加法器的工作原理" class="headerlink" title="地址加法器的工作原理"></a>地址加法器的工作原理</h3><p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png" alt="截屏2021-06-02 上午12.06.06"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decltype(f()) sum &#x3D; x; &#x2F;&#x2F; sum has whatever type f returns.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">0</span>, &amp;cj = ci;</span><br><span class="line"><span class="keyword">decltype</span>(ci) x = <span class="number">0</span>; <span class="comment">// x has type const int</span></span><br><span class="line"><span class="keyword">decltype</span>(cj) y = x; <span class="comment">// y has type const int&amp; and is bound to x </span></span><br><span class="line"><span class="keyword">decltype</span>(cj) z; <span class="comment">// error: z is a reference and must be initialized</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// decltype of an expression can be a reference type</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>, *p = &amp;i, &amp;r = i;</span><br><span class="line"><span class="keyword">decltype</span>(r + <span class="number">0</span>) b; <span class="comment">// ok: addition yields an int; b is an (uninitialized) int </span></span><br><span class="line"><span class="keyword">decltype</span>(*p) c; <span class="comment">// error: c is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>段地址 * 16，即数据左移4位</p>
+<p>decltype(*p)代表引用类型</p>
 </blockquote>
 <ul>
-<li>一个数据的十六进制形式左移1位，相当于乘以16；</li>
-<li>一个数据的十进制形式左移1位，相当于乘以10；</li>
-<li>一个数据的X进制形式左移1位，相当于乘以X；</li>
-</ul>
-<h2 id="2-7-段地址-✖️16-偏移地址-物理地址的本质含义"><a href="#2-7-段地址-✖️16-偏移地址-物理地址的本质含义" class="headerlink" title="2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义"></a>2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义</h2><ul>
-<li><p>第一个比喻：</p>
-<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png" alt="截屏2021-06-02 上午12.09.59"></p>
-<ul>
-<li>从学校走2826m到图书馆。这2826可以认为是图书馆的物理地址。</li>
-<li>可以分解为从学校走2000m到体育馆，从体育馆再走826m到图书馆<ul>
-<li>第一个距离2000m是相当于起点的基础地址</li>
-<li>第二个距离826m是相对于基础地址的偏移地址</li>
-</ul>
+<li><p><code>decltype(())</code>：仅代表引用类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">decltype</span>((i)) d; <span class="comment">// error: d is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
+
 </li>
-</ul>
-</li>
-<li><p>第二个比喻：</p>
-<p>用纸条通讯，询问图书馆的地址（目前只有两张可以容纳3位数据的纸条）</p>
-<ul>
-<li><p>第一张：200</p>
-</li>
-<li><p>第二张：826</p>
-<p>规则：第一张 ✖️10 + 第二张，即可得到地址。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2><p>错误认识：</p>
-<p>内存被划分成了一个一个的段，每一个段有一个段地址</p>
-<p>其实：</p>
-<p>内存并没有分段，段的划分来自于CPU，由于8086CPU用“段地址 ✖️ 16 + 偏移地址 = 物理地址”的方式给出内存单元的物理地址，使得我们可以用分段的方式来管理内存。</p>
-<ul>
-<li>段地址 ✖️ 16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；</li>
-<li>偏移地址为16，16位的地址的寻址能力为64k，所以一个段的长度最大为64k。</li>
 </ul>
 <blockquote>
-<p>如果给定一个段地址，仅通过变化偏移地址来进行寻址，最多可以定位多少内存单元？</p>
-<p>结论：偏移地址16位，变化范围为0~FFFFH，仅用偏移地址来寻址最多可寻64k个内存单元。</p>
-<p>比如：给定段地址1000H，用偏移地址寻址，CPU的寻址范围为：10000H ~ 1FFFFH。</p>
+<p><strong>Exercises Section 2.5.3<br> Exercise 2.36:</strong> In the following code, determine the type of each variable and the value each variable has when the code finishes:</p>
+<p>int a = 3, b = 4; </p>
+<p>decltype(a) c = a; </p>
+<p>decltype((b)) d = a; </p>
+<p>++c;</p>
+<p>++d;</p>
+<p>答：c : int， d int &amp;</p>
 </blockquote>
-<p>数据在21F60H内存中。对于8086PC机的两种描述：</p>
-<ol>
-<li>数据存在内存2000：1F60单元中；</li>
-<li>数据存在内存的2000段中的1F60H单元中。</li>
-</ol>
 <blockquote>
-<p>注：段是可以人为定义的，可根据需要，将地址连续、起始地址为16的倍数的一组内存单元定义为一个段。</p>
+<p><strong>Exercise 2.37:</strong> <strong>Assignment is an example of an expression that yields a reference type. The type is a reference to the type of the left-hand operand. That is, if i is an int, then the type of the expression i = x is int&amp;.</strong> Using that knowledge, determine the type and value of each variable in this code:</p>
+<p>int a = 3, b = 4;</p>
+<p>decltype(a) c = a;</p>
+<p>decltype(a = b) </p>
+<p> d = a; </p>
+</blockquote>
+<blockquote>
+<p><strong>Exercise 2.38:</strong> Describe the differences in type deduction between decltype and auto. Give an example of an expression where auto and decltype will deduce the same type and an example where they will deduce differing types.</p>
 </blockquote>
 
     </div>
@@ -309,13 +271,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="C++ Primer学习笔记">
-      <i class="fa fa-chevron-left"></i> C++ Primer学习笔记
+    <a href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" rel="prev" title="汇编语言学习笔记（四）—— Debug">
+      <i class="fa fa-chevron-left"></i> 汇编语言学习笔记（四）—— Debug
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="计算机组成原理学习笔记">
-      计算机组成原理学习笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -375,7 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">2.4 物理地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-16%E4%BD%8D%E7%BB%93%E6%9E%84%E7%9A%84CPU"><span class="nav-number">2.</span> <span class="nav-text">2.5 16位结构的CPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-8086CPU%E7%BB%99%E5%87%BA%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">2.6 8086CPU给出物理地址的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">地址加法器的工作原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-%E6%AE%B5%E5%9C%B0%E5%9D%80-%E2%9C%96%EF%B8%8F16-%E5%81%8F%E7%A7%BB%E5%9C%B0%E5%9D%80-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%90%AB%E4%B9%89"><span class="nav-number">4.</span> <span class="nav-text">2.7 段地址 ✖️16 + 偏移地址 &#x3D; 物理地址的本质含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-%E6%AE%B5%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">5.</span> <span class="nav-text">2.8 段的概念</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#decltype"><span class="nav-number">1.</span> <span class="nav-text">decltype</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
