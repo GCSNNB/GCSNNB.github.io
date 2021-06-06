@@ -145,6 +145,151 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-title-link" itemprop="url">C-Primer学习笔记（五）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-06 17:42:35 / Modified: 22:33:16" itemprop="dateCreated datePublished" datetime="2021-06-06T17:42:35+08:00">2021-06-06</time>
+            </span>
+
+          
+            <span id="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C-Primer学习笔记（五）" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><ul>
+<li><p>定义一个结构体</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo; </span><br><span class="line">	<span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义结构对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125; accum, trans, *salesptr; </span><br><span class="line"><span class="comment">// equivalent, but better way to define these objects</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125;; </span><br><span class="line">Sales_data accum, trans, *salesptr;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>定义结构体以分号结束</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="include"><a href="#include" class="headerlink" title="#include"></a>#include</h2><p>预处理器是一个在编译器之前运行的程序，并且会改变我们程序的源码。</p>
+<p>当预处理看到一个<code>#include</code>，会将指定头文件的内容替换掉<code>#include</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>; </span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用#ifndef来防止头文件被多次引用</p>
+</blockquote>
+<h1 id="using-declaration"><a href="#using-declaration" class="headerlink" title="using declaration"></a>using declaration</h1><p>通过使用<code>using</code>形式的定义，来简化写法，比如：<code>using namespace::name</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// using declaration; when we use the name cin, we get the one from the namespace std</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; i; <span class="comment">// ok: cin is a synonym for std::cin</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// error: no using declaration; we must use the full name</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// ok: explicitly use cout from namepsace std</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于定义了<code>using std::cin</code>，我们可以在调用<code>cin</code>函数时，不添加<code>std::</code>namespace前缀。</p>
+</blockquote>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
+<li><p>在使用string之前需要引入string头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="定义和初始化"><a href="#定义和初始化" class="headerlink" title="定义和初始化"></a>定义和初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// default initialization; s1 is the empty string </span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2 isacopyof s1</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// s3 is a copy of the string literal</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// s4 is cccccccccc</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="复制初始化（copy-initialize）和直接初始化-direct-initialization"><a href="#复制初始化（copy-initialize）和直接初始化-direct-initialization" class="headerlink" title="复制初始化（copy initialize）和直接初始化(direct initialization)"></a>复制初始化（copy initialize）和直接初始化(direct initialization)</h2><p>当使用<code>=</code>时，编译器是复制初始化，而当忽略<code>=</code>时，我们使用的是直接初始化，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s5 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// copy initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s6</span><span class="params">(<span class="string">&quot;hiya&quot;</span>)</span></span>; <span class="comment">// direct initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// direct initialization; s7 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> s8 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>); <span class="comment">// copy initialization; s8 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">temp</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// temp is cccccccccc </span></span><br><span class="line"><span class="built_in">string</span> s8 = temp; <span class="comment">// copy temp into s8</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="读写字符串"><a href="#读写字符串" class="headerlink" title="读写字符串"></a>读写字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Note: #include and using declarations must be added to compile this code int main()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">string</span> s; <span class="comment">// empty string</span></span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; s; <span class="comment">// read a whitespace-separated string into s</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// write s to the output</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取字符串的长度"><a href="#获取字符串的长度" class="headerlink" title="获取字符串的长度"></a>获取字符串的长度</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = line.size(); <span class="comment">// len has type string::size_type</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello, &quot;</span>, s2 = <span class="string">&quot;world\n&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> s3 = s1 + s2; <span class="comment">// s3 is hello, world\n</span></span><br><span class="line">s1+=s2; <span class="comment">// equivalentto s1=s1+s2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;world&quot;</span>; <span class="comment">// no punctuation in s1 or s2</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1 + <span class="string">&quot;, &quot;</span> + s2 + <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<code>+</code>符号两边至少要有一个string类型，不能是字符字面量相加</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s4 = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: adding a string and a literal string </span></span><br><span class="line">s5 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>; <span class="comment">// error: no string operand string</span></span><br><span class="line">s6 = s1 + <span class="string">&quot;, &quot;</span> + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: each + has a string operand string </span></span><br><span class="line">s7 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span> + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s6 = (s1 + <span class="string">&quot;, &quot;</span>) + <span class="string">&quot;world&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>相当于：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> tmp = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br><span class="line">s6 = tmp + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s7 = (<span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>) + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>(“hello” + “,”) 符号两边都是常量</p>
+</blockquote>
+<blockquote>
+<p><strong>Exercise 3.3:</strong> Explain how whitespace characters are handled in the string input operator and in the getline function.</p>
+<p><strong>对于string类的输入函数，它会自动忽略开头的空白（空格、制表符、换行等等），从第一个真正的字符开始直到下一个空白。</strong></p>
+<p><strong>对于getline()函数，它会保存字符串中的空白符，它读入数据，直到遇到换行符位置。</strong> </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> line;</span><br><span class="line">	<span class="comment">// read input a line at a time until end-of-file </span></span><br><span class="line">	<span class="keyword">while</span> (getline(<span class="built_in">cin</span>, line))</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>答案来自☞<a target="_blank" rel="noopener" href="https://blog.csdn.net/misayaaaaa/article/details/53284630">C++Primer第五版 第三章习题答案（1~10）</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1442,170 +1587,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">C++ Primer学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-01 14:48:46 / Modified: 18:18:12" itemprop="dateCreated datePublished" datetime="2021-06-01T14:48:46+08:00">2021-06-01</time>
-            </span>
-
-          
-            <span id="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">int</span> v1 = <span class="number">0</span>, v2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1 &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2 &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>cin（see-in）：标准输入</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入v1的值</span></span><br><span class="line"><span class="keyword">int</span> v1 = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; v1;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>cout(see-out)：标准输出</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出字符串&quot;Enter two numbers:&quot;</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="命名空间（namespace）"><a href="#命名空间（namespace）" class="headerlink" title="命名空间（namespace）"></a>命名空间（namespace）</h1></li>
-</ul>
-<p>命名空间的出现是为了避免如下的问题：</p>
-<p>我们声明了同名函数<code>dance</code>，那么如何调用指定的某个函数呢？</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Somebody &#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Somebody dances&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;I dance&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用命名空间，指定调用的函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dance(); <span class="comment">// 输出：I dance</span></span><br><span class="line">    Somebody::dance(); <span class="comment">// 输出: Somebody dances</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="引用（References）"><a href="#引用（References）" class="headerlink" title="引用（References）"></a>引用（References）</h1><blockquote>
-<p>引用就是一个对象的别名</p>
-<p>A reference is not an object. Instead, a reference is just another name for an already existing object.</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line">    <span class="keyword">int</span> &amp;refVal = ival;</span><br><span class="line">    refVal = <span class="number">512</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ival &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 512</span></span><br><span class="line">    <span class="keyword">int</span> &amp;refVal2; <span class="comment">// error: references must be initialized.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>引用必须初始化</li>
-<li>一旦初始化，不可以再将引用指向其他对象</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;refVal4 = <span class="number">10</span>; <span class="comment">// error: initializer must be an object </span></span><br><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal5 = dval; <span class="comment">// error: initializer must be an int object</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>Exercises Section 2.3.1</strong></p>
-<p><strong>Exercise 2.15:</strong> Which of the following definitions, if any, are invalid? Why?</p>
-<p><strong>(a)</strong> int ival = 1.01;</p>
-<p><strong>(b)</strong> int &amp;rval1 = 1.01;</p>
-<p><strong>(c)</strong> int &amp;rval2 = ival;</p>
-<p><strong>(d)</strong> int &rval3;</p>
-</blockquote>
-<p>(a) ✅（b）❌  初始化赋值必须是int对象</p>
-<p> (c)  ✅ （d）❌ 引用必须被初始化</p>
-<h1 id="指针（Pointers）"><a href="#指针（Pointers）" class="headerlink" title="指针（Pointers）"></a>指针（Pointers）</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip1, *ip2; <span class="comment">// both ip1 and ip2 are pointers to int </span></span><br><span class="line"><span class="keyword">double</span> dp, *dp2; <span class="comment">// dp2 is a pointer to double; dp is a double</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>与引用不同，指针本身就是一个对象</li>
-<li>在指针的生命周期中，可以指向不同的对象</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p holds the address of ival; p is a pointer to ival</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>指针存放的值是另一个对象的地址</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval;</span><br><span class="line"><span class="keyword">double</span> *pd = &amp;dval; <span class="comment">// ok: initializer is the address of a double</span></span><br><span class="line"><span class="keyword">double</span> *pd2 = pd; <span class="comment">// ok: initializer is a pointer to double</span></span><br><span class="line"><span class="keyword">int</span> *pi = pd; <span class="comment">// error: types of pi and pd differ</span></span><br><span class="line">pi = &amp;dval; <span class="comment">// error: assigning the address of a double to a pointer to int</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>指针类型必须和其指向的地址中存放的对象的类型相同</li>
-</ul>
-<blockquote>
-<p>注：&amp; 和 * 有多种含义</p>
-<p>&amp;、*可以当做声明使用，比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span>&amp;r=i; <span class="comment">//&amp; *followsatypeandispartofadeclaration; r is a *reference*</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p; <span class="comment">// * *follows a type and is part of a declaration; p is a *pointer*</span></span><br></pre></td></tr></table></figure>
-
-<p>&amp;也可以作取地址符使用：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = &amp;i； <span class="comment">// &amp; is used in an expression as the address-of operator.</span></span><br></pre></td></tr></table></figure>
-
-<p>*可以作取值符号使用：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*p = i; <span class="comment">// * is used in an expression as the dereference operator</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = *p; <span class="comment">// &amp; is part of the declaration; * is the dereference operator</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<ol>
-<li><p>使用指针访问一个对象</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p holds the address of ival; p is a pointer to ival </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">// * yields the object to which p points; prints 42</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用指针指向空指针（Null Pointers）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>; <span class="comment">// equivalent to int *p1 = 0;</span></span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>; <span class="comment">// directly initializes p2 from the literal constant 0 </span></span><br><span class="line"><span class="comment">// must #include cstdlib</span></span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>; <span class="comment">// equivalent to int *p3 = 0;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="void指针（void-Pointers）"><a href="#void指针（void-Pointers）" class="headerlink" title="void指针（void* Pointers）"></a>void指针（void* Pointers）</h2><p>void指针能够指向任意类型的对象</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> obj = <span class="number">3.14</span>, *pd = &amp;obj;</span><br><span class="line"><span class="comment">// ok: void* can hold the address value of any data pointer type</span></span><br><span class="line"><span class="keyword">void</span> *pv = &amp;obj; <span class="comment">// obj can be an object of any type</span></span><br><span class="line">pv = pd; <span class="comment">// pv can hold a pointer to any type</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>Exercise 2.20:</strong> What does the following program do?</p>
-<p>int i = 42;<br>int *p1 = &i; </p>
-<p>*p1 = *p1 * *p1;</p>
-</blockquote>
-<p>*p1 = 42 * 42</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1675,7 +1656,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
