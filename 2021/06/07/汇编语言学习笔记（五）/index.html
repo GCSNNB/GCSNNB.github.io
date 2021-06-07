@@ -20,23 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="机器编程处理器和架构集的历史Inter x86处理器 精简指令集计算机RISC （Reduced  instruction set computer）  复杂指令集计算机 CISC（Complex instruction set computer）  RISC出现前，称以前的指令集为CISC（是一种嘲讽）    C, 汇编，机器码   c源文件(.c) – 编译器（Compiler）–&gt;">
+  <meta name="description" content="3.4 mov 、add、sub指令 已学mov指令的几种形式 mov 寄存器，数据  mov ax, 6 mov 寄存器，寄存器  mov bx, ax mov 寄存器，内存单元 mov ax, [0] mov 内存单元，寄存器 mov [0], ax mov 段寄存器，寄存器 mov ds, ax     3.5 数据段我们可以将一组长度为N(N &lt;&#x3D; 64)、地址连续、起始地址为16的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机组成原理学习笔记（二）">
-<meta property="og:url" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:title" content="汇编语言学习笔记（五）">
+<meta property="og:url" content="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
-<meta property="og:description" content="机器编程处理器和架构集的历史Inter x86处理器 精简指令集计算机RISC （Reduced  instruction set computer）  复杂指令集计算机 CISC（Complex instruction set computer）  RISC出现前，称以前的指令集为CISC（是一种嘲讽）    C, 汇编，机器码   c源文件(.c) – 编译器（Compiler）–&gt;">
+<meta property="og:description" content="3.4 mov 、add、sub指令 已学mov指令的几种形式 mov 寄存器，数据  mov ax, 6 mov 寄存器，寄存器  mov bx, ax mov 寄存器，内存单元 mov ax, [0] mov 内存单元，寄存器 mov [0], ax mov 段寄存器，寄存器 mov ds, ax     3.5 数据段我们可以将一组长度为N(N &lt;&#x3D; 64)、地址连续、起始地址为16的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png">
-<meta property="og:image" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png">
-<meta property="article:published_time" content="2021-06-03T00:35:15.000Z">
-<meta property="article:modified_time" content="2021-06-03T06:41:19.822Z">
+<meta property="og:image" content="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png">
+<meta property="article:published_time" content="2021-06-07T00:55:01.000Z">
+<meta property="article:modified_time" content="2021-06-07T13:38:25.040Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png">
+<meta name="twitter:image" content="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png">
 
-<link rel="canonical" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+<link rel="canonical" href="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -49,7 +48,7 @@
   };
 </script>
 
-  <title>计算机组成原理学习笔记（二） | Leoolin</title>
+  <title>汇编语言学习笔记（五） | Leoolin</title>
   
 
 
@@ -154,7 +153,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -167,7 +166,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          计算机组成原理学习笔记（二）
+          汇编语言学习笔记（五）
         </h1>
 
         <div class="post-meta">
@@ -178,11 +177,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-03 08:35:15 / Modified: 14:41:19" itemprop="dateCreated datePublished" datetime="2021-06-03T08:35:15+08:00">2021-06-03</time>
+              <time title="Created: 2021-06-07 08:55:01 / Modified: 21:38:25" itemprop="dateCreated datePublished" datetime="2021-06-07T08:55:01+08:00">2021-06-07</time>
             </span>
 
           
-            <span id="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记（二）" title="Views">
+            <span id="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（五）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -197,8 +196,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -213,47 +212,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="机器编程"><a href="#机器编程" class="headerlink" title="机器编程"></a>机器编程</h1><h2 id="处理器和架构集的历史"><a href="#处理器和架构集的历史" class="headerlink" title="处理器和架构集的历史"></a>处理器和架构集的历史</h2><h3 id="Inter-x86处理器"><a href="#Inter-x86处理器" class="headerlink" title="Inter x86处理器"></a>Inter x86处理器</h3><ul>
-<li><p>精简指令集计算机RISC （Reduced  instruction set computer）</p>
+        <h1 id="3-4-mov-、add、sub指令"><a href="#3-4-mov-、add、sub指令" class="headerlink" title="3.4 mov 、add、sub指令"></a>3.4 mov 、add、sub指令</h1><ul>
+<li>已学mov指令的几种形式<ul>
+<li><code>mov 寄存器，数据</code>  mov ax, 6</li>
+<li><code>mov 寄存器，寄存器 </code> mov bx, ax</li>
+<li><code>mov 寄存器，内存单元</code> mov ax, [0]</li>
+<li><code>mov 内存单元，寄存器</code> mov [0], ax</li>
+<li><code>mov 段寄存器，寄存器</code> mov ds, ax</li>
+</ul>
 </li>
-<li><p>复杂指令集计算机 CISC（Complex instruction set computer）</p>
-</li>
-<li><p>RISC出现前，称以前的指令集为CISC（是一种嘲讽）</p>
-<p><img src="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-03 上午10.01.42"></p>
-</li>
 </ul>
-<h2 id="C-汇编，机器码"><a href="#C-汇编，机器码" class="headerlink" title="C, 汇编，机器码"></a>C, 汇编，机器码</h2><p> <img src="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png" alt="截屏2021-06-03 上午10.29.32"></p>
+<p><img src="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png" alt="截屏2021-06-07 下午9.29.16"></p>
+<h1 id="3-5-数据段"><a href="#3-5-数据段" class="headerlink" title="3.5 数据段"></a>3.5 数据段</h1><p>我们可以将一组长度为N(N &lt;= 64)、地址连续、起始地址为16的倍数的内存单元当作专门存放数据的内存空间，从而定义了一个数据段。</p>
+<p>比如我们用123B0H~123B9H这段空间来存放数据：</p>
 <ul>
-<li>c源文件(.c) – <em>编译器</em>（Compiler）–&gt;  汇编文件(.s) –<em>汇编器</em> (Assembler)–&gt;目标文件（.o）–<em>链接器(Linker)</em> + 静态库（Static libraries）–&gt; 可执行文件</li>
+<li>段地址：123BH</li>
+<li>长度：10字节</li>
 </ul>
-<p>将c源文件转化成汇编</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Og -S 指针.cpp</span><br></pre></td></tr></table></figure>
-
-<p>机器指令示例：</p>
-<ul>
-<li>C语言</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*dest &#x3D; t;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>汇编</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movq %rax, (%rbx)</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>t： %rax</p>
-<p>dest: %rbx</p>
-<p>*dest: M[%rbx] </p>
+<p>问题3.5 </p>
+<p>写几条指令，累加数据段中的前3个字型数据</p>
 </blockquote>
-<ul>
-<li>指令编码</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x40059e: 48 89 03</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 123BH</span><br><span class="line">mov ds, ax</span><br><span class="line">mov ax, [0]  </span><br><span class="line">add ax, [2]   ;将数据段第二个字（偏移量为2）</span><br><span class="line">add ax [4]    ;将数据段第二个字（偏移量为4）</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>3byte指令</p>
-<p>指令存储在0x40059e处</p>
-</blockquote>
 
     </div>
 
@@ -272,12 +253,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="汇编语言学习笔记（二）">
-      <i class="fa fa-chevron-left"></i> 汇编语言学习笔记（二）
+    <a href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" rel="prev" title="C++ Primer学习笔记（五）">
+      <i class="fa fa-chevron-left"></i> C++ Primer学习笔记（五）
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/06/03/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" rel="next" title="C++ Primer学习笔记（三）">
-      C++ Primer学习笔记（三） <i class="fa fa-chevron-right"></i>
+    <a href="/2021/06/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" rel="next" title="计算机组成原理学习笔记（三）">
+      计算机组成原理学习笔记（三） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -338,7 +319,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">机器编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%92%8C%E6%9E%B6%E6%9E%84%E9%9B%86%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="nav-number">1.1.</span> <span class="nav-text">处理器和架构集的历史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inter-x86%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">Inter x86处理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E6%B1%87%E7%BC%96%EF%BC%8C%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">C, 汇编，机器码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-4-mov-%E3%80%81add%E3%80%81sub%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">3.4 mov 、add、sub指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-5-%E6%95%B0%E6%8D%AE%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">3.5 数据段</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
