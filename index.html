@@ -145,6 +145,407 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/08/What-s-new-in-WWDC21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/08/What-s-new-in-WWDC21/" class="post-title-link" itemprop="url">一文带你读完WWDC21核心（新）技术点</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-08 00:49:29" itemprop="dateCreated datePublished" datetime="2021-06-08T00:49:29+08:00">2021-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-09 08:46:45" itemprop="dateModified" datetime="2021-06-09T08:46:45+08:00">2021-06-09</time>
+              </span>
+
+          
+            <span id="/2021/06/08/What-s-new-in-WWDC21/" class="post-meta-item leancloud_visitors" data-flag-title="一文带你读完WWDC21核心（新）技术点" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/08/What-s-new-in-WWDC21/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/08/What-s-new-in-WWDC21/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>一年一度的WWDC又来了，一起来看看今年又有哪些值得关注的技术点吧~</p>
+</blockquote>
+<h2 id="Xcode-Cloud"><a href="#Xcode-Cloud" class="headerlink" title="Xcode Cloud"></a>Xcode Cloud</h2><blockquote>
+<p>试想一个一站式的iOS开发体验，在Xcode中提交代码后，自动在云端编译并且测试，接下来开发者只需根据Xcode上显示的测试结果改进代码，当一切准备就绪，就会自动将应用分发到各平台的TestFlight中…，为了实现这样流畅的开发体验，Apple将开发流程中所涉及到的所有环节，都集成到了Xcode中。</p>
+<p><strong>温馨提示：Xcode Clould目前限时免费，大家可以在<a target="_blank" rel="noopener" href="https://developer.apple.com/xcode-cloud/">官网</a>申请Beta版权限</strong></p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/1.png" alt="截屏2021-06-08 下午9.53.50"></p>
+</blockquote>
+<ul>
+<li><p>原有的开发流程</p>
+<ul>
+<li><p>各个环节</p>
+<p>Coding -&gt; 测试 -&gt; 整合 -&gt; 分发 -&gt; 改进</p>
+<blockquote>
+<p>这里的整合指的是功能分支合到主干分支的过程。</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/2.png" alt="截屏2021-06-09 上午7.25.41"></p>
+</li>
+<li><p>痛点</p>
+<p>每个环节依赖不同的工具，而环境切换的过程往往会中断我们编写代码的思路</p>
+</li>
+</ul>
+</li>
+<li><p>Xcode Cloud</p>
+<blockquote>
+<p>一个负责持续集成和分发服务的工具</p>
+</blockquote>
+<ul>
+<li><p>优势：</p>
+<ul>
+<li>内置在Xcode，无需切换工作上下文；</li>
+<li>提交Commit后，自动在云端编译；</li>
+<li>灵活且可扩展，支持集成其他CI系统；</li>
+<li>数据安全，保证源码、密钥安全。</li>
+</ul>
+</li>
+<li><p>工作流：</p>
+<ul>
+<li><p>选中项目</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/3.png" alt="截屏2021-06-09 上午7.39.33"></p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/4.png" alt="截屏2021-06-09 上午7.39.01"></p>
+</li>
+<li><p>确认工作流</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/5.png" alt="截屏2021-06-09 上午7.40.22"></p>
+</li>
+<li><p>授权访问源代码</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/6.png" alt="截屏2021-06-09 上午7.42.25"></p>
+</li>
+<li><p>连接App Store Connect</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/7.png" alt="截屏2021-06-09 上午7.41.50"></p>
+</li>
+<li><p>查看结果</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/8.png" alt="截屏2021-06-09 上午7.43.28"></p>
+<ul>
+<li><p>左侧导航器会根据项目的分支名进行分组</p>
+</li>
+<li><p>右侧详情页会显示所有动作的状态</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/9.png" alt="截屏2021-06-09 上午7.44.35"></p>
+</li>
+</ul>
+</li>
+<li><p>增加新的工作流</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/10.png" alt="截屏2021-06-09 上午7.45.54"></p>
+<ul>
+<li><p>设置触发编译的条件</p>
+<ul>
+<li><p>方案一：分支上每次代码变更时触发</p>
+</li>
+<li><p>方案二：Pull Request分支上每次代码变更时触发</p>
+</li>
+<li><p>方案三：对标签（Tag）进行修改时触发</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/11.png" alt="截屏2021-06-09 上午7.52.36"></p>
+</li>
+</ul>
+</li>
+<li><p>选择Xcode的版本</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/12.png" alt="截屏2021-06-09 上午7.52.36"></p>
+</li>
+<li><p>添加Action</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/13.png" alt="截屏2021-06-09 上午7.54.36"></p>
+<ul>
+<li><p>添加UI Test</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/14.png" alt="截屏2021-06-09 上午7.55.14"></p>
+</li>
+</ul>
+</li>
+<li><p>查看Action运行结果</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/15.png" alt="截屏2021-06-09 上午7.57.03"></p>
+<ul>
+<li><p>可以使用Xcode Cloud通过UI Test过程中的截屏查看运行过程</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/16.png" alt="截屏2021-06-09 上午7.57.37"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>分支整合</p>
+<ul>
+<li><p>在Xcode中管理Pull Request</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/17.png" alt="截屏2021-06-09 上午7.58.36"></p>
+</li>
+<li><p>在当前编译的条件下，Xcode Cloud会自动构建和测试所有Pull Merge分支上的新Commit</p>
+<p>![截屏2021-06-09 上午8.00.04](/Users/Joshsone/Library/Application Support/typora-user-images/截屏2021-06-09 上午8.00.04.png)</p>
+</li>
+<li><p>还可以快速定位至评论中所涉及到的代码位置</p>
+<blockquote>
+<p>点击左侧栏中带有信息标识的类名，点击可以直接定位到对应的位置，并查看评论</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/18.png" alt="截屏2021-06-09 上午8.01.48"></p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/19.png" alt="截屏2021-06-09 上午8.03.02"></p>
+</li>
+</ul>
+</li>
+<li><p>分发</p>
+<ul>
+<li><p>云端自动签名</p>
+<blockquote>
+<p>开发者无需关心描述文件和密钥等事项</p>
+</blockquote>
+</li>
+<li><p>支持多平台 TestFlight自动分发（包括Mac版）</p>
+</li>
+</ul>
+</li>
+<li><p>改进</p>
+<ul>
+<li><p>在测试过程中，Xcode Organizer可以在几分钟内收到TestFlight用户的反馈信息，开发者可以根据用户描述的信息对代码进行改进</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/20.png" alt="截屏2021-06-09 上午8.04.24"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h2><h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><ul>
+<li><p>理解asymc/await</p>
+<blockquote>
+<p>await表示当前调用者正在等待异步函数的结果</p>
+</blockquote>
+<p>比如：完成一次舞蹈演出需要三个 <strong>异步步骤</strong>：演员热身、工作人员从仓库找出道具、搭建舞台，完成这些演员才可以登台演出。</p>
+<ul>
+<li><p>原有嵌套式写法（伪代码）：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepareForShow</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 演员热身</span></span><br><span class="line">	danceCompany.warmUp &#123;</span><br><span class="line">    <span class="comment">// 工作人员从仓库找出道具</span></span><br><span class="line">		 <span class="keyword">self</span>.crew.fetchStageScenery &#123;</span><br><span class="line">        <span class="comment">// 搭建舞台</span></span><br><span class="line">		 		<span class="keyword">self</span>.setStage &#123;</span><br><span class="line">          <span class="comment">// 登场演出</span></span><br><span class="line">		 		  dancers.moveToPosition</span><br><span class="line">		 		&#125;</span><br><span class="line">		 &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使用async/await的直线排列式写法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepareForShow</span><span class="params">()</span></span> async <span class="keyword">throws</span> -&gt; <span class="type">Scene</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> dancers = <span class="keyword">try</span> await danceCompany.warmUP(duration: .minutes(<span class="number">45</span>))</span><br><span class="line">	<span class="keyword">let</span> scenery = await crew.fetchStageScenery()</span><br><span class="line">	<span class="keyword">let</span> openingScene = setStage(with: scenery)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">try</span> await dancers.moveToPosition(<span class="keyword">in</span>: openingScence)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结构化并发（Structured concurrency）</p>
+<p>再比如：完成一次舞蹈演出需要三个 <strong>异步步骤</strong>：演员热身、工作人员从仓库找出道具、搭建舞台，完成这些演员才可以登台演出。其中<strong>演员热身</strong>和<strong>工作人员从仓库找出道具、搭建舞台</strong>可以同时进行</p>
+<ul>
+<li><p>创建并发子任务</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepareForShow</span><span class="params">()</span></span> async <span class="keyword">throws</span> -&gt; <span class="type">Scene</span> &#123;</span><br><span class="line">	async <span class="keyword">let</span> dancers = <span class="keyword">try</span> await danceCompany.warmUP(duration: .minutes(<span class="number">45</span>))</span><br><span class="line">	async <span class="keyword">let</span> scenery = await crew.fetchStageScenery()</span><br><span class="line">	<span class="keyword">let</span> openingScene = setStage(with: await scenery)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">try</span> await dancers.moveToPosition(<span class="keyword">in</span>: openingScence)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>actors</p>
+<ul>
+<li><p>actor</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">actor <span class="type">StageManager</span> &#123;</span><br><span class="line">    	<span class="keyword">var</span> stage: <span class="type">Stage</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="function"><span class="keyword">func</span> <span class="title">setStage</span><span class="params">(with scenery: Scenery)</span></span> -&gt; <span class="type">Scene</span> &#123;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以前通过串行dispatch queue进行属性互斥访问的方式，由于需要管理很多冗余代码，很容易引入额外的竞争机制，从而出现问题， 而将actor作为一级构造嵌入到Swift里，可以底层设计层面避免了这种情况的发生。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>MainActor</p>
+<blockquote>
+<p>函数会同步到主线程执行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@MainActor</span><br><span class="line">func display(scene: Scene)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>小结：async/await让异步代码写的更自然，结构化并发让代码更容易理解，actors用来构建安全的共享状态</p>
+<h3 id="Swift-Playgrounds"><a href="#Swift-Playgrounds" class="headerlink" title="Swift Playgrounds"></a>Swift Playgrounds</h3><blockquote>
+<p>现在在iPad上也能用Swift Playgrounds开发app了</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/21.png" alt="截屏2021-06-09 上午8.10.55"></p>
+<ul>
+<li><p>在iPad上可以直接发布应用到TestFlight</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/22.png" alt="截屏2021-06-09 上午8.12.18"></p>
+</li>
+</ul>
+<h3 id="Focus"><a href="#Focus" class="headerlink" title="Focus"></a>Focus</h3><ul>
+<li><p>通知</p>
+<blockquote>
+<p>原有的通知无论优先级如何，都会以相同的方式堆积在我们的屏幕上，完全看不出哪一条通知更重要</p>
+</blockquote>
+<ul>
+<li><p>现在通知可以归类成四类干扰等级</p>
+<ul>
+<li><p>Passive</p>
+<p>无声且不会唤醒设备，下一次拿起手机时显示，用于时效性不强的通知</p>
+</li>
+<li><p>Active（同之前默认的通知类型）</p>
+<p>带有音效和触感反馈，同以往的通知一样</p>
+</li>
+<li><p>Time Sensitive</p>
+<p>这一等级的通知会马上推送给用户，用户不点击会停留在锁屏页上一段时间，用于马上需要读取的通知</p>
+</li>
+<li><p>Critical</p>
+<p>即使设备静音，也会播放声效，只有关系到健康和安全的重大通知，才能设置成这一等级，且设置时需要用户授权</p>
+</li>
+</ul>
+<p>除此之外，还有一种特别的通知：</p>
+<ul>
+<li><p>消息类型通知（信息或者通话）</p>
+<blockquote>
+<p>如果你开发的是通信类APP，可以告诉系统，这是消息或者通话类型的通知，系统会自动调整通知的样式和运行方式，以便人们更好的查看消息</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>通知摘要</p>
+<blockquote>
+<p>为了避免人们错过一些通知，同时帮助用户能在自己想要的时间查看通知，系统提供了一种新的通知展示样式 — <strong>通知摘要</strong>，用户可以使用通知摘要，在选择的时间来集中查看推送</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/23.png" alt="截屏2021-06-09 上午8.26.35"></p>
+<ul>
+<li><p>消息类型：只展示Passive或Active类型的通知</p>
+</li>
+<li><p>通知摘要的顶部有两个轮播位置</p>
+<ul>
+<li>轮播位通知选取规则：<ul>
+<li>带有大缩略图的通知会比没有大缩略图的通知，优先入选</li>
+<li>默认情况：推送最多的APP会优先得到推荐，当然用户可以在此基础上个性化定制摘要</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>等级调整</p>
+<blockquote>
+<p>系统根据用户和APP通知的交互行为，推荐用户将其调整为合适的干扰等级</p>
+</blockquote>
+<ul>
+<li><p>如果用户经常在专注模式使用某APP</p>
+<blockquote>
+<p>系统会建议将该APP调整为专注模式时允许接收通知</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/24.png" alt="截屏2021-06-09 上午8.27.35"></p>
+</li>
+<li><p>如果用户经常与某APP的Time Sensitive通知进行交互</p>
+<blockquote>
+<p>系统会建议将改APP的通知等级调回为Active</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/25.png" alt="截屏2021-06-09 上午8.30.33"></p>
+</li>
+<li><p>如果某APP不断发送通知，用户却没有反应</p>
+<blockquote>
+<p>系统会建议将这个APP发送的通知静音</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/26.png" alt="截屏2021-06-09 上午8.33.44"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>小结</p>
+<ul>
+<li>通过设置通知相关性分数和合适的缩略图，使通知占据摘要顶部的轮播位置</li>
+<li>思考APP的通知最适合哪一干扰级别<ul>
+<li>例如：如果是聊天软件，应该使用最新的<code>User Notifications API</code>来告诉系统来自APP的消息和来电通知</li>
+</ul>
+</li>
+<li>使用最新的<code>Focus Status API</code>，在APP里显示用户的专注模式状态</li>
+</ul>
+</li>
+</ul>
+<h3 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h3><blockquote>
+<p>通过Widget的新特性让你的APP更好用、且更容易被用户看到</p>
+</blockquote>
+<ul>
+<li><p>使用iPad上的超大尺寸小组件</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/27.png" alt="截屏2021-06-09 上午8.34.23"></p>
+</li>
+<li><p>通过Intents框架让Widget自动加入到智能堆叠小组件中</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/28.png" alt="截屏2021-06-09 上午8.35.14"></p>
+</li>
+</ul>
+<h3 id="SharePlay"><a href="#SharePlay" class="headerlink" title="SharePlay"></a>SharePlay</h3><blockquote>
+<p>人们聚会时，除了聊天以外，分享体验也很重要，SharePlay Kit的出现正是为了帮助人们在难以相见的时候，依旧保持紧密联系。</p>
+</blockquote>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/29.png" alt="截屏2021-06-09 上午8.36.35"></p>
+<ul>
+<li><p>入口</p>
+<ul>
+<li>FaceTime</li>
+<li>iMessage</li>
+</ul>
+<blockquote>
+<p>让人们在视频聊天的同时，共同进行一项活动，比如：共享视频播放、共享画布。</p>
+</blockquote>
+</li>
+<li><p>共享视频播放</p>
+<p><img src="/2021/06/08/What-s-new-in-WWDC21/Joshsone/GCBlog/source/_posts/What-s-new-in-WWDC21/30.png" alt="截屏2021-06-09 上午8.37.18"></p>
+</li>
+</ul>
+<blockquote>
+<p>在视频APP里采用Group Activities和AVPlayer同步，从而可以快速集成这一功能。</p>
+</blockquote>
+<ul>
+<li><p>共享画布</p>
+<blockquote>
+<p>基于Group Activities，将笔画发给FaceTime群组中的每一个人，从而实现协同绘画</p>
+</blockquote>
+<p>![截屏2021-06-09 上午8.38.07](/Users/Joshsone/Library/Application Support/typora-user-images/截屏2021-06-09 上午8.38.07.png)</p>
+</li>
+</ul>
+<p>小结：只需要让APP实现Group Activities，就可以实现基于FaceTime的共享体验</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1464,84 +1865,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">计算机组成原理学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-01 14:56:34" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:34+08:00">2021-06-01</time>
-            </span>
-
-          
-            <span id="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1611,12 +1934,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
