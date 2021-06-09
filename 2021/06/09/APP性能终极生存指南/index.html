@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="性能是客户端永远绕不开的话题，一起来康康今年的WWDC提供了哪些有关性能提升的建议吧~ （温馨提示：本片内容来源自WWDC21：Ultimate application performance survival guide，文中出现的每张图片均以其在视频中出现的时间命名）    使用的五种工具  Xcode Organizer MetricKit Instruments XCTest App S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APP终极性能生存指南">
+<meta property="og:url" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="性能是客户端永远绕不开的话题，一起来康康今年的WWDC提供了哪些有关性能提升的建议吧~ （温馨提示：本片内容来源自WWDC21：Ultimate application performance survival guide，文中出现的每张图片均以其在视频中出现的时间命名）    使用的五种工具  Xcode Organizer MetricKit Instruments XCTest App S">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/24.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/2.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/3.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/4.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/5.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/6.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/7.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/8.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/9.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/10.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/11.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/12.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/13.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/14.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/15.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/16.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/17.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/18.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/19.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/20.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/21.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/22.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/23.png">
+<meta property="article:published_time" content="2021-06-09T14:24:39.000Z">
+<meta property="article:modified_time" content="2021-06-09T23:03:37.990Z">
+<meta property="article:author" content="林辰">
+<meta property="article:tag" content="WWDC21">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/24.png">
+
+<link rel="canonical" href="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>APP终极性能生存指南 | Leoolin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Leoolin</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          APP终极性能生存指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-09 22:24:39" itemprop="dateCreated datePublished" datetime="2021-06-09T22:24:39+08:00">2021-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-10 07:03:37" itemprop="dateModified" datetime="2021-06-10T07:03:37+08:00">2021-06-10</time>
+              </span>
+
+          
+            <span id="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="APP终极性能生存指南" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>性能是客户端永远绕不开的话题，一起来康康今年的WWDC提供了哪些有关性能提升的建议吧~</p>
+<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10181/">Ultimate application performance survival guide</a>，文中出现的每张图片均以其在视频中出现的时间命名）</p>
+</blockquote>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/24.png" alt="1:38"></p>
+<ul>
+<li><p>使用的五种工具</p>
+<ul>
+<li>Xcode Organizer</li>
+<li>MetricKit</li>
+<li>Instruments</li>
+<li>XCTest</li>
+<li>App Store Connect API</li>
+</ul>
+</li>
+<li><p>参考的八个性能指标</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/2.png" alt="1:58"></p>
+<ul>
+<li><p>电量</p>
+</li>
+<li><p>启动时间</p>
+</li>
+<li><p>超时响应率（Hang rate）</p>
+<blockquote>
+<p>APP无法响应用户的输入或者行为超过250ms，即记作一个hang</p>
+</blockquote>
+</li>
+<li><p>内存</p>
+</li>
+<li><p>磁盘写入</p>
+</li>
+<li><p>滚动卡顿</p>
+</li>
+<li><p>APP终止</p>
+</li>
+<li><p>MXSignposts</p>
+</li>
+</ul>
+</li>
+<li><p>电量（battery usage）</p>
+<blockquote>
+<p>用户可以通过手机查看APP的电量消耗情况</p>
+</blockquote>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/3.png" alt="3:14"></p>
+<ul>
+<li><p>优化电池使用寿命</p>
+<ul>
+<li>CPU</li>
+<li>网络</li>
+<li>定位</li>
+<li>音频</li>
+<li>蓝牙</li>
+<li>GPU</li>
+</ul>
+</li>
+<li><p>使用Xcode工具</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/4.png" alt="4:10"></p>
+<ul>
+<li>查看CPU超过20%的阶段（CPU High Utilization）</li>
+<li>查看CPU从闲置被唤醒的阶段（CPU Wake Overhead）</li>
+</ul>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/5.png" alt="4:41"></p>
+<p>也可以打开Time Profile查看该阶段更详细的信息，比如使用Location Energy Model确保应用如预期中正确地使用定位功能</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/6.png" alt="这张是我本地截屏"></p>
+</li>
+<li><p>使用MetricKit</p>
+<p>MetricKit收集数据流程概览</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/7.png" alt="6:41"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建遵守`MXMetricManagerSubscriber`的协议的类AppMetrics</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppMetrics</span>: <span class="title">MXMetricManagerSubscriber</span> </span>&#123;</span><br><span class="line">	<span class="keyword">init</span>() &#123;</span><br><span class="line">		<span class="comment">// 初始化时将AppMetrics加入到`MXMetricManager`单例中</span></span><br><span class="line">		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">		shared.add(<span class="keyword">self</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">deinit</span> &#123;</span><br><span class="line">		<span class="comment">// 销毁时进行移除</span></span><br><span class="line">		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">		shared.remove(<span class="keyword">self</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">// 处理每日的metrics</span></span><br><span class="line">	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXMetricPayload])</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">// 处理diagnostics</span></span><br><span class="line">	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXDiagnositcPayload])</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>使用Xcode Organizer</p>
+<blockquote>
+<p>MetricKit收集的数据形式与Xcode Organizer中的数据其实是一致的，Xcode Organizer数据来源自MetrixKit中收集到的信息。</p>
+<p>但是Xcode Organizer对收集到的数据进行了聚合，忽略了用户的详细特征，展现的是整体趋势；</p>
+<p>而使用MetricKit可以更具针对性的对某一用户在一段时间内的性能表现进行分析。</p>
+</blockquote>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/8.png" alt="6:57"></p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/9.png" alt="7:03"></p>
+<ul>
+<li><p>Regressions</p>
+<blockquote>
+<p>Xcode 13新增的模块，将各个版本的所有性能指标中发生数据劣化的情况单独拎出来，让开发者可以将注意力集中在一处。</p>
+</blockquote>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/10.png" alt="7:22"></p>
+</li>
+<li><p>定位问题发生所在</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/11.png" alt="7:58"></p>
+</li>
+</ul>
+</li>
+<li><p>超时响应率和滚动卡顿（Hang rate &amp; Scrolling）</p>
+<ul>
+<li><p>超时响应</p>
+<p>长时间无法响应是导致用户强退应用的重要原因</p>
+</li>
+<li><p>滚动卡顿</p>
+<p>当在下一次屏幕刷新时，新的内容还未ready就会出现卡顿</p>
+</li>
+</ul>
+<blockquote>
+<p>Hang rate &amp; Scrollings是表明APP没有及时响应的两个指标，一旦发生会严重影响用户体验，甚至让用户在使用应用时产生挫败感，从而降低用户的使用意愿。</p>
+</blockquote>
+<ul>
+<li><p>使用Xcode Organizer</p>
+<ul>
+<li>Hang rate</li>
+</ul>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/12.png" alt="9:40"></p>
+<ul>
+<li>Scrolling</li>
+</ul>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/13.png" alt="9:42"></p>
+</li>
+<li><p>使用Instrument</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/14.png" alt="10:05"></p>
+<ul>
+<li><p>Thread State Trace</p>
+<p>可以查看线程被阻塞的详细情况</p>
+</li>
+<li><p>System Call Trace</p>
+<p>可以查看系统函数调用的时机和时长</p>
+</li>
+</ul>
+</li>
+<li><p>使用XCTest进行性能测试</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testScrollingAnimationPerformance</span><span class="params">()</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">	app.launch()</span><br><span class="line">	app.staticTexts[<span class="string">&quot;Meal Planner&quot;</span>].tap()</span><br><span class="line">	<span class="keyword">let</span> foodCollection = app.collectionViews.firstMatch</span><br><span class="line">	<span class="comment">// `measure`函数默认重复5次，可以通过option设置手动停止</span></span><br><span class="line">	<span class="keyword">let</span> measureOptions = <span class="type">XCTMeasureOptions</span>()</span><br><span class="line">	measureOptions.invocationOptions = [.manuallyStop]</span><br><span class="line">	<span class="comment">// 开始measure</span></span><br><span class="line">	measure(metrics: [<span class="type">XCTOSSignpostMetric</span>.scrollDecelerationMetric], </span><br><span class="line">	option: measureOptions) &#123;</span><br><span class="line">    <span class="comment">// 滑动</span></span><br><span class="line">		foodCollection.swipeUP(velocity: .fast)</span><br><span class="line">    <span class="comment">// 停止measure</span></span><br><span class="line">		stopMeasuring()</span><br><span class="line">    <span class="comment">// 重置状态</span></span><br><span class="line">		foodCollection.swipeDown(velocity: .fast)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用MetricKit收集线上数据</p>
+<p>在iOS 14中，MetricKit会收集用户使用过程中发生的问题，然后每24小时集中上报一次。</p>
+<p>在iOS 15和MacOS 12中，MetricKit会在用户发生问题后，并且立刻进行上报</p>
+<ul>
+<li>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>记录动画</p>
+<p>MXSignpost是MetricKit中封装的API，可以用来监控关键代码的运行情况</p>
+</li>
+</ul>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/15.png" alt="11:20"></p>
+</li>
+<li><p>磁盘写入</p>
+<ul>
+<li><p>使用Instrument中的File Activity查看磁盘写入情况</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/16.png" alt="13:22"></p>
+<ul>
+<li>优化建议：</li>
+</ul>
+<p>对于频繁写入的case，推荐使用Core Data</p>
+<p>避免快速创建和删除文件</p>
+</li>
+<li><p>使用XCTest</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSaveMeal</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">let</span> app = <span class="type">XCUIApplication</span>()</span><br><span class="line">	<span class="keyword">let</span> options = <span class="type">XCTMeasureOptions</span>()</span><br><span class="line">	options.invocationOptions = [.manullyStart]</span><br><span class="line">	<span class="comment">// 检测下面代码运行时的磁盘写入情况</span></span><br><span class="line">	measure(metrics: [<span class="type">XCTStorageMetric</span>(application: app)], options: options) &#123;</span><br><span class="line">	app.launch()</span><br><span class="line">	startMeasuring()</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">let</span> firstCell = app.cells.firstMatch</span><br><span class="line">	firstCell.buttons[<span class="string">&quot;Save meal&quot;</span>].firstMatch.tap()</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">let</span> savedButton = firstCell.buttons[<span class="string">&quot;Saved&quot;</span>].firshMatch</span><br><span class="line">	<span class="type">XCTAssertTure</span>(savedButton.waitForExistence(timeout: <span class="number">2</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用Xcode Organizer</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/17.png" alt="14:35"></p>
+<p>在Disk Writes报告中可以查看24小时内写入量超过1GB的case</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/18.png" alt="15:01"></p>
+<p>在Xcode 13中，还可以得到一些优化建议</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/19.png" alt="15:22"></p>
+</li>
+<li><p>使用MetricKit</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标记开始磁盘写入</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">syncAllContentsToDB</span><span class="params">()</span></span> &#123;</span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.begin, </span><br><span class="line">	log:<span class="type">MXMetricManager</span>.makeLogHandle(categroy: <span class="string">&quot;diskWrite_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_diskWrites&quot;</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// sync contents to database</span></span><br><span class="line">	</span><br><span class="line">  <span class="comment">// 标记磁盘写入结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end,</span><br><span class="line">	log:<span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;diskWrite_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_diskWrites&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>启动时间</p>
+<ul>
+<li><p>使用Xcode Organizer</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/20.png" alt="18:15"></p>
+<ul>
+<li>查看因启动超时导致的崩溃</li>
+</ul>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/21.png" alt="18:47"></p>
+</li>
+<li><p>使用Instrument中的App Launch</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/22.png" alt="19:13"></p>
+</li>
+</ul>
+</li>
+<li><p>Memory</p>
+<ul>
+<li><p>使用Xcode Organizer</p>
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/23.png" alt="20:21"></p>
+</li>
+<li><p>使用Instrument中的Leak、Allocations和VM Tracker三个模板</p>
+<ul>
+<li>Leak检测内存泄漏</li>
+<li>Allocations分析内存的生命周期</li>
+<li>VM Tracker展示虚拟内存空间的使用情况</li>
+</ul>
+</li>
+<li><p>使用MetricKit</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">saveAppAssets</span><span class="params">()</span></span> &#123;</span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.begin, </span><br><span class="line">	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;memory_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_memory&quot;</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// save app metadata</span></span><br><span class="line">	</span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end,</span><br><span class="line">	log: <span class="type">MXMetricManger</span>.makeLogHandle(category: <span class="string">&quot;memory_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_memory&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>更多有关电量优化的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/417/">Improving battery life and performance WWDC19</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10212/">Analyze HTTP traffic in Instruments WWDC 21</a></p>
+<p>更多Hang优化的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258/">Understand and Eliminate Hangs from you app WWDC21</a></p>
+<p>更多滚动优化的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/tech-talks/10855/">Explore UI animation hitches and the render loop WWDC20</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10077/">Eliminate animation hitches with XCTest WWDC20</a></p>
+<p>更多磁盘写入优化的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose power and performance regressions in your app WWDC21</a></p>
+<p>更多启动优化的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10078/">Why is my app getting killed WWDC20</a></p>
+<p>更多内存优化的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10180/">Detect and diagnose memory issues</a></p>
+<p>更多关于性能工具的Session：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10076/">Diagnose performance issues with Xcode Organizer WWDC20</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10081/">What’s new in MetricKit WWDC20</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10057/">Identify trends with Power and Performance API WWDC20</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/411/">Getting started with Instruments WWDC19</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/WWDC21/" rel="tag"># WWDC21</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/08/What-s-new-in-WWDC21/" rel="prev" title="一文带你读完WWDC21核心（新）技术点">
+      <i class="fa fa-chevron-left"></i> 一文带你读完WWDC21核心（新）技术点
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林辰</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林辰</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'kFJQFYlGcpqkKj9grbxdFeO3-gzGzoHsz',
+      appKey     : 'cKBWWrkyrqclSn3x0gcqCNST',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
