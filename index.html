@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-10 07:19:20" itemprop="dateModified" datetime="2021-06-10T07:19:20+08:00">2021-06-10</time>
+                <time title="Modified: 2021-06-10 07:25:12" itemprop="dateModified" datetime="2021-06-10T07:25:12+08:00">2021-06-10</time>
               </span>
 
           
@@ -253,37 +253,37 @@
 <li><p>电量（battery usage）</p>
 <ul>
 <li><p>优化电池使用需要关注的几点：</p>
-</li>
-<li><p>CPU</p>
 <ul>
+<li>CPU<ul>
 <li>网络</li>
 </ul>
 </li>
-<li><p>定位</p>
-<ul>
+<li>定位<ul>
 <li>音频</li>
 <li>蓝牙</li>
 <li>GPU</li>
 </ul>
+</li>
+</ul>
 <blockquote>
-<p>其中CPU、网络、定位是电量消耗大头</p>
+<p>其中CPU、网络、定位是电量消耗大户~</p>
 </blockquote>
 </li>
-<li><p>使用Xcode工具查看Debug期间电量损耗情况</p>
+<li><p>使用Xcode工具查看Debug期间的电量损耗情况</p>
 <p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/4.png" alt="4:10"></p>
 <ul>
 <li>查看CPU超过20%的阶段（CPU High Utilization）</li>
+<li>查看CPU从闲置被唤醒的阶段（CPU Wake Overhead）</li>
 </ul>
-</li>
-<li><p>查看CPU从闲置被唤醒的阶段（CPU Wake Overhead）</p>
 <p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/5.png" alt="4:41"></p>
 </li>
-<li><p>使用Instrument中的Time Profile查看该阶段更详细的信息（比如使用Location Energy Model确保应用如预期中正确地使用定位功能）</p>
+<li><p>使用Instrument中的Time Profile工具查看该阶段更详细的信息</p>
+<p>（比如使用Location Energy Model确保应用如预期中正确地使用定位功能）</p>
 <p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/6.png" alt="这张是我本地截屏"></p>
 </li>
 <li><p>使用MetricKit收集用户的性能数据</p>
 <p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/7.png" alt="6:41"></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建遵守`MXMetricManagerSubscriber`的协议的类AppMetrics</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">AppMetrics</span>: <span class="title">MXMetricManagerSubscriber</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">init</span>() &#123;</span><br><span class="line">    		<span class="comment">// 初始化时将AppMetrics加入到`MXMetricManager`单例中</span></span><br><span class="line">    		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">    		shared.add(<span class="keyword">self</span>)</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="keyword">deinit</span> &#123;</span><br><span class="line">    		<span class="comment">// 销毁时进行移除</span></span><br><span class="line">    		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">    		shared.remove(<span class="keyword">self</span>)</span><br><span class="line">    	&#125;</span><br><span class="line">    	</span><br><span class="line">      <span class="comment">// 处理每日的metrics</span></span><br><span class="line">    	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXMetricPayload])</span></span> &#123;</span><br><span class="line">    	</span><br><span class="line">    	&#125;</span><br><span class="line">    	</span><br><span class="line">      <span class="comment">// 处理diagnostics</span></span><br><span class="line">    	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXDiagnositcPayload])</span></span> &#123;</span><br><span class="line">    	</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建遵守`MXMetricManagerSubscriber`的协议的类AppMetrics</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">AppMetrics</span>: <span class="title">MXMetricManagerSubscriber</span> </span>&#123;</span><br><span class="line">	<span class="keyword">init</span>() &#123;</span><br><span class="line">  		<span class="comment">// 初始化时将AppMetrics加入到`MXMetricManager`单例中</span></span><br><span class="line">  		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">  		shared.add(<span class="keyword">self</span>)</span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">deinit</span> &#123;</span><br><span class="line">  		<span class="comment">// 销毁时进行移除</span></span><br><span class="line">  		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">  		shared.remove(<span class="keyword">self</span>)</span><br><span class="line">  	&#125;</span><br><span class="line">  	</span><br><span class="line">    <span class="comment">// 处理每日的metrics</span></span><br><span class="line">  	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXMetricPayload])</span></span> &#123;</span><br><span class="line">  	</span><br><span class="line">  	&#125;</span><br><span class="line">  	</span><br><span class="line">    <span class="comment">// 处理diagnostics</span></span><br><span class="line">  	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXDiagnositcPayload])</span></span> &#123;</span><br><span class="line">  	</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 
 </li>
@@ -293,7 +293,7 @@
 <ul>
 <li><p>使用Xcode Organizer查看线上性能数据</p>
 <blockquote>
-<p>Xcode Organizer对MetrixKit收集到的数据进行了聚合，忽略了用户的详细特征，展现的是整体趋势；</p>
+<p>Xcode Organizer对MetrixKit收集到的数据进行了聚合，忽略了单一用户的详细数据，展现的是整体的趋势；</p>
 <p>而使用MetricKit可以更具针对性的对某一用户在一段时间内的性能表现进行分析。</p>
 </blockquote>
 <p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/8.png" alt="6:57"></p>
@@ -351,11 +351,12 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testScrollingAnimationPerformance</span><span class="params">()</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">	app.launch()</span><br><span class="line">	app.staticTexts[<span class="string">&quot;Meal Planner&quot;</span>].tap()</span><br><span class="line">	<span class="keyword">let</span> foodCollection = app.collectionViews.firstMatch</span><br><span class="line">	<span class="comment">// `measure`函数默认重复5次，可以通过option设置手动停止</span></span><br><span class="line">	<span class="keyword">let</span> measureOptions = <span class="type">XCTMeasureOptions</span>()</span><br><span class="line">	measureOptions.invocationOptions = [.manuallyStop]</span><br><span class="line">	<span class="comment">// 开始measure</span></span><br><span class="line">	measure(metrics: [<span class="type">XCTOSSignpostMetric</span>.scrollDecelerationMetric], </span><br><span class="line">	option: measureOptions) &#123;</span><br><span class="line">    <span class="comment">// 滑动</span></span><br><span class="line">		foodCollection.swipeUP(velocity: .fast)</span><br><span class="line">    <span class="comment">// 停止measure</span></span><br><span class="line">		stopMeasuring()</span><br><span class="line">    <span class="comment">// 重置状态</span></span><br><span class="line">		foodCollection.swipeDown(velocity: .fast)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用MetricKit收集线上数据</p>
+<blockquote>
 <p>在iOS 14中，MetricKit会收集用户使用过程中发生的问题，然后每24小时集中上报一次。</p>
 <p>在iOS 15和MacOS 12中，MetricKit会在用户发生问题后，并且立刻进行上报</p>
-<ul>
-<li>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</li>
-</ul>
+</blockquote>
+</li>
+<li><p>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
