@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-13 01:08:04" itemprop="dateModified" datetime="2021-06-13T01:08:04+08:00">2021-06-13</time>
+                <time title="Modified: 2021-06-13 01:36:53" itemprop="dateModified" datetime="2021-06-13T01:36:53+08:00">2021-06-13</time>
               </span>
 
           
@@ -211,8 +211,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是为了达成这一目标。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png" alt="2:18"></p>
+          <p>性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是因为这一点。<img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png" alt="2:18"></p>
 <blockquote>
 <p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10180/">Detect and diagnose memory issues</a>）</p>
 <p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
@@ -248,9 +247,11 @@
 </ul>
 <h2 id="内存占用结构"><a href="#内存占用结构" class="headerlink" title="内存占用结构"></a>内存占用结构</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/2.png" alt="2:26"></p>
 <ul>
+<li><p>Clean Memory</p>
+</li>
 <li><p>Dirty Memory</p>
 <blockquote>
-<p>脏内存由被APP写入的内存构成。</p>
+<p>Clean Memory被分配，并写入内容后成为”脏内存“，脏内存包括：</p>
 </blockquote>
 <ul>
 <li>所有的堆分配（malloc）</li>
@@ -260,11 +261,10 @@
 </li>
 <li><p>Compressed Memory</p>
 <blockquote>
-<p>压缩内存是脏内存中暂未被访问的部分（Unaccessed pages），会在访问后解压（即成为脏内存）。</p>
+<p>压缩内存特指脏页（Dirty Pages）中暂未被访问的部分（Unaccessed pages），会在访问后解压，成为脏内存。</p>
+<p>（下文会详细介绍脏页（Dirty Pages）的概念）</p>
 </blockquote>
 <p>注：iOS中没有内存交换（Memory Swap）的概念，你可能在使用Instrument工具时，见到过<code>Swapped</code>字段，实际上所指的是<code>Compressed Memory</code></p>
-</li>
-<li><p>Clean Memory</p>
 </li>
 </ul>
 <blockquote>
@@ -274,7 +274,7 @@
 <ul>
 <li><p>XCTest</p>
 <blockquote>
-<p>通过项目的单元测试和U测试来检测开发环境的性能指标</p>
+<p>通过单元测试和U测试中的XCTest来检测开发环境的性能指标</p>
 </blockquote>
 <ul>
 <li><p>XCTest可以测量以下性能指标：</p>
@@ -290,7 +290,7 @@
 <li><p>通过XCTest检测内存使用情况</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSaveMeal</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">let</span> app = <span class="type">XCUIApplication</span>()</span><br><span class="line">	<span class="keyword">let</span> options = <span class="type">XCTMeasuireOptions</span>()</span><br><span class="line">	options.invocationOptions = [.manullyStart]</span><br><span class="line">	measure(metrics: [<span class="type">XCTMemoryMetric</span>(application: app)],</span><br><span class="line">					options:options) &#123;</span><br><span class="line">		app.launch()</span><br><span class="line">		startMeasureing()</span><br><span class="line">		app.cells.firstMatch.buttons[<span class="string">&quot;Save meal&quot;</span>].firstMatch.tap()</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">let</span> savedButton = app.cells.firstMatch.buttons[<span class="string">&quot;Saved&quot;</span>].firstMatch</span><br><span class="line">		<span class="type">XCTAssertTure</span>(savedButton.waitForExistence(timeout: <span class="number">30</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>XCTest新增两项收集诊断的文件产物</p>
+<li><p>XCTest在Xcode 13中新增的两项收集性能情况的诊断产物</p>
 <p>开启：<code>enablePerformanceTestsDiagnostics YES</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild test</span><br><span class="line">-project MealPannerApp.xcodeproj</span><br><span class="line">-scheme PerformanceTests</span><br><span class="line">-destination platform&#x3D;iOS,name&#x3D;&quot;iPhone&quot;</span><br><span class="line">-enablePerformanceTestsDiagnostics YES</span><br></pre></td></tr></table></figure>
 
@@ -298,15 +298,15 @@
 <li><p>Ktrace files</p>
 <p>Ktrace file能够打开，并展示以下分析报告：</p>
 <ul>
-<li>当卡顿发生时展示渲染通道的状态</li>
-<li>因主线程阻塞，导致的Hang（超过250ms无法响应，记作一个Hang）</li>
+<li>当卡顿发生时的渲染通道的状态</li>
+<li>因主线程阻塞，导致的Hang（APP无法响应用户的输入或者行为超过250ms，即记作一个hang）</li>
 </ul>
 </li>
 <li><p>Memory graphs</p>
 <blockquote>
 <p>Memory graph展示APP进程的地址空间的快照</p>
 </blockquote>
-<p>我们可以生成任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照，从而查看这一阶段内存占用的变化</p>
+<p>我们可以生成任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照，从而查看这一阶段内存占用的变化。</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/4.png" alt="7:19"></p>
 </li>
 </ul>
@@ -329,7 +329,7 @@
 </li>
 <li><p>堆大小问题（Heap size issues）</p>
 <blockquote>
-<p>堆是进程地址空间中储存动态分配对象的段（section），有策略性的加载和释放内存，避免内存峰值过高引发OOM。</p>
+<p>堆是进程地址空间中储存动态分配的对象的段（section），有策略性的加载和释放内存，可以避免内存峰值过高引发OOM。</p>
 </blockquote>
 <ul>
 <li>堆分配回归（Heap allocation regressions）</li>
@@ -337,46 +337,59 @@
 </ul>
 </li>
 </ul>
-<h3 id="堆分配回归"><a href="#堆分配回归" class="headerlink" title="堆分配回归"></a>堆分配回归</h3><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/7.png" alt="15:31"></p>
+<h3 id="堆分配回归"><a href="#堆分配回归" class="headerlink" title="堆分配回归"></a>堆分配回归</h3><ul>
+<li>使用<code>vmmap -summary</code>对memgraph文件进行分析</li>
+</ul>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/7.png" alt="15:31"></p>
 <ul>
-<li><p>对memgraph文件进行分析</p>
+<li><p>我们主要关心<code>Dirty Size</code>和<code>Swapped Size</code>两列数据</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/8.png" alt="16:09"></p>
-<p>我们主要关心<code>Dirty Size</code>和<code>Swapped Size</code>两列数据</p>
-<p>对任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照进行对比</p>
+</li>
+</ul>
+<ul>
+<li><p>对任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照进行对比</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/9.png" alt="16:42"></p>
-<p>可以在下方看到按类聚合的，各类对象占用内存的大小</p>
+</li>
+<li><p>可以在下方看到按类聚合的，各类对象占用内存的大小</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/10.png" alt="17:15"></p>
 <p>从图中可以看到，<code>non-object</code>类型的数据，占用内存约13M。在Swift中，<code>non-object</code>通常代表原始分配字节（raw malloced bytes）</p>
-<p>打印memgraph文件中，类型为<code>non-object</code>且占用内存超过500k的对象</p>
+</li>
+<li><p>打印memgraph文件中，类型为<code>non-object</code>且占用内存超过500k的对象</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/11.png" alt="17:36"></p>
-<p>打印对象的引用树</p>
+</li>
+<li><p>打印对象的引用树</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/12.png" alt="18:00"></p>
-<p>可以通过<code>malloc_history -fullStacks</code>打印对象的分配调用栈</p>
+</li>
+<li><p>可以通过<code>malloc_history -fullStacks</code>打印对象的分配调用栈</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/13.png" alt="19:42"></p>
-<p>当不确定是哪个对象有问题时，可以通过<code>leaks --referenceTree</code>，自顶向下打印进程的所有内存中最可疑的对象</p>
+</li>
+<li><p>当不确定是哪个对象有问题时，可以通过<code>leaks --referenceTree</code>，自顶向下打印进程的所有内存中最可疑的对象</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/14.png" alt="18:40"></p>
-<p>可以通过<code>--groupByType</code>参数，按type聚合简化打印结果。</p>
+<ul>
+<li>可以通过<code>--groupByType</code>参数，按type聚合简化打印结果。</li>
+</ul>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/15.png" alt="19:08"></p>
 </li>
 </ul>
 <h3 id="碎片化"><a href="#碎片化" class="headerlink" title="碎片化"></a>碎片化</h3><blockquote>
+<p>先介绍两个概念：页和”脏页“</p>
 <ul>
-<li>页（Pages）是最小的独立的内存单元</li>
-<li>当页中写入任何数据，都会使整页变成”脏页“，而”脏页“中未使用的内存称为”空闲内存“</li>
+<li>页（Pages）：是最小的独立的内存单元</li>
+<li>一旦页中写入任何数据，都会使整页变成”脏页“</li>
 </ul>
 </blockquote>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/16.png" alt="21:37"></p>
-<p>当内存准备写入新的数据时，系统会优先尝试使用脏页中的空闲内存，而当即将分配的内存过大时，即使空闲内存的总大小足够，但并不是一段连续的内存空间时，仍会开辟一个新的脏页去写入这些数据。</p>
+<p>当内存准备写入新的数据时，系统会优先尝试使用脏页中的空闲内存，而当即将分配的内存过大时，即使空闲内存的总大小足够，但其并不是一段连续的内存空间，仍会开辟一个新的脏页去写入这些数据。</p>
 <p>这些无法被使用的空闲内存就是”碎片化内存“</p>
-<p>再例如以下这种情况：我们分配的对象总共使用了4个页，但每个页只占50%。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/17.png" alt="23:36"></p>
-<p>当我们释放这些对象时，图中仍有50%的碎片化内存，且同时存在4个脏页。</p>
+<p>再例如以下这种情况：我们分配的对象总共使用了4个页，但每个页的占用空间只占50%。</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/25.png" alt="23:19"></p>
+<p>当我们释放这些对象后，这些4个脏页的内存空间仍有50%的碎片化内存。</p>
 <p>最理想化的状态应该将所有的分配的对象放在两页，如下图：</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/18.png" alt="23:42"></p>
-<p>这样一旦释放这些对象时，仅会有两个脏页，并且不存在碎片化内存。</p>
+<p>这样一旦释放这些对象时，仅会留有两个脏页，并且不存在碎片化内存。</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/19.png" alt="23:52"></p>
 <ul>
-<li><p>我们的目标</p>
+<li><p>我们的目标：</p>
 <ul>
 <li>让分配的对象尽可能连续且拥有同样的生命周期</li>
 <li>碎片化率保持在25%以下</li>
@@ -388,7 +401,7 @@
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/20.png" alt="25:00"></p>
 <ul>
 <li><p>DefaultMallocZone</p>
-<p>平时只需要关注这部分，因为这是开发者进行堆分配默认结束的地方</p>
+<p>平时开发者只需要关注这部分的内存空间，因为这是我们进行堆分配默认结束的地方</p>
 </li>
 <li><p>MallocStackLoggingLiteZone</p>
 <p>这个空间是所有堆分配结束的地方</p>
@@ -401,7 +414,7 @@
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/22.png" alt="26:42"></p>
 </li>
 </ul>
-<p>总体流程：</p>
+<p>回顾下我们的总体排查流程：</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/23.png" alt="27:51"> </p>
 <h2 id="更多WWDC有关性能的Session"><a href="#更多WWDC有关性能的Session" class="headerlink" title="更多WWDC有关性能的Session"></a>更多WWDC有关性能的Session</h2><p><a href>iOS memory deep dive WWDC18</a></p>
 <p><a href>Getting started with Instruments WWDC19</a></p>
