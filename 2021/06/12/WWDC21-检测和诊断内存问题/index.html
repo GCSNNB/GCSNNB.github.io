@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是为了达成这一目标。   想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正 一文带你读完WWDC21核心（新）技术点 APP终极性能生存指南   Faster application activations 减少APP的内存占用，可以提高APP在后台存活的机会，从而让APP更快">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WWDC21 检测和诊断内存问题">
+<meta property="og:url" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是为了达成这一目标。   想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正 一文带你读完WWDC21核心（新）技术点 APP终极性能生存指南   Faster application activations 减少APP的内存占用，可以提高APP在后台存活的机会，从而让APP更快">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/2.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/3.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/4.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/5.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/6.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/7.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/8.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/9.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/10.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/11.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/12.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/13.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/14.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/15.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/16.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/17.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/18.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/19.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/20.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/21.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/22.png">
+<meta property="og:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/23.png">
+<meta property="article:published_time" content="2021-06-12T00:58:48.000Z">
+<meta property="article:modified_time" content="2021-06-12T16:52:13.800Z">
+<meta property="article:author" content="林辰">
+<meta property="article:tag" content="WWDC2021">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png">
+
+<link rel="canonical" href="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>WWDC21 检测和诊断内存问题 | Leoolin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Leoolin</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WWDC21 检测和诊断内存问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-12 08:58:48" itemprop="dateCreated datePublished" datetime="2021-06-12T08:58:48+08:00">2021-06-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-13 00:52:13" itemprop="dateModified" datetime="2021-06-13T00:52:13+08:00">2021-06-13</time>
+              </span>
+
+          
+            <span id="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="WWDC21 检测和诊断内存问题" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是为了达成这一目标。</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png" alt="2:18"></p>
+<blockquote>
+<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
+</blockquote>
+<ul>
+<li><p>Faster application activations</p>
+<p>减少APP的内存占用，可以提高APP在后台存活的机会，从而让APP更快的被激活。</p>
+<blockquote>
+<p>设备的内存空间是有限的，监控APP的内存使用情况，能够防止系统为了回收内存而主动终止APP。</p>
+<p>这样即使APP在后台运行，也能够保存当前用户的使用状态，从而避免再次从内存加载导致的耗时。</p>
+</blockquote>
+</li>
+<li><p>Responsive experience</p>
+<p>更好的响应速度</p>
+<blockquote>
+<p>策略性的将APP的内容加载到内存里，能够避免在用户使用APP时，因系统回收内存增加的等待耗时。</p>
+</blockquote>
+</li>
+<li><p>Complex features</p>
+<p>让用户体验更丰富的功能</p>
+<blockquote>
+<p>像加载视频、展示动画，这些复杂的功能往往需要占用更多的内存。因此有策略的使用内存，可以避免在用户使用APP的复杂功能时，被系统因内存占用问题而终止。</p>
+</blockquote>
+</li>
+<li><p>Wider device compatibility</p>
+<p>更好的设备兼容性</p>
+<blockquote>
+<p>让内存空间不太充足的老设备也能更好的使用APP的功能</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="内存占用结构"><a href="#内存占用结构" class="headerlink" title="内存占用结构"></a>内存占用结构</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/2.png" alt="2:26"></p>
+<ul>
+<li><p>Dirty Memory</p>
+<blockquote>
+<p>脏内存由被APP写入的内存构成。</p>
+</blockquote>
+<ul>
+<li>所有的堆分配（malloc）</li>
+<li>解码图像缓冲区</li>
+<li>Frameworks</li>
+</ul>
+</li>
+<li><p>Compressed Memory</p>
+<blockquote>
+<p>压缩内存是脏内存中暂未被访问的部分（Unaccessed pages），会在访问后解压（即成为脏内存）。</p>
+</blockquote>
+<p>注：iOS中没有内存交换（Memory Swap）的概念，你可能在使用Instrument工具时，见到过<code>Swapped</code>字段，实际上所指的是<code>Compressed Memory</code></p>
+</li>
+<li><p>Clean Memory</p>
+</li>
+</ul>
+<blockquote>
+<p>内存占用 = Dirty Memory + Compressed Memory</p>
+</blockquote>
+<h2 id="内存画像工具"><a href="#内存画像工具" class="headerlink" title="内存画像工具"></a>内存画像工具</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/3.png" alt="3:52"></p>
+<ul>
+<li><p>XCTest</p>
+<blockquote>
+<p>通过项目的单元测试和U测试来检测开发环境的性能指标</p>
+</blockquote>
+<ul>
+<li><p>XCTest可以测量以下性能指标：</p>
+<ul>
+<li>内存使用情况</li>
+<li>CPU使用</li>
+<li>磁盘写入情况</li>
+<li>卡顿率</li>
+<li>执行时间（完成某一任务所花的全部时间）</li>
+<li>APP启动时间</li>
+</ul>
+</li>
+<li><p>通过XCTest检测内存使用情况</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSaveMeal</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">let</span> app = <span class="type">XCUIApplication</span>()</span><br><span class="line">	<span class="keyword">let</span> options = <span class="type">XCTMeasuireOptions</span>()</span><br><span class="line">	options.invocationOptions = [.manullyStart]</span><br><span class="line">	measure(metrics: [<span class="type">XCTMemoryMetric</span>(application: app)],</span><br><span class="line">					options:options) &#123;</span><br><span class="line">		app.launch()</span><br><span class="line">		startMeasureing()</span><br><span class="line">		app.cells.firstMatch.buttons[<span class="string">&quot;Save meal&quot;</span>].firstMatch.tap()</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">let</span> savedButton = app.cells.firstMatch.buttons[<span class="string">&quot;Saved&quot;</span>].firstMatch</span><br><span class="line">		<span class="type">XCTAssertTure</span>(savedButton.waitForExistence(timeout: <span class="number">30</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>XCTest新增两项收集诊断的文件产物</p>
+<p>开启：<code>enablePerformanceTestsDiagnostics YES</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild test</span><br><span class="line">-project MealPannerApp.xcodeproj</span><br><span class="line">-scheme PerformanceTests</span><br><span class="line">-destination platform&#x3D;iOS,name&#x3D;&quot;iPhone&quot;</span><br><span class="line">-enablePerformanceTestsDiagnostics YES</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Ktrace files</p>
+<p>Ktrace file能够打开，并展示以下分析报告：</p>
+<ul>
+<li>当卡顿发生时展示渲染通道的状态</li>
+<li>因主线程阻塞，导致的Hang（超过250ms无法响应，记作一个Hang）</li>
+</ul>
+</li>
+<li><p>Memory graphs</p>
+<blockquote>
+<p>Memory graph展示APP进程的地址空间的快照</p>
+</blockquote>
+<p>我们可以生成任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照，从而查看这一阶段内存占用的变化</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/4.png" alt="7:19"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>MetricKit &amp; Xcode Organizer</p>
+<p>检测线上环境的内存指标</p>
+</li>
+</ul>
+<h2 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h2><ul>
+<li><p>内存泄漏（Leaks）</p>
+<p>最常见内存泄漏的原因的是循环引用</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/5.png" alt="11:18"></p>
+<ul>
+<li><p>通过命令行查看memgraph文件</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/6.png" alt="12:28"></p>
+</li>
+</ul>
+</li>
+<li><p>堆大小问题（Heap size issues）</p>
+<blockquote>
+<p>堆是进程地址空间中储存动态分配对象的段（section），有策略性的加载和释放内存，避免内存峰值过高引发OOM。</p>
+</blockquote>
+<ul>
+<li>堆分配回归（Heap allocation regressions）</li>
+<li>碎片化（Fragmentation）</li>
+</ul>
+</li>
+</ul>
+<h3 id="堆分配回归"><a href="#堆分配回归" class="headerlink" title="堆分配回归"></a>堆分配回归</h3><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/7.png" alt="15:31"></p>
+<ul>
+<li><p>对memgraph文件进行分析</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/8.png" alt="16:09"></p>
+<p>我们主要关心<code>Dirty Size</code>和<code>Swapped Size</code>两列数据</p>
+<p>对任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照进行对比</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/9.png" alt="16:42"></p>
+<p>可以在下方看到按类聚合的，各类对象占用内存的大小</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/10.png" alt="17:15"></p>
+<p>从图中可以看到，<code>non-object</code>类型的数据，占用内存约13M。在Swift中，<code>non-object</code>通常代表原始分配字节（raw malloced bytes）</p>
+<p>打印memgraph文件中，类型为<code>non-object</code>且占用内存超过500k的对象</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/11.png" alt="17:36"></p>
+<p>打印对象的引用树</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/12.png" alt="18:00"></p>
+<p>可以通过<code>malloc_history -fullStacks</code>打印对象的分配调用栈</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/13.png" alt="19:42"></p>
+<p>当不确定是哪个对象有问题时，可以通过<code>leaks --referenceTree</code>，自顶向下打印进程的所有内存中最可疑的对象</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/14.png" alt="18:40"></p>
+<p>可以通过<code>--groupByType</code>参数，按type聚合简化打印结果。</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/15.png" alt="19:08"></p>
+</li>
+</ul>
+<h3 id="碎片化"><a href="#碎片化" class="headerlink" title="碎片化"></a>碎片化</h3><blockquote>
+<ul>
+<li>页（Pages）是最小的独立的内存单元</li>
+<li>当页中写入任何数据，都会使整页变成”脏页“，而”脏页“中未使用的内存称为”空闲内存“</li>
+</ul>
+</blockquote>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/16.png" alt="21:37"></p>
+<p>当内存准备写入新的数据时，系统会优先尝试使用脏页中的空闲内存，而当即将分配的内存过大时，即使空闲内存的总大小足够，但并不是一段连续的内存空间时，仍会开辟一个新的脏页去写入这些数据。</p>
+<p>这些无法被使用的空闲内存就是”碎片化内存“</p>
+<p>再例如以下这种情况：我们分配的对象总共使用了4个页，但每个页只占50%。</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/17.png" alt="23:36"></p>
+<p>当我们释放这些对象时，图中仍有50%的碎片化内存，且同时存在4个脏页。</p>
+<p>最理想化的状态应该将所有的分配的对象放在两页，如下图：</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/18.png" alt="23:42"></p>
+<p>这样一旦释放这些对象时，仅会有两个脏页，并且不存在碎片化内存。</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/19.png" alt="23:52"></p>
+<ul>
+<li><p>我们的目标</p>
+<ul>
+<li>让分配的对象尽可能连续且拥有同样的生命周期</li>
+<li>碎片化率保持在25%以下</li>
+<li>使用自动释放池</li>
+<li>特别注意长时间运行的进程</li>
+</ul>
+</li>
+<li><p><code>vmman -summary xx.memgraph</code>查看碎片化内存情况</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/20.png" alt="25:00"></p>
+<ul>
+<li><p>DefaultMallocZone</p>
+<p>平时只需要关注这部分，因为这是开发者进行堆分配默认结束的地方</p>
+</li>
+<li><p>MallocStackLoggingLiteZone</p>
+<p>这个空间是所有堆分配结束的地方</p>
+</li>
+</ul>
+</li>
+<li><p>使用Instruments工具中的Allocations track查看内存情况</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/21.png" alt="26:41"></p>
+<p>其中的Destroyed和Persisted分别对应上面所描述的内存释放后的空闲内存（free memory）和仍未释放的内存（remaining objects）</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/22.png" alt="26:42"></p>
+</li>
+</ul>
+<p>总体流程：</p>
+<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/23.png" alt="27:51"> </p>
+<h2 id="更多WWDC有关性能的Session"><a href="#更多WWDC有关性能的Session" class="headerlink" title="更多WWDC有关性能的Session"></a>更多WWDC有关性能的Session</h2><p><a href>iOS memory deep dive WWDC18</a></p>
+<p><a href>Getting started with Instruments WWDC19</a></p>
+<p><a href>Understand and eliminate hangs from your apps WWDC21</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/WWDC2021/" rel="tag"># WWDC2021</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="prev" title="APP终极性能生存指南">
+      <i class="fa fa-chevron-left"></i> APP终极性能生存指南
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">内存占用结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%94%BB%E5%83%8F%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">内存画像工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">内存问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%88%86%E9%85%8D%E5%9B%9E%E5%BD%92"><span class="nav-number">3.1.</span> <span class="nav-text">堆分配回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A2%8E%E7%89%87%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">碎片化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9AWWDC%E6%9C%89%E5%85%B3%E6%80%A7%E8%83%BD%E7%9A%84Session"><span class="nav-number">4.</span> <span class="nav-text">更多WWDC有关性能的Session</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林辰</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林辰</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'kFJQFYlGcpqkKj9grbxdFeO3-gzGzoHsz',
+      appKey     : 'cKBWWrkyrqclSn3x0gcqCNST',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
