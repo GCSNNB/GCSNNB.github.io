@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-14 21:27:04 / Modified: 23:07:53" itemprop="dateCreated datePublished" datetime="2021-06-14T21:27:04+08:00">2021-06-14</time>
+              <time title="Created: 2021-06-14 21:27:04 / Modified: 23:22:25" itemprop="dateCreated datePublished" datetime="2021-06-14T21:27:04+08:00">2021-06-14</time>
             </span>
 
           
@@ -208,6 +208,14 @@
           <h2 id="什么是Hang？"><a href="#什么是Hang？" class="headerlink" title="什么是Hang？"></a>什么是Hang？</h2><p>试想这样的场景：当用户在你的APP中进行交互时，APP却没有及时的响应用户的操作。</p>
 <p>这种体验可以被描述为延时、慢、卡顿，在Apple开发中，我们称这种无响应的表现为Hang。</p>
 <p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/1.png" alt="1:35"></p>
+<blockquote>
+<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258">Understand and eliminate hangs from your app</a>）</p>
+<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
+</blockquote>
 <h2 id="理解main-runloop"><a href="#理解main-runloop" class="headerlink" title="理解main runloop"></a>理解main runloop</h2><p>用户的交互均在主线程的Runloop发生。当用户和APP交互，主线程会接受到这个事件，接下来处理这个事件，然后更新UI。</p>
 <p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/2.png" alt="2:03"></p>
 <p>如果处理事件耗费的很长时间，就从用户交互到UI更新之间会发生延时（delay）。</p>
@@ -285,11 +293,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a href>System Trace in depth</a></p>
-<p><a href>What’s new in MetricKit</a></p>
-<p><a href>Diagnose power and performance regressions in your app</a></p>
-<p><a href>Improving battery life and performance</a></p>
-<p><a href>Modernizing Grand Central Dispatch</a></p>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2016/411/">System Trace in depth</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10081/">What’s new in MetricKit</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose power and performance regressions in your app</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/417/">Improving battery life and performance</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2017/706/">Modernizing Grand Central Dispatch</a></p>
 
       
     </div>
@@ -332,10 +340,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-13 20:24:09 / Modified: 22:35:05" itemprop="dateCreated datePublished" datetime="2021-06-13T20:24:09+08:00">2021-06-13</time>
+              <time title="Created: 2021-06-13 20:24:09" itemprop="dateCreated datePublished" datetime="2021-06-13T20:24:09+08:00">2021-06-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-14 23:22:12" itemprop="dateModified" datetime="2021-06-14T23:22:12+08:00">2021-06-14</time>
+              </span>
 
           
             <span id="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" class="post-meta-item leancloud_visitors" data-flag-title="诊断APP的电源和性能回归" title="Views">
@@ -371,6 +385,14 @@
       
           <p>Instruments工具包含了非常丰富的数据，可以自由选择查看各机型、各指标类目的具体性能数据，同样也正因为其展示的数据太过庞杂，可能让开发者不清楚该从如何入手去进行优化。</p>
 <p>Xcode 13中Instruments中新增了Regressions模块，它会突出需要优先处理的性能问题，来简化工作流。</p>
+<blockquote>
+<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose Power and Performance regressions in your app</a>）</p>
+<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
+</blockquote>
 <h2 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h2><p>当一个APP相对与近期的版本，在性能或电量方面发生劣化，就称为回归（Regression）。</p>
 <p>比如在上线一个新版本后，APP启动时间增加。</p>
 <p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/1.png" alt="3:47"></p>
@@ -391,9 +413,9 @@
 <p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/3.png" alt="11:40"></p>
 </li>
 </ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a href>Why is my app getting killed?</a></p>
-<p><a href>Triage TestFlight crashes with Xcode Organizer</a></p>
-<p><a href>Identify trends with the Power and Performace API</a></p>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10078/">Why is my app getting killed?</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10203/">Triage TestFlight crashes with Xcode Organizer</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Identify trends with the Power and Performace API</a></p>
 
       
     </div>
@@ -444,7 +466,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-13 01:36:53" itemprop="dateModified" datetime="2021-06-13T01:36:53+08:00">2021-06-13</time>
+                <time title="Modified: 2021-06-14 23:19:07" itemprop="dateModified" datetime="2021-06-14T23:19:07+08:00">2021-06-14</time>
               </span>
 
           
@@ -485,6 +507,8 @@
 <p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
 </blockquote>
 <ul>
 <li><p>Faster application activations</p>
@@ -684,9 +708,9 @@
 </ul>
 <p>回顾下我们的总体排查流程：</p>
 <p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/23.png" alt="27:51"> </p>
-<h2 id="更多WWDC有关性能的Session"><a href="#更多WWDC有关性能的Session" class="headerlink" title="更多WWDC有关性能的Session"></a>更多WWDC有关性能的Session</h2><p><a href>iOS memory deep dive WWDC18</a></p>
-<p><a href>Getting started with Instruments WWDC19</a></p>
-<p><a href>Understand and eliminate hangs from your apps WWDC21</a></p>
+<h2 id="更多WWDC有关性能的Session"><a href="#更多WWDC有关性能的Session" class="headerlink" title="更多WWDC有关性能的Session"></a>更多WWDC有关性能的Session</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2018/416/">iOS memory deep dive WWDC18</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/411/">Getting started with Instruments WWDC19</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258/">Understand and eliminate hangs from your apps WWDC21</a></p>
 
       
     </div>
@@ -737,7 +761,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-13 01:05:13" itemprop="dateModified" datetime="2021-06-13T01:05:13+08:00">2021-06-13</time>
+                <time title="Modified: 2021-06-14 23:20:59" itemprop="dateModified" datetime="2021-06-14T23:20:59+08:00">2021-06-14</time>
               </span>
 
           
@@ -778,6 +802,8 @@
 <p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
 </blockquote>
 <p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/24.png" alt="1:38"></p>
 <ul>
@@ -1060,7 +1086,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-13 01:06:16" itemprop="dateModified" datetime="2021-06-13T01:06:16+08:00">2021-06-13</time>
+                <time title="Modified: 2021-06-14 23:17:17" itemprop="dateModified" datetime="2021-06-14T23:17:17+08:00">2021-06-14</time>
               </span>
 
           
@@ -1101,6 +1127,8 @@
 <p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
 </blockquote>
 <h2 id="Xcode-Cloud"><a href="#Xcode-Cloud" class="headerlink" title="Xcode Cloud"></a>Xcode Cloud</h2><blockquote>
 <p>试想一个一站式的iOS开发体验，在Xcode中提交代码后，自动在云端编译并且测试，接下来开发者只需根据Xcode上显示的测试结果改进代码，当一切准备就绪，就会自动将应用分发到各平台的TestFlight中…，为了实现这样流畅的开发体验，Apple将开发流程中所涉及到的所有环节，都集成到了Xcode中。</p>

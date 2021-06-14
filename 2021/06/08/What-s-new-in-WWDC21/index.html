@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一年一度的WWDC又来了，一起来看看今年又有哪些值得关注的技术点吧~  （温馨提示：本片内容来源自WWDC21：Platforms State of the Union） 想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正 检测和诊断内存问题 APP终极性能生存指南  Xcode Cloud 试想一个一站式的iOS开发体验，在Xcode中提交代码后，自动在云端编译并且测">
+  <meta name="description" content="一年一度的WWDC又来了，一起来看看今年又有哪些值得关注的技术点吧~  （温馨提示：本片内容来源自WWDC21：Platforms State of the Union） 想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正 检测和诊断内存问题 APP终极性能生存指南 iOS中的Hang是什么？该如何治理？ 诊断APP的电源和性能回归  Xcode Cloud 试想一个一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一文带你读完WWDC21核心（新）技术点">
 <meta property="og:url" content="http://example.com/2021/06/08/What-s-new-in-WWDC21/index.html">
 <meta property="og:site_name" content="Leoolin">
-<meta property="og:description" content="一年一度的WWDC又来了，一起来看看今年又有哪些值得关注的技术点吧~  （温馨提示：本片内容来源自WWDC21：Platforms State of the Union） 想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正 检测和诊断内存问题 APP终极性能生存指南  Xcode Cloud 试想一个一站式的iOS开发体验，在Xcode中提交代码后，自动在云端编译并且测">
+<meta property="og:description" content="一年一度的WWDC又来了，一起来看看今年又有哪些值得关注的技术点吧~  （温馨提示：本片内容来源自WWDC21：Platforms State of the Union） 想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正 检测和诊断内存问题 APP终极性能生存指南 iOS中的Hang是什么？该如何治理？ 诊断APP的电源和性能回归  Xcode Cloud 试想一个一">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/06/08/What-s-new-in-WWDC21/1.png">
 <meta property="og:image" content="http://example.com/2021/06/08/What-s-new-in-WWDC21/2.png">
@@ -60,7 +60,7 @@
 <meta property="og:image" content="http://example.com/2021/06/08/What-s-new-in-WWDC21/30.png">
 <meta property="og:image" content="http://example.com/2021/06/08/What-s-new-in-WWDC21/33.png">
 <meta property="article:published_time" content="2021-06-07T16:49:29.000Z">
-<meta property="article:modified_time" content="2021-06-12T17:06:16.029Z">
+<meta property="article:modified_time" content="2021-06-14T15:17:17.264Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="WWDC21">
 <meta name="twitter:card" content="summary">
@@ -214,7 +214,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-13 01:06:16" itemprop="dateModified" datetime="2021-06-13T01:06:16+08:00">2021-06-13</time>
+                <time title="Modified: 2021-06-14 23:17:17" itemprop="dateModified" datetime="2021-06-14T23:17:17+08:00">2021-06-14</time>
               </span>
 
           
@@ -255,6 +255,8 @@
 <p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
 <p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
+<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
 </blockquote>
 <h2 id="Xcode-Cloud"><a href="#Xcode-Cloud" class="headerlink" title="Xcode Cloud"></a>Xcode Cloud</h2><blockquote>
 <p>试想一个一站式的iOS开发体验，在Xcode中提交代码后，自动在云端编译并且测试，接下来开发者只需根据Xcode上显示的测试结果改进代码，当一切准备就绪，就会自动将应用分发到各平台的TestFlight中…，为了实现这样流畅的开发体验，Apple将开发流程中所涉及到的所有环节，都集成到了Xcode中。</p>
