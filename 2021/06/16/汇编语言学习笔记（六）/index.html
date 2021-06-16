@@ -20,15 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Leoolin">
-<meta property="og:url" content="http://example.com/tags/WWDC2021/index.html">
+  <meta name="description" content="3.6栈操作规则：LIFO（后进先出） 8086CPU提供的入栈和出栈的指令：  Push（入栈） push ax：将寄存器ax中的数据送入栈中  Pop（出栈） push ax：从栈顶取出数据送入ax。    8086CPU的入栈和出栈操作都是以字为单位进行的    CPU如何知道当前要执行的指令所在的位置？ 寄存器CS和IP中存放着当前指令的段地址和偏移地址  执行push和pop的时候，如何">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编语言学习笔记（六）">
+<meta property="og:url" content="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="3.6栈操作规则：LIFO（后进先出） 8086CPU提供的入栈和出栈的指令：  Push（入栈） push ax：将寄存器ax中的数据送入栈中  Pop（出栈） push ax：从栈顶取出数据送入ax。    8086CPU的入栈和出栈操作都是以字为单位进行的    CPU如何知道当前要执行的指令所在的位置？ 寄存器CS和IP中存放着当前指令的段地址和偏移地址  执行push和pop的时候，如何">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/1.png">
+<meta property="og:image" content="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/2.png">
+<meta property="og:image" content="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/3.png">
+<meta property="article:published_time" content="2021-06-15T23:51:38.000Z">
+<meta property="article:modified_time" content="2021-06-16T00:29:30.339Z">
 <meta property="article:author" content="林辰">
+<meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/1.png">
 
-<link rel="canonical" href="http://example.com/tags/WWDC2021/">
+<link rel="canonical" href="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: WWDC2021 | Leoolin</title>
+  <title>汇编语言学习笔记（六） | Leoolin</title>
   
 
 
@@ -139,57 +148,145 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          汇编语言学习笔记（六）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-16 07:51:38 / Modified: 08:29:30" itemprop="dateCreated datePublished" datetime="2021-06-16T07:51:38+08:00">2021-06-16</time>
+            </span>
+
+          
+            <span id="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（六）" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">WWDC2021
-          <small>Tag</small>
-        </h2>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <h1 id="3-6栈"><a href="#3-6栈" class="headerlink" title="3.6栈"></a>3.6栈</h1><p>操作规则：LIFO（后进先出）</p>
+<p>8086CPU提供的入栈和出栈的指令：</p>
+<ul>
+<li><p>Push（入栈）</p>
+<p>push ax：将寄存器ax中的数据送入栈中</p>
+</li>
+<li><p>Pop（出栈）</p>
+<p>push ax：从栈顶取出数据送入ax。</p>
+</li>
+</ul>
+<blockquote>
+<p>8086CPU的入栈和出栈操作都是以字为单位进行的</p>
+</blockquote>
+<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/1.png" alt="截屏2021-06-16 上午8.13.13"></p>
+<ul>
+<li><p>CPU如何知道当前要执行的指令所在的位置？</p>
+<p>寄存器CS和IP中存放着当前指令的段地址和偏移地址</p>
+</li>
+<li><p>执行push和pop的时候，如何知道哪个单元是栈顶单元？</p>
+<p>8086CPU中，有两个寄存器：</p>
+<ul>
+<li>段寄存器SS  存放栈顶的段地址</li>
+<li>寄存器SP 存放栈顶的偏移地址</li>
+</ul>
+<p>任何时刻，SS:SP指向栈顶元素</p>
+</li>
+</ul>
+<p>push ax时：</p>
+<ul>
+<li><p>SP = SP - 2</p>
+</li>
+<li><p>将ax中的内容送入SS:SP指向的内存单元处，SS:SP此时指向新栈顶</p>
+<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/2.png" alt="截屏2021-06-16 上午8.23.02"></p>
+</li>
+<li><p>将10000H~1000FH这段空间当做栈，初始状态栈是空的，此时，SS=1000H，SP=多少？</p>
+<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/3.png" alt="截屏2021-06-16 上午8.25.46"></p>
+</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-12T08:58:48+08:00"
-              content="2021-06-12">
-          06-12
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag"># 计算机基础</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">检测和诊断内存问题</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" rel="prev" title="iOS中的Hang是什么？该如何治理？">
+      <i class="fa fa-chevron-left"></i> iOS中的Hang是什么？该如何治理？
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -236,6 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-6%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">3.6栈</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
