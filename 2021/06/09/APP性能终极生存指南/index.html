@@ -40,6 +40,7 @@
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/12.png">
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/13.png">
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/14.png">
+<meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/15.png">
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/16.png">
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/17.png">
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/18.png">
@@ -49,7 +50,7 @@
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/22.png">
 <meta property="og:image" content="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/23.png">
 <meta property="article:published_time" content="2021-06-09T14:24:39.000Z">
-<meta property="article:modified_time" content="2021-06-14T15:20:59.997Z">
+<meta property="article:modified_time" content="2021-06-17T08:11:09.058Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="WWDC21">
 <meta name="twitter:card" content="summary">
@@ -203,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:20:59" itemprop="dateModified" datetime="2021-06-14T23:20:59+08:00">2021-06-14</time>
+                <time title="Modified: 2021-06-17 16:11:09" itemprop="dateModified" datetime="2021-06-17T16:11:09+08:00">2021-06-17</time>
               </span>
 
           
@@ -381,14 +382,16 @@
 <li><p>使用MetricKit收集线上数据</p>
 <blockquote>
 <p>在iOS 14中，MetricKit会收集用户使用过程中发生的问题，然后每24小时集中上报一次。</p>
-<p>在iOS 15和MacOS 12中，MetricKit会在用户发生问题后，并且立刻进行上报</p>
+<p>在iOS 15和MacOS 12中，MetricKit仍是每天上报一次，但会在<code>addSubscriber</code>后，并且立刻进行回调</p>
 </blockquote>
 </li>
-<li><p>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  &gt; 注：MXSignpost是MetricKit中封装的API，可以用来监控关键代码的运行情况</span><br><span class="line"></span><br><span class="line">![11:20](APP性能终极生存指南&#x2F;15.png)</span><br></pre></td></tr></table></figure>
-</li>
 </ul>
+</li>
+<li><p>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 注：MXSignpost是MetricKit中封装的API，可以用来监控关键代码的运行情况</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/15.png" alt="11:20"></p>
 </li>
 <li><p>磁盘写入</p>
 <ul>
@@ -575,7 +578,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

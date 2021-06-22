@@ -145,6 +145,350 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（七）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-22 08:10:47 / Modified: 08:45:11" itemprop="dateCreated datePublished" datetime="2021-06-22T08:10:47+08:00">2021-06-22</time>
+            </span>
+
+          
+            <span id="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（七）" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="3-8-栈顶越界的问题"><a href="#3-8-栈顶越界的问题" class="headerlink" title="3.8 栈顶越界的问题"></a>3.8 栈顶越界的问题</h1><p>push越界，上溢出；pop越界，下溢出</p>
+<p>栈空间之前的空间里很可能存放了具有其他用途的数据、代码</p>
+<ul>
+<li>我们在编程时要自己操心栈顶越界的问题，要根据可能用到的最大栈空间，来安排栈的大小，防止入栈的数据太多而导致越界</li>
+<li>执行出栈的操作时也要注意，以防止栈空的时候继续出栈而导致的越界</li>
+</ul>
+<h1 id="3-9-push、pop指令"><a href="#3-9-push、pop指令" class="headerlink" title="3.9 push、pop指令"></a>3.9 push、pop指令</h1><p>push和pop指令是可以在寄存器和内存之间传送数据的。</p>
+<p>栈空间当然也是内存空间的一部分，它只是一段可以以一种特殊方式进行访问的内存空间</p>
+<p>push和pop指令的格式</p>
+<p>一：</p>
+<ul>
+<li>push 寄存器：将一个寄存器中的数据入栈</li>
+<li>pop 寄存器：用一个寄存器接受出栈的数据</li>
+</ul>
+<p>二：</p>
+<ul>
+<li>push 段寄存器：将一个段寄存器中的内容入栈</li>
+<li>pop 段寄存器：用一个段寄存器接受出栈的数据</li>
+</ul>
+<p>三：</p>
+<ul>
+<li><p>push 内存单元：将一个内存单元处的字入栈（栈操作都是以字为单位）</p>
+</li>
+<li><p>pop 内存单元：用一个内存单元来接收出栈的数据</p>
+<p><code>push [0]</code> 、<code>pop [2]</code></p>
+</li>
+</ul>
+<p>指令执行时，CPU要知道内存单元的地址，可以在push、pop指令中给出内存单元的偏移地址，段地址在指令执行时，CPU从ds中取得。</p>
+<blockquote>
+<p>问题：3.7 </p>
+<p>将10000H~1000FH这段空间当做栈，初始状态是空的，将AX、BX、DS中的数据入栈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov ax 1000H</span><br><span class="line">mov ss, ax        ; 设置栈的段地址，SS&#x3D;1000H，不能直接向段寄存器SS送入数据</span><br><span class="line">mov sp, 0010H     ; 栈为空时，ss:sp在1000FH的下一位</span><br><span class="line"></span><br><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">push ds</span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-21 20:41:08" itemprop="dateCreated datePublished" datetime="2021-06-21T20:41:08+08:00">2021-06-21</time>
+            </span>
+
+          
+            <span id="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ARK"><a href="#ARK" class="headerlink" title="ARK"></a>ARK</h1><ul>
+<li>Pod Install 时间长</li>
+<li>Build 较长</li>
+<li>成功率较低</li>
+<li>IDE慢、内存占用高</li>
+</ul>
+<blockquote>
+<p>500+ POD</p>
+</blockquote>
+<p>思路一：子壳/Eample工程</p>
+<ul>
+<li><p>彻底模块化</p>
+</li>
+<li><p>体验差异</p>
+<blockquote>
+<p>集成主壳后发现问题，仍需去子壳工程修复</p>
+</blockquote>
+</li>
+<li><p>速度较慢</p>
+</li>
+<li><p>容易劣化</p>
+</li>
+</ul>
+<p>思路二：</p>
+<ul>
+<li><p>精简化</p>
+</li>
+<li><p>全链路稳定</p>
+<p>单节点的提升未必对全链路是正向的</p>
+</li>
+</ul>
+<p>动态化研发流程ARK</p>
+<ul>
+<li><p>基于动态库</p>
+<ul>
+<li><p>减少包体积</p>
+</li>
+<li><p>进程间共享、降低内存</p>
+</li>
+<li><p>动态加载应用内模块</p>
+<ul>
+<li>运行时（热修复）</li>
+<li>编译时</li>
+</ul>
+<blockquote>
+<p>编译时替换应用内模块</p>
+</blockquote>
+</li>
+</ul>
+<p>ARK思路：</p>
+<p>平台研发流程：输出动态库文件 </p>
+<p>本地研发流程：单独编译需要修改的Pod，编译成Framework并动态替换</p>
+<p>[2.57.45]</p>
+</li>
+</ul>
+<p>静态库转动态库</p>
+<p>编译、链接、运行</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/" class="post-title-link" itemprop="url">一个浮点数引发的悲剧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-17 10:50:30 / Modified: 13:47:13" itemprop="dateCreated datePublished" datetime="2021-06-17T10:50:30+08:00">2021-06-17</time>
+            </span>
+
+          
+            <span id="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/" class="post-meta-item leancloud_visitors" data-flag-title="一个浮点数引发的悲剧" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="不期而遇"><a href="#不期而遇" class="headerlink" title="不期而遇"></a>不期而遇</h1><p>某天我开开心心地写了一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSInteger a &#x3D; 10;</span><br><span class="line">NSUInteger b &#x3D; 9;</span><br><span class="line">CGFloat c &#x3D; -4 - (a - b - 1) * 13;</span><br></pre></td></tr></table></figure>
+
+<p>我预期<code>c</code>值为-4，但是编译器却输出了一个：</p>
+<p>![截屏2021-06-17 上午11.56.32](/Users/Joshsone/Library/Application Support/typora-user-images/截屏2021-06-17 上午11.56.32.png)</p>
+<p>WTF？这是啥，因为这莫名的缘分，我展开了一段追根溯源的路程。</p>
+<h1 id="寻觅之旅"><a href="#寻觅之旅" class="headerlink" title="寻觅之旅"></a>寻觅之旅</h1><p>为了厘清这段神秘的数字到底从何而来，我将Xcode调整为Always Show Disassembly，来看看编译器到底做了些啥？</p>
+<p>![截屏2021-06-17 下午12.05.44](/Users/Joshsone/Library/Application Support/typora-user-images/截屏2021-06-17 下午12.05.44.png)</p>
+<p>这段汇编代码对应到执行完<code>-4 - (a - b - 1) * 13</code>，但是还没有赋值给<code>c</code>，寄存器<code>rax</code>中存放的就是计算结果，我们打印来看下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(lldb) expression $rax</span><br><span class="line">(unsigned long) $0 &#x3D; 18446744073709551612</span><br></pre></td></tr></table></figure>
+
+<p>可以看出<code>rax</code>中存放的是无符号长整形，其二进制形式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(lldb) p&#x2F;t 18446744073709551612</span><br><span class="line">(unsigned long long) $1 &#x3D; 0b1111111111111111111111111111111111111111111111111111111111111100</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，代码执行到这一步，已经出现了问题，我们期待结果是负数，那必然就是有符号整形，但是由于我们将<code>b</code>声明为<code>NSUInteger</code>，系统便将计算结果强转为了<code>NSUInteger</code>。</p>
+<blockquote>
+<p>另外提一句：有符号的-4，二进制格式也为0b1111111111111111111111111111111111111111111111111111111111111100</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -168,10 +512,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-16 07:51:38 / Modified: 08:29:30" itemprop="dateCreated datePublished" datetime="2021-06-16T07:51:38+08:00">2021-06-16</time>
+              <time title="Created: 2021-06-16 07:51:38" itemprop="dateCreated datePublished" datetime="2021-06-16T07:51:38+08:00">2021-06-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-22 08:18:00" itemprop="dateModified" datetime="2021-06-22T08:18:00+08:00">2021-06-22</time>
+              </span>
 
           
             <span id="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（六）" title="Views">
@@ -241,7 +591,18 @@
 </li>
 <li><p>将10000H~1000FH这段空间当做栈，初始状态栈是空的，此时，SS=1000H，SP=多少？</p>
 <p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/3.png" alt="截屏2021-06-16 上午8.25.46"></p>
-</li>
+<h1 id="pop指令的执行过程"><a href="#pop指令的执行过程" class="headerlink" title="pop指令的执行过程"></a>pop指令的执行过程</h1></li>
+</ul>
+<p><code>pop ax</code></p>
+<ul>
+<li>将SS:SP指向的内存单元处的数据放入ax中；</li>
+<li>SP=SP+2，SS:SP指向当前栈顶下面的单元，以当前栈顶下面的单元为新的栈顶。</li>
+</ul>
+<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/4.png" alt="截屏2021-06-22 上午8.14.47"></p>
+<p>注意：</p>
+<ul>
+<li>出栈后，SS:SP指向新的栈顶1000EH，pop操作前的栈顶元素，1000CH处的2266H依然存在，但是，它已不再栈中。</li>
+<li>当再次执行push等入栈指令后，SS：SP移至1000CH，并在里面写入新的数据，它将被覆盖。</li>
 </ul>
 
       
@@ -878,7 +1239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:20:59" itemprop="dateModified" datetime="2021-06-14T23:20:59+08:00">2021-06-14</time>
+                <time title="Modified: 2021-06-17 16:11:09" itemprop="dateModified" datetime="2021-06-17T16:11:09+08:00">2021-06-17</time>
               </span>
 
           
@@ -1056,14 +1417,16 @@
 <li><p>使用MetricKit收集线上数据</p>
 <blockquote>
 <p>在iOS 14中，MetricKit会收集用户使用过程中发生的问题，然后每24小时集中上报一次。</p>
-<p>在iOS 15和MacOS 12中，MetricKit会在用户发生问题后，并且立刻进行上报</p>
+<p>在iOS 15和MacOS 12中，MetricKit仍是每天上报一次，但会在<code>addSubscriber</code>后，并且立刻进行回调</p>
 </blockquote>
 </li>
-<li><p>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  &gt; 注：MXSignpost是MetricKit中封装的API，可以用来监控关键代码的运行情况</span><br><span class="line"></span><br><span class="line">![11:20](APP性能终极生存指南&#x2F;15.png)</span><br></pre></td></tr></table></figure>
-</li>
 </ul>
+</li>
+<li><p>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 注：MXSignpost是MetricKit中封装的API，可以用来监控关键代码的运行情况</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/15.png" alt="11:20"></p>
 </li>
 <li><p>磁盘写入</p>
 <ul>
@@ -1677,427 +2040,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（五）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-06 17:42:35 / Modified: 22:36:07" itemprop="dateCreated datePublished" datetime="2021-06-06T17:42:35+08:00">2021-06-06</time>
-            </span>
-
-          
-            <span id="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（五）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><ul>
-<li><p>定义一个结构体</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo; </span><br><span class="line">	<span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定义结构对象</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125; accum, trans, *salesptr; </span><br><span class="line"><span class="comment">// equivalent, but better way to define these objects</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125;; </span><br><span class="line">Sales_data accum, trans, *salesptr;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>定义结构体以分号结束</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="include"><a href="#include" class="headerlink" title="#include"></a>#include</h2><p>预处理器是一个在编译器之前运行的程序，并且会改变我们程序的源码。</p>
-<p>当预处理看到一个<code>#include</code>，会将指定头文件的内容替换掉<code>#include</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>; </span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用#ifndef来防止头文件被多次引用</p>
-</blockquote>
-<h1 id="using-declaration"><a href="#using-declaration" class="headerlink" title="using declaration"></a>using declaration</h1><p>通过使用<code>using</code>形式的定义，来简化写法，比如：<code>using namespace::name</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// using declaration; when we use the name cin, we get the one from the namespace std</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; i; <span class="comment">// ok: cin is a synonym for std::cin</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// error: no using declaration; we must use the full name</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// ok: explicitly use cout from namepsace std</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>由于定义了<code>using std::cin</code>，我们可以在调用<code>cin</code>函数时，不添加<code>std::</code>namespace前缀。</p>
-</blockquote>
-<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
-<li><p>在使用string之前需要引入string头文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="定义和初始化"><a href="#定义和初始化" class="headerlink" title="定义和初始化"></a>定义和初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// default initialization; s1 is the empty string </span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2 isacopyof s1</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// s3 is a copy of the string literal</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// s4 is cccccccccc</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="复制初始化（copy-initialize）和直接初始化-direct-initialization"><a href="#复制初始化（copy-initialize）和直接初始化-direct-initialization" class="headerlink" title="复制初始化（copy initialize）和直接初始化(direct initialization)"></a>复制初始化（copy initialize）和直接初始化(direct initialization)</h2><p>当使用<code>=</code>时，编译器是复制初始化，而当忽略<code>=</code>时，我们使用的是直接初始化，比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s5 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// copy initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s6</span><span class="params">(<span class="string">&quot;hiya&quot;</span>)</span></span>; <span class="comment">// direct initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// direct initialization; s7 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> s8 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>); <span class="comment">// copy initialization; s8 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">temp</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// temp is cccccccccc </span></span><br><span class="line"><span class="built_in">string</span> s8 = temp; <span class="comment">// copy temp into s8</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="读写字符串"><a href="#读写字符串" class="headerlink" title="读写字符串"></a>读写字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Note: #include and using declarations must be added to compile this code int main()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">string</span> s; <span class="comment">// empty string</span></span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; s; <span class="comment">// read a whitespace-separated string into s</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// write s to the output</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取字符串的长度"><a href="#获取字符串的长度" class="headerlink" title="获取字符串的长度"></a>获取字符串的长度</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = line.size(); <span class="comment">// len has type string::size_type</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello, &quot;</span>, s2 = <span class="string">&quot;world\n&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> s3 = s1 + s2; <span class="comment">// s3 is hello, world\n</span></span><br><span class="line">s1+=s2; <span class="comment">// equivalentto s1=s1+s2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;world&quot;</span>; <span class="comment">// no punctuation in s1 or s2</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1 + <span class="string">&quot;, &quot;</span> + s2 + <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意<code>+</code>符号两边至少要有一个string类型，不能是字符字面量相加</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s4 = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: adding a string and a literal string </span></span><br><span class="line">s5 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>; <span class="comment">// error: no string operand string</span></span><br><span class="line">s6 = s1 + <span class="string">&quot;, &quot;</span> + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: each + has a string operand string </span></span><br><span class="line">s7 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span> + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s6 = (s1 + <span class="string">&quot;, &quot;</span>) + <span class="string">&quot;world&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>相当于：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> tmp = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br><span class="line">s6 = tmp + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s7 = (<span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>) + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>(“hello” + “,”) 符号两边都是常量</p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 3.3:</strong> Explain how whitespace characters are handled in the string input operator and in the getline function.</p>
-<p><strong>对于string类的输入函数，它会自动忽略开头的空白（空格、制表符、换行等等），从第一个真正的字符开始直到下一个空白。</strong></p>
-<p><strong>对于getline()函数，它会保存字符串中的空白符，它读入数据，直到遇到换行符位置。</strong> </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> line;</span><br><span class="line">	<span class="comment">// read input a line at a time until end-of-file </span></span><br><span class="line">	<span class="keyword">while</span> (getline(<span class="built_in">cin</span>, line))</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>答案来自☞<a target="_blank" rel="noopener" href="https://blog.csdn.net/misayaaaaa/article/details/53284630">C++Primer第五版 第三章习题答案（1~10）</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（四）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-05 13:08:41 / Modified: 22:58:14" itemprop="dateCreated datePublished" datetime="2021-06-05T13:08:41+08:00">2021-06-05</time>
-            </span>
-
-          
-            <span id="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（四）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><blockquote>
-<p>有时我们想将某一个表达式的结果的类型作为变量的类型</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decltype(f()) sum &#x3D; x; &#x2F;&#x2F; sum has whatever type f returns.</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">0</span>, &amp;cj = ci;</span><br><span class="line"><span class="keyword">decltype</span>(ci) x = <span class="number">0</span>; <span class="comment">// x has type const int</span></span><br><span class="line"><span class="keyword">decltype</span>(cj) y = x; <span class="comment">// y has type const int&amp; and is bound to x </span></span><br><span class="line"><span class="keyword">decltype</span>(cj) z; <span class="comment">// error: z is a reference and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// decltype of an expression can be a reference type</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>, *p = &amp;i, &amp;r = i;</span><br><span class="line"><span class="keyword">decltype</span>(r + <span class="number">0</span>) b; <span class="comment">// ok: addition yields an int; b is an (uninitialized) int </span></span><br><span class="line"><span class="keyword">decltype</span>(*p) c; <span class="comment">// error: c is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>decltype(*p)代表引用类型</p>
-</blockquote>
-<ul>
-<li><p><code>decltype(())</code>：仅代表引用类型</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">decltype</span>((i)) d; <span class="comment">// error: d is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<blockquote>
-<p><strong>Exercises Section 2.5.3<br> Exercise 2.36:</strong> In the following code, determine the type of each variable and the value each variable has when the code finishes:</p>
-<p>int a = 3, b = 4; </p>
-<p>decltype(a) c = a; </p>
-<p>decltype((b)) d = a; </p>
-<p>++c;</p>
-<p>++d;</p>
-<p>答：c : int， d int &amp;</p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 2.37:</strong> <strong>Assignment is an example of an expression that yields a reference type. The type is a reference to the type of the left-hand operand. That is, if i is an int, then the type of the expression i = x is int&amp;.</strong> Using that knowledge, determine the type and value of each variable in this code:</p>
-<p>int a = 3, b = 4;</p>
-<p>decltype(a) c = a;</p>
-<p>decltype(a = b) d = a; </p>
-<p> 答：c : int ; d : int &amp; </p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 2.38:</strong> Describe the differences in type deduction between decltype and auto. Give an example of an expression where auto and decltype will deduce the same type and an example where they will deduce differing types.</p>
-<p>答：针对引用类型，如下： a是int类型，b是int &amp;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, &amp;r = i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> a = r;</span><br><span class="line"></span><br><span class="line"><span class="keyword">decltype</span>(r) b = i;</span><br></pre></td></tr></table></figure>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" class="post-title-link" itemprop="url">汇编语言学习笔记（四）—— Debug</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-04 00:53:08 / Modified: 08:11:44" itemprop="dateCreated datePublished" datetime="2021-06-04T00:53:08+08:00">2021-06-04</time>
-            </span>
-
-          
-            <span id="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（四）—— Debug" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li><p>下载并安装DosBox</p>
-<p>到官网下载对应操作系统的软件 → <a target="_blank" rel="noopener" href="https://www.dosbox.com/download.php?main=1">传送门</a></p>
-</li>
-<li><p>下载Debug程序 →<a href="%5Bhttps://pan.baidu.com/s/1rzWTW1G76SdD7nGYs8WNaQ%5D(https://link.jianshu.com/?t=https://pan.baidu.com/s/1rzWTW1G76SdD7nGYs8WNaQ)">软件地址</a>来源自<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/147be16882e9?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">Mac下的OS X系统如何使用Debug程序</a></p>
-</li>
-<li><p>运行DosBox后输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount c &#x2F;Users&#x2F;Leoolin&#x2F;Downloads</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>后面的路径为debug程序所在的文件夹</p>
-</blockquote>
-</li>
-<li><p>再输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug </span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="DEBUG常用命令"><a href="#DEBUG常用命令" class="headerlink" title="DEBUG常用命令"></a>DEBUG常用命令</h2><p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/1.png" alt="截屏2021-06-04 上午12.58.45"></p>
-<ul>
-<li><p>修改寄存器的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r ax</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/2.png" alt="截屏2021-06-04 上午7.38.28"></p>
-</li>
-<li><p>查看当前寄存器的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/3.png" alt="截屏2021-06-04 上午7.39.48"></p>
-</li>
-<li><p>执行一条指令</p>
-<ul>
-<li><p>修改代码段寄存器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r cs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改指令指针寄存器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r ip</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<p>输入以下指令：</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/4.png" alt="截屏2021-06-04 上午7.55.53"></p>
-<ul>
-<li><p>查看内存中的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>指定内存位置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d 073F:0100</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/5.png" alt="截屏2021-06-04 上午7.58.37"></p>
-</li>
-</ul>
-</li>
-<li><p>将内存中的机器指令翻译成汇编指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u 073F:0100</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/6.png" alt="截屏2021-06-04 上午8.00.15"></p>
-<p>依次执行这些指令观察寄存器的变化：</p>
-</li>
-<li><p>修改代码段寄存器和指令指针寄存器的位置</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/7.png" alt="截屏2021-06-04 上午8.06.55"></p>
-</li>
-<li><p>依次执行…</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/8.png" alt="截屏2021-06-04 上午8.07.44"></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2163,7 +2109,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="3.4 mov 、add、sub指令 已学mov指令的几种形式 mov 寄存器，数据  mov ax, 6 mov 寄存器，寄存器  mov bx, ax mov 寄存器，内存单元 mov ax, [0] mov 内存单元，寄存器 mov [0], ax mov 段寄存器，寄存器 mov ds, ax     3.5 数据段我们可以将一组长度为N(N &lt;&#x3D; 64)、地址连续、起始地址为16的">
+  <meta name="description" content="3.8 栈顶越界的问题push越界，上溢出；pop越界，下溢出 栈空间之前的空间里很可能存放了具有其他用途的数据、代码  我们在编程时要自己操心栈顶越界的问题，要根据可能用到的最大栈空间，来安排栈的大小，防止入栈的数据太多而导致越界 执行出栈的操作时也要注意，以防止栈空的时候继续出栈而导致的越界  3.9 push、pop指令push和pop指令是可以在寄存器和内存之间传送数据的。 栈空间当然也是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编语言学习笔记（五）">
-<meta property="og:url" content="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/index.html">
+<meta property="og:title" content="汇编语言学习笔记（七）">
+<meta property="og:url" content="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
-<meta property="og:description" content="3.4 mov 、add、sub指令 已学mov指令的几种形式 mov 寄存器，数据  mov ax, 6 mov 寄存器，寄存器  mov bx, ax mov 寄存器，内存单元 mov ax, [0] mov 内存单元，寄存器 mov [0], ax mov 段寄存器，寄存器 mov ds, ax     3.5 数据段我们可以将一组长度为N(N &lt;&#x3D; 64)、地址连续、起始地址为16的">
+<meta property="og:description" content="3.8 栈顶越界的问题push越界，上溢出；pop越界，下溢出 栈空间之前的空间里很可能存放了具有其他用途的数据、代码  我们在编程时要自己操心栈顶越界的问题，要根据可能用到的最大栈空间，来安排栈的大小，防止入栈的数据太多而导致越界 执行出栈的操作时也要注意，以防止栈空的时候继续出栈而导致的越界  3.9 push、pop指令push和pop指令是可以在寄存器和内存之间传送数据的。 栈空间当然也是">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png">
-<meta property="article:published_time" content="2021-06-07T00:55:01.000Z">
-<meta property="article:modified_time" content="2021-06-07T13:38:25.040Z">
+<meta property="article:published_time" content="2021-06-22T00:10:47.000Z">
+<meta property="article:modified_time" content="2021-06-22T00:45:11.469Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png">
 
-<link rel="canonical" href="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
+<link rel="canonical" href="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>汇编语言学习笔记（五） | Leoolin</title>
+  <title>汇编语言学习笔记（七） | Leoolin</title>
   
 
 
@@ -153,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -166,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          汇编语言学习笔记（五）
+          汇编语言学习笔记（七）
         </h1>
 
         <div class="post-meta">
@@ -177,11 +175,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-07 08:55:01 / Modified: 21:38:25" itemprop="dateCreated datePublished" datetime="2021-06-07T08:55:01+08:00">2021-06-07</time>
+              <time title="Created: 2021-06-22 08:10:47 / Modified: 08:45:11" itemprop="dateCreated datePublished" datetime="2021-06-22T08:10:47+08:00">2021-06-22</time>
             </span>
 
           
-            <span id="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（五）" title="Views">
+            <span id="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（七）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -196,8 +194,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -212,29 +210,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="3-4-mov-、add、sub指令"><a href="#3-4-mov-、add、sub指令" class="headerlink" title="3.4 mov 、add、sub指令"></a>3.4 mov 、add、sub指令</h1><ul>
-<li>已学mov指令的几种形式<ul>
-<li><code>mov 寄存器，数据</code>  mov ax, 6</li>
-<li><code>mov 寄存器，寄存器 </code> mov bx, ax</li>
-<li><code>mov 寄存器，内存单元</code> mov ax, [0]</li>
-<li><code>mov 内存单元，寄存器</code> mov [0], ax</li>
-<li><code>mov 段寄存器，寄存器</code> mov ds, ax</li>
+        <h1 id="3-8-栈顶越界的问题"><a href="#3-8-栈顶越界的问题" class="headerlink" title="3.8 栈顶越界的问题"></a>3.8 栈顶越界的问题</h1><p>push越界，上溢出；pop越界，下溢出</p>
+<p>栈空间之前的空间里很可能存放了具有其他用途的数据、代码</p>
+<ul>
+<li>我们在编程时要自己操心栈顶越界的问题，要根据可能用到的最大栈空间，来安排栈的大小，防止入栈的数据太多而导致越界</li>
+<li>执行出栈的操作时也要注意，以防止栈空的时候继续出栈而导致的越界</li>
 </ul>
+<h1 id="3-9-push、pop指令"><a href="#3-9-push、pop指令" class="headerlink" title="3.9 push、pop指令"></a>3.9 push、pop指令</h1><p>push和pop指令是可以在寄存器和内存之间传送数据的。</p>
+<p>栈空间当然也是内存空间的一部分，它只是一段可以以一种特殊方式进行访问的内存空间</p>
+<p>push和pop指令的格式</p>
+<p>一：</p>
+<ul>
+<li>push 寄存器：将一个寄存器中的数据入栈</li>
+<li>pop 寄存器：用一个寄存器接受出栈的数据</li>
+</ul>
+<p>二：</p>
+<ul>
+<li>push 段寄存器：将一个段寄存器中的内容入栈</li>
+<li>pop 段寄存器：用一个段寄存器接受出栈的数据</li>
+</ul>
+<p>三：</p>
+<ul>
+<li><p>push 内存单元：将一个内存单元处的字入栈（栈操作都是以字为单位）</p>
+</li>
+<li><p>pop 内存单元：用一个内存单元来接收出栈的数据</p>
+<p><code>push [0]</code> 、<code>pop [2]</code></p>
 </li>
 </ul>
-<p><img src="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png" alt="截屏2021-06-07 下午9.29.16"></p>
-<h1 id="3-5-数据段"><a href="#3-5-数据段" class="headerlink" title="3.5 数据段"></a>3.5 数据段</h1><p>我们可以将一组长度为N(N &lt;= 64)、地址连续、起始地址为16的倍数的内存单元当作专门存放数据的内存空间，从而定义了一个数据段。</p>
-<p>比如我们用123B0H~123B9H这段空间来存放数据：</p>
-<ul>
-<li>段地址：123BH</li>
-<li>长度：10字节</li>
-</ul>
+<p>指令执行时，CPU要知道内存单元的地址，可以在push、pop指令中给出内存单元的偏移地址，段地址在指令执行时，CPU从ds中取得。</p>
 <blockquote>
-<p>问题3.5 </p>
-<p>写几条指令，累加数据段中的前3个字型数据</p>
+<p>问题：3.7 </p>
+<p>将10000H~1000FH这段空间当做栈，初始状态是空的，将AX、BX、DS中的数据入栈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov ax 1000H</span><br><span class="line">mov ss, ax        ; 设置栈的段地址，SS&#x3D;1000H，不能直接向段寄存器SS送入数据</span><br><span class="line">mov sp, 0010H     ; 栈为空时，ss:sp在1000FH的下一位</span><br><span class="line"></span><br><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">push ds</span><br></pre></td></tr></table></figure>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 123BH</span><br><span class="line">mov ds, ax</span><br><span class="line">mov ax, [0]  </span><br><span class="line">add ax, [2]   ;将数据段第二个字（偏移量为2）</span><br><span class="line">add ax [4]    ;将数据段第二个字（偏移量为4）</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -253,13 +261,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" rel="prev" title="C++ Primer学习笔记（五）">
-      <i class="fa fa-chevron-left"></i> C++ Primer学习笔记（五）
+    <a href="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/08/What-s-new-in-WWDC21/" rel="next" title="一文带你读完WWDC21核心（新）技术点">
-      一文带你读完WWDC21核心（新）技术点 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -319,7 +324,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-4-mov-%E3%80%81add%E3%80%81sub%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">3.4 mov 、add、sub指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-5-%E6%95%B0%E6%8D%AE%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">3.5 数据段</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-8-%E6%A0%88%E9%A1%B6%E8%B6%8A%E7%95%8C%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">3.8 栈顶越界的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-9-push%E3%80%81pop%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">3.9 push、pop指令</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

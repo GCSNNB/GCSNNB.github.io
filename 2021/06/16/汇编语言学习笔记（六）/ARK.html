@@ -1,0 +1,57 @@
+<h1 id="ARK"><a href="#ARK" class="headerlink" title="ARK"></a>ARK</h1><ul>
+<li>Pod Install 时间长</li>
+<li>Build 较长</li>
+<li>成功率较低</li>
+<li>IDE慢、内存占用高</li>
+</ul>
+<blockquote>
+<p>500+ POD</p>
+</blockquote>
+<p>思路一：子壳/Eample工程</p>
+<ul>
+<li><p>彻底模块化</p>
+</li>
+<li><p>体验差异</p>
+<blockquote>
+<p>集成主壳后发现问题，仍需去子壳工程修复</p>
+</blockquote>
+</li>
+<li><p>速度较慢</p>
+</li>
+<li><p>容易劣化</p>
+</li>
+</ul>
+<p>思路二：</p>
+<ul>
+<li><p>精简化</p>
+</li>
+<li><p>全链路稳定</p>
+<p>单节点的提升未必对全链路是正向的</p>
+</li>
+</ul>
+<p>动态化研发流程ARK</p>
+<ul>
+<li><p>基于动态库</p>
+<ul>
+<li><p>减少包体积</p>
+</li>
+<li><p>进程间共享、降低内存</p>
+</li>
+<li><p>动态加载应用内模块</p>
+<ul>
+<li>运行时（热修复）</li>
+<li>编译时</li>
+</ul>
+<blockquote>
+<p>编译时替换应用内模块</p>
+</blockquote>
+</li>
+</ul>
+<p>ARK思路：</p>
+<p>平台研发流程：输出动态库文件 </p>
+<p>本地研发流程：单独编译需要修改的Pod，编译成Framework并动态替换</p>
+<p>[2.57.45]</p>
+</li>
+</ul>
+<p>静态库转动态库</p>
+<p>编译、链接、运行</p>
