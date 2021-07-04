@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="Leoolin">
 <meta property="og:description" content="3.8 栈顶越界的问题push越界，上溢出；pop越界，下溢出 栈空间之前的空间里很可能存放了具有其他用途的数据、代码  我们在编程时要自己操心栈顶越界的问题，要根据可能用到的最大栈空间，来安排栈的大小，防止入栈的数据太多而导致越界 执行出栈的操作时也要注意，以防止栈空的时候继续出栈而导致的越界  3.9 push、pop指令push和pop指令是可以在寄存器和内存之间传送数据的。 栈空间当然也是">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/1.png">
 <meta property="article:published_time" content="2021-06-22T00:10:47.000Z">
-<meta property="article:modified_time" content="2021-06-22T00:45:11.469Z">
+<meta property="article:modified_time" content="2021-06-28T03:01:20.073Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/1.png">
 
 <link rel="canonical" href="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/">
 
@@ -173,10 +175,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-22 08:10:47 / Modified: 08:45:11" itemprop="dateCreated datePublished" datetime="2021-06-22T08:10:47+08:00">2021-06-22</time>
+              <time title="Created: 2021-06-22 08:10:47" itemprop="dateCreated datePublished" datetime="2021-06-22T08:10:47+08:00">2021-06-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-28 11:01:20" itemprop="dateModified" datetime="2021-06-28T11:01:20+08:00">2021-06-28</time>
+              </span>
 
           
             <span id="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（七）" title="Views">
@@ -243,6 +251,69 @@
 <p>将10000H~1000FH这段空间当做栈，初始状态是空的，将AX、BX、DS中的数据入栈。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov ax 1000H</span><br><span class="line">mov ss, ax        ; 设置栈的段地址，SS&#x3D;1000H，不能直接向段寄存器SS送入数据</span><br><span class="line">mov sp, 0010H     ; 栈为空时，ss:sp在1000FH的下一位</span><br><span class="line"></span><br><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">push ds</span><br></pre></td></tr></table></figure>
 </blockquote>
+<blockquote>
+<p>问题：3.8</p>
+<p>编程：</p>
+<ul>
+<li>将10000H~1000FH 这段空间当作栈，初始状态是空的；</li>
+<li>设置AX=001AH，BX=001BH；</li>
+<li>将AX、BX中的数据入栈；</li>
+<li>然后将AX、BX清零；</li>
+<li>从栈中恢复AX、BX原来的内容。</li>
+</ul>
+<p>类似于函数调用过程:main函数调用a函数，初始时先将main函数的寄存器入栈，进行完操作后恢复寄存器到初始状态，回到main函数执行下面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H   </span><br><span class="line">mov ss, ax</span><br><span class="line">mov sp, 1010H    ;初始化栈顶</span><br><span class="line">mov ax, 001AH</span><br><span class="line">mov bx, 001BH</span><br><span class="line">sub ax, ax       ;将ax清零，也可以用赋值：mov ax, 0 异或： xor ax, ax </span><br><span class="line">sub bx, bx       ;sub ax,ax的机器码为2个字节</span><br><span class="line">								 ;mov ax,0 的机器码为3个字节</span><br><span class="line">								 </span><br><span class="line">pop bx           ;从栈中恢复ax,bx原来的数据，当前栈顶的内容是bx</span><br><span class="line">pop ax           ;中原来的内容</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>问题3.9</p>
+<p>编程：</p>
+<ul>
+<li>将10000H~1000FH这段空间当作栈，初始状态是空的</li>
+<li>设置AX=002AH，BX=002BH</li>
+<li>利用栈，交换AX和BX中的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H</span><br><span class="line">mov ss, ax</span><br><span class="line">mov sp, 1010H</span><br><span class="line">mov ax, 002AH</span><br><span class="line">mov bx, 002BH</span><br><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">pop ax</span><br><span class="line">pop bx</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>问题3.10</p>
+<p>我们如果要在10000H处写入字型数据2266H，可以用以下的代码完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H</span><br><span class="line">mov ds, ax</span><br><span class="line">mov ax, 2266H</span><br><span class="line">mov [0], ax</span><br></pre></td></tr></table></figure>
+
+<p>换一个写法：要求写入字型数据2266H</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">______</span><br><span class="line">______</span><br><span class="line">______</span><br><span class="line">mov ax, 2266H</span><br><span class="line">push ax</span><br></pre></td></tr></table></figure>
+
+<p>不能使用<code>mov 内存单元, 寄存器</code>这类指令</p>
+<p>答：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H</span><br><span class="line">mov ss, ax</span><br><span class="line">mov sp, 2        ; push 会让 sp &#x3D; sp - 2</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/1.png" alt="截屏2021-06-26 下午3.26.03"></p>
+<p>执行push、pop指令需要两步：</p>
+<ul>
+<li>执行push时<ul>
+<li>先改变sp，后向SS:SP处传送<ul>
+<li>SP=SP-2</li>
+<li>向SS:SP指向的字单元中送入数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行pop时<ul>
+<li>先读取SS:SP处的数据，后改变SP。<ul>
+<li>向SS:SP指向的字单元中读取数据</li>
+<li>SP=SP+2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>push、pop等栈操作指令，修改的只是SP。也就是说，栈顶的变化范围最大为：0~FFFFH。</p>
+</blockquote>
+<p>综述：</p>
+<ul>
+<li>任意时刻，SS:SP指向栈顶元素</li>
+<li>8086CPU只记录栈顶，栈空间的大小我们要自己管理</li>
+</ul>
 
     </div>
 
@@ -264,7 +335,10 @@
     <a href="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" rel="prev" title="">
       <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/" rel="next" title="汇编语言学习笔记（八）">
+      汇编语言学习笔记（八） <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -338,7 +412,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

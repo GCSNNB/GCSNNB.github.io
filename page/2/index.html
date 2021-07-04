@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/Observation%20Deck.imageset/Contents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（五）</a>
+            <a href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/Observation%20Deck.imageset/Contents/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -170,11 +170,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-06 17:42:35 / Modified: 22:36:07" itemprop="dateCreated datePublished" datetime="2021-06-06T17:42:35+08:00">2021-06-06</time>
+              <time title="Created: 2021-07-04 13:46:55 / Modified: 13:47:05" itemprop="dateCreated datePublished" datetime="2021-07-04T13:46:55+08:00">2021-07-04</time>
             </span>
 
           
-            <span id="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（五）" title="Views">
+            <span id="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/Observation%20Deck.imageset/Contents/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -189,8 +189,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/Observation%20Deck.imageset/Contents/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/Observation%20Deck.imageset/Contents/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -205,73 +205,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><ul>
-<li><p>定义一个结构体</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo; </span><br><span class="line">	<span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定义结构对象</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125; accum, trans, *salesptr; </span><br><span class="line"><span class="comment">// equivalent, but better way to define these objects</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125;; </span><br><span class="line">Sales_data accum, trans, *salesptr;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>定义结构体以分号结束</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="include"><a href="#include" class="headerlink" title="#include"></a>#include</h2><p>预处理器是一个在编译器之前运行的程序，并且会改变我们程序的源码。</p>
-<p>当预处理看到一个<code>#include</code>，会将指定头文件的内容替换掉<code>#include</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>; </span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用#ifndef来防止头文件被多次引用</p>
-</blockquote>
-<h1 id="using-declaration"><a href="#using-declaration" class="headerlink" title="using declaration"></a>using declaration</h1><p>通过使用<code>using</code>形式的定义，来简化写法，比如：<code>using namespace::name</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// using declaration; when we use the name cin, we get the one from the namespace std</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; i; <span class="comment">// ok: cin is a synonym for std::cin</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// error: no using declaration; we must use the full name</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// ok: explicitly use cout from namepsace std</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>由于定义了<code>using std::cin</code>，我们可以在调用<code>cin</code>函数时，不添加<code>std::</code>namespace前缀。</p>
-</blockquote>
-<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
-<li><p>在使用string之前需要引入string头文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="定义和初始化"><a href="#定义和初始化" class="headerlink" title="定义和初始化"></a>定义和初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// default initialization; s1 is the empty string </span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2 isacopyof s1</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// s3 is a copy of the string literal</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// s4 is cccccccccc</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="复制初始化（copy-initialize）和直接初始化-direct-initialization"><a href="#复制初始化（copy-initialize）和直接初始化-direct-initialization" class="headerlink" title="复制初始化（copy initialize）和直接初始化(direct initialization)"></a>复制初始化（copy initialize）和直接初始化(direct initialization)</h2><p>当使用<code>=</code>时，编译器是复制初始化，而当忽略<code>=</code>时，我们使用的是直接初始化，比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s5 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// copy initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s6</span><span class="params">(<span class="string">&quot;hiya&quot;</span>)</span></span>; <span class="comment">// direct initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// direct initialization; s7 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> s8 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>); <span class="comment">// copy initialization; s8 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">temp</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// temp is cccccccccc </span></span><br><span class="line"><span class="built_in">string</span> s8 = temp; <span class="comment">// copy temp into s8</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="读写字符串"><a href="#读写字符串" class="headerlink" title="读写字符串"></a>读写字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Note: #include and using declarations must be added to compile this code int main()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">string</span> s; <span class="comment">// empty string</span></span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; s; <span class="comment">// read a whitespace-separated string into s</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// write s to the output</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取字符串的长度"><a href="#获取字符串的长度" class="headerlink" title="获取字符串的长度"></a>获取字符串的长度</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = line.size(); <span class="comment">// len has type string::size_type</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello, &quot;</span>, s2 = <span class="string">&quot;world\n&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> s3 = s1 + s2; <span class="comment">// s3 is hello, world\n</span></span><br><span class="line">s1+=s2; <span class="comment">// equivalentto s1=s1+s2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;world&quot;</span>; <span class="comment">// no punctuation in s1 or s2</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1 + <span class="string">&quot;, &quot;</span> + s2 + <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意<code>+</code>符号两边至少要有一个string类型，不能是字符字面量相加</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s4 = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: adding a string and a literal string </span></span><br><span class="line">s5 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>; <span class="comment">// error: no string operand string</span></span><br><span class="line">s6 = s1 + <span class="string">&quot;, &quot;</span> + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: each + has a string operand string </span></span><br><span class="line">s7 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span> + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s6 = (s1 + <span class="string">&quot;, &quot;</span>) + <span class="string">&quot;world&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>相当于：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> tmp = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br><span class="line">s6 = tmp + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s7 = (<span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>) + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>(“hello” + “,”) 符号两边都是常量</p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 3.3:</strong> Explain how whitespace characters are handled in the string input operator and in the getline function.</p>
-<p><strong>对于string类的输入函数，它会自动忽略开头的空白（空格、制表符、换行等等），从第一个真正的字符开始直到下一个空白。</strong></p>
-<p><strong>对于getline()函数，它会保存字符串中的空白符，它读入数据，直到遇到换行符位置。</strong> </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> line;</span><br><span class="line">	<span class="comment">// read input a line at a time until end-of-file </span></span><br><span class="line">	<span class="keyword">while</span> (getline(<span class="built_in">cin</span>, line))</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>答案来自☞<a target="_blank" rel="noopener" href="https://blog.csdn.net/misayaaaaa/article/details/53284630">C++Primer第五版 第三章习题答案（1~10）</a></p>
-
+          {"images":[{"filename":"Image.png","idiom":"universal","scale":"1x"},{"idiom":"universal","scale":"2x"},{"idiom":"universal","scale":"3x"}],"info":{"author":"xcode","version":1}}
       
     </div>
 
@@ -290,7 +224,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Preview%20Content/Preview%20Assets.xcassets/Contents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -304,7 +238,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（四）</a>
+            <a href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Preview%20Content/Preview%20Assets.xcassets/Contents/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -313,13 +247,12 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-05 13:08:41 / Modified: 22:58:14" itemprop="dateCreated datePublished" datetime="2021-06-05T13:08:41+08:00">2021-06-05</time>
+              <time title="Created: 2021-07-04 11:04:23" itemprop="dateCreated datePublished" datetime="2021-07-04T11:04:23+08:00">2021-07-04</time>
             </span>
 
           
-            <span id="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（四）" title="Views">
+            <span id="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Preview%20Content/Preview%20Assets.xcassets/Contents/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -334,8 +267,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Preview%20Content/Preview%20Assets.xcassets/Contents/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Preview%20Content/Preview%20Assets.xcassets/Contents/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -350,46 +283,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><blockquote>
-<p>有时我们想将某一个表达式的结果的类型作为变量的类型</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decltype(f()) sum &#x3D; x; &#x2F;&#x2F; sum has whatever type f returns.</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">0</span>, &amp;cj = ci;</span><br><span class="line"><span class="keyword">decltype</span>(ci) x = <span class="number">0</span>; <span class="comment">// x has type const int</span></span><br><span class="line"><span class="keyword">decltype</span>(cj) y = x; <span class="comment">// y has type const int&amp; and is bound to x </span></span><br><span class="line"><span class="keyword">decltype</span>(cj) z; <span class="comment">// error: z is a reference and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// decltype of an expression can be a reference type</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>, *p = &amp;i, &amp;r = i;</span><br><span class="line"><span class="keyword">decltype</span>(r + <span class="number">0</span>) b; <span class="comment">// ok: addition yields an int; b is an (uninitialized) int </span></span><br><span class="line"><span class="keyword">decltype</span>(*p) c; <span class="comment">// error: c is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>decltype(*p)代表引用类型</p>
-</blockquote>
-<ul>
-<li><p><code>decltype(())</code>：仅代表引用类型</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">decltype</span>((i)) d; <span class="comment">// error: d is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<blockquote>
-<p><strong>Exercises Section 2.5.3<br> Exercise 2.36:</strong> In the following code, determine the type of each variable and the value each variable has when the code finishes:</p>
-<p>int a = 3, b = 4; </p>
-<p>decltype(a) c = a; </p>
-<p>decltype((b)) d = a; </p>
-<p>++c;</p>
-<p>++d;</p>
-<p>答：c : int， d int &amp;</p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 2.37:</strong> <strong>Assignment is an example of an expression that yields a reference type. The type is a reference to the type of the left-hand operand. That is, if i is an int, then the type of the expression i = x is int&amp;.</strong> Using that knowledge, determine the type and value of each variable in this code:</p>
-<p>int a = 3, b = 4;</p>
-<p>decltype(a) c = a;</p>
-<p>decltype(a = b) d = a; </p>
-<p> 答：c : int ; d : int &amp; </p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 2.38:</strong> Describe the differences in type deduction between decltype and auto. Give an example of an expression where auto and decltype will deduce the same type and an example where they will deduce differing types.</p>
-<p>答：针对引用类型，如下： a是int类型，b是int &amp;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, &amp;r = i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> a = r;</span><br><span class="line"></span><br><span class="line"><span class="keyword">decltype</span>(r) b = i;</span><br></pre></td></tr></table></figure>
-</blockquote>
-
+          {"info":{"author":"xcode","version":1}}
       
     </div>
 
@@ -408,7 +302,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AppIcon.appiconset/Contents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -422,7 +316,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" class="post-title-link" itemprop="url">汇编语言学习笔记（四）—— Debug</a>
+            <a href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AppIcon.appiconset/Contents/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -431,13 +325,12 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-04 00:53:08 / Modified: 08:11:44" itemprop="dateCreated datePublished" datetime="2021-06-04T00:53:08+08:00">2021-06-04</time>
+              <time title="Created: 2021-07-04 11:04:23" itemprop="dateCreated datePublished" datetime="2021-07-04T11:04:23+08:00">2021-07-04</time>
             </span>
 
           
-            <span id="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（四）—— Debug" title="Views">
+            <span id="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AppIcon.appiconset/Contents/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -452,8 +345,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AppIcon.appiconset/Contents/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AppIcon.appiconset/Contents/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -468,82 +361,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li><p>下载并安装DosBox</p>
-<p>到官网下载对应操作系统的软件 → <a target="_blank" rel="noopener" href="https://www.dosbox.com/download.php?main=1">传送门</a></p>
-</li>
-<li><p>下载Debug程序 →<a href="%5Bhttps://pan.baidu.com/s/1rzWTW1G76SdD7nGYs8WNaQ%5D(https://link.jianshu.com/?t=https://pan.baidu.com/s/1rzWTW1G76SdD7nGYs8WNaQ)">软件地址</a>来源自<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/147be16882e9?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">Mac下的OS X系统如何使用Debug程序</a></p>
-</li>
-<li><p>运行DosBox后输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount c &#x2F;Users&#x2F;Leoolin&#x2F;Downloads</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>后面的路径为debug程序所在的文件夹</p>
-</blockquote>
-</li>
-<li><p>再输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug </span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="DEBUG常用命令"><a href="#DEBUG常用命令" class="headerlink" title="DEBUG常用命令"></a>DEBUG常用命令</h2><p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/1.png" alt="截屏2021-06-04 上午12.58.45"></p>
-<ul>
-<li><p>修改寄存器的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r ax</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/2.png" alt="截屏2021-06-04 上午7.38.28"></p>
-</li>
-<li><p>查看当前寄存器的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/3.png" alt="截屏2021-06-04 上午7.39.48"></p>
-</li>
-<li><p>执行一条指令</p>
-<ul>
-<li><p>修改代码段寄存器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r cs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改指令指针寄存器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r ip</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<p>输入以下指令：</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/4.png" alt="截屏2021-06-04 上午7.55.53"></p>
-<ul>
-<li><p>查看内存中的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>指定内存位置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d 073F:0100</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/5.png" alt="截屏2021-06-04 上午7.58.37"></p>
-</li>
-</ul>
-</li>
-<li><p>将内存中的机器指令翻译成汇编指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u 073F:0100</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/6.png" alt="截屏2021-06-04 上午8.00.15"></p>
-<p>依次执行这些指令观察寄存器的变化：</p>
-</li>
-<li><p>修改代码段寄存器和指令指针寄存器的位置</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/7.png" alt="截屏2021-06-04 上午8.06.55"></p>
-</li>
-<li><p>依次执行…</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/8.png" alt="截屏2021-06-04 上午8.07.44"></p>
-</li>
-</ul>
-
+          {"images":[{"idiom":"iphone","scale":"2x","size":"20x20"},{"idiom":"iphone","scale":"3x","size":"20x20"},{"idiom":"iphone","scale":"2x","size":"29x29"},{"idiom":"iphone","scale":"3x","size":"29x29"},{"idiom":"iphone","scale":"2x","size":"40x40"},{"idiom":"iphone","scale":"3x","size":"40x40"},{"idiom":"iphone","scale":"2x","size":"60x60"},{"idiom":"iphone","scale":"3x","size":"60x60"},{"idiom":"ipad","scale":"1x","size":"20x20"},{"idiom":"ipad","scale":"2x","size":"20x20"},{"idiom":"ipad","scale":"1x","size":"29x29"},{"idiom":"ipad","scale":"2x","size":"29x29"},{"idiom":"ipad","scale":"1x","size":"40x40"},{"idiom":"ipad","scale":"2x","size":"40x40"},{"idiom":"ipad","scale":"1x","size":"76x76"},{"idiom":"ipad","scale":"2x","size":"76x76"},{"idiom":"ipad","scale":"2x","size":"83.5x83.5"},{"idiom":"ios-marketing","scale":"1x","size":"1024x1024"}],"info":{"author":"xcode","version":1}}
       
     </div>
 
@@ -562,7 +380,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AccentColor.colorset/Contents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -576,7 +394,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（三）</a>
+            <a href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AccentColor.colorset/Contents/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -586,18 +404,331 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-06-04 00:36:05" itemprop="dateCreated datePublished" datetime="2021-06-04T00:36:05+08:00">2021-06-04</time>
+              <time title="Created: 2021-07-04 11:04:22" itemprop="dateCreated datePublished" datetime="2021-07-04T11:04:22+08:00">2021-07-04</time>
+            </span>
+
+          
+            <span id="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AccentColor.colorset/Contents/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AccentColor.colorset/Contents/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/What-s-New-in-Swift-WWDC19/Rooms/Rooms/Assets.xcassets/AccentColor.colorset/Contents/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          {"colors":[{"idiom":"universal"}],"info":{"author":"xcode","version":1}}
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/SwiftUI-WWDC19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/04/SwiftUI-WWDC19/" class="post-title-link" itemprop="url">SwiftUI WWDC19</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-04 10:39:42" itemprop="dateCreated datePublished" datetime="2021-07-04T10:39:42+08:00">2021-07-04</time>
+            </span>
+
+          
+            <span id="/2021/07/04/SwiftUI-WWDC19/" class="post-meta-item leancloud_visitors" data-flag-title="SwiftUI WWDC19" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/04/SwiftUI-WWDC19/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/SwiftUI-WWDC19/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/%E7%88%86%E8%82%9DSwiftUI%EF%BC%8C%E9%9B%86%E5%90%88SwiftUI%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%86%E9%A2%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/04/%E7%88%86%E8%82%9DSwiftUI%EF%BC%8C%E9%9B%86%E5%90%88SwiftUI%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%86%E9%A2%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" class="post-title-link" itemprop="url">爆肝SwiftUI，集合SwiftUI的所有视频~ 持续更新</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-04 10:39:02" itemprop="dateCreated datePublished" datetime="2021-07-04T10:39:02+08:00">2021-07-04</time>
+            </span>
+
+          
+            <span id="/2021/07/04/%E7%88%86%E8%82%9DSwiftUI%EF%BC%8C%E9%9B%86%E5%90%88SwiftUI%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%86%E9%A2%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" class="post-meta-item leancloud_visitors" data-flag-title="爆肝SwiftUI，集合SwiftUI的所有视频~ 持续更新" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/04/%E7%88%86%E8%82%9DSwiftUI%EF%BC%8C%E9%9B%86%E5%90%88SwiftUI%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%86%E9%A2%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/%E7%88%86%E8%82%9DSwiftUI%EF%BC%8C%E9%9B%86%E5%90%88SwiftUI%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%86%E9%A2%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（八）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-26 11:25:01 / Modified: 11:25:24" itemprop="dateCreated datePublished" datetime="2021-06-26T11:25:01+08:00">2021-06-26</time>
+            </span>
+
+          
+            <span id="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（八）" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（七）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-22 08:10:47" itemprop="dateCreated datePublished" datetime="2021-06-22T08:10:47+08:00">2021-06-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-07 21:22:48" itemprop="dateModified" datetime="2021-06-07T21:22:48+08:00">2021-06-07</time>
+                <time title="Modified: 2021-06-28 11:01:20" itemprop="dateModified" datetime="2021-06-28T11:01:20+08:00">2021-06-28</time>
               </span>
 
           
-            <span id="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（三）" title="Views">
+            <span id="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（七）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -612,8 +743,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -628,66 +759,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="第三章-寄存器（内存访问）"><a href="#第三章-寄存器（内存访问）" class="headerlink" title="第三章 寄存器（内存访问）"></a>第三章 寄存器（内存访问）</h1><h2 id="3-1-内存中字的存储"><a href="#3-1-内存中字的存储" class="headerlink" title="3.1 内存中字的存储"></a>3.1 内存中字的存储</h2><p> 在0地址处开始存放20000（4E20H）：</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/1.png" alt="截屏2021-06-04 上午12.10.10"></p>
-<p>小端模式：高字节存放高地址位，低字节存放低地址位（0号单元是低地址单元，1号单元是高地址单元）</p>
-<blockquote>
-<p>问：1地址单元存放的字型数据是多少？</p>
-<p>答：124EH</p>
-</blockquote>
-<p> 结论：任何两个地址连续的内存单元，N号单元和N+1号单元，可以将它们看成两个内存单元，也可以看成一个地址为N的字单元中的高位字节单元和低位字节单元。</p>
-<h2 id="3-2-DS和-address"><a href="#3-2-DS和-address" class="headerlink" title="3.2 DS和[address]"></a>3.2 DS和[address]</h2><ul>
-<li>CPU要读取一个内存单元的时候，必须先给出这个内存单元的地址</li>
-<li>在8086PC中，内存地址由段地址和偏移地址组成</li>
-<li>8086CPU中有一个DS寄存器，通常用来存放要访问的数据的段地址</li>
-</ul>
-<blockquote>
-<p>例如：我们要读取10000H单元的内容可以用如下程序段进行：</p>
-<p>mov bx, 1000H</p>
-<p>mov ds, bx</p>
-<p>mov al, [0]</p>
-<p>上面三条指令将10000H(1000:0)中的数据读到al中</p>
-</blockquote>
-<p>mov指令的功能</p>
-<ol>
-<li><p>将数据直接送入寄存器</p>
-<p>mov ax,2</p>
-</li>
-<li><p>将一个寄存器中的内容送入另一个寄存器</p>
-<p>mov bx,ax</p>
-</li>
-<li><p>将一个内存单元中的内容送入另一个寄存器</p>
-<p>mov al, [0]</p>
+          <h1 id="3-8-栈顶越界的问题"><a href="#3-8-栈顶越界的问题" class="headerlink" title="3.8 栈顶越界的问题"></a>3.8 栈顶越界的问题</h1><p>push越界，上溢出；pop越界，下溢出</p>
+<p>栈空间之前的空间里很可能存放了具有其他用途的数据、代码</p>
 <ul>
-<li>格式：mov 寄存器名, 内存单元地址</li>
-<li>[…]表示一个内存单元，[…]中的0表示内存单元的偏移地址。</li>
-<li>执行指令时，8086CPU自动取DS中的数据为内存单元的段。</li>
+<li>我们在编程时要自己操心栈顶越界的问题，要根据可能用到的最大栈空间，来安排栈的大小，防止入栈的数据太多而导致越界</li>
+<li>执行出栈的操作时也要注意，以防止栈空的时候继续出栈而导致的越界</li>
+</ul>
+<h1 id="3-9-push、pop指令"><a href="#3-9-push、pop指令" class="headerlink" title="3.9 push、pop指令"></a>3.9 push、pop指令</h1><p>push和pop指令是可以在寄存器和内存之间传送数据的。</p>
+<p>栈空间当然也是内存空间的一部分，它只是一段可以以一种特殊方式进行访问的内存空间</p>
+<p>push和pop指令的格式</p>
+<p>一：</p>
+<ul>
+<li>push 寄存器：将一个寄存器中的数据入栈</li>
+<li>pop 寄存器：用一个寄存器接受出栈的数据</li>
+</ul>
+<p>二：</p>
+<ul>
+<li>push 段寄存器：将一个段寄存器中的内容入栈</li>
+<li>pop 段寄存器：用一个段寄存器接受出栈的数据</li>
+</ul>
+<p>三：</p>
+<ul>
+<li><p>push 内存单元：将一个内存单元处的字入栈（栈操作都是以字为单位）</p>
+</li>
+<li><p>pop 内存单元：用一个内存单元来接收出栈的数据</p>
+<p><code>push [0]</code> 、<code>pop [2]</code></p>
+</li>
+</ul>
+<p>指令执行时，CPU要知道内存单元的地址，可以在push、pop指令中给出内存单元的偏移地址，段地址在指令执行时，CPU从ds中取得。</p>
+<blockquote>
+<p>问题：3.7 </p>
+<p>将10000H~1000FH这段空间当做栈，初始状态是空的，将AX、BX、DS中的数据入栈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov ax 1000H</span><br><span class="line">mov ss, ax        ; 设置栈的段地址，SS&#x3D;1000H，不能直接向段寄存器SS送入数据</span><br><span class="line">mov sp, 0010H     ; 栈为空时，ss:sp在1000FH的下一位</span><br><span class="line"></span><br><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">push ds</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>问题：3.8</p>
+<p>编程：</p>
+<ul>
+<li>将10000H~1000FH 这段空间当作栈，初始状态是空的；</li>
+<li>设置AX=001AH，BX=001BH；</li>
+<li>将AX、BX中的数据入栈；</li>
+<li>然后将AX、BX清零；</li>
+<li>从栈中恢复AX、BX原来的内容。</li>
+</ul>
+<p>类似于函数调用过程:main函数调用a函数，初始时先将main函数的寄存器入栈，进行完操作后恢复寄存器到初始状态，回到main函数执行下面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H   </span><br><span class="line">mov ss, ax</span><br><span class="line">mov sp, 1010H    ;初始化栈顶</span><br><span class="line">mov ax, 001AH</span><br><span class="line">mov bx, 001BH</span><br><span class="line">sub ax, ax       ;将ax清零，也可以用赋值：mov ax, 0 异或： xor ax, ax </span><br><span class="line">sub bx, bx       ;sub ax,ax的机器码为2个字节</span><br><span class="line">								 ;mov ax,0 的机器码为3个字节</span><br><span class="line">								 </span><br><span class="line">pop bx           ;从栈中恢复ax,bx原来的数据，当前栈顶的内容是bx</span><br><span class="line">pop ax           ;中原来的内容</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>问题3.9</p>
+<p>编程：</p>
+<ul>
+<li>将10000H~1000FH这段空间当作栈，初始状态是空的</li>
+<li>设置AX=002AH，BX=002BH</li>
+<li>利用栈，交换AX和BX中的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H</span><br><span class="line">mov ss, ax</span><br><span class="line">mov sp, 1010H</span><br><span class="line">mov ax, 002AH</span><br><span class="line">mov bx, 002BH</span><br><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">pop ax</span><br><span class="line">pop bx</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>问题3.10</p>
+<p>我们如果要在10000H处写入字型数据2266H，可以用以下的代码完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H</span><br><span class="line">mov ds, ax</span><br><span class="line">mov ax, 2266H</span><br><span class="line">mov [0], ax</span><br></pre></td></tr></table></figure>
+
+<p>换一个写法：要求写入字型数据2266H</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">______</span><br><span class="line">______</span><br><span class="line">______</span><br><span class="line">mov ax, 2266H</span><br><span class="line">push ax</span><br></pre></td></tr></table></figure>
+
+<p>不能使用<code>mov 内存单元, 寄存器</code>这类指令</p>
+<p>答：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 1000H</span><br><span class="line">mov ss, ax</span><br><span class="line">mov sp, 2        ; push 会让 sp &#x3D; sp - 2</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/2021/06/22/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89/1.png" alt="截屏2021-06-26 下午3.26.03"></p>
+<p>执行push、pop指令需要两步：</p>
+<ul>
+<li>执行push时<ul>
+<li>先改变sp，后向SS:SP处传送<ul>
+<li>SP=SP-2</li>
+<li>向SS:SP指向的字单元中送入数据</li>
 </ul>
 </li>
-</ol>
+</ul>
+</li>
+<li>执行pop时<ul>
+<li>先读取SS:SP处的数据，后改变SP。<ul>
+<li>向SS:SP指向的字单元中读取数据</li>
+<li>SP=SP+2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>注意：8086CPU不支持将数据直接送入段寄存器 (由于硬件设计问题)</p>
-<p>mov ds, 1000H是非法的 ❌</p>
-<p>正确做法：数据-&gt;通用寄存器-&gt;段寄存器 ✅</p>
+<p>push、pop等栈操作指令，修改的只是SP。也就是说，栈顶的变化范围最大为：0~FFFFH。</p>
 </blockquote>
-<p>怎样将数据从寄存器al送入内存单元10000H？（反向操作~）</p>
-<blockquote>
-<p>mov bx, 1000H</p>
-<p>mov ds, bx</p>
-<p>mov [0] al</p>
-</blockquote>
-<h2 id="3-3-字的传送"><a href="#3-3-字的传送" class="headerlink" title="3.3 字的传送"></a>3.3 字的传送</h2><p>因为8086CPU是16位结构，有16根数据线，所以，可以一次性传送16位的数据，也就是一次性传送一个字。</p>
-<blockquote>
-<p>比如：</p>
-<p>mov bx 1000H</p>
-<p>mov ds, bx</p>
-<p>mov ax, [0]   ;1000:0处的字型数据送入ax</p>
-<p>mov [0], cx  ; cx中的16位数据送到1000:0处</p>
-</blockquote>
-<h2 id="问题3-3"><a href="#问题3-3" class="headerlink" title="问题3.3"></a>问题3.3</h2><blockquote>
-<p>TODO: P14</p>
-</blockquote>
-<h2 id="问题3-4"><a href="#问题3-4" class="headerlink" title="问题3.4"></a>问题3.4</h2>
+<p>综述：</p>
+<ul>
+<li>任意时刻，SS:SP指向栈顶元素</li>
+<li>8086CPU只记录栈顶，栈空间的大小我们要自己管理</li>
+</ul>
+
       
     </div>
 
@@ -706,7 +874,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -720,7 +888,142 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/03/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（三）</a>
+            <a href="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-21 20:41:08" itemprop="dateCreated datePublished" datetime="2021-06-21T20:41:08+08:00">2021-06-21</time>
+            </span>
+
+          
+            <span id="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" class="post-meta-item leancloud_visitors" data-flag-title="" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/21/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/ARK/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ARK"><a href="#ARK" class="headerlink" title="ARK"></a>ARK</h1><ul>
+<li>Pod Install 时间长</li>
+<li>Build 较长</li>
+<li>成功率较低</li>
+<li>IDE慢、内存占用高</li>
+</ul>
+<blockquote>
+<p>500+ POD</p>
+</blockquote>
+<p>思路一：子壳/Eample工程</p>
+<ul>
+<li><p>彻底模块化</p>
+</li>
+<li><p>体验差异</p>
+<blockquote>
+<p>集成主壳后发现问题，仍需去子壳工程修复</p>
+</blockquote>
+</li>
+<li><p>速度较慢</p>
+</li>
+<li><p>容易劣化</p>
+</li>
+</ul>
+<p>思路二：</p>
+<ul>
+<li><p>精简化</p>
+</li>
+<li><p>全链路稳定</p>
+<p>单节点的提升未必对全链路是正向的</p>
+</li>
+</ul>
+<p>动态化研发流程ARK</p>
+<ul>
+<li><p>基于动态库</p>
+<ul>
+<li><p>减少包体积</p>
+</li>
+<li><p>进程间共享、降低内存</p>
+</li>
+<li><p>动态加载应用内模块</p>
+<ul>
+<li>运行时（热修复）</li>
+<li>编译时</li>
+</ul>
+<blockquote>
+<p>编译时替换应用内模块</p>
+</blockquote>
+</li>
+</ul>
+<p>ARK思路：</p>
+<p>平台研发流程：输出动态库文件 </p>
+<p>本地研发流程：单独编译需要修改的Pod，编译成Framework并动态替换</p>
+<p>[2.57.45]</p>
+</li>
+</ul>
+<p>静态库转动态库</p>
+<p>编译、链接、运行</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/" class="post-title-link" itemprop="url">一个浮点数引发的悲剧</a>
         </h2>
 
         <div class="post-meta">
@@ -731,11 +1034,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-03 15:37:48 / Modified: 23:32:37" itemprop="dateCreated datePublished" datetime="2021-06-03T15:37:48+08:00">2021-06-03</time>
+              <time title="Created: 2021-06-17 10:50:30 / Modified: 13:47:13" itemprop="dateCreated datePublished" datetime="2021-06-17T10:50:30+08:00">2021-06-17</time>
             </span>
 
           
-            <span id="/2021/06/03/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（三）" title="Views">
+            <span id="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/" class="post-meta-item leancloud_visitors" data-flag-title="一个浮点数引发的悲剧" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -750,8 +1053,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/03/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/03/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/17/%E4%B8%80%E4%B8%AA%E6%B5%AE%E7%82%B9%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%82%B2%E5%89%A7/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -766,820 +1069,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="别名（Type-Aliases）"><a href="#别名（Type-Aliases）" class="headerlink" title="别名（Type Aliases）"></a>别名（Type Aliases）</h1><ul>
-<li>写法一</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> wages; <span class="comment">// wages is a synonym for double</span></span><br><span class="line"><span class="keyword">typedef</span> wages base, *p; <span class="comment">// base is a synonym for double, p for double*</span></span><br><span class="line"></span><br><span class="line">wages i = <span class="number">1.0</span>;</span><br><span class="line">p val = &amp;i;</span><br></pre></td></tr></table></figure>
+          <h1 id="不期而遇"><a href="#不期而遇" class="headerlink" title="不期而遇"></a>不期而遇</h1><p>某天我开开心心地写了一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSInteger a &#x3D; 10;</span><br><span class="line">NSUInteger b &#x3D; 9;</span><br><span class="line">CGFloat c &#x3D; -4 - (a - b - 1) * 13;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>写法二</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> SI = <span class="keyword">int</span>; <span class="comment">// SI is a synonym for int</span></span><br></pre></td></tr></table></figure>
+<p>我预期<code>c</code>值为-4，但是编译器却输出了一个：</p>
+<p>![截屏2021-06-17 上午11.56.32](/Users/Joshsone/Library/Application Support/typora-user-images/截屏2021-06-17 上午11.56.32.png)</p>
+<p>WTF？这是啥，因为这莫名的缘分，我展开了一段追根溯源的路程。</p>
+<h1 id="寻觅之旅"><a href="#寻觅之旅" class="headerlink" title="寻觅之旅"></a>寻觅之旅</h1><p>为了厘清这段神秘的数字到底从何而来，我将Xcode调整为Always Show Disassembly，来看看编译器到底做了些啥？</p>
+<p>![截屏2021-06-17 下午12.05.44](/Users/Joshsone/Library/Application Support/typora-user-images/截屏2021-06-17 下午12.05.44.png)</p>
+<p>这段汇编代码对应到执行完<code>-4 - (a - b - 1) * 13</code>，但是还没有赋值给<code>c</code>，寄存器<code>rax</code>中存放的就是计算结果，我们打印来看下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(lldb) expression $rax</span><br><span class="line">(unsigned long) $0 &#x3D; 18446744073709551612</span><br></pre></td></tr></table></figure>
 
+<p>可以看出<code>rax</code>中存放的是无符号长整形，其二进制形式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(lldb) p&#x2F;t 18446744073709551612</span><br><span class="line">(unsigned long long) $1 &#x3D; 0b1111111111111111111111111111111111111111111111111111111111111100</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，代码执行到这一步，已经出现了问题，我们期待结果是负数，那必然就是有符号整形，但是由于我们将<code>b</code>声明为<code>NSUInteger</code>，系统便将计算结果强转为了<code>NSUInteger</code>。</p>
 <blockquote>
-<p>C++11支持</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *pstring;</span><br><span class="line"><span class="keyword">const</span> pstring cstr = <span class="number">0</span>; <span class="comment">// cstr is a constant pointer to char</span></span><br><span class="line"><span class="keyword">const</span> pstring *ps; <span class="comment">// ps is a pointer to a constant pointer to char</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="auto类型"><a href="#auto类型" class="headerlink" title="auto类型"></a>auto类型</h1><blockquote>
-<p>编译器会自动通过初试值来判断<code>auto</code>对象的类型</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">autoi=<span class="number">0</span>,*p=&amp;i; <span class="comment">//ok: i is int and p isapointerto </span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">auto</span> sz = <span class="number">0</span>, pi = <span class="number">3.14</span>; <span class="comment">// error: inconsistent types for sz and pi</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>auto会自动忽略top-level const，保留low-level const</p>
-<blockquote>
-<p>top-level const即自身为常量</p>
-<p>low-level const即自身可以修改，但是所指向（引用）的地址储存值为常量</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = i, &amp;cr = ci;</span><br><span class="line"><span class="keyword">auto</span> b = ci; <span class="comment">// b is an int (top-level const in ci is dropped)</span></span><br><span class="line"><span class="keyword">auto</span> c = cr; <span class="comment">// c is an int (cr is an alias for ci whose const is top-level) autod=&amp;i; // d isan int*(&amp; ofan int objectis int*)</span></span><br><span class="line"><span class="keyword">auto</span> e = &amp;ci; <span class="comment">// e is const int*(&amp; of a const object is low-level const)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置为top-level const</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span> f = ci; <span class="comment">// deduced type of ci is int; f has type const int</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">计算机组成原理学习笔记（二）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-03 08:35:15 / Modified: 14:41:19" itemprop="dateCreated datePublished" datetime="2021-06-03T08:35:15+08:00">2021-06-03</time>
-            </span>
-
-          
-            <span id="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记（二）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="机器编程"><a href="#机器编程" class="headerlink" title="机器编程"></a>机器编程</h1><h2 id="处理器和架构集的历史"><a href="#处理器和架构集的历史" class="headerlink" title="处理器和架构集的历史"></a>处理器和架构集的历史</h2><h3 id="Inter-x86处理器"><a href="#Inter-x86处理器" class="headerlink" title="Inter x86处理器"></a>Inter x86处理器</h3><ul>
-<li><p>精简指令集计算机RISC （Reduced  instruction set computer）</p>
-</li>
-<li><p>复杂指令集计算机 CISC（Complex instruction set computer）</p>
-</li>
-<li><p>RISC出现前，称以前的指令集为CISC（是一种嘲讽）</p>
-<p><img src="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-03 上午10.01.42"></p>
-</li>
-</ul>
-<h2 id="C-汇编，机器码"><a href="#C-汇编，机器码" class="headerlink" title="C, 汇编，机器码"></a>C, 汇编，机器码</h2><p> <img src="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png" alt="截屏2021-06-03 上午10.29.32"></p>
-<ul>
-<li>c源文件(.c) – <em>编译器</em>（Compiler）–&gt;  汇编文件(.s) –<em>汇编器</em> (Assembler)–&gt;目标文件（.o）–<em>链接器(Linker)</em> + 静态库（Static libraries）–&gt; 可执行文件</li>
-</ul>
-<p>将c源文件转化成汇编</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Og -S 指针.cpp</span><br></pre></td></tr></table></figure>
-
-<p>机器指令示例：</p>
-<ul>
-<li>C语言</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*dest &#x3D; t;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>汇编</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movq %rax, (%rbx)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>t： %rax</p>
-<p>dest: %rbx</p>
-<p>*dest: M[%rbx] </p>
-</blockquote>
-<ul>
-<li>指令编码</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x40059e: 48 89 03</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>3byte指令</p>
-<p>指令存储在0x40059e处</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（二）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-02 22:26:11 / Modified: 23:41:22" itemprop="dateCreated datePublished" datetime="2021-06-02T22:26:11+08:00">2021-06-02</time>
-            </span>
-
-          
-            <span id="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（二）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="2-9-段寄存器"><a href="#2-9-段寄存器" class="headerlink" title="2.9 段寄存器"></a>2.9 段寄存器</h2><p>段地址存储在段寄存器</p>
-<blockquote>
-<p>8086CPU有4个段寄存器</p>
-<p>CS、DS、SS、ES</p>
-</blockquote>
-<p>当8086CPU要访问内存时，由这4个段寄存器提供内存单元的段地址</p>
-<h2 id="2-10-CS和IP"><a href="#2-10-CS和IP" class="headerlink" title="2.10 CS和IP"></a>2.10 CS和IP</h2><p>CS和IP是8086CPU中最关键的寄存器，他们指示当前要读取指令的地址。</p>
-<p>CS：代码段寄存器</p>
-<p>IP：指令指针寄存器</p>
-<ol>
-<li>从CS:IP指向内存单元读取指令，读取的指令进入指令缓存器；</li>
-<li>IP = IP + 所读取指令的长度，从而指向下一条指令；</li>
-<li>执行指令。转到步骤1，重复这个过程。</li>
-</ol>
-<blockquote>
-<p>8086PC工作过程的简要描述</p>
-<ul>
-<li>在8086CPU加电或复位后（CPU刚开始工作时）CP和IP被设置为CS=FFFFH，IP=0000H。</li>
-<li>即在8086PC机刚启动时，CPU从内存FFFF0H单元中读取指令执行。</li>
-<li>FFFF0H单元中的指令是8086PC机开机后执行的第一条指令。</li>
-</ul>
-</blockquote>
-<ul>
-<li>在任何时候，CPU将CS、IP中的内容当作指令的段地址和偏移地址，用它们合成指令的物理地址，到内存中读取指令码，再执行。</li>
-</ul>
-<ul>
-<li>如果说，内存中的一段信息曾被CPU执行过，那么它所在的内存单元必然被CS:IP指向过。</li>
-</ul>
-<h2 id="2-11-修改CS、IP的指令"><a href="#2-11-修改CS、IP的指令" class="headerlink" title="2.11 修改CS、IP的指令"></a>2.11 修改CS、IP的指令</h2><ul>
-<li>在CPU中，程序员能够用指令读写的部件只有寄存器，程序员可以通过改变寄存器中的内容实现对CPU的控制。</li>
-<li>CPU从何处执行指令是由CS、IP中的内容决定的，程序员可以通过改变CS、IP中的内容来控制CPU执行目标指令。</li>
-</ul>
-<blockquote>
-<p>如何修改AX中的值？</p>
-<p>mov指令可以改变8086CPU大部分寄存器的值：传送指令</p>
-<ul>
-<li>mov指令不能用于设置CS、IP的值，8086CPU没有提供这样的功能</li>
-</ul>
-</blockquote>
-<ul>
-<li><p>jmp段地址：偏移地址</p>
-<p>同时修改CS、IP的内容</p>
-<blockquote>
-<p>功能：用指令中给出的段地址修改CS，偏移地址修改IP。</p>
-</blockquote>
-<p>jmp 2AE3:3 &gt;&gt; 2AE33H</p>
-<p>jmp 3:0B16 &gt;&gt; 0B46H</p>
-</li>
-<li><p>仅修改IP的内容</p>
-<p>jmp某一合法寄存器</p>
-<p>jmp ax （类似于mov IP, ax）</p>
-<blockquote>
-<p>功能：用寄存器中的值修改IP</p>
-</blockquote>
-</li>
-</ul>
-<p>问题分析：CPU运行的流程</p>
-<p>（初始：CS=2000H，IP=0000H）</p>
-<p><img src="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-02 下午11.08.40"></p>
-<ol>
-<li>mov ax, 6622H    ;ax=6622H</li>
-<li>jmp 1000:3      ;CS=1000,IP=3</li>
-<li>mov ax,0000  ;ax=0000H</li>
-<li>mov bx,ax   ;bx=0000H</li>
-<li>jum bx ;IP=0000H</li>
-<li>mov ax,0123H ;ax=0123H</li>
-<li>转到第三步执行（死循环 ）</li>
-</ol>
-<h2 id="2-12-代码段"><a href="#2-12-代码段" class="headerlink" title="2.12 代码段"></a>2.12 代码段</h2><p>对于8086PC机，可以将长度为N(N&lt;=64kb)的一组代码，存在一组地址连续、起始地址为16的倍数的内存单元，这段内存是用来存放代码的，从而定义了一个代码段。</p>
-<p>例如：</p>
-<p>这段长度为10字节的字节的指令，存在从123B0H<del>123B9H的一组内存单元中，我们就可以认为，123B0H</del>123B9H这段内存单元是用来存放代码的，是一个代码段，它的段地址为123BH，长度为10字节。</p>
-<p><img src="/2021/06/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/2.png" alt="截屏2021-06-02 下午11.24.18"></p>
-<h2 id="检测点2-3："><a href="#检测点2-3：" class="headerlink" title="检测点2.3："></a>检测点2.3：</h2><blockquote>
-<p>下面的3条指令执行后，CPU几次修改IP？都是什么时候？最后IP中的值是多少？</p>
-<p>mov ax,bx</p>
-<p>sub ax, ax</p>
-<p>jmp ax</p>
-</blockquote>
-<p>4次（第三次：读取jmp ax之后；第四次：执行jmp ax修改IP）, ax=0000H，IP=ax；</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（二）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-02 10:06:54 / Modified: 19:24:51" itemprop="dateCreated datePublished" datetime="2021-06-02T10:06:54+08:00">2021-06-02</time>
-            </span>
-
-          
-            <span id="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（二）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> *pi = &amp;ival; <span class="comment">// pi points to an int</span></span><br><span class="line"><span class="keyword">int</span> **ppi = &amp;pi; <span class="comment">// ppi points to a pointer to an int</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-02 上午10.14.16"></p>
-<h1 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;<span class="comment">//p isa pointer to int </span></span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;<span class="comment">// r is a reference to the pointer p</span></span><br><span class="line">r = &amp;i; <span class="comment">// r refers to a pointer; assigning &amp;i to r makes p point to i</span></span><br><span class="line">*r = <span class="number">0</span>; <span class="comment">// dereferencing r yields i, the object to which p points; changes i to 0</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>如何理解<code>int *&amp;r = p;</code>？</p>
-<p>从右往左看，最靠近<code>r</code>的是<code>&amp;</code>，说明<code>r</code>是一个引用，然后是<code>*</code>，说明<code>r</code>指向指针，最后是<code>int</code>，说明r是一个指向int类型指针的引用。</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>Exercises Section 2.3.3<br>Exercise 2.25:</strong> Determine the types and values of each of the following variables.</p>
-<p><strong>(a)</strong> int* ip, &amp;r = ip;</p>
-<p><strong>(b)</strong> int i, *ip = 0; </p>
-<p><strong>(c)</strong> int* ip, ip2;</p>
-<p>(a) ip：int类型的指针,r：指向int类型指针的引用</p>
-<p>(b) i：int类型的变量，ip：int类型的指针</p>
-<p>(c)ip：int类型的指针，ip2：int类型的变量</p>
-</blockquote>
-<h1 id="常量限定符（const）"><a href="#常量限定符（const）" class="headerlink" title="常量限定符（const）"></a>常量限定符（const）</h1><ul>
-<li>const修饰的对象不可修改</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> bufSize = <span class="number">512</span>; <span class="comment">// input buffer size</span></span><br><span class="line">bufSize = <span class="number">512</span>; <span class="comment">// error: attempt to write to const object</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>const修饰的对象必须初始化</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = get_size(); <span class="comment">// ok: initialized at run time</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> j = <span class="number">42</span>; <span class="comment">// ok: initialized at compile time </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> k; <span class="comment">// error: k is uninitialized const</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在多个文件中使用const修饰的对象</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file_1.cc defines and initializes a const that is accessible to other files </span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">int</span> bufSize = fcn();</span><br><span class="line"><span class="comment">// file_1.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">int</span> bufSize; <span class="comment">// same bufSize as defined in file_1.cc</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>Exercises Section 2.4<br> Exercise 2.26:</strong> Which of the following are legal? For those that are illegal,</p>
-<p>explain why.</p>
-<p><strong>(a)</strong> const int buf;</p>
-<p><strong>(b)</strong> int cnt = 0;</p>
-<p><strong>(c)</strong> const int sz = cnt; </p>
-<p><strong>(d)</strong> ++cnt; ++sz;</p>
-<p>(a)：❌ (d)：++cnt;（✅）++sz;（❌)</p>
-</blockquote>
-<h2 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">1024</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = ci; <span class="comment">// ok: both reference and underlying object are const </span></span><br><span class="line">r1 = <span class="number">42</span>; <span class="comment">// error: r1 is a reference to const</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = ci; <span class="comment">// error: non const reference to a const object</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>常量引用不可修改值</li>
-<li>非常量引用不可指向常量对象</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = i; <span class="comment">// we can bind a const int&amp; to a plain int object const int &amp;r2 = 42; // ok: r1 is a reference to const</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r3 = r1 * <span class="number">2</span>; <span class="comment">// ok: r3 is a reference to const</span></span><br><span class="line"><span class="keyword">int</span> &amp;r4 = r * <span class="number">2</span>; <span class="comment">// error: r4 is a plain, non const reference</span></span><br></pre></td></tr></table></figure>
-
-<p>常量引用可以指向 <em>非常量对象</em>、<em>字面量</em>、<em>通用表达式</em></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ri = dval;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>常量引用会自动强制类型转化</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> temp = dval; <span class="comment">// create a temporary const int from the double </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ri = temp; <span class="comment">// bind ri to that temporary</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="常量指针（pointer-to-const）"><a href="#常量指针（pointer-to-const）" class="headerlink" title="常量指针（pointer to const）"></a>常量指针（pointer to const）</h2><blockquote>
-<p>指向常量的指针，指针地址可以修改，但地址存放的值不可以修改</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> pi = <span class="number">3.14</span>; <span class="comment">// pi is const; its value may not be changed</span></span><br><span class="line"><span class="keyword">double</span> *ptr = &amp;pi; <span class="comment">// error: ptr is a plain pointer</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *cptr = &amp;pi; <span class="comment">// ok: cptr may point to a double that is const </span></span><br><span class="line">*cptr = <span class="number">42</span>; <span class="comment">// error: cannot assign to *cptr</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>指向常量的指针地址存放的值不可修改</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>; <span class="comment">// dval is a double; its value can be changed</span></span><br><span class="line">cptr = &amp;dval; <span class="comment">// ok: but can&#x27;t change dval through cptr</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>指向常量的指针可以指向非常量对象</li>
-</ul>
-<h2 id="指针常量（const-Pointers）"><a href="#指针常量（const-Pointers）" class="headerlink" title="指针常量（const Pointers）"></a>指针常量（const Pointers）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> errNumb = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> curErr = &amp;errNumb; <span class="comment">// curErr will always point to errNumb const </span></span><br><span class="line"><span class="keyword">double</span> pi = <span class="number">3.14159</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *<span class="keyword">const</span> pip = &amp;pi; <span class="comment">// pip is a const pointer to a const object</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>从右往左看：<code>curErr</code>被<code>const</code>修饰，不可修改</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*pip = <span class="number">2.72</span>; <span class="comment">// error: pip is a pointer to const</span></span><br><span class="line"><span class="comment">// if the object to which curErr points (i.e., errNumb) is nonzero </span></span><br><span class="line"><span class="keyword">if</span> (*curErr) &#123;</span><br><span class="line">*curErr = <span class="number">0</span>; <span class="comment">// ok: reset the value of the object to which curErr is bound &#125;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>Exercises Section 2.4.2<br> Exercise 2.27:</strong> Which of the following initializations are legal? Explain why.</p>
-<p> <strong>(a)</strong> int i = -1, &amp;r = 0;<br> <strong>(b)</strong> int <em>const p2 = &i2;<br> <strong>(c)</strong> const int i = -1, &amp;r = 0;<br> <strong>(d)</strong> const int *const p3 = &i2;<br> *</em>(e)** const int *p1 = &i2;<br> <strong>(f)</strong> const int &amp;const r2;<br> <strong>(g)</strong> const int i2 = i, &amp;r = i;</p>
-<p>(a)❌ 引用必须指向一个对象</p>
-<p>(f)  ❌常量必须初始化</p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 2.28:</strong> Explain the following definitions. Identify any that are illegal. </p>
-<p><strong>(a)</strong> int i, *const cp;<br><strong>(b)</strong> int *p1, *const p2;</p>
-<p><strong>(c)</strong> const int ic, &amp;r = ic; </p>
-<p><strong>(d)</strong> const int *const p3;</p>
-<p><strong>(e)</strong> const int *p;</p>
-<p>原因：常量初始化没有赋值</p>
-</blockquote>
-<h2 id="常量表达式"><a href="#常量表达式" class="headerlink" title="常量表达式"></a>常量表达式</h2><blockquote>
-<p>常量表达式是指能够在编译时确定值</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> max_files = <span class="number">20</span>; <span class="comment">// max_files is a constant expression</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> limit = max_files + <span class="number">1</span>; <span class="comment">// limit is a constant expression </span></span><br><span class="line"><span class="keyword">int</span> staff_size = <span class="number">27</span>; <span class="comment">// staff_size is not a constant expression</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sz = get_size(); <span class="comment">// sz is not a constant expression</span></span><br></pre></td></tr></table></figure>
-
-<p>尽管sz是一个常量，但是它的值只有在运行时才能确定，因此sz不是一个常量表达式</p>
-<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> mf = <span class="number">20</span>; <span class="comment">// 20 is a constant expression </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> limit = mf + <span class="number">1</span>; <span class="comment">// mf + 1 is a constant expression </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> sz = size(); <span class="comment">// ok only if size is a constexpr function</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>constexpr避免了出现上述<code>sz</code>的情况</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = <span class="literal">nullptr</span>; <span class="comment">// p is a pointer to a const int </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *q = <span class="literal">nullptr</span>; <span class="comment">// q is a const pointer to int</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>constexpr是top-level const，即指针本身是常量（low-level const是指针指向常量对象）</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *np = <span class="literal">nullptr</span>; <span class="comment">// np is a constant pointer to int that is null</span></span><br><span class="line"><span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> i = <span class="number">42</span>; <span class="comment">// type of i is const int</span></span><br><span class="line"><span class="comment">// i and j must be defined outside any function</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i; <span class="comment">// p is a constant pointer to the const int i </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *p1 = &amp;j; <span class="comment">// p1 is a constant pointer to the int j</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">计算机组成原理学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-01 14:56:34" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:34+08:00">2021-06-01</time>
-            </span>
-
-          
-            <span id="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">汇编语言学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-01 14:56:22" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:22+08:00">2021-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-02 10:05:21" itemprop="dateModified" datetime="2021-06-02T10:05:21+08:00">2021-06-02</time>
-              </span>
-
-          
-            <span id="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="2-4-物理地址"><a href="#2-4-物理地址" class="headerlink" title="2.4 物理地址"></a>2.4 物理地址</h2><p>CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。</p>
-<h2 id="2-5-16位结构的CPU"><a href="#2-5-16位结构的CPU" class="headerlink" title="2.5 16位结构的CPU"></a>2.5 16位结构的CPU</h2><p>16位结构描述了一个CPU具有以下几个方面特征：</p>
-<ul>
-<li>运算器一次最多可以处理16位的数据</li>
-<li>寄存器的最大宽度为16位</li>
-<li>寄存器和运算器之间的通路是16位的</li>
-</ul>
-<h2 id="2-6-8086CPU给出物理地址的方法"><a href="#2-6-8086CPU给出物理地址的方法" class="headerlink" title="2.6 8086CPU给出物理地址的方法"></a>2.6 8086CPU给出物理地址的方法</h2><p>8086有20位地址总线，可传送20位地址，寻址能力为1M</p>
-<p>8086内部为16位结构，只能传送16位的地址，寻址能力却只有64k。</p>
-<blockquote>
-<p>8086CPU采用一种在内部用两个16位地址合成的方法来形成一个20位的物理空间</p>
-</blockquote>
-<ol>
-<li>cpu中的相关部件提供两个16位的地址，一个称为断地址，一个称为偏移地址；</li>
-<li>段地址和偏移地址通过内部总线送入一个称为 <strong>地址加法器</strong> 的部件</li>
-<li>地址加法器将两个16位地址合并成一个20位的地址</li>
-</ol>
-<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png" alt="截屏2021-06-02 上午12.02.00"></p>
-<h3 id="地址加法器的工作原理"><a href="#地址加法器的工作原理" class="headerlink" title="地址加法器的工作原理"></a>地址加法器的工作原理</h3><p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png" alt="截屏2021-06-02 上午12.06.06"></p>
-<blockquote>
-<p>段地址 * 16，即数据左移4位</p>
-</blockquote>
-<ul>
-<li>一个数据的十六进制形式左移1位，相当于乘以16；</li>
-<li>一个数据的十进制形式左移1位，相当于乘以10；</li>
-<li>一个数据的X进制形式左移1位，相当于乘以X；</li>
-</ul>
-<h2 id="2-7-段地址-✖️16-偏移地址-物理地址的本质含义"><a href="#2-7-段地址-✖️16-偏移地址-物理地址的本质含义" class="headerlink" title="2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义"></a>2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义</h2><ul>
-<li><p>第一个比喻：</p>
-<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png" alt="截屏2021-06-02 上午12.09.59"></p>
-<ul>
-<li>从学校走2826m到图书馆。这2826可以认为是图书馆的物理地址。</li>
-<li>可以分解为从学校走2000m到体育馆，从体育馆再走826m到图书馆<ul>
-<li>第一个距离2000m是相当于起点的基础地址</li>
-<li>第二个距离826m是相对于基础地址的偏移地址</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>第二个比喻：</p>
-<p>用纸条通讯，询问图书馆的地址（目前只有两张可以容纳3位数据的纸条）</p>
-<ul>
-<li><p>第一张：200</p>
-</li>
-<li><p>第二张：826</p>
-<p>规则：第一张 ✖️10 + 第二张，即可得到地址。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2><p>错误认识：</p>
-<p>内存被划分成了一个一个的段，每一个段有一个段地址</p>
-<p>其实：</p>
-<p>内存并没有分段，段的划分来自于CPU，由于8086CPU用“段地址 ✖️ 16 + 偏移地址 = 物理地址”的方式给出内存单元的物理地址，使得我们可以用分段的方式来管理内存。</p>
-<ul>
-<li>段地址 ✖️ 16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；</li>
-<li>偏移地址为16，16位的地址的寻址能力为64k，所以一个段的长度最大为64k。</li>
-</ul>
-<blockquote>
-<p>如果给定一个段地址，仅通过变化偏移地址来进行寻址，最多可以定位多少内存单元？</p>
-<p>结论：偏移地址16位，变化范围为0~FFFFH，仅用偏移地址来寻址最多可寻64k个内存单元。</p>
-<p>比如：给定段地址1000H，用偏移地址寻址，CPU的寻址范围为：10000H ~ 1FFFFH。</p>
-</blockquote>
-<p>数据在21F60H内存中。对于8086PC机的两种描述：</p>
-<ol>
-<li>数据存在内存2000：1F60单元中；</li>
-<li>数据存在内存的2000段中的1F60H单元中。</li>
-</ol>
-<blockquote>
-<p>注：段是可以人为定义的，可根据需要，将地址连续、起始地址为16的倍数的一组内存单元定义为一个段。</p>
+<p>另外提一句：有符号的-4，二进制格式也为0b1111111111111111111111111111111111111111111111111111111111111100</p>
 </blockquote>
 
       
@@ -1599,7 +1105,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1665,7 +1171,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
