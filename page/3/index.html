@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,141 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（六）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-16 07:51:38" itemprop="dateCreated datePublished" datetime="2021-06-16T07:51:38+08:00">2021-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-22 08:18:00" itemprop="dateModified" datetime="2021-06-22T08:18:00+08:00">2021-06-22</time>
-              </span>
-
-          
-            <span id="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（六）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="3-6栈"><a href="#3-6栈" class="headerlink" title="3.6栈"></a>3.6栈</h1><p>操作规则：LIFO（后进先出）</p>
-<p>8086CPU提供的入栈和出栈的指令：</p>
-<ul>
-<li><p>Push（入栈）</p>
-<p>push ax：将寄存器ax中的数据送入栈中</p>
-</li>
-<li><p>Pop（出栈）</p>
-<p>push ax：从栈顶取出数据送入ax。</p>
-</li>
-</ul>
-<blockquote>
-<p>8086CPU的入栈和出栈操作都是以字为单位进行的</p>
-</blockquote>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/1.png" alt="截屏2021-06-16 上午8.13.13"></p>
-<ul>
-<li><p>CPU如何知道当前要执行的指令所在的位置？</p>
-<p>寄存器CS和IP中存放着当前指令的段地址和偏移地址</p>
-</li>
-<li><p>执行push和pop的时候，如何知道哪个单元是栈顶单元？</p>
-<p>8086CPU中，有两个寄存器：</p>
-<ul>
-<li>段寄存器SS  存放栈顶的段地址</li>
-<li>寄存器SP 存放栈顶的偏移地址</li>
-</ul>
-<p>任何时刻，SS:SP指向栈顶元素</p>
-</li>
-</ul>
-<p>push ax时：</p>
-<ul>
-<li><p>SP = SP - 2</p>
-</li>
-<li><p>将ax中的内容送入SS:SP指向的内存单元处，SS:SP此时指向新栈顶</p>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/2.png" alt="截屏2021-06-16 上午8.23.02"></p>
-</li>
-<li><p>将10000H~1000FH这段空间当做栈，初始状态栈是空的，此时，SS=1000H，SP=多少？</p>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/3.png" alt="截屏2021-06-16 上午8.25.46"></p>
-<h1 id="pop指令的执行过程"><a href="#pop指令的执行过程" class="headerlink" title="pop指令的执行过程"></a>pop指令的执行过程</h1></li>
-</ul>
-<p><code>pop ax</code></p>
-<ul>
-<li>将SS:SP指向的内存单元处的数据放入ax中；</li>
-<li>SP=SP+2，SS:SP指向当前栈顶下面的单元，以当前栈顶下面的单元为新的栈顶。</li>
-</ul>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/4.png" alt="截屏2021-06-22 上午8.14.47"></p>
-<p>注意：</p>
-<ul>
-<li>出栈后，SS:SP指向新的栈顶1000EH，pop操作前的栈顶元素，1000CH处的2266H依然存在，但是，它已不再栈中。</li>
-<li>当再次执行push等入栈指令后，SS：SP移至1000CH，并在里面写入新的数据，它将被覆盖。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" class="post-title-link" itemprop="url">iOS中的Hang是什么？该如何治理？</a>
+            <a href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（二）</a>
         </h2>
 
         <div class="post-meta">
@@ -304,11 +170,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-14 21:27:04 / Modified: 23:22:25" itemprop="dateCreated datePublished" datetime="2021-06-14T21:27:04+08:00">2021-06-14</time>
+              <time title="Created: 2021-06-02 10:06:54 / Modified: 19:24:51" itemprop="dateCreated datePublished" datetime="2021-06-02T10:06:54+08:00">2021-06-02</time>
             </span>
 
           
-            <span id="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="iOS中的Hang是什么？该如何治理？" title="Views">
+            <span id="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（二）" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -323,8 +189,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -339,99 +205,151 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="什么是Hang？"><a href="#什么是Hang？" class="headerlink" title="什么是Hang？"></a>什么是Hang？</h2><p>试想这样的场景：当用户在你的APP中进行交互时，APP却没有及时的响应用户的操作。</p>
-<p>这种体验可以被描述为延时、慢、卡顿，在Apple开发中，我们称这种无响应的表现为Hang。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/1.png" alt="1:35"></p>
+          <h1 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> *pi = &amp;ival; <span class="comment">// pi points to an int</span></span><br><span class="line"><span class="keyword">int</span> **ppi = &amp;pi; <span class="comment">// ppi points to a pointer to an int</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/02/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" alt="截屏2021-06-02 上午10.14.16"></p>
+<h1 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;<span class="comment">//p isa pointer to int </span></span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;<span class="comment">// r is a reference to the pointer p</span></span><br><span class="line">r = &amp;i; <span class="comment">// r refers to a pointer; assigning &amp;i to r makes p point to i</span></span><br><span class="line">*r = <span class="number">0</span>; <span class="comment">// dereferencing r yields i, the object to which p points; changes i to 0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如何理解<code>int *&amp;r = p;</code>？</p>
+<p>从右往左看，最靠近<code>r</code>的是<code>&amp;</code>，说明<code>r</code>是一个引用，然后是<code>*</code>，说明<code>r</code>指向指针，最后是<code>int</code>，说明r是一个指向int类型指针的引用。</p>
+</li>
+</ul>
 <blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258">Understand and eliminate hangs from your app</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
+<p><strong>Exercises Section 2.3.3<br>Exercise 2.25:</strong> Determine the types and values of each of the following variables.</p>
+<p><strong>(a)</strong> int* ip, &amp;r = ip;</p>
+<p><strong>(b)</strong> int i, *ip = 0; </p>
+<p><strong>(c)</strong> int* ip, ip2;</p>
+<p>(a) ip：int类型的指针,r：指向int类型指针的引用</p>
+<p>(b) i：int类型的变量，ip：int类型的指针</p>
+<p>(c)ip：int类型的指针，ip2：int类型的变量</p>
 </blockquote>
-<h2 id="理解main-runloop"><a href="#理解main-runloop" class="headerlink" title="理解main runloop"></a>理解main runloop</h2><p>用户的交互均在主线程的Runloop发生。当用户和APP交互，主线程会接受到这个事件，接下来处理这个事件，然后更新UI。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/2.png" alt="2:03"></p>
-<p>如果处理事件耗费的很长时间，就从用户交互到UI更新之间会发生延时（delay）。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/3.png" alt="2:31"></p>
-<h2 id="Hang通常由什么引起？"><a href="#Hang通常由什么引起？" class="headerlink" title="Hang通常由什么引起？"></a>Hang通常由什么引起？</h2><p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/4.png" alt="3:52"></p>
+<h1 id="常量限定符（const）"><a href="#常量限定符（const）" class="headerlink" title="常量限定符（const）"></a>常量限定符（const）</h1><ul>
+<li>const修饰的对象不可修改</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> bufSize = <span class="number">512</span>; <span class="comment">// input buffer size</span></span><br><span class="line">bufSize = <span class="number">512</span>; <span class="comment">// error: attempt to write to const object</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>主线程任务忙（Busy）</p>
-<p>例如：过渡加载资源。当前页面中只需要展示前4个图片，但是却一次性加载了所有的图片。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/5.png" alt="4:35"></p>
-<p>例如：执行了与主线程不相关的任务。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/6.png" alt="5:18"></p>
-<p>再比如了使用次优的API。像绘制图片圆角有两种方法：</p>
+<li>const修饰的对象必须初始化</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = get_size(); <span class="comment">// ok: initialized at run time</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> j = <span class="number">42</span>; <span class="comment">// ok: initialized at compile time </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> k; <span class="comment">// error: k is uninitialized const</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>方法一：</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/7.png" alt="6:23"></p>
-</li>
-<li><p>方法二：</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/8.png" alt="6:38"></p>
-</li>
+<li>在多个文件中使用const修饰的对象</li>
 </ul>
-<p>比较这两种方法，法一是CPU密集型操作，会消耗大量内存。法二使用GPU进行绘制，更快更及时。</p>
-</li>
-<li><p>主线程阻塞（Blocked）</p>
-<p>可能导致主线程阻塞的操作，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file_1.cc defines and initializes a const that is accessible to other files </span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">int</span> bufSize = fcn();</span><br><span class="line"><span class="comment">// file_1.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">int</span> bufSize; <span class="comment">// same bufSize as defined in file_1.cc</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercises Section 2.4<br> Exercise 2.26:</strong> Which of the following are legal? For those that are illegal,</p>
+<p>explain why.</p>
+<p><strong>(a)</strong> const int buf;</p>
+<p><strong>(b)</strong> int cnt = 0;</p>
+<p><strong>(c)</strong> const int sz = cnt; </p>
+<p><strong>(d)</strong> ++cnt; ++sz;</p>
+<p>(a)：❌ (d)：++cnt;（✅）++sz;（❌)</p>
+</blockquote>
+<h2 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">1024</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = ci; <span class="comment">// ok: both reference and underlying object are const </span></span><br><span class="line">r1 = <span class="number">42</span>; <span class="comment">// error: r1 is a reference to const</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = ci; <span class="comment">// error: non const reference to a const object</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>同步请求网络，并等待数据返回</p>
-</li>
-<li><p>文件IO等访问系统资源的行为</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/9.png" alt="10:29"></p>
-</li>
-<li><p>数据库操作</p>
-</li>
-<li><p>锁</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/10.png" alt="8:57"></p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/11.png" alt="9:02"></p>
-</li>
+<li>常量引用不可修改值</li>
+<li>非常量引用不可指向常量对象</li>
 </ul>
-</li>
-</ul>
-<h2 id="如何诊断Hang"><a href="#如何诊断Hang" class="headerlink" title="如何诊断Hang"></a>如何诊断Hang</h2><ul>
-<li><p>使用Instruments，排查线下的问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = i; <span class="comment">// we can bind a const int&amp; to a plain int object const int &amp;r2 = 42; // ok: r1 is a reference to const</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r3 = r1 * <span class="number">2</span>; <span class="comment">// ok: r3 is a reference to const</span></span><br><span class="line"><span class="keyword">int</span> &amp;r4 = r * <span class="number">2</span>; <span class="comment">// error: r4 is a plain, non const reference</span></span><br></pre></td></tr></table></figure>
+
+<p>常量引用可以指向 <em>非常量对象</em>、<em>字面量</em>、<em>通用表达式</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ri = dval;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>Time Profile</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/12.png" alt="13:00"></p>
-</li>
+<li>常量引用会自动强制类型转化</li>
 </ul>
-</li>
-<li><p>使用MetricKit，检测线上的情况</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/13.png" alt="13:38"></p>
-</li>
-</ul>
-<h2 id="如果治理Hang？"><a href="#如果治理Hang？" class="headerlink" title="如果治理Hang？"></a>如果治理Hang？</h2><p>核心目标：减轻主线程的工作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> temp = dval; <span class="comment">// create a temporary const int from the double </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ri = temp; <span class="comment">// bind ri to that temporary</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常量指针（pointer-to-const）"><a href="#常量指针（pointer-to-const）" class="headerlink" title="常量指针（pointer to const）"></a>常量指针（pointer to const）</h2><blockquote>
+<p>指向常量的指针，指针地址可以修改，但地址存放的值不可以修改</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> pi = <span class="number">3.14</span>; <span class="comment">// pi is const; its value may not be changed</span></span><br><span class="line"><span class="keyword">double</span> *ptr = &amp;pi; <span class="comment">// error: ptr is a plain pointer</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *cptr = &amp;pi; <span class="comment">// ok: cptr may point to a double that is const </span></span><br><span class="line">*cptr = <span class="number">42</span>; <span class="comment">// error: cannot assign to *cptr</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>优化必需在主线程中执行的任务</p>
+<li>指向常量的指针地址存放的值不可修改</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>; <span class="comment">// dval is a double; its value can be changed</span></span><br><span class="line">cptr = &amp;dval; <span class="comment">// ok: but can&#x27;t change dval through cptr</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>使用缓存</p>
-<p>例如：由其他线程负责保存和更新缓存，主线程只负责读</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/14.png" alt="16:29"></p>
-</li>
-<li><p>使用Notification</p>
-<p>在主线程中发送通知，其他线程接受通知并异步处理数据</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/15.png" alt="17:47"></p>
-</li>
+<li>指向常量的指针可以指向非常量对象</li>
 </ul>
-</li>
-<li><p>移除主线程不必要的任务</p>
-<p>通常来说，为UI提供关键信息的任务，应该在主线程执行。此外，所有的View和View Controller必须在主线程创建、修改和销毁。</p>
-<p>而计算任务可以在其他线程执行，然后在主线程同步UI。一些不重要的维护、非时间敏感的任务应该在其他线程异步执行。</p>
-<p>例如：网络请求</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/16.png" alt="19:28"></p>
-<ul>
-<li><p>使用GCD异步处理任务</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/17.png" alt="20:21"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2016/411/">System Trace in depth</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10081/">What’s new in MetricKit</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose power and performance regressions in your app</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/417/">Improving battery life and performance</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2017/706/">Modernizing Grand Central Dispatch</a></p>
+<h2 id="指针常量（const-Pointers）"><a href="#指针常量（const-Pointers）" class="headerlink" title="指针常量（const Pointers）"></a>指针常量（const Pointers）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> errNumb = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> curErr = &amp;errNumb; <span class="comment">// curErr will always point to errNumb const </span></span><br><span class="line"><span class="keyword">double</span> pi = <span class="number">3.14159</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> *<span class="keyword">const</span> pip = &amp;pi; <span class="comment">// pip is a const pointer to a const object</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从右往左看：<code>curErr</code>被<code>const</code>修饰，不可修改</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*pip = <span class="number">2.72</span>; <span class="comment">// error: pip is a pointer to const</span></span><br><span class="line"><span class="comment">// if the object to which curErr points (i.e., errNumb) is nonzero </span></span><br><span class="line"><span class="keyword">if</span> (*curErr) &#123;</span><br><span class="line">*curErr = <span class="number">0</span>; <span class="comment">// ok: reset the value of the object to which curErr is bound &#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercises Section 2.4.2<br> Exercise 2.27:</strong> Which of the following initializations are legal? Explain why.</p>
+<p> <strong>(a)</strong> int i = -1, &amp;r = 0;<br> <strong>(b)</strong> int <em>const p2 = &i2;<br> <strong>(c)</strong> const int i = -1, &amp;r = 0;<br> <strong>(d)</strong> const int *const p3 = &i2;<br> *</em>(e)** const int *p1 = &i2;<br> <strong>(f)</strong> const int &amp;const r2;<br> <strong>(g)</strong> const int i2 = i, &amp;r = i;</p>
+<p>(a)❌ 引用必须指向一个对象</p>
+<p>(f)  ❌常量必须初始化</p>
+</blockquote>
+<blockquote>
+<p><strong>Exercise 2.28:</strong> Explain the following definitions. Identify any that are illegal. </p>
+<p><strong>(a)</strong> int i, *const cp;<br><strong>(b)</strong> int *p1, *const p2;</p>
+<p><strong>(c)</strong> const int ic, &amp;r = ic; </p>
+<p><strong>(d)</strong> const int *const p3;</p>
+<p><strong>(e)</strong> const int *p;</p>
+<p>原因：常量初始化没有赋值</p>
+</blockquote>
+<h2 id="常量表达式"><a href="#常量表达式" class="headerlink" title="常量表达式"></a>常量表达式</h2><blockquote>
+<p>常量表达式是指能够在编译时确定值</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> max_files = <span class="number">20</span>; <span class="comment">// max_files is a constant expression</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> limit = max_files + <span class="number">1</span>; <span class="comment">// limit is a constant expression </span></span><br><span class="line"><span class="keyword">int</span> staff_size = <span class="number">27</span>; <span class="comment">// staff_size is not a constant expression</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sz = get_size(); <span class="comment">// sz is not a constant expression</span></span><br></pre></td></tr></table></figure>
+
+<p>尽管sz是一个常量，但是它的值只有在运行时才能确定，因此sz不是一个常量表达式</p>
+<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> mf = <span class="number">20</span>; <span class="comment">// 20 is a constant expression </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> limit = mf + <span class="number">1</span>; <span class="comment">// mf + 1 is a constant expression </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> sz = size(); <span class="comment">// ok only if size is a constexpr function</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>constexpr避免了出现上述<code>sz</code>的情况</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = <span class="literal">nullptr</span>; <span class="comment">// p is a pointer to a const int </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *q = <span class="literal">nullptr</span>; <span class="comment">// q is a const pointer to int</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>constexpr是top-level const，即指针本身是常量（low-level const是指针指向常量对象）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *np = <span class="literal">nullptr</span>; <span class="comment">// np is a constant pointer to int that is null</span></span><br><span class="line"><span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> i = <span class="number">42</span>; <span class="comment">// type of i is const int</span></span><br><span class="line"><span class="comment">// i and j must be defined outside any function</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i; <span class="comment">// p is a constant pointer to the const int i </span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *p1 = &amp;j; <span class="comment">// p1 is a constant pointer to the int j</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
@@ -451,7 +369,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -465,7 +383,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">诊断APP的电源和性能回归</a>
+            <a href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">计算机组成原理学习笔记</a>
         </h2>
 
         <div class="post-meta">
@@ -475,18 +393,11 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-06-13 20:24:09" itemprop="dateCreated datePublished" datetime="2021-06-13T20:24:09+08:00">2021-06-13</time>
+              <time title="Created: 2021-06-01 14:56:34" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:34+08:00">2021-06-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:22:12" itemprop="dateModified" datetime="2021-06-14T23:22:12+08:00">2021-06-14</time>
-              </span>
 
           
-            <span id="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" class="post-meta-item leancloud_visitors" data-flag-title="诊断APP的电源和性能回归" title="Views">
+            <span id="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理学习笔记" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -501,8 +412,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -517,40 +428,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Instruments工具包含了非常丰富的数据，可以自由选择查看各机型、各指标类目的具体性能数据，同样也正因为其展示的数据太过庞杂，可能让开发者不清楚该从如何入手去进行优化。</p>
-<p>Xcode 13中Instruments中新增了Regressions模块，它会突出需要优先处理的性能问题，来简化工作流。</p>
-<blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose Power and Performance regressions in your app</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
-</blockquote>
-<h2 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h2><p>当一个APP相对与近期的版本，在性能或电量方面发生劣化，就称为回归（Regression）。</p>
-<p>比如在上线一个新版本后，APP启动时间增加。</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/1.png" alt="3:47"></p>
-<p>最新版本的启动时间，会与近期几个版本的启动时间的平均值进行比较，如果最新版本的启动时间更长，就会标记为回归。</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/2.png" alt="4:33"></p>
-<p>Regression左侧栏汇总了哪些指标被回归，以及相较上几个版本劣化了多少。</p>
-<ul>
-<li><p>Disk Writes</p>
-<p>磁盘和内存还有CPU一样都是受限制的资源，不检查磁盘写入会损耗和伤害底层设备，同时还可能造成Hang（用户操作超过250ms未响应记作一个Hang）和UI卡顿，甚至缩短电池寿命。</p>
-<ul>
-<li>Insights</li>
-</ul>
-<p>Organzier新增了一个叫做Insights区域的区域，来提供一些性能优化建议</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/4.png" alt="10:29"></p>
-</li>
-<li><p>File activities</p>
-<p>Instruments中的File activities也可以用来debug储存相关的问题。</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/3.png" alt="11:40"></p>
-</li>
-</ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10078/">Why is my app getting killed?</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10203/">Triage TestFlight crashes with Xcode Organizer</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Identify trends with the Power and Performace API</a></p>
-
+          
       
     </div>
 
@@ -569,7 +447,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -583,7 +461,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">检测和诊断内存问题</a>
+            <a href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">汇编语言学习笔记</a>
         </h2>
 
         <div class="post-meta">
@@ -593,18 +471,18 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-06-12 08:58:48" itemprop="dateCreated datePublished" datetime="2021-06-12T08:58:48+08:00">2021-06-12</time>
+              <time title="Created: 2021-06-01 14:56:22" itemprop="dateCreated datePublished" datetime="2021-06-01T14:56:22+08:00">2021-06-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:19:07" itemprop="dateModified" datetime="2021-06-14T23:19:07+08:00">2021-06-14</time>
+                <time title="Modified: 2021-06-02 10:05:21" itemprop="dateModified" datetime="2021-06-02T10:05:21+08:00">2021-06-02</time>
               </span>
 
           
-            <span id="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="检测和诊断内存问题" title="Views">
+            <span id="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -619,8 +497,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -635,216 +513,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是因为这一点。<img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png" alt="2:18"></p>
+          <h2 id="2-4-物理地址"><a href="#2-4-物理地址" class="headerlink" title="2.4 物理地址"></a>2.4 物理地址</h2><p>CPU访问内存单元时要给出内存单元的地址。我们将这个唯一的地址称为物理地址。</p>
+<h2 id="2-5-16位结构的CPU"><a href="#2-5-16位结构的CPU" class="headerlink" title="2.5 16位结构的CPU"></a>2.5 16位结构的CPU</h2><p>16位结构描述了一个CPU具有以下几个方面特征：</p>
+<ul>
+<li>运算器一次最多可以处理16位的数据</li>
+<li>寄存器的最大宽度为16位</li>
+<li>寄存器和运算器之间的通路是16位的</li>
+</ul>
+<h2 id="2-6-8086CPU给出物理地址的方法"><a href="#2-6-8086CPU给出物理地址的方法" class="headerlink" title="2.6 8086CPU给出物理地址的方法"></a>2.6 8086CPU给出物理地址的方法</h2><p>8086有20位地址总线，可传送20位地址，寻址能力为1M</p>
+<p>8086内部为16位结构，只能传送16位的地址，寻址能力却只有64k。</p>
 <blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10180/">Detect and diagnose memory issues</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
+<p>8086CPU采用一种在内部用两个16位地址合成的方法来形成一个20位的物理空间</p>
+</blockquote>
+<ol>
+<li>cpu中的相关部件提供两个16位的地址，一个称为断地址，一个称为偏移地址；</li>
+<li>段地址和偏移地址通过内部总线送入一个称为 <strong>地址加法器</strong> 的部件</li>
+<li>地址加法器将两个16位地址合并成一个20位的地址</li>
+</ol>
+<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_1.png" alt="截屏2021-06-02 上午12.02.00"></p>
+<h3 id="地址加法器的工作原理"><a href="#地址加法器的工作原理" class="headerlink" title="地址加法器的工作原理"></a>地址加法器的工作原理</h3><p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_2.png" alt="截屏2021-06-02 上午12.06.06"></p>
+<blockquote>
+<p>段地址 * 16，即数据左移4位</p>
 </blockquote>
 <ul>
-<li><p>Faster application activations</p>
-<p>减少APP的内存占用，可以提高APP在后台存活的机会，从而让APP更快的被激活。</p>
-<blockquote>
-<p>设备的内存空间是有限的，监控APP的内存使用情况，能够防止系统为了回收内存而主动终止APP。</p>
-<p>这样即使APP在后台运行，也能够保存当前用户的使用状态，从而避免再次从内存加载导致的耗时。</p>
-</blockquote>
-</li>
-<li><p>Responsive experience</p>
-<p>更好的响应速度</p>
-<blockquote>
-<p>策略性的将APP的内容加载到内存里，能够避免在用户使用APP时，因系统回收内存增加的等待耗时。</p>
-</blockquote>
-</li>
-<li><p>Complex features</p>
-<p>让用户体验更丰富的功能</p>
-<blockquote>
-<p>像加载视频、展示动画，这些复杂的功能往往需要占用更多的内存。因此有策略的使用内存，可以避免在用户使用APP的复杂功能时，被系统因内存占用问题而终止。</p>
-</blockquote>
-</li>
-<li><p>Wider device compatibility</p>
-<p>更好的设备兼容性</p>
-<blockquote>
-<p>让内存空间不太充足的老设备也能更好的使用APP的功能</p>
-</blockquote>
-</li>
+<li>一个数据的十六进制形式左移1位，相当于乘以16；</li>
+<li>一个数据的十进制形式左移1位，相当于乘以10；</li>
+<li>一个数据的X进制形式左移1位，相当于乘以X；</li>
 </ul>
-<h2 id="内存占用结构"><a href="#内存占用结构" class="headerlink" title="内存占用结构"></a>内存占用结构</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/2.png" alt="2:26"></p>
+<h2 id="2-7-段地址-✖️16-偏移地址-物理地址的本质含义"><a href="#2-7-段地址-✖️16-偏移地址-物理地址的本质含义" class="headerlink" title="2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义"></a>2.7 段地址 ✖️16 + 偏移地址 = 物理地址的本质含义</h2><ul>
+<li><p>第一个比喻：</p>
+<p><img src="/2021/06/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.6_3.png" alt="截屏2021-06-02 上午12.09.59"></p>
 <ul>
-<li><p>Clean Memory</p>
-</li>
-<li><p>Dirty Memory</p>
-<blockquote>
-<p>Clean Memory被分配，并写入内容后成为”脏内存“，脏内存包括：</p>
-</blockquote>
-<ul>
-<li>所有的堆分配（malloc）</li>
-<li>解码图像缓冲区</li>
-<li>Frameworks</li>
+<li>从学校走2826m到图书馆。这2826可以认为是图书馆的物理地址。</li>
+<li>可以分解为从学校走2000m到体育馆，从体育馆再走826m到图书馆<ul>
+<li>第一个距离2000m是相当于起点的基础地址</li>
+<li>第二个距离826m是相对于基础地址的偏移地址</li>
 </ul>
 </li>
-<li><p>Compressed Memory</p>
-<blockquote>
-<p>压缩内存特指脏页（Dirty Pages）中暂未被访问的部分（Unaccessed pages），会在访问后解压，成为脏内存。</p>
-<p>（下文会详细介绍脏页（Dirty Pages）的概念）</p>
-</blockquote>
-<p>注：iOS中没有内存交换（Memory Swap）的概念，你可能在使用Instrument工具时，见到过<code>Swapped</code>字段，实际上所指的是<code>Compressed Memory</code></p>
+</ul>
 </li>
+<li><p>第二个比喻：</p>
+<p>用纸条通讯，询问图书馆的地址（目前只有两张可以容纳3位数据的纸条）</p>
+<ul>
+<li><p>第一张：200</p>
+</li>
+<li><p>第二张：826</p>
+<p>规则：第一张 ✖️10 + 第二张，即可得到地址。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-8-段的概念"><a href="#2-8-段的概念" class="headerlink" title="2.8 段的概念"></a>2.8 段的概念</h2><p>错误认识：</p>
+<p>内存被划分成了一个一个的段，每一个段有一个段地址</p>
+<p>其实：</p>
+<p>内存并没有分段，段的划分来自于CPU，由于8086CPU用“段地址 ✖️ 16 + 偏移地址 = 物理地址”的方式给出内存单元的物理地址，使得我们可以用分段的方式来管理内存。</p>
+<ul>
+<li>段地址 ✖️ 16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；</li>
+<li>偏移地址为16，16位的地址的寻址能力为64k，所以一个段的长度最大为64k。</li>
 </ul>
 <blockquote>
-<p>内存占用 = Dirty Memory + Compressed Memory</p>
+<p>如果给定一个段地址，仅通过变化偏移地址来进行寻址，最多可以定位多少内存单元？</p>
+<p>结论：偏移地址16位，变化范围为0~FFFFH，仅用偏移地址来寻址最多可寻64k个内存单元。</p>
+<p>比如：给定段地址1000H，用偏移地址寻址，CPU的寻址范围为：10000H ~ 1FFFFH。</p>
 </blockquote>
-<h2 id="内存画像工具"><a href="#内存画像工具" class="headerlink" title="内存画像工具"></a>内存画像工具</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/3.png" alt="3:52"></p>
-<ul>
-<li><p>XCTest</p>
+<p>数据在21F60H内存中。对于8086PC机的两种描述：</p>
+<ol>
+<li>数据存在内存2000：1F60单元中；</li>
+<li>数据存在内存的2000段中的1F60H单元中。</li>
+</ol>
 <blockquote>
-<p>通过单元测试和U测试中的XCTest来检测开发环境的性能指标</p>
+<p>注：段是可以人为定义的，可根据需要，将地址连续、起始地址为16的倍数的一组内存单元定义为一个段。</p>
 </blockquote>
-<ul>
-<li><p>XCTest可以测量以下性能指标：</p>
-<ul>
-<li>内存使用情况</li>
-<li>CPU使用</li>
-<li>磁盘写入情况</li>
-<li>卡顿率</li>
-<li>执行时间（完成某一任务所花的全部时间）</li>
-<li>APP启动时间</li>
-</ul>
-</li>
-<li><p>通过XCTest检测内存使用情况</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSaveMeal</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">let</span> app = <span class="type">XCUIApplication</span>()</span><br><span class="line">	<span class="keyword">let</span> options = <span class="type">XCTMeasuireOptions</span>()</span><br><span class="line">	options.invocationOptions = [.manullyStart]</span><br><span class="line">	measure(metrics: [<span class="type">XCTMemoryMetric</span>(application: app)],</span><br><span class="line">					options:options) &#123;</span><br><span class="line">		app.launch()</span><br><span class="line">		startMeasureing()</span><br><span class="line">		app.cells.firstMatch.buttons[<span class="string">&quot;Save meal&quot;</span>].firstMatch.tap()</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">let</span> savedButton = app.cells.firstMatch.buttons[<span class="string">&quot;Saved&quot;</span>].firstMatch</span><br><span class="line">		<span class="type">XCTAssertTure</span>(savedButton.waitForExistence(timeout: <span class="number">30</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>XCTest在Xcode 13中新增的两项收集性能情况的诊断产物</p>
-<p>开启：<code>enablePerformanceTestsDiagnostics YES</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild test</span><br><span class="line">-project MealPannerApp.xcodeproj</span><br><span class="line">-scheme PerformanceTests</span><br><span class="line">-destination platform&#x3D;iOS,name&#x3D;&quot;iPhone&quot;</span><br><span class="line">-enablePerformanceTestsDiagnostics YES</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>Ktrace files</p>
-<p>Ktrace file能够打开，并展示以下分析报告：</p>
-<ul>
-<li>当卡顿发生时的渲染通道的状态</li>
-<li>因主线程阻塞，导致的Hang（APP无法响应用户的输入或者行为超过250ms，即记作一个hang）</li>
-</ul>
-</li>
-<li><p>Memory graphs</p>
-<blockquote>
-<p>Memory graph展示APP进程的地址空间的快照</p>
-</blockquote>
-<p>我们可以生成任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照，从而查看这一阶段内存占用的变化。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/4.png" alt="7:19"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>MetricKit &amp; Xcode Organizer</p>
-<p>检测线上环境的内存指标</p>
-</li>
-</ul>
-<h2 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h2><ul>
-<li><p>内存泄漏（Leaks）</p>
-<p>最常见内存泄漏的原因的是循环引用</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/5.png" alt="11:18"></p>
-<ul>
-<li><p>通过命令行查看memgraph文件</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/6.png" alt="12:28"></p>
-</li>
-</ul>
-</li>
-<li><p>堆大小问题（Heap size issues）</p>
-<blockquote>
-<p>堆是进程地址空间中储存动态分配的对象的段（section），有策略性的加载和释放内存，可以避免内存峰值过高引发OOM。</p>
-</blockquote>
-<ul>
-<li>堆分配回归（Heap allocation regressions）</li>
-<li>碎片化（Fragmentation）</li>
-</ul>
-</li>
-</ul>
-<h3 id="堆分配回归"><a href="#堆分配回归" class="headerlink" title="堆分配回归"></a>堆分配回归</h3><ul>
-<li>使用<code>vmmap -summary</code>对memgraph文件进行分析</li>
-</ul>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/7.png" alt="15:31"></p>
-<ul>
-<li><p>我们主要关心<code>Dirty Size</code>和<code>Swapped Size</code>两列数据</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/8.png" alt="16:09"></p>
-</li>
-</ul>
-<ul>
-<li><p>对任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照进行对比</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/9.png" alt="16:42"></p>
-</li>
-<li><p>可以在下方看到按类聚合的，各类对象占用内存的大小</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/10.png" alt="17:15"></p>
-<p>从图中可以看到，<code>non-object</code>类型的数据，占用内存约13M。在Swift中，<code>non-object</code>通常代表原始分配字节（raw malloced bytes）</p>
-</li>
-<li><p>打印memgraph文件中，类型为<code>non-object</code>且占用内存超过500k的对象</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/11.png" alt="17:36"></p>
-</li>
-<li><p>打印对象的引用树</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/12.png" alt="18:00"></p>
-</li>
-<li><p>可以通过<code>malloc_history -fullStacks</code>打印对象的分配调用栈</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/13.png" alt="19:42"></p>
-</li>
-<li><p>当不确定是哪个对象有问题时，可以通过<code>leaks --referenceTree</code>，自顶向下打印进程的所有内存中最可疑的对象</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/14.png" alt="18:40"></p>
-<ul>
-<li>可以通过<code>--groupByType</code>参数，按type聚合简化打印结果。</li>
-</ul>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/15.png" alt="19:08"></p>
-</li>
-</ul>
-<h3 id="碎片化"><a href="#碎片化" class="headerlink" title="碎片化"></a>碎片化</h3><blockquote>
-<p>先介绍两个概念：页和”脏页“</p>
-<ul>
-<li>页（Pages）：是最小的独立的内存单元</li>
-<li>一旦页中写入任何数据，都会使整页变成”脏页“</li>
-</ul>
-</blockquote>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/16.png" alt="21:37"></p>
-<p>当内存准备写入新的数据时，系统会优先尝试使用脏页中的空闲内存，而当即将分配的内存过大时，即使空闲内存的总大小足够，但其并不是一段连续的内存空间，仍会开辟一个新的脏页去写入这些数据。</p>
-<p>这些无法被使用的空闲内存就是”碎片化内存“</p>
-<p>再例如以下这种情况：我们分配的对象总共使用了4个页，但每个页的占用空间只占50%。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/25.png" alt="23:19"></p>
-<p>当我们释放这些对象后，这些4个脏页的内存空间仍有50%的碎片化内存。</p>
-<p>最理想化的状态应该将所有的分配的对象放在两页，如下图：</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/18.png" alt="23:42"></p>
-<p>这样一旦释放这些对象时，仅会留有两个脏页，并且不存在碎片化内存。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/19.png" alt="23:52"></p>
-<ul>
-<li><p>我们的目标：</p>
-<ul>
-<li>让分配的对象尽可能连续且拥有同样的生命周期</li>
-<li>碎片化率保持在25%以下</li>
-<li>使用自动释放池</li>
-<li>特别注意长时间运行的进程</li>
-</ul>
-</li>
-<li><p><code>vmman -summary xx.memgraph</code>查看碎片化内存情况</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/20.png" alt="25:00"></p>
-<ul>
-<li><p>DefaultMallocZone</p>
-<p>平时开发者只需要关注这部分的内存空间，因为这是我们进行堆分配默认结束的地方</p>
-</li>
-<li><p>MallocStackLoggingLiteZone</p>
-<p>这个空间是所有堆分配结束的地方</p>
-</li>
-</ul>
-</li>
-<li><p>使用Instruments工具中的Allocations track查看内存情况</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/21.png" alt="26:41"></p>
-<p>其中的Destroyed和Persisted分别对应上面所描述的内存释放后的空闲内存（free memory）和仍未释放的内存（remaining objects）</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/22.png" alt="26:42"></p>
-</li>
-</ul>
-<p>回顾下我们的总体排查流程：</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/23.png" alt="27:51"> </p>
-<h2 id="更多WWDC有关性能的Session"><a href="#更多WWDC有关性能的Session" class="headerlink" title="更多WWDC有关性能的Session"></a>更多WWDC有关性能的Session</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2018/416/">iOS memory deep dive WWDC18</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/411/">Getting started with Instruments WWDC19</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258/">Understand and eliminate hangs from your apps WWDC21</a></p>
 
       
     </div>
@@ -864,7 +603,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -878,741 +617,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">APP终极性能生存指南</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-09 22:24:39" itemprop="dateCreated datePublished" datetime="2021-06-09T22:24:39+08:00">2021-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-17 16:11:09" itemprop="dateModified" datetime="2021-06-17T16:11:09+08:00">2021-06-17</time>
-              </span>
-
-          
-            <span id="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="APP终极性能生存指南" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>性能是客户端永远绕不开的话题，一起来康康今年的WWDC提供了哪些有关性能提升的建议吧~</p>
-<blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10181/">Ultimate application performance survival guide</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
-</blockquote>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/24.png" alt="1:38"></p>
-<ul>
-<li><p>使用的五种工具</p>
-<ul>
-<li>Xcode Organizer</li>
-<li>MetricKit</li>
-<li>Instruments</li>
-<li>XCTest</li>
-<li>App Store Connect API</li>
-</ul>
-</li>
-<li><p>参考的八个性能指标</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/2.png" alt="1:58"></p>
-<ul>
-<li><p>电量</p>
-</li>
-<li><p>启动时间</p>
-</li>
-<li><p>超时响应率（Hang rate）</p>
-<blockquote>
-<p>APP无法响应用户的输入或者行为超过250ms，即记作一个hang</p>
-</blockquote>
-</li>
-<li><p>内存</p>
-</li>
-<li><p>磁盘写入</p>
-</li>
-<li><p>滚动卡顿</p>
-</li>
-<li><p>APP终止</p>
-</li>
-<li><p>MXSignposts</p>
-</li>
-</ul>
-</li>
-<li><p>电量（battery usage）</p>
-<ul>
-<li><p>优化电池使用需要关注的几点：</p>
-<ul>
-<li>CPU</li>
-<li>网络</li>
-<li>定位</li>
-<li>音频</li>
-<li>蓝牙</li>
-<li>GPU</li>
-</ul>
-<blockquote>
-<p>其中CPU、网络、定位是电量消耗大户</p>
-</blockquote>
-</li>
-<li><p>使用Xcode工具查看Debug期间的电量损耗情况</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/4.png" alt="4:10"></p>
-<ul>
-<li>查看CPU超过20%的阶段（CPU High Utilization）</li>
-<li>查看CPU从闲置被唤醒的阶段（CPU Wake Overhead）</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/5.png" alt="4:41"></p>
-</li>
-<li><p>使用Instrument中的Time Profile工具查看该阶段更详细的信息</p>
-<p>（比如使用Location Energy Model确保应用如预期中正确地使用定位功能）</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/6.png" alt="这张是我本地截屏"></p>
-</li>
-<li><p>使用MetricKit收集用户的性能数据</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/7.png" alt="6:41"></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建遵守`MXMetricManagerSubscriber`的协议的类AppMetrics</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">AppMetrics</span>: <span class="title">MXMetricManagerSubscriber</span> </span>&#123;</span><br><span class="line">	<span class="keyword">init</span>() &#123;</span><br><span class="line">  		<span class="comment">// 初始化时将AppMetrics加入到`MXMetricManager`单例中</span></span><br><span class="line">  		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">  		shared.add(<span class="keyword">self</span>)</span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">deinit</span> &#123;</span><br><span class="line">  		<span class="comment">// 销毁时进行移除</span></span><br><span class="line">  		<span class="keyword">let</span> shared = <span class="type">MXMetricManager</span>.shared</span><br><span class="line">  		shared.remove(<span class="keyword">self</span>)</span><br><span class="line">  	&#125;</span><br><span class="line">  	</span><br><span class="line">    <span class="comment">// 处理每日的metrics</span></span><br><span class="line">  	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXMetricPayload])</span></span> &#123;</span><br><span class="line">  	</span><br><span class="line">  	&#125;</span><br><span class="line">  	</span><br><span class="line">    <span class="comment">// 处理diagnostics</span></span><br><span class="line">  	<span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(<span class="number">_</span> payloads: [MXDiagnositcPayload])</span></span> &#123;</span><br><span class="line">  	</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>使用Xcode Organizer查看线上性能数据</p>
-<blockquote>
-<p>Xcode Organizer对MetrixKit收集到的数据进行了聚合，忽略了单一用户的详细数据，展现的是整体的趋势；</p>
-<p>而使用MetricKit可以更具针对性的对某一用户在一段时间内的性能表现进行分析。</p>
-</blockquote>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/8.png" alt="6:57"></p>
-<ul>
-<li>查看用户的电量使用情况</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/9.png" alt="7:03"></p>
-<ul>
-<li><p>Regressions</p>
-<blockquote>
-<p>Regressions是Xcode 13新增的模块，它将各个版本的性能指标中发生劣化的情况单独拎出来展示，让开发者更清晰的看到哪些性能指标亟待优化。</p>
-</blockquote>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/10.png" alt="7:22"></p>
-</li>
-<li><p>查看问题发生时对应的代码</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/11.png" alt="7:58"></p>
-</li>
-</ul>
-</li>
-<li><p>超时响应率和滚动卡顿（Hang rate &amp; Scrolling）</p>
-<ul>
-<li><p>超时响应</p>
-<p>长时间无法响应是导致用户强退应用的重要原因</p>
-</li>
-<li><p>滚动卡顿</p>
-<p>当在下一次屏幕刷新时，新的内容还未ready就会出现卡顿</p>
-</li>
-</ul>
-<blockquote>
-<p>Hang rate &amp; Scrollings是表明APP没有及时响应的两个指标,一旦发生会严重影响用户体验，甚至让用户在使用应用时产生挫败感，从而降低用户的使用APP的意愿。</p>
-</blockquote>
-<ul>
-<li><p>使用Xcode Organizer查看线上的卡顿情况</p>
-<ul>
-<li>Hang rate</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/12.png" alt="9:40"></p>
-<ul>
-<li>Scrolling</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/13.png" alt="9:42"></p>
-</li>
-<li><p>使用Instrument进行分析</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/14.png" alt="10:05"></p>
-<ul>
-<li><p>Thread State Trace</p>
-<p>可以查看线程被阻塞的详细情况</p>
-</li>
-<li><p>System Call Trace</p>
-<p>可以查看系统函数调用的时机和时长</p>
-</li>
-</ul>
-</li>
-<li><p>使用XCTest进行性能测试</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testScrollingAnimationPerformance</span><span class="params">()</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">	app.launch()</span><br><span class="line">	app.staticTexts[<span class="string">&quot;Meal Planner&quot;</span>].tap()</span><br><span class="line">	<span class="keyword">let</span> foodCollection = app.collectionViews.firstMatch</span><br><span class="line">	<span class="comment">// `measure`函数默认重复5次，可以通过option设置手动停止</span></span><br><span class="line">	<span class="keyword">let</span> measureOptions = <span class="type">XCTMeasureOptions</span>()</span><br><span class="line">	measureOptions.invocationOptions = [.manuallyStop]</span><br><span class="line">	<span class="comment">// 开始measure</span></span><br><span class="line">	measure(metrics: [<span class="type">XCTOSSignpostMetric</span>.scrollDecelerationMetric], </span><br><span class="line">	option: measureOptions) &#123;</span><br><span class="line">    <span class="comment">// 滑动</span></span><br><span class="line">		foodCollection.swipeUP(velocity: .fast)</span><br><span class="line">    <span class="comment">// 停止measure</span></span><br><span class="line">		stopMeasuring()</span><br><span class="line">    <span class="comment">// 重置状态</span></span><br><span class="line">		foodCollection.swipeDown(velocity: .fast)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用MetricKit收集线上数据</p>
-<blockquote>
-<p>在iOS 14中，MetricKit会收集用户使用过程中发生的问题，然后每24小时集中上报一次。</p>
-<p>在iOS 15和MacOS 12中，MetricKit仍是每天上报一次，但会在<code>addSubscriber</code>后，并且立刻进行回调</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>iOS 15中MetricKit新增动画性能检测的API，能够记录动画期间详细的性能数据和卡顿情况</p>
-  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAnimating</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 标记动画开始执行</span></span><br><span class="line"> mxSignpostAnimaitionIntervalBegin(</span><br><span class="line"> 	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation&quot;</span>_telemetry),</span><br><span class="line"> 	name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationDidComplete</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 标记动画结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end, log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;animation_telemetry&quot;</span>), name: <span class="string">&quot;custom_animation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 注：MXSignpost是MetricKit中封装的API，可以用来监控关键代码的运行情况</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/15.png" alt="11:20"></p>
-</li>
-<li><p>磁盘写入</p>
-<ul>
-<li><p>使用Instrument中的File Activity查看磁盘写入情况</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/16.png" alt="13:22"></p>
-<ul>
-<li><p>优化建议：</p>
-<ul>
-<li><p>对于频繁写入的case，推荐使用Core Data</p>
-</li>
-<li><p>避免快速创建和删除文件</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>使用XCTest进行性能测试</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSaveMeal</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">let</span> app = <span class="type">XCUIApplication</span>()</span><br><span class="line">	<span class="keyword">let</span> options = <span class="type">XCTMeasureOptions</span>()</span><br><span class="line">	options.invocationOptions = [.manullyStart]</span><br><span class="line">	<span class="comment">// 检测下面代码运行时的磁盘写入情况</span></span><br><span class="line">	measure(metrics: [<span class="type">XCTStorageMetric</span>(application: app)], options: options) &#123;</span><br><span class="line">	app.launch()</span><br><span class="line">	startMeasuring()</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">let</span> firstCell = app.cells.firstMatch</span><br><span class="line">	firstCell.buttons[<span class="string">&quot;Save meal&quot;</span>].firstMatch.tap()</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">let</span> savedButton = firstCell.buttons[<span class="string">&quot;Saved&quot;</span>].firshMatch</span><br><span class="line">	<span class="type">XCTAssertTure</span>(savedButton.waitForExistence(timeout: <span class="number">2</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用Xcode Organizer查看线上磁盘写入情况</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/17.png" alt="14:35"></p>
-<ul>
-<li>查看在Disk Writes报告中可以查看24小时内写入量超过1GB的case</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/18.png" alt="15:01"></p>
-<ul>
-<li>在Xcode 13中，还可以得到一些优化建议</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/19.png" alt="15:22"></p>
-</li>
-<li><p>使用MetricKit收集用户的磁盘写入情况</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标记开始磁盘写入</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">syncAllContentsToDB</span><span class="params">()</span></span> &#123;</span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.begin, </span><br><span class="line">	log:<span class="type">MXMetricManager</span>.makeLogHandle(categroy: <span class="string">&quot;diskWrite_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_diskWrites&quot;</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// sync contents to database</span></span><br><span class="line">	</span><br><span class="line">  <span class="comment">// 标记磁盘写入结束</span></span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end,</span><br><span class="line">	log:<span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;diskWrite_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_diskWrites&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>启动时间</p>
-<ul>
-<li><p>使用Xcode Organizer查看线上启动数据</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/20.png" alt="18:15"></p>
-<ul>
-<li>查看因启动超时导致的程序终止</li>
-</ul>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/21.png" alt="18:47"></p>
-</li>
-<li><p>使用Instrument中的App Launch工具进一步分析</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/22.png" alt="19:13"></p>
-</li>
-</ul>
-</li>
-<li><p>Memory</p>
-<ul>
-<li><p>使用Xcode Organizer查看线上内存使用情况</p>
-<p><img src="/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/23.png" alt="20:21"></p>
-</li>
-<li><p>使用Instrument中的Leak、Allocations和VM Tracker三个模板</p>
-<ul>
-<li>Leak检测内存泄漏</li>
-<li>Allocations分析内存的生命周期</li>
-<li>VM Tracker展示虚拟内存空间的使用情况</li>
-</ul>
-</li>
-<li><p>使用MetricKit收集线上数据</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">saveAppAssets</span><span class="params">()</span></span> &#123;</span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.begin, </span><br><span class="line">	log: <span class="type">MXMetricManager</span>.makeLogHandle(category: <span class="string">&quot;memory_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_memory&quot;</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// save app metadata</span></span><br><span class="line">	</span><br><span class="line">	mxSignpost(<span class="type">OSSignpostType</span>.end,</span><br><span class="line">	log: <span class="type">MXMetricManger</span>.makeLogHandle(category: <span class="string">&quot;memory_telemetry&quot;</span>),</span><br><span class="line">	name: <span class="string">&quot;custom_memory&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<p>更多有关电量优化的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/417/">Improving battery life and performance WWDC19</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10212/">Analyze HTTP traffic in Instruments WWDC 21</a></p>
-<p>更多Hang优化的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258/">Understand and Eliminate Hangs from you app WWDC21</a></p>
-<p>更多滚动优化的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/tech-talks/10855/">Explore UI animation hitches and the render loop WWDC20</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10077/">Eliminate animation hitches with XCTest WWDC20</a></p>
-<p>更多磁盘写入优化的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose power and performance regressions in your app WWDC21</a></p>
-<p>更多启动优化的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10078/">Why is my app getting killed WWDC20</a></p>
-<p>更多内存优化的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10180/">Detect and diagnose memory issues</a></p>
-<p>更多关于性能工具的Session：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10076/">Diagnose performance issues with Xcode Organizer WWDC20</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10081/">What’s new in MetricKit WWDC20</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10057/">Identify trends with Power and Performance API WWDC20</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/411/">Getting started with Instruments WWDC19</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/08/What-s-new-in-WWDC21/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/08/What-s-new-in-WWDC21/" class="post-title-link" itemprop="url">一文带你读完WWDC21核心（新）技术点</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-08 00:49:29" itemprop="dateCreated datePublished" datetime="2021-06-08T00:49:29+08:00">2021-06-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:17:17" itemprop="dateModified" datetime="2021-06-14T23:17:17+08:00">2021-06-14</time>
-              </span>
-
-          
-            <span id="/2021/06/08/What-s-new-in-WWDC21/" class="post-meta-item leancloud_visitors" data-flag-title="一文带你读完WWDC21核心（新）技术点" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/08/What-s-new-in-WWDC21/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/08/What-s-new-in-WWDC21/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一年一度的WWDC又来了，一起来看看今年又有哪些值得关注的技术点吧~</p>
-<blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/102/">Platforms State of the Union</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
-</blockquote>
-<h2 id="Xcode-Cloud"><a href="#Xcode-Cloud" class="headerlink" title="Xcode Cloud"></a>Xcode Cloud</h2><blockquote>
-<p>试想一个一站式的iOS开发体验，在Xcode中提交代码后，自动在云端编译并且测试，接下来开发者只需根据Xcode上显示的测试结果改进代码，当一切准备就绪，就会自动将应用分发到各平台的TestFlight中…，为了实现这样流畅的开发体验，Apple将开发流程中所涉及到的所有环节，都集成到了Xcode中。</p>
-<p><strong>温馨提示：Xcode Clould目前限时免费，大家可以在<a target="_blank" rel="noopener" href="https://developer.apple.com/xcode-cloud/">官网</a>申请Beta版权限</strong></p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/1.png" alt="截屏2021-06-08 下午9.53.50"></p>
-</blockquote>
-<ul>
-<li><p>原有的开发流程</p>
-<ul>
-<li><p>各个环节</p>
-<p>Coding -&gt; 测试 -&gt; 整合 -&gt; 分发 -&gt; 改进</p>
-<blockquote>
-<p>这里的整合指的是功能分支合到主干分支的过程。</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/2.png" alt="截屏2021-06-09 上午7.25.41"></p>
-</li>
-<li><p>痛点</p>
-<p>每个环节依赖不同的工具，而环境切换的过程往往会中断我们编写代码的思路</p>
-</li>
-</ul>
-</li>
-<li><p>Xcode Cloud</p>
-<blockquote>
-<p>一个负责持续集成和分发服务的工具</p>
-</blockquote>
-<ul>
-<li><p>优势：</p>
-<ul>
-<li>内置在Xcode，无需切换工作上下文；</li>
-<li>提交Commit后，自动在云端编译；</li>
-<li>灵活且可扩展，支持集成其他CI系统；</li>
-<li>数据安全，保证源码、密钥安全。</li>
-</ul>
-</li>
-<li><p>工作流：</p>
-<ul>
-<li><p>选中项目</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/3.png" alt="截屏2021-06-09 上午7.39.33"></p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/4.png" alt="截屏2021-06-09 上午7.39.01"></p>
-</li>
-<li><p>确认工作流</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/5.png" alt="截屏2021-06-09 上午7.40.22"></p>
-</li>
-<li><p>授权访问源代码</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/6.png" alt="截屏2021-06-09 上午7.42.25"></p>
-</li>
-<li><p>连接App Store Connect</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/7.png" alt="截屏2021-06-09 上午7.41.50"></p>
-</li>
-<li><p>查看结果</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/8.png" alt="截屏2021-06-09 上午7.43.28"></p>
-<ul>
-<li><p>左侧导航器会根据项目的分支名进行分组</p>
-</li>
-<li><p>右侧详情页会显示所有动作的状态</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/9.png" alt="截屏2021-06-09 上午7.44.35"></p>
-</li>
-</ul>
-</li>
-<li><p>增加新的工作流</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/10.png" alt="截屏2021-06-09 上午7.45.54"></p>
-<ul>
-<li><p>设置触发编译的条件</p>
-<ul>
-<li><p>方案一：分支上每次代码变更时触发</p>
-</li>
-<li><p>方案二：Pull Request分支上每次代码变更时触发</p>
-</li>
-<li><p>方案三：对标签（Tag）进行修改时触发</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/11.png" alt="截屏2021-06-09 上午7.52.36"></p>
-</li>
-</ul>
-</li>
-<li><p>选择Xcode的版本</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/12.png" alt="截屏2021-06-09 上午7.52.36"></p>
-</li>
-<li><p>添加Action</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/13.png" alt="截屏2021-06-09 上午7.54.36"></p>
-<ul>
-<li><p>添加UI Test</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/14.png" alt="截屏2021-06-09 上午7.55.14"></p>
-</li>
-</ul>
-</li>
-<li><p>查看Action运行结果</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/15.png" alt="截屏2021-06-09 上午7.57.03"></p>
-<ul>
-<li><p>可以使用Xcode Cloud通过UI Test过程中的截屏查看运行过程</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/16.png" alt="截屏2021-06-09 上午7.57.37"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>分支整合</p>
-<ul>
-<li><p>在Xcode中管理Pull Request</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/17.png" alt="截屏2021-06-09 上午7.58.36"></p>
-</li>
-<li><p>在当前编译的条件下，Xcode Cloud会自动构建和测试所有Pull Merge分支上的新Commit</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/32.png" alt="截屏2021-06-09 上午8.00.04"></p>
-</li>
-<li><p>还可以快速定位至评论中所涉及到的代码位置</p>
-<blockquote>
-<p>点击左侧栏中带有信息标识的类名，点击可以直接定位到对应的位置，并查看评论</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/18.png" alt="截屏2021-06-09 上午8.01.48"></p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/19.png" alt="截屏2021-06-09 上午8.03.02"></p>
-</li>
-</ul>
-</li>
-<li><p>分发</p>
-<ul>
-<li><p>云端自动签名</p>
-<blockquote>
-<p>开发者无需关心描述文件和密钥等事项</p>
-</blockquote>
-</li>
-<li><p>支持多平台 TestFlight自动分发（包括Mac版）</p>
-</li>
-</ul>
-</li>
-<li><p>改进</p>
-<ul>
-<li><p>在测试过程中，Xcode Organizer可以在几分钟内收到TestFlight用户的反馈信息，开发者可以根据用户描述的信息对代码进行改进</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/20.png" alt="截屏2021-06-09 上午8.04.24"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h2><h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><ul>
-<li><p>理解asymc/await</p>
-<blockquote>
-<p>await表示当前调用者正在等待异步函数的结果</p>
-</blockquote>
-<p>比如：完成一次舞蹈演出需要三个 <strong>异步步骤</strong>：演员热身、工作人员从仓库找出道具、搭建舞台，完成这些演员才可以登台演出。</p>
-<ul>
-<li><p>原有嵌套式写法（伪代码）：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepareForShow</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 演员热身</span></span><br><span class="line">	danceCompany.warmUp &#123;</span><br><span class="line">    <span class="comment">// 工作人员从仓库找出道具</span></span><br><span class="line">		 <span class="keyword">self</span>.crew.fetchStageScenery &#123;</span><br><span class="line">        <span class="comment">// 搭建舞台</span></span><br><span class="line">		 		<span class="keyword">self</span>.setStage &#123;</span><br><span class="line">          <span class="comment">// 登场演出</span></span><br><span class="line">		 		  dancers.moveToPosition</span><br><span class="line">		 		&#125;</span><br><span class="line">		 &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>使用async/await的直线排列式写法：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepareForShow</span><span class="params">()</span></span> async <span class="keyword">throws</span> -&gt; <span class="type">Scene</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> dancers = <span class="keyword">try</span> await danceCompany.warmUP(duration: .minutes(<span class="number">45</span>))</span><br><span class="line">	<span class="keyword">let</span> scenery = await crew.fetchStageScenery()</span><br><span class="line">	<span class="keyword">let</span> openingScene = setStage(with: scenery)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">try</span> await dancers.moveToPosition(<span class="keyword">in</span>: openingScence)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>结构化并发（Structured concurrency）</p>
-<p>再比如：完成一次舞蹈演出需要三个 <strong>异步步骤</strong>：演员热身、工作人员从仓库找出道具、搭建舞台，完成这些演员才可以登台演出。其中<strong>演员热身</strong>和<strong>工作人员从仓库找出道具、搭建舞台</strong>可以同时进行</p>
-<ul>
-<li><p>创建并发子任务</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepareForShow</span><span class="params">()</span></span> async <span class="keyword">throws</span> -&gt; <span class="type">Scene</span> &#123;</span><br><span class="line">	async <span class="keyword">let</span> dancers = <span class="keyword">try</span> await danceCompany.warmUP(duration: .minutes(<span class="number">45</span>))</span><br><span class="line">	async <span class="keyword">let</span> scenery = await crew.fetchStageScenery()</span><br><span class="line">	<span class="keyword">let</span> openingScene = setStage(with: await scenery)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">try</span> await dancers.moveToPosition(<span class="keyword">in</span>: openingScence)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>actors</p>
-<ul>
-<li><p>actor</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">actor <span class="type">StageManager</span> &#123;</span><br><span class="line">    	<span class="keyword">var</span> stage: <span class="type">Stage</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="function"><span class="keyword">func</span> <span class="title">setStage</span><span class="params">(with scenery: Scenery)</span></span> -&gt; <span class="type">Scene</span> &#123;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>以前通过串行dispatch queue进行属性互斥访问的方式，由于需要管理很多冗余代码，很容易引入额外的竞争机制，从而出现问题， 而将actor作为一级构造嵌入到Swift里，可以底层设计层面避免了这种情况的发生。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>MainActor</p>
-<blockquote>
-<p>函数会同步到主线程执行</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@MainActor</span><br><span class="line">func display(scene: Scene)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>小结：async/await让异步代码写的更自然，结构化并发让代码更容易理解，actors用来构建安全的共享状态</p>
-<h3 id="Swift-Playgrounds"><a href="#Swift-Playgrounds" class="headerlink" title="Swift Playgrounds"></a>Swift Playgrounds</h3><blockquote>
-<p>现在在iPad上也能用Swift Playgrounds开发app了</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/21.png" alt="截屏2021-06-09 上午8.10.55"></p>
-<ul>
-<li><p>在iPad上可以直接发布应用到TestFlight</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/22.png" alt="截屏2021-06-09 上午8.12.18"></p>
-</li>
-</ul>
-<h3 id="Focus"><a href="#Focus" class="headerlink" title="Focus"></a>Focus</h3><ul>
-<li><p>通知</p>
-<blockquote>
-<p>原有的通知无论优先级如何，都会以相同的方式堆积在我们的屏幕上，完全看不出哪一条通知更重要</p>
-</blockquote>
-<ul>
-<li><p>现在通知可以归类成四类干扰等级</p>
-<ul>
-<li><p>Passive</p>
-<p>无声且不会唤醒设备，下一次拿起手机时显示，用于时效性不强的通知</p>
-</li>
-<li><p>Active（同之前默认的通知类型）</p>
-<p>带有音效和触感反馈，同以往的通知一样</p>
-</li>
-<li><p>Time Sensitive</p>
-<p>这一等级的通知会马上推送给用户，用户不点击会停留在锁屏页上一段时间，用于马上需要读取的通知</p>
-</li>
-<li><p>Critical</p>
-<p>即使设备静音，也会播放声效，只有关系到健康和安全的重大通知，才能设置成这一等级，且设置时需要用户授权</p>
-</li>
-</ul>
-<p>除此之外，还有一种特别的通知：</p>
-<ul>
-<li><p>消息类型通知（信息或者通话）</p>
-<blockquote>
-<p>如果你开发的是通信类APP，可以告诉系统，这是消息或者通话类型的通知，系统会自动调整通知的样式和运行方式，以便人们更好的查看消息</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>通知摘要</p>
-<blockquote>
-<p>为了避免人们错过一些通知，同时帮助用户能在自己想要的时间查看通知，系统提供了一种新的通知展示样式 — <strong>通知摘要</strong>，用户可以使用通知摘要，在选择的时间来集中查看推送</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/23.png" alt="截屏2021-06-09 上午8.26.35"></p>
-<ul>
-<li><p>消息类型：只展示Passive或Active类型的通知</p>
-</li>
-<li><p>通知摘要的顶部有两个轮播位置</p>
-<ul>
-<li>轮播位通知选取规则：<ul>
-<li>带有大缩略图的通知会比没有大缩略图的通知，优先入选</li>
-<li>默认情况：推送最多的APP会优先得到推荐，当然用户可以在此基础上个性化定制摘要</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>等级调整</p>
-<blockquote>
-<p>系统根据用户和APP通知的交互行为，推荐用户将其调整为合适的干扰等级</p>
-</blockquote>
-<ul>
-<li><p>如果用户经常在专注模式使用某APP</p>
-<blockquote>
-<p>系统会建议将该APP调整为专注模式时允许接收通知</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/24.png" alt="截屏2021-06-09 上午8.27.35"></p>
-</li>
-<li><p>如果用户经常与某APP的Time Sensitive通知进行交互</p>
-<blockquote>
-<p>系统会建议将改APP的通知等级调回为Active</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/25.png" alt="截屏2021-06-09 上午8.30.33"></p>
-</li>
-<li><p>如果某APP不断发送通知，用户却没有反应</p>
-<blockquote>
-<p>系统会建议将这个APP发送的通知静音</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/26.png" alt="截屏2021-06-09 上午8.33.44"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>小结</p>
-<ul>
-<li>通过设置通知相关性分数和合适的缩略图，使通知占据摘要顶部的轮播位置</li>
-<li>思考APP的通知最适合哪一干扰级别<ul>
-<li>例如：如果是聊天软件，应该使用最新的<code>User Notifications API</code>来告诉系统来自APP的消息和来电通知</li>
-</ul>
-</li>
-<li>使用最新的<code>Focus Status API</code>，在APP里显示用户的专注模式状态</li>
-</ul>
-</li>
-</ul>
-<h3 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h3><blockquote>
-<p>通过Widget的新特性让你的APP更好用、且更容易被用户看到</p>
-</blockquote>
-<ul>
-<li><p>使用iPad上的超大尺寸小组件</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/27.png" alt="截屏2021-06-09 上午8.34.23"></p>
-</li>
-<li><p>通过Intents框架让Widget自动加入到智能堆叠小组件中</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/28.png" alt="截屏2021-06-09 上午8.35.14"></p>
-</li>
-</ul>
-<h3 id="SharePlay"><a href="#SharePlay" class="headerlink" title="SharePlay"></a>SharePlay</h3><blockquote>
-<p>人们聚会时，除了聊天以外，分享体验也很重要，SharePlay Kit的出现正是为了帮助人们在难以相见的时候，依旧保持紧密联系。</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/29.png" alt="截屏2021-06-09 上午8.36.35"></p>
-<ul>
-<li><p>入口</p>
-<ul>
-<li>FaceTime</li>
-<li>iMessage</li>
-</ul>
-<blockquote>
-<p>让人们在视频聊天的同时，共同进行一项活动，比如：共享视频播放、共享画布。</p>
-</blockquote>
-</li>
-<li><p>共享视频播放</p>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/30.png" alt="截屏2021-06-09 上午8.37.18"></p>
-</li>
-</ul>
-<blockquote>
-<p>在视频APP里采用Group Activities和AVPlayer同步，从而可以快速集成这一功能。</p>
-</blockquote>
-<ul>
-<li><p>共享画布</p>
-<blockquote>
-<p>基于Group Activities，将笔画发给FaceTime群组中的每一个人，从而实现协同绘画</p>
-</blockquote>
-<p><img src="/2021/06/08/What-s-new-in-WWDC21/33.png" alt="截屏2021-06-09 上午8.38.07"></p>
-</li>
-</ul>
-<p>小结：只需要让APP实现Group Activities，就可以实现基于FaceTime的共享体验</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（五）</a>
+            <a href="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">C++ Primer学习笔记</a>
         </h2>
 
         <div class="post-meta">
@@ -1623,11 +628,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-07 08:55:01 / Modified: 21:38:25" itemprop="dateCreated datePublished" datetime="2021-06-07T08:55:01+08:00">2021-06-07</time>
+              <time title="Created: 2021-06-01 14:48:46 / Modified: 18:18:12" itemprop="dateCreated datePublished" datetime="2021-06-01T14:48:46+08:00">2021-06-01</time>
             </span>
 
           
-            <span id="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（五）" title="Views">
+            <span id="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1642,8 +647,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/01/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1658,29 +663,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="3-4-mov-、add、sub指令"><a href="#3-4-mov-、add、sub指令" class="headerlink" title="3.4 mov 、add、sub指令"></a>3.4 mov 、add、sub指令</h1><ul>
-<li>已学mov指令的几种形式<ul>
-<li><code>mov 寄存器，数据</code>  mov ax, 6</li>
-<li><code>mov 寄存器，寄存器 </code> mov bx, ax</li>
-<li><code>mov 寄存器，内存单元</code> mov ax, [0]</li>
-<li><code>mov 内存单元，寄存器</code> mov [0], ax</li>
-<li><code>mov 段寄存器，寄存器</code> mov ds, ax</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2021/06/07/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/1.png" alt="截屏2021-06-07 下午9.29.16"></p>
-<h1 id="3-5-数据段"><a href="#3-5-数据段" class="headerlink" title="3.5 数据段"></a>3.5 数据段</h1><p>我们可以将一组长度为N(N &lt;= 64)、地址连续、起始地址为16的倍数的内存单元当作专门存放数据的内存空间，从而定义了一个数据段。</p>
-<p>比如我们用123B0H~123B9H这段空间来存放数据：</p>
+          <h1 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">int</span> v1 = <span class="number">0</span>, v2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; v1 &gt;&gt; v2;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1 &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2 &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>段地址：123BH</li>
-<li>长度：10字节</li>
+<li><p>cin（see-in）：标准输入</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入v1的值</span></span><br><span class="line"><span class="keyword">int</span> v1 = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; v1;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cout(see-out)：标准输出</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出字符串&quot;Enter two numbers:&quot;</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Enter two numbers:&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="命名空间（namespace）"><a href="#命名空间（namespace）" class="headerlink" title="命名空间（namespace）"></a>命名空间（namespace）</h1></li>
+</ul>
+<p>命名空间的出现是为了避免如下的问题：</p>
+<p>我们声明了同名函数<code>dance</code>，那么如何调用指定的某个函数呢？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Somebody &#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Somebody dances&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;I dance&quot;</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用命名空间，指定调用的函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dance(); <span class="comment">// 输出：I dance</span></span><br><span class="line">    Somebody::dance(); <span class="comment">// 输出: Somebody dances</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="引用（References）"><a href="#引用（References）" class="headerlink" title="引用（References）"></a>引用（References）</h1><blockquote>
+<p>引用就是一个对象的别名</p>
+<p>A reference is not an object. Instead, a reference is just another name for an already existing object.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line">    <span class="keyword">int</span> &amp;refVal = ival;</span><br><span class="line">    refVal = <span class="number">512</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ival &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 512</span></span><br><span class="line">    <span class="keyword">int</span> &amp;refVal2; <span class="comment">// error: references must be initialized.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>引用必须初始化</li>
+<li>一旦初始化，不可以再将引用指向其他对象</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;refVal4 = <span class="number">10</span>; <span class="comment">// error: initializer must be an object </span></span><br><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal5 = dval; <span class="comment">// error: initializer must be an int object</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercises Section 2.3.1</strong></p>
+<p><strong>Exercise 2.15:</strong> Which of the following definitions, if any, are invalid? Why?</p>
+<p><strong>(a)</strong> int ival = 1.01;</p>
+<p><strong>(b)</strong> int &amp;rval1 = 1.01;</p>
+<p><strong>(c)</strong> int &amp;rval2 = ival;</p>
+<p><strong>(d)</strong> int &rval3;</p>
+</blockquote>
+<p>(a) ✅（b）❌  初始化赋值必须是int对象</p>
+<p> (c)  ✅ （d）❌ 引用必须被初始化</p>
+<h1 id="指针（Pointers）"><a href="#指针（Pointers）" class="headerlink" title="指针（Pointers）"></a>指针（Pointers）</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip1, *ip2; <span class="comment">// both ip1 and ip2 are pointers to int </span></span><br><span class="line"><span class="keyword">double</span> dp, *dp2; <span class="comment">// dp2 is a pointer to double; dp is a double</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>与引用不同，指针本身就是一个对象</li>
+<li>在指针的生命周期中，可以指向不同的对象</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p holds the address of ival; p is a pointer to ival</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指针存放的值是另一个对象的地址</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dval;</span><br><span class="line"><span class="keyword">double</span> *pd = &amp;dval; <span class="comment">// ok: initializer is the address of a double</span></span><br><span class="line"><span class="keyword">double</span> *pd2 = pd; <span class="comment">// ok: initializer is a pointer to double</span></span><br><span class="line"><span class="keyword">int</span> *pi = pd; <span class="comment">// error: types of pi and pd differ</span></span><br><span class="line">pi = &amp;dval; <span class="comment">// error: assigning the address of a double to a pointer to int</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指针类型必须和其指向的地址中存放的对象的类型相同</li>
 </ul>
 <blockquote>
-<p>问题3.5 </p>
-<p>写几条指令，累加数据段中的前3个字型数据</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 123BH</span><br><span class="line">mov ds, ax</span><br><span class="line">mov ax, [0]  </span><br><span class="line">add ax, [2]   ;将数据段第二个字（偏移量为2）</span><br><span class="line">add ax [4]    ;将数据段第二个字（偏移量为4）</span><br></pre></td></tr></table></figure>
+<p>注：&amp; 和 * 有多种含义</p>
+<p>&amp;、*可以当做声明使用，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span>&amp;r=i; <span class="comment">//&amp; *followsatypeandispartofadeclaration; r is a *reference*</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p; <span class="comment">// * *follows a type and is part of a declaration; p is a *pointer*</span></span><br></pre></td></tr></table></figure>
 
+<p>&amp;也可以作取地址符使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = &amp;i； <span class="comment">// &amp; is used in an expression as the address-of operator.</span></span><br></pre></td></tr></table></figure>
+
+<p>*可以作取值符号使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*p = i; <span class="comment">// * is used in an expression as the dereference operator</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = *p; <span class="comment">// &amp; is part of the declaration; * is the dereference operator</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol>
+<li><p>使用指针访问一个对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p holds the address of ival; p is a pointer to ival </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">// * yields the object to which p points; prints 42</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用指针指向空指针（Null Pointers）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>; <span class="comment">// equivalent to int *p1 = 0;</span></span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>; <span class="comment">// directly initializes p2 from the literal constant 0 </span></span><br><span class="line"><span class="comment">// must #include cstdlib</span></span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>; <span class="comment">// equivalent to int *p3 = 0;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="void指针（void-Pointers）"><a href="#void指针（void-Pointers）" class="headerlink" title="void指针（void* Pointers）"></a>void指针（void* Pointers）</h2><p>void指针能够指向任意类型的对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> obj = <span class="number">3.14</span>, *pd = &amp;obj;</span><br><span class="line"><span class="comment">// ok: void* can hold the address value of any data pointer type</span></span><br><span class="line"><span class="keyword">void</span> *pv = &amp;obj; <span class="comment">// obj can be an object of any type</span></span><br><span class="line">pv = pd; <span class="comment">// pv can hold a pointer to any type</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Exercise 2.20:</strong> What does the following program do?</p>
+<p>int i = 42;<br>int *p1 = &i; </p>
+<p>*p1 = *p1 * *p1;</p>
+</blockquote>
+<p>*p1 = 42 * 42</p>
 
       
     </div>
@@ -1700,7 +767,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1714,7 +781,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（五）</a>
+            <a href="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/" class="post-title-link" itemprop="url">聊一聊脚本语言：AppleScript</a>
         </h2>
 
         <div class="post-meta">
@@ -1723,13 +790,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-06 17:42:35 / Modified: 22:36:07" itemprop="dateCreated datePublished" datetime="2021-06-06T17:42:35+08:00">2021-06-06</time>
+              <time title="Created: 2020-09-12 21:59:16" itemprop="dateCreated datePublished" datetime="2020-09-12T21:59:16+08:00">2020-09-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-13 00:10:33" itemprop="dateModified" datetime="2020-09-13T00:10:33+08:00">2020-09-13</time>
+              </span>
 
           
-            <span id="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（五）" title="Views">
+            <span id="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/" class="post-meta-item leancloud_visitors" data-flag-title="聊一聊脚本语言：AppleScript" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1744,8 +817,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/06/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1760,73 +833,161 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><ul>
-<li><p>定义一个结构体</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo; </span><br><span class="line">	<span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定义结构对象</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125; accum, trans, *salesptr; </span><br><span class="line"><span class="comment">// equivalent, but better way to define these objects</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span> <span class="comment">/* ... */</span> &#125;; </span><br><span class="line">Sales_data accum, trans, *salesptr;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>定义结构体以分号结束</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>笔者学习AppleScript的起因，是因为本人键盘修饰键的使用习惯和其他同事不同，笔者习惯于将「大小写修饰键」和「Ctrl键」互调位置，以至于习惯默认修饰键配置的同事在我的电脑上进行调试，总是忍不住感叹一声：<br>“这TM是人用的吗？”<br>相信了解iOS开发的小伙伴们都知道，Ctrl + Command + 上下，可以切换.h和.m文件，但是在笔者的键盘上，执行这一操作时，不但没有任何的效果，还会把键盘设置成了大写模式，在一次又一次，同事怒吼的咆哮后，笔者痛定思通，决心要解决这个问题，在如何不改变自己键盘使用习惯的前提下，让来调试代码的同事们也感到如使用自己键盘般的流畅和丝滑呢？</p>
+<p>于是，就有就有了这篇<code>聊一聊脚本语言：AppleScript</code></p>
 </blockquote>
+<h2 id="AppleScript的实践应用"><a href="#AppleScript的实践应用" class="headerlink" title="AppleScript的实践应用"></a>AppleScript的实践应用</h2><h3 id="实践：还原修饰键默认设置"><a href="#实践：还原修饰键默认设置" class="headerlink" title="实践：还原修饰键默认设置"></a>实践：还原修饰键默认设置</h3><blockquote>
+<p>本文下面比较详细地介绍了AppleScript基础知识，在学习它们之前，只需要简单了解AppleScript中常用的几个概念，就可以实现GUI Scripting的神奇功效，我们先来看看AppleScript中的常用概念</p>
+</blockquote>
+<h2 id="AppleScript的常用概念"><a href="#AppleScript的常用概念" class="headerlink" title="AppleScript的常用概念"></a>AppleScript的常用概念</h2><p>这是一个神奇的传送门☞<a href="applescript://">脚本编辑器</a>（本文所有代码均可直接在IDE中执行）</p>
+<p>我们先了解下我们的IDE工具，打开脚本编辑器</p>
+<p><img src="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/1.png" alt="1.png"></p>
+<p>点击图片中的按钮，可以看到上面除了「结果」选项外，还多出了「信息」、「事件」和「回复」三个选项，在这里面可以看到更为详细的打印信息！</p>
+<p><img src="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/2.png" alt="2.png"></p>
+<p>AppleScript的必须掌握的命令：</p>
+<ul>
+<li>tell someone do something</li>
+</ul>
+<p>AppleScript的语法十分接近自然语言，想要操作一个对象执行某些操作，只需要使用”tell命令 +对象类型 + 对象名”，在之后执行<code>end tell</code>，结束当前的回话</p>
+<p>激活终端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tell application &quot;Terminal&quot;</span><br><span class="line">	activate -- 告诉 终端，执行激活命令</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>关闭终端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tell application &quot;Terminal&quot;</span><br><span class="line">	quit -- 告诉 终端，执行退出命令</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>System Events是系统应用，我们有时寄期望于在系统应用中找到某个正在执行的进程（Process）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tell application &quot;System Events&quot;</span><br><span class="line">	tell process &quot;Terminal&quot;</span><br><span class="line">	end tell</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>在执行这段代码后，你会发现，其实什么都没有执行，不用慌，这是因为你并没有告诉”终端”要做些什么，那么我们通过<code>entire contents </code>命令获取Terminal内的所有UI元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#执行下面代码前，先激活&quot;终端&quot;</span><br><span class="line"></span><br><span class="line">tell application &quot;System Events&quot;</span><br><span class="line">	tell process &quot;Terminal&quot;</span><br><span class="line">		entire contents --获取区域内所有的UI元素</span><br><span class="line">	end tell</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>执行后，会得到”终端”内的所有UI元素的完整描述</p>
+<p><img src="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/3.png" alt="3.png"></p>
+<p>选择日志中的一条进行分析</p>
+<blockquote>
+<p><em>button</em> 1 <strong>of</strong> <em>window</em> “终端 — -zsh — 80×24” <strong>of</strong> <em>application process</em> “Terminal” <strong>of</strong> <em>application</em> “System Events”</p>
+</blockquote>
+<p>其实这其中的从属关系已经十分明确了，翻译过来就是</p>
+<blockquote>
+<p>应用<code>System Events</code>的应用进程<code>Terminal</code>的<code>窗口</code>的<code>按钮1</code></p>
+</blockquote>
+<ul>
+<li>模拟点击</li>
+</ul>
+<p><em>button 1</em>的描述，我们已经很清楚了，那<em>button 1</em>到底对应”终端”中的哪个按钮呢？其实单从名字上看，很难看出<em>button 1</em>对应的是哪个按钮，那么我们用一个很简单的方法，确定它的位置，让button 1执行点击操作，通过它的点击效果反推它的位置！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#执行下面代码前，先激活&quot;终端&quot;</span><br><span class="line"></span><br><span class="line">tell application &quot;System Events&quot;</span><br><span class="line">	</span><br><span class="line">	tell process &quot;Terminal&quot;</span><br><span class="line">		(*</span><br><span class="line">			注意：由于环境的差异性，直接复制这段代码到你的脚本编辑器，可能得不到想要的效果</span><br><span class="line">			这里一定要输入你上面entire contents后，打印的&quot;button 1&quot;的完整结果</span><br><span class="line">			*)</span><br><span class="line">		click button 1 of window &quot;终端 — -zsh — 80×24&quot; of application process &quot;Terminal&quot; of application &quot;System Events&quot; </span><br><span class="line">	end tell</span><br><span class="line">	</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>执行上述操作后，发现”终端”被关闭了，原来<em>button 1</em>对应的就是”终端”左上角的关闭按钮</p>
+<blockquote>
+<p>请注意：并不是所有的<em>button 1</em>对应的都是应用的关闭按钮，还要具体情况具体分析</p>
+</blockquote>
+<ul>
+<li>模拟输入</li>
+</ul>
+<p>我们打开了终端，想看当前目录下存有哪些文件，该如何操作呢？</p>
+<p>想一下这个问题，我们都知道在终端中查看目录下文件的命令是<code>ls</code>，那么就可以将这个问题拆分为键入’ls’和点击回车两个步骤</p>
+<p>在AppleScript中，输入字符串的命令是<code>keystroke</code>，你也可以用<code>key code</code>实现单键点击</p>
+<p>我们完善一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tell application &quot;Terminal&quot;</span><br><span class="line">	activate</span><br><span class="line">end tell</span><br><span class="line"></span><br><span class="line">tell application &quot;System Events&quot;</span><br><span class="line">	</span><br><span class="line">	tell process &quot;Terminal&quot;</span><br><span class="line">		keystroke &quot;ls&quot;</span><br><span class="line">		delay 1 -- 延时一秒后执行</span><br><span class="line">		key code 36 -- 回车的键位码为36</span><br><span class="line">	end tell</span><br><span class="line">	</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>完整的键位码传送门☞<a target="_blank" rel="noopener" href="https://eastmanreference.com/complete-list-of-applescript-key-codes">键位码</a></p>
+<p>我们有时需要通过组合按键的方式执行某一操作，通过在键入命令后添加<code>using &#123;按键A down, 按键B down&#125;</code>的方式，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#强制关闭应用快捷键</span><br><span class="line">key code 53 using &#123;command down, option down&#125; -- Esc的键位码为53</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行shell命令</li>
+</ul>
+<p>在终端中通过执行shell命令的方式可以达到和模拟键入的同样的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tell application &quot;Terminal&quot;</span><br><span class="line">	activate</span><br><span class="line">	do script &quot;ls&quot; </span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>当然也可打开某路径下的文件，这里我们尝试打开”系统偏好设置”中的”键盘偏好设置”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tell application &quot;Terminal&quot;</span><br><span class="line">	activate</span><br><span class="line">	#打开键盘偏好设置</span><br><span class="line">	do script &quot;open .  &#39;&#x2F;System&#x2F;Library&#x2F;PreferencePanes&#x2F;Keyboard.prefPane&#39;&quot;</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
+
+<p>我们简单回顾一下，现在我们已经了解了：</p>
+<ul>
+<li><p>如何激活应用，并在当前的系统进程中找到它</p>
+</li>
+<li><p>如何获取某一区域内的全部UI控件，并尝试点击其中的某一个单独控件</p>
+</li>
+<li><p>如何实现模拟字符串输入、单键输入和组合输入</p>
+</li>
+<li><p>如何关闭应用</p>
 </li>
 </ul>
-<h2 id="include"><a href="#include" class="headerlink" title="#include"></a>#include</h2><p>预处理器是一个在编译器之前运行的程序，并且会改变我们程序的源码。</p>
-<p>当预处理看到一个<code>#include</code>，会将指定头文件的内容替换掉<code>#include</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>; </span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>此外，我们再多了解两个帮助我们编写代码的两个小知识点：</p>
+<p>1.注释</p>
+<p>AppleScript中的注释分为单行注释和多行注释</p>
+<p>单行注释：<code>#</code>、<code>--</code></p>
+<p>多行注释 <code>(* 中间的部分都是注释 *)</code></p>
+<p>（上文中三种注释均有用到）</p>
+<p>2.输出日志</p>
+<p><code>log</code>命令，可以通过打印辅助信息，来帮助我们编写代码</p>
+<p>至此，你已经掌握了实现恢复系统默认修饰键的全部知识，小伙伴们完全可以自己尝试写下代码</p>
+<hr>
+<p>核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#激活</span><br><span class="line">tell application &quot;Terminal&quot;</span><br><span class="line">	activate</span><br><span class="line">	#打开键盘偏好设置</span><br><span class="line">	do script &quot;open .  &#39;&#x2F;System&#x2F;Library&#x2F;PreferencePanes&#x2F;Keyboard.prefPane&#39;&quot;</span><br><span class="line">end tell</span><br><span class="line"></span><br><span class="line">tell application &quot;System Events&quot;</span><br><span class="line">	</span><br><span class="line">	tell process &quot;系统偏好设置&quot;</span><br><span class="line">		#点击修饰键		</span><br><span class="line">		click button &quot;修饰键…&quot; of tab group 1 of window &quot;键盘&quot; -- of application process &quot;System Preferences&quot; of application &quot;System Events&quot;</span><br><span class="line">		</span><br><span class="line">		#更改为默认状态</span><br><span class="line">		click button &quot;修饰键…&quot; of tab group 1 of window &quot;键盘&quot; -- of application process &quot;System Preferences&quot; of application &quot;System Events&quot;</span><br><span class="line">		click button &quot;恢复成默认&quot; of sheet 1 of window &quot;键盘&quot; -- of application process &quot;System Preferences&quot; of application &quot;System Events&quot;</span><br><span class="line">			</span><br><span class="line">		click button &quot;好&quot; of sheet 1 of window &quot;键盘&quot; -- of application process &quot;System Preferences&quot; of ®application &quot;System Events&quot;</span><br><span class="line">		</span><br><span class="line">	end tell</span><br><span class="line">	</span><br><span class="line">end tell</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>使用#ifndef来防止头文件被多次引用</p>
-</blockquote>
-<h1 id="using-declaration"><a href="#using-declaration" class="headerlink" title="using declaration"></a>using declaration</h1><p>通过使用<code>using</code>形式的定义，来简化写法，比如：<code>using namespace::name</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// using declaration; when we use the name cin, we get the one from the namespace std</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; i; <span class="comment">// ok: cin is a synonym for std::cin</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// error: no using declaration; we must use the full name</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i; <span class="comment">// ok: explicitly use cout from namepsace std</span></span><br></pre></td></tr></table></figure>
+<p>编写完成后，选择导出：</p>
+<p><img src="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/5.png"></p>
+<p>笔者在这里<code>文件格式</code>选择的是<code>应用程序</code>，并设置了对应的配合快捷键，实现快捷调用~</p>
+<p><img src="/2020/09/12/%E8%81%8A%E4%B8%80%E8%81%8A%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%9AAppleScript/6.png"></p>
+<p><font color="#D61717">完整代码传送门，欢迎Star☞<a target="_blank" rel="noopener" href="https://github.com/GCSNNB/ASShortcutKey-">ASShortcutkey</a></font></p>
+<h2 id="AppleScript基础知识"><a href="#AppleScript基础知识" class="headerlink" title="AppleScript基础知识"></a>AppleScript基础知识</h2><h3 id="1-基本模块"><a href="#1-基本模块" class="headerlink" title="1.基本模块"></a>1.基本模块</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#符号&#39;¬&#39;（option+&#39;L&#39;） 用来将语句延续到第二行</span><br><span class="line">display dialog &quot;This is just a test.&quot; buttons &#123;&quot;Great&quot;, &quot;OK&quot;&#125; ¬</span><br><span class="line">default button &quot;OK&quot; giving up after 3 --result：调出弹窗,默认键是OK,3秒后消失</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>由于定义了<code>using std::cin</code>，我们可以在调用<code>cin</code>函数时，不添加<code>std::</code>namespace前缀。</p>
-</blockquote>
-<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
-<li><p>在使用string之前需要引入string头文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span></span><br></pre></td></tr></table></figure>
+<h4 id="变量和属性"><a href="#变量和属性" class="headerlink" title="变量和属性"></a>变量和属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#变量赋值</span><br><span class="line">set myName to &quot;John&quot;</span><br><span class="line">copy 22 to myAge</span><br><span class="line"></span><br><span class="line">#局部变量</span><br><span class="line">local windowCount</span><br><span class="line">local agentName，agentNumber，agentHireDate</span><br><span class="line"></span><br><span class="line">#全局变量</span><br><span class="line">global gAgentCount</span><br><span class="line">global gStatementDate，gNextAgentNumber</span><br><span class="line"></span><br><span class="line">#属性</span><br><span class="line">property defaultClientName : &quot;Mary Smith&quot;</span><br><span class="line"></span><br><span class="line">#字符串中引用变量</span><br><span class="line">set aPerson to &quot;GCS&quot;</span><br><span class="line">display dialog &quot;Hello &quot; &amp; aPerson &amp; &quot;!&quot;</span><br></pre></td></tr></table></figure>
 
-</li>
+<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set myText to 2 as text</span><br></pre></td></tr></table></figure>
+
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 * 7 - &quot;1&quot; --result 20</span><br></pre></td></tr></table></figure>
+
+<h4 id="List-数组"><a href="#List-数组" class="headerlink" title="List(数组)"></a>List(数组)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#初始化数组</span><br><span class="line">set myList to &#123;1, &quot;what&quot;, 3&#125; --result: &#123;1, &quot;what&quot;, 3&#125;</span><br><span class="line">set beginning of myList to 0 --首位设置为0</span><br><span class="line">set end of myList to &quot;four&quot; --末位设置为&quot;four&quot;</span><br><span class="line">set item 2 of myList to 4 --第二位设置为4</span><br><span class="line">myList --result: &#123;0, 4, &quot;what&quot;, 3, &quot;four&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Record（键值对）"><a href="#Record（键值对）" class="headerlink" title="Record（键值对）"></a>Record（键值对）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#存值</span><br><span class="line">set myFullName to &#123;firstName:&quot;John&quot;, lastName:&quot;Chapman&quot;&#125;</span><br><span class="line">#取值</span><br><span class="line">set myLastName to lastName of myFullName --result &quot;Chapman&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-控制语句"><a href="#2-控制语句" class="headerlink" title="2.控制语句"></a>2.控制语句</h3><h4 id="considering-ignoring"><a href="#considering-ignoring" class="headerlink" title="considering/ignoring"></a>considering/ignoring</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;Hello Bob&quot; &#x3D; &quot;HelloBob&quot; --result: false</span><br><span class="line">ignoring white space --忽略空格</span><br><span class="line">    &quot;Hello Bob&quot; &#x3D; &quot;HelloBob&quot; --result: true</span><br><span class="line">end ignoring</span><br><span class="line"></span><br><span class="line">&quot;BOB&quot; &#x3D; &quot;bob&quot; --result: true</span><br><span class="line">considering case --考虑大小写</span><br><span class="line">    &quot;BOB&quot; &#x3D; &quot;bob&quot; --result: false</span><br><span class="line">end considering</span><br></pre></td></tr></table></figure>
+
+<h4 id="try-error"><a href="#try-error" class="headerlink" title="try-error"></a>try-error</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try</span><br><span class="line">	word 5 of &quot;one two three&quot;</span><br><span class="line">on error</span><br><span class="line">	error &quot;There are not enough words.&quot;</span><br><span class="line">end try</span><br></pre></td></tr></table></figure>
+
+<h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set currentTemp to 10</span><br><span class="line">if currentTemp &lt; 60 then</span><br><span class="line">    set response to &quot;It&#39;s a little chilly today.&quot;</span><br><span class="line">else if currentTemp &gt; 80 then</span><br><span class="line">    set response to &quot;It&#39;s getting hotter today.&quot;</span><br><span class="line">else</span><br><span class="line">    set response to &quot;It&#39;s a nice day today.&quot;</span><br><span class="line">end if</span><br><span class="line">display dialog response</span><br></pre></td></tr></table></figure>
+
+<h4 id="repeat-exit"><a href="#repeat-exit" class="headerlink" title="repeat-exit"></a>repeat-exit</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set num to 0</span><br><span class="line">repeat</span><br><span class="line">	-- perform operations</span><br><span class="line">	if num &lt; 5 then</span><br><span class="line">		set num to num + 1</span><br><span class="line">	else</span><br><span class="line">		display dialog num</span><br><span class="line">		exit repeat</span><br><span class="line">	end if</span><br><span class="line">end repeat</span><br></pre></td></tr></table></figure>
+
+<h4 id="repeat-number-times"><a href="#repeat-number-times" class="headerlink" title="repeat (number) times"></a>repeat (number) times</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">set x to 3</span><br><span class="line">set power to 3</span><br><span class="line"></span><br><span class="line">set returnVal to x</span><br><span class="line">repeat power - 1 times</span><br><span class="line">	set returnVal to returnVal * x</span><br><span class="line">end repeat</span><br><span class="line">return returnVal</span><br></pre></td></tr></table></figure>
+
+<h4 id="repeat-while-当型循环"><a href="#repeat-while-当型循环" class="headerlink" title="repeat while(当型循环)"></a>repeat while(当型循环)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set userNotDone to true</span><br><span class="line">repeat while userNotDone</span><br><span class="line">	set userNotDone to enterDataRecord()</span><br><span class="line">end repeat</span><br><span class="line"></span><br><span class="line">on enterDataRecord()</span><br><span class="line">	delay 3</span><br><span class="line">	false</span><br><span class="line">end enterDataRecord </span><br></pre></td></tr></table></figure>
+
+<h4 id="数值循环"><a href="#数值循环" class="headerlink" title="数值循环"></a>数值循环</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set n to 3</span><br><span class="line">set returnVal to 0</span><br><span class="line">repeat with i from 0 to n</span><br><span class="line">	set returnVal to returnVal + I</span><br><span class="line">end repeat</span><br><span class="line">return returnVal</span><br></pre></td></tr></table></figure>
+
+<p>(数组遍历)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">set peopleList to &#123;&quot;Chris&quot;, &quot;David&quot;, &quot;Sal&quot;, &quot;Ben&quot;&#125;</span><br><span class="line"></span><br><span class="line">#方法一</span><br><span class="line">repeat with aPerson in peopleList</span><br><span class="line">    display dialog &quot;Hello &quot; &amp; aPerson &amp; &quot;!&quot;</span><br><span class="line">end repeat</span><br><span class="line"></span><br><span class="line">#方法二</span><br><span class="line">repeat with i from 1 to (number of items in peopleList)</span><br><span class="line">    display dialog &quot;Hello &quot; &amp; item i of peopleList &amp; &quot;!&quot;</span><br><span class="line">end repeat</span><br></pre></td></tr></table></figure>
+
+<h4 id="String-to-List"><a href="#String-to-List" class="headerlink" title="String to List"></a>String to List</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set wordList to words in &quot;Where is the hammer?&quot;</span><br><span class="line">repeat with currentWord in wordList</span><br><span class="line">	log currentWord</span><br><span class="line">	if (contents of currentWord) is equal to &quot;hammer&quot; then</span><br><span class="line">		display dialog &quot;I found the hammer!&quot;</span><br><span class="line">	end if</span><br><span class="line">end repeat</span><br></pre></td></tr></table></figure>
+
+<h4 id="record遍历"><a href="#record遍历" class="headerlink" title="record遍历"></a>record遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#在文档中没有找到遍历record的方法，不知道是不是不小心遗漏了</span><br><span class="line">#但是在Stack Overflow中看有如下方法，引入了OC中的Foundation库，实现了record的遍历</span><br><span class="line">use framework &quot;Foundation&quot;</span><br><span class="line">set testRecord to &#123;a:&quot;aaa&quot;, b:&quot;bbb&quot;, c:&quot;ccc&quot;&#125;</span><br><span class="line"></span><br><span class="line">set objCDictionary to current application&#39;s NSDictionary&#39;s dictionaryWithDictionary:testRecord</span><br><span class="line">set allKeys to objCDictionary&#39;s allKeys()</span><br><span class="line"></span><br><span class="line">repeat with theKey in allKeys</span><br><span class="line">	log theKey as text</span><br><span class="line">	log (objCDictionary&#39;s valueForKey:theKey) as text</span><br><span class="line">end repeat</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-函数构造"><a href="#3-函数构造" class="headerlink" title="3.函数构造"></a>3.函数构造</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">on greetClient(nameOfClient)</span><br><span class="line">	display dialog (&quot;Hello &quot; &amp; nameOfClient &amp; &quot;!&quot;)</span><br><span class="line">end greetClient</span><br><span class="line"></span><br><span class="line">greetClient(&quot;GCS_DEVELOPER&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-脚本对象"><a href="#4-脚本对象" class="headerlink" title="4.脚本对象"></a>4.脚本对象</h3><ul>
+<li>定义/执行脚本</li>
 </ul>
-<h2 id="定义和初始化"><a href="#定义和初始化" class="headerlink" title="定义和初始化"></a>定义和初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// default initialization; s1 is the empty string </span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2 isacopyof s1</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// s3 is a copy of the string literal</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// s4 is cccccccccc</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">script John</span><br><span class="line">	property HowManyTimes : 0</span><br><span class="line">	</span><br><span class="line">	to sayHello to someone</span><br><span class="line">		set HowManyTimes to HowManyTimes + 1</span><br><span class="line">		return &quot;Hello &quot; &amp; someone</span><br><span class="line">	end sayHello</span><br><span class="line">	</span><br><span class="line">end script</span><br><span class="line"></span><br><span class="line">tell John to sayHello to &quot;Herb&quot;</span><br><span class="line">#John&#39;s sayHello to &quot;Jake&quot; --result: &quot;Hello Jake&quot;</span><br><span class="line">#sayHello of John to &quot;Jake&quot; --result: &quot;Hello Jake&quot;</span><br></pre></td></tr></table></figure>
 
-<h2 id="复制初始化（copy-initialize）和直接初始化-direct-initialization"><a href="#复制初始化（copy-initialize）和直接初始化-direct-initialization" class="headerlink" title="复制初始化（copy initialize）和直接初始化(direct initialization)"></a>复制初始化（copy initialize）和直接初始化(direct initialization)</h2><p>当使用<code>=</code>时，编译器是复制初始化，而当忽略<code>=</code>时，我们使用的是直接初始化，比如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s5 = <span class="string">&quot;hiya&quot;</span>; <span class="comment">// copy initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s6</span><span class="params">(<span class="string">&quot;hiya&quot;</span>)</span></span>; <span class="comment">// direct initialization</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// direct initialization; s7 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> s8 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>); <span class="comment">// copy initialization; s8 is cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">temp</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>; <span class="comment">// temp is cccccccccc </span></span><br><span class="line"><span class="built_in">string</span> s8 = temp; <span class="comment">// copy temp into s8</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>初始化脚本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">on makePoint(x, y)</span><br><span class="line">    script thePoint</span><br><span class="line">        property xCoordinate:x</span><br><span class="line">        property yCoordinate:y</span><br><span class="line">    end script</span><br><span class="line">    return thePoint</span><br><span class="line">end makePoint</span><br><span class="line"> </span><br><span class="line">set myPoint to makePoint(10,20)</span><br><span class="line">get xCoordinate of myPoint  --result: 10</span><br><span class="line">get yCoordinate of myPoint  --result: 20</span><br></pre></td></tr></table></figure>
 
-<h2 id="读写字符串"><a href="#读写字符串" class="headerlink" title="读写字符串"></a>读写字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Note: #include and using declarations must be added to compile this code int main()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">string</span> s; <span class="comment">// empty string</span></span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; s; <span class="comment">// read a whitespace-separated string into s</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// write s to the output</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>继承</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">script Alex</span><br><span class="line">    on sayHello()</span><br><span class="line">        return &quot;Hello, &quot; &amp; getName()</span><br><span class="line">    end sayHello</span><br><span class="line">    on getName()</span><br><span class="line">        return &quot;Alex&quot;</span><br><span class="line">    end getName</span><br><span class="line">end script</span><br><span class="line"> </span><br><span class="line">script AlexJunior</span><br><span class="line">    property parent : Alex</span><br><span class="line">    on getName()</span><br><span class="line">        return &quot;Alex Jr&quot;</span><br><span class="line">    end getName</span><br><span class="line">end script</span><br><span class="line"> </span><br><span class="line">-- Sample calls to handlers in the script objects:</span><br><span class="line">tell Alex to sayHello() --result: &quot;Hello, Alex&quot;</span><br><span class="line">tell AlexJunior to sayHello() --result: &quot;Hello, Alex Jr.&quot;</span><br><span class="line"> </span><br><span class="line">tell Alex to getName() --result: &quot;Alex&quot;</span><br><span class="line">tell AlexJunior to getName() --result: &quot;Alex Jr&quot;</span><br></pre></td></tr></table></figure>
 
-<h2 id="获取字符串的长度"><a href="#获取字符串的长度" class="headerlink" title="获取字符串的长度"></a>获取字符串的长度</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = line.size(); <span class="comment">// len has type string::size_type</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello, &quot;</span>, s2 = <span class="string">&quot;world\n&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> s3 = s1 + s2; <span class="comment">// s3 is hello, world\n</span></span><br><span class="line">s1+=s2; <span class="comment">// equivalentto s1=s1+s2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;world&quot;</span>; <span class="comment">// no punctuation in s1 or s2</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1 + <span class="string">&quot;, &quot;</span> + s2 + <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意<code>+</code>符号两边至少要有一个string类型，不能是字符字面量相加</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s4 = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: adding a string and a literal string </span></span><br><span class="line">s5 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>; <span class="comment">// error: no string operand string</span></span><br><span class="line">s6 = s1 + <span class="string">&quot;, &quot;</span> + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: each + has a string operand string </span></span><br><span class="line">s7 = <span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span> + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s6 = (s1 + <span class="string">&quot;, &quot;</span>) + <span class="string">&quot;world&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>相当于：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> tmp = s1 + <span class="string">&quot;, &quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br><span class="line">s6 = tmp + <span class="string">&quot;world&quot;</span>; <span class="comment">// ok: + has a string operand</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s7 = (<span class="string">&quot;hello&quot;</span> + <span class="string">&quot;, &quot;</span>) + s2; <span class="comment">// error: can&#x27;t add string literals</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>(“hello” + “,”) 符号两边都是常量</p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 3.3:</strong> Explain how whitespace characters are handled in the string input operator and in the getline function.</p>
-<p><strong>对于string类的输入函数，它会自动忽略开头的空白（空格、制表符、换行等等），从第一个真正的字符开始直到下一个空白。</strong></p>
-<p><strong>对于getline()函数，它会保存字符串中的空白符，它读入数据，直到遇到换行符位置。</strong> </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> line;</span><br><span class="line">	<span class="comment">// read input a line at a time until end-of-file </span></span><br><span class="line">	<span class="keyword">while</span> (getline(<span class="built_in">cin</span>, line))</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>答案来自☞<a target="_blank" rel="noopener" href="https://blog.csdn.net/misayaaaaa/article/details/53284630">C++Primer第五版 第三章习题答案（1~10）</a></p>
-
+<h2 id="写在结尾"><a href="#写在结尾" class="headerlink" title="写在结尾"></a>写在结尾</h2><p>本文记录的只是AppleScript中的一小部分内容，笔者在网上暂时还没有找到十分详细的中文文档和介绍，所以想要更加深入的了解和学习AppleScript还是查看官方文档！</p>
+<p>一手资料☞<a target="_blank" rel="noopener" href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html">AppleScript Language Guide</a></p>
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://sspai.com/post/43758">手把手教你用 AppleScript 模拟鼠标键盘操作，实现 macOS 系统的自动化操作</a></p>
+<h3 id><a href="#" class="headerlink" title></a></h3>
       
     </div>
 
@@ -1845,7 +1006,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1859,7 +1020,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-title-link" itemprop="url">C++ Primer学习笔记（四）</a>
+            <a href="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" class="post-title-link" itemprop="url">App Clip离落地有多远？</a>
         </h2>
 
         <div class="post-meta">
@@ -1870,11 +1031,11 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-06-05 13:08:41 / Modified: 22:58:14" itemprop="dateCreated datePublished" datetime="2021-06-05T13:08:41+08:00">2021-06-05</time>
+              <time title="Created: 2020-09-10 18:18:36 / Modified: 21:08:07" itemprop="dateCreated datePublished" datetime="2020-09-10T18:18:36+08:00">2020-09-10</time>
             </span>
 
           
-            <span id="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="C++ Primer学习笔记（四）" title="Views">
+            <span id="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" class="post-meta-item leancloud_visitors" data-flag-title="App Clip离落地有多远？" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1889,8 +1050,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/05/C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/10/App-Clip%E7%A6%BB%E8%90%BD%E5%9C%B0%E6%9C%89%E5%A4%9A%E8%BF%9C/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1905,199 +1066,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><blockquote>
-<p>有时我们想将某一个表达式的结果的类型作为变量的类型</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decltype(f()) sum &#x3D; x; &#x2F;&#x2F; sum has whatever type f returns.</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">0</span>, &amp;cj = ci;</span><br><span class="line"><span class="keyword">decltype</span>(ci) x = <span class="number">0</span>; <span class="comment">// x has type const int</span></span><br><span class="line"><span class="keyword">decltype</span>(cj) y = x; <span class="comment">// y has type const int&amp; and is bound to x </span></span><br><span class="line"><span class="keyword">decltype</span>(cj) z; <span class="comment">// error: z is a reference and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// decltype of an expression can be a reference type</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>, *p = &amp;i, &amp;r = i;</span><br><span class="line"><span class="keyword">decltype</span>(r + <span class="number">0</span>) b; <span class="comment">// ok: addition yields an int; b is an (uninitialized) int </span></span><br><span class="line"><span class="keyword">decltype</span>(*p) c; <span class="comment">// error: c is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>decltype(*p)代表引用类型</p>
-</blockquote>
+          <h2 id="一：前言"><a href="#一：前言" class="headerlink" title="一：前言"></a>一：前言</h2><p>之前也陆陆续续看过一些介绍App Clip的技术文章，发现这些文章几乎千篇一律，差不多都是「苹果技术文档」和「WWDC视频截图」的拼装，以及「WWDC视频讲解」和「网上同类文章」的复述，却很少谈及<em>App Clip</em>真正落地的业务场景和涉及的技术问题。</p>
+<p>App Clip发布后，我开始负责App Clip的技术调研工作，也是沾团队的光，约到了一个App Clip lab，感受了一把白天看WWDC，晚上和WWDC讲解人一对一交流的体验，虽然我们团队最后决定先暂停App Clip的开发，但是在调研App Clip的过程中，也确实发现了很多值得思考之处。</p>
+<p>先说一个结论：不要因为看了WWDC和一些技术文章，就对App Clip有过分美好的幻想，至少从目前来看，App Clip的坑还很多。</p>
+<h2 id="二：业务原因"><a href="#二：业务原因" class="headerlink" title="二：业务原因"></a>二：业务原因</h2><h3 id="2-1-业务场景少"><a href="#2-1-业务场景少" class="headerlink" title="2.1 业务场景少"></a>2.1 业务场景少</h3><ol>
+<li><p>线下支付</p>
+<p>看过WWDC视频的小伙伴们可能已经察觉到了，视频中介绍的场景90%以上都是线下支付的场景，不知道苹果的本意是不是希望通过App Clip去抢占o2o市场，虽然说的是「不用安装商家App」即可通过App Clip享受便捷服务，快速完成下单。可在中国，用户绝大部分的时候本来就不需要下载商家App，难道小程序不香嘛？况且就算真的有这种需求，目前能够满足的也仅仅是iOS 14系统以上的iOS用户。所以这种线下支付的场景，至少在目前看来，App Clip甚至称不上现有方案的一个<em>有效替代方案</em>。</p>
+</li>
+<li><p>线上拉新</p>
+<p>既然线下支付推进困难重重，那肯定很多人会把目光重新看向线上场景。因为App Clip具备「及时可用」的特点，让用户不用下载完整的App即可享受到App的部分功能，那不妨就把App Clip做为一个拉新的入口，把Clip当做「试用装」吸引用户，等用户习惯了，再引导用户下载App。理想虽然很美好，可现实中怎么把「试用装」交到用户手中呢？我们知道，App Clip的调用场景目前主要就5种，二维码、Safari Smart Banner、NFC、Map和Message。</p>
+<p>其中NFC需要物理介质，Map需要实体店，它们对于纯线上的App来说很难找到应用的场景。</p>
+<p>Message更不用说了，首先国人对Message聊天的需求本来就不大，也总不能群发带Clip的短信给用户吧？</p>
+<p>对二维码，我们是抱有美好的期待的，希望用户通过第三方SDK将二维码分享给好友，然后好友通过二维码调起App Clip，逻辑满分。但尴尬的是，App Clip的二维码，只能通过「系统相机」才能调起。我相信绝大部分的人看到二维码，第一反应都是拿微信去扫一扫，想要培养用户使用「系统相机」扫码的习惯恐怕很难。</p>
+<p>那最后剩下的就是Safari这种方式了，这就需要我们想方设法的让用户在Safari里打开这个链接，注意，必须是Safari里打开，在第三方App里的WebView是没有办法显示Smart Banner的，自然也就没办法调起App Clip。</p>
+</li>
+</ol>
+<h3 id="2-2-操作路径长"><a href="#2-2-操作路径长" class="headerlink" title="2.2 操作路径长"></a>2.2 操作路径长</h3><p>即便Safari貌似是纯线上App最适用的场景了，但是这种方式还存在一个问题，那就是用户的操作路径过长。以第三方分享为例，用户在第三方App接受到好友分享的链接后，打开Clip最短的操作路径可能如下：</p>
 <ul>
-<li><p><code>decltype(())</code>：仅代表引用类型</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">decltype</span>((i)) d; <span class="comment">// error: d is int&amp; and must be initialized</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>打开好友分享的链接，进入到内容页；</li>
+<li>点击更多按钮，选择在Safari中打开；</li>
+<li>点击Safari中Smart Banner上的Open按钮，调起Clip Card；</li>
+<li>点击Clip Card上的Open按钮，调起App Clip；</li>
 </ul>
+<p>在引导用户通过Safari打开这步估计就足够劝退大部分的用户了…</p>
+<h2 id="三：技术原因"><a href="#三：技术原因" class="headerlink" title="三：技术原因"></a>三：技术原因</h2><p>即便我们不考虑业务场景，单纯从技术角度看，实现一个App Clip本身恐怕也不会是一个轻松的过程。</p>
+<ol>
+<li><p>代码拆分</p>
+<p>苹果希望App Clip和App提供一致的体验，刚看完WWDC的视频，一开始真的会给人一种实现一个App Clip 「So Easy」的感觉，只要复用原有的工程，随便勾勾选选，把文件加到Clip的Target下，一个精美小巧的App Clip就呈现在眼前了。</p>
+<p>可事实上呢？通常我们需要尽可能复用现有的业务来开发Clip，可除非你所在的项目业务足够简单，或者组件化做的足够彻底，否则你会发现摘Clip的代码是一件几乎无法实现的事情，很可能需要先做大量的技术重构。当然你也可以将原有代码复制出来，重写一份，可是这样下来，为了保持与完整App的功能一致性，就需要付出维护两套代码的时间成本。</p>
+</li>
+<li><p>包大小限制</p>
+<p>10M是App Clip包大小的上限，对于现在动辄一二百M的应用来说，如何用10M来完成目标功能，也是一个不小的挑战。一方面还是上面提到的代码拆分的问题，如果组件化时，基础层划分的颗粒度不够细致，很可能导致上层业务依赖的基础组件过多，从而影响包大小。另一方面，如果App Clip的功能一直是增量的，那必然会导致未来的某一天会超过10M的限制，为避免这一问题，还需要根据新增功能对包大小的影响，配合产品完成现有业务功能的调整。</p>
+</li>
+<li><p>后台活动</p>
+<p>App Clip不支持后台处理活动，这里的后台活动不单指<code>beginBackgroundTaskWithExpirationHandler:</code>这种后台任务，经过实际测试，甚至连「正常的网络请求」以及「NSData转 NSString」等操作，在后台执行都是不是完全可靠的，再结合视频里说的：</p>
 <blockquote>
-<p><strong>Exercises Section 2.5.3<br> Exercise 2.36:</strong> In the following code, determine the type of each variable and the value each variable has when the code finishes:</p>
-<p>int a = 3, b = 4; </p>
-<p>decltype(a) c = a; </p>
-<p>decltype((b)) d = a; </p>
-<p>++c;</p>
-<p>++d;</p>
-<p>答：c : int， d int &amp;</p>
+<p>In addition, app Clip can’t perform background activity, such as doing background networking with URLSession or maintaining Bluetooth connections when the app clip isn’t in use.</p>
 </blockquote>
-<blockquote>
-<p><strong>Exercise 2.37:</strong> <strong>Assignment is an example of an expression that yields a reference type. The type is a reference to the type of the left-hand operand. That is, if i is an int, then the type of the expression i = x is int&amp;.</strong> Using that knowledge, determine the type and value of each variable in this code:</p>
-<p>int a = 3, b = 4;</p>
-<p>decltype(a) c = a;</p>
-<p>decltype(a = b) d = a; </p>
-<p> 答：c : int ; d : int &amp; </p>
-</blockquote>
-<blockquote>
-<p><strong>Exercise 2.38:</strong> Describe the differences in type deduction between decltype and auto. Give an example of an expression where auto and decltype will deduce the same type and an example where they will deduce differing types.</p>
-<p>答：针对引用类型，如下： a是int类型，b是int &amp;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, &amp;r = i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> a = r;</span><br><span class="line"></span><br><span class="line"><span class="keyword">decltype</span>(r) b = i;</span><br></pre></td></tr></table></figure>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" class="post-title-link" itemprop="url">汇编语言学习笔记（四）—— Debug</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-04 00:53:08 / Modified: 08:11:44" itemprop="dateCreated datePublished" datetime="2021-06-04T00:53:08+08:00">2021-06-04</time>
-            </span>
-
-          
-            <span id="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（四）—— Debug" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li><p>下载并安装DosBox</p>
-<p>到官网下载对应操作系统的软件 → <a target="_blank" rel="noopener" href="https://www.dosbox.com/download.php?main=1">传送门</a></p>
+<p>对于不能执行的<code>background activity</code>目前包括什么，咱无从得知，但从安全的角度看，尽量不在后台搞事情，肯定是第一原则，只是不知道把后台的监听都去掉，你的项目是否还能work~</p>
 </li>
-<li><p>下载Debug程序 →<a href="%5Bhttps://pan.baidu.com/s/1rzWTW1G76SdD7nGYs8WNaQ%5D(https://link.jianshu.com/?t=https://pan.baidu.com/s/1rzWTW1G76SdD7nGYs8WNaQ)">软件地址</a>来源自<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/147be16882e9?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">Mac下的OS X系统如何使用Debug程序</a></p>
+<li><p>唯一标识</p>
+<p>如果想把App Clip当做拉新的手段，那可能就会涉及到一个问题：如果识别出当前App用户曾是App Clip用户？</p>
+<p>我们知道如果用户手机上存在App Clip的情况下，又下载了对应的App，是可以进行数据迁移的。那如果用户的Clip因为一段时间未使用被系统自动删除了，此后用户又下载了App，该怎么设置用户的唯一标识呢？</p>
+<p>要知道Clip在被系统删除时，也会清空其存储在Keychain中的数据，至于IDFA，Shared Keychain那就更别想了，Clip压根不开放这个能力。当然肯定还是有一些其他方式能够对用户进行唯一标识，比如有些防作弊的SDK，就可以标识唯一的设备ID，这就看大家各显神通了。当然，如果不关心这种case的话就另说了。</p>
 </li>
-<li><p>运行DosBox后输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount c &#x2F;Users&#x2F;Leoolin&#x2F;Downloads</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>后面的路径为debug程序所在的文件夹</p>
-</blockquote>
+<li><p>第三方App调起</p>
+<p>App Clip可以通过Url Scheme或者Universal Link调起第三方App，但是第三方App却不能通过Url Scheme和Universal Link调起App Clip，说白了就是能调出去但是回不来。第三方登录、第三方分享、第三方支付可能都会受到影响。</p>
 </li>
-<li><p>再输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:</span><br></pre></td></tr></table></figure>
+<li><p>不支持企业包</p>
+<p>企业证书是没法配置App Clip的，如果项目是使用同一个工程，通过不同的configuration切换企业版和正式版，可能还需要注意一个额外的问题，App Clip是通过<code>Build Phases</code>中的<code>Embed App Clip</code>集成到主Target中的，而<code>Build Phases</code>又没办法区分configuration，如果想区分版本去添加<code>Embed App Clip</code>，就只能打企业包时，单独去修改Project文件了。</p>
 </li>
-<li><p>再输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug </span><br></pre></td></tr></table></figure>
-
+<li><p>Pods</p>
+<p>可能目前CocoaPods对App Clip的支持还不够完善，写Demo时发现如果App Clip需要依赖Pods的话，<code>pod install</code>后，在<code>Build Phases</code>中是不会自动生成<code>Embed Pods Frameworks</code>的，这就会导致编译时报<code>image not found</code>的错误，目前解决的办法就是手动添加一下<code>Embed Pods Frameworks</code>。</p>
 </li>
-</ul>
-<h2 id="DEBUG常用命令"><a href="#DEBUG常用命令" class="headerlink" title="DEBUG常用命令"></a>DEBUG常用命令</h2><p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/1.png" alt="截屏2021-06-04 上午12.58.45"></p>
-<ul>
-<li><p>修改寄存器的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r ax</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/2.png" alt="截屏2021-06-04 上午7.38.28"></p>
-</li>
-<li><p>查看当前寄存器的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/3.png" alt="截屏2021-06-04 上午7.39.48"></p>
-</li>
-<li><p>执行一条指令</p>
-<ul>
-<li><p>修改代码段寄存器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r cs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改指令指针寄存器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r ip</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<p>输入以下指令：</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/4.png" alt="截屏2021-06-04 上午7.55.53"></p>
-<ul>
-<li><p>查看内存中的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>指定内存位置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d 073F:0100</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/5.png" alt="截屏2021-06-04 上午7.58.37"></p>
-</li>
-</ul>
-</li>
-<li><p>将内存中的机器指令翻译成汇编指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u 073F:0100</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/6.png" alt="截屏2021-06-04 上午8.00.15"></p>
-<p>依次执行这些指令观察寄存器的变化：</p>
-</li>
-<li><p>修改代码段寄存器和指令指针寄存器的位置</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/7.png" alt="截屏2021-06-04 上午8.06.55"></p>
-</li>
-<li><p>依次执行…</p>
-<p><img src="/2021/06/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94-Debug/8.png" alt="截屏2021-06-04 上午8.07.44"></p>
-</li>
-</ul>
+</ol>
+<h2 id="四：结语"><a href="#四：结语" class="headerlink" title="四：结语"></a>四：结语</h2><p>当然，对于App Clip的最终落地来说，技术原因终归是次要的，最关键还要看如何找到适合自己产品的业务场景。在苹果线上培训的时候，认识了一个团队的开发，说他们想用App Clip做AR，当时我就觉得这个想法还挺好的。可能对于很多产品来说没有这么新颖的玩法，其实倒也不必太在意，对于苹果来说他们也很清楚目前的现状，据他们自己说也在和美国总部沟通，当然结果如何，咱不得而知，但毕竟留个念想嘛，万一未来App Clip的入口放开了呢~</p>
 
       
     </div>
@@ -2116,7 +1139,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 
@@ -2182,7 +1205,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
