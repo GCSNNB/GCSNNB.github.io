@@ -145,6 +145,346 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/What-s-New-in-Swift-WWDC19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/04/What-s-New-in-Swift-WWDC19/" class="post-title-link" itemprop="url">手把手教你用SwiftUI写程序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-04 10:51:22" itemprop="dateCreated datePublished" datetime="2021-07-04T10:51:22+08:00">2021-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-05 00:20:49" itemprop="dateModified" datetime="2021-07-05T00:20:49+08:00">2021-07-05</time>
+              </span>
+
+          
+            <span id="/2021/07/04/What-s-New-in-Swift-WWDC19/" class="post-meta-item leancloud_visitors" data-flag-title="手把手教你用SwiftUI写程序" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/04/What-s-New-in-Swift-WWDC19/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/04/What-s-New-in-Swift-WWDC19/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>学习SwifUI的最好方式是，用SwiftUI编写一个程序</p>
+<p>文章来源：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/204/">Introducing SwiftUI: Building Your First App</a></p>
+<p>注：视频中使用的部分API，已经在后续版本中废弃，本文代码根据最新版API进行了调整，确保 <a target="_blank" rel="noopener" href="https://github.com/GCSNNB/SwiftUI_Demo/tree/main/WWDC/Rooms">Demo工程</a> 能够运行</p>
+</blockquote>
+<h2 id="一：编写第一个SwiftUI程序"><a href="#一：编写第一个SwiftUI程序" class="headerlink" title="一：编写第一个SwiftUI程序"></a>一：编写第一个SwiftUI程序</h2><ol>
+<li>创建SwiftUI工程</li>
+</ol>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/1.png" alt="截屏2021-07-04 上午11.04.58"></p>
+<ul>
+<li><p>左侧是代码区</p>
+</li>
+<li><p>右侧是Canvas</p>
+<p>编写代码时，右侧的Canvas能够实时显示出代码的UI预览效果</p>
+</li>
+</ul>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/2.png" alt="截屏2021-07-04 上午11.05.49"></p>
+<ol start="2">
+<li><p>编写UI布局代码</p>
+<ul>
+<li><p>通过拖拽增加UI控件</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/1.gif"></p>
+<ul>
+<li>VStack：SwiftUI常用的一种布局元素，可以用来垂直地叠加视图</li>
+<li>HStack：水平叠加视图</li>
+</ul>
+</li>
+<li><p>cmd+点击VStack，插入HStack<br><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/3.png" alt="截屏2021-07-04 上午11.30.37"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HStack</span> &#123;</span><br><span class="line">            <span class="type">VStack</span> &#123;</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;Rooms&quot;</span>)</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;20 people&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在文字左侧增加一个图片</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HStack</span> &#123;</span><br><span class="line">  					<span class="comment">// `photo`是系统自带资源库中的图片</span></span><br><span class="line">          <span class="type">Image</span>(systemName: <span class="string">&quot;photo&quot;</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="type">VStack</span> &#123;</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;Rooms&quot;</span>)</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;20 people&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Canvas中将VStack修改为左对齐</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/2.gif"></p>
+</li>
+<li><p>设置Text的字号</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/4.png" alt="截屏2021-07-04 上午11.49.02"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HStack</span> &#123;</span><br><span class="line">            <span class="type">Image</span>(systemName: <span class="string">&quot;photo&quot;</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="type">VStack</span>(alignment: .leading) &#123;</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;Rooms&quot;</span>)</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;20 people&quot;</span>)</span><br><span class="line">                    .font(.subheadline)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们称<code>.font(.subheadline)</code>为修饰器（modifier），用来自定义视图的外观或行为</p>
+</li>
+<li><p>设置Text的颜色为<code>secondary</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HStack</span> &#123;</span><br><span class="line">            <span class="type">Image</span>(systemName: <span class="string">&quot;photo&quot;</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="type">VStack</span>(alignment: .leading) &#123;</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;Rooms&quot;</span>)</span><br><span class="line">                <span class="type">Text</span>(<span class="string">&quot;20 people&quot;</span>)</span><br><span class="line">                    .font(.subheadline)</span><br><span class="line">                    .foregroundColor(.secondary)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将HStack替换为List</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/5.png" alt="截屏2021-07-04 上午11.55.23"></p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/6.png" alt="截屏2021-07-04 上午11.56.07"></p>
+</li>
+</ul>
+</li>
+<li><p>设置数据源</p>
+<ul>
+<li><p>增加Room模型 </p>
+<p>在SwiftUI中，需要让模型遵循<code>Identifiable</code>协议，实现<code>id</code>属性</p>
+</li>
+</ul>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/7.png" alt="截屏2021-07-04 下午12.34.18"></p>
+<ul>
+<li><p>在ContentView中使用Room数据来展示UI</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/8.png" alt="截屏2021-07-04 下午12.40.15"></p>
+<blockquote>
+<p>当代码发生重大改变（比如增加属性），Xcode会暂停预览，直到我们做好重新更新的准备（点击Resum按钮）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>丰富UI内容</p>
+<ul>
+<li><p>设置图片圆角</p>
+<ul>
+<li><p>通过拖拽Modifier库来实现</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/3.gif"></p>
+</li>
+</ul>
+</li>
+<li><p>设置Navigation、NavigationTitle以及给每个单元格设置跳转</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NavigationView</span> &#123;</span><br><span class="line">            <span class="type">List</span>(rooms) &#123; room <span class="keyword">in</span></span><br><span class="line">                <span class="type">NavigationLink</span>(destination: <span class="type">Text</span>(room.name)) &#123;</span><br><span class="line">                    <span class="type">Image</span>(systemName: <span class="string">&quot;photo&quot;</span>)</span><br><span class="line">                        .cornerRadius(<span class="number">8.0</span>)</span><br><span class="line">                </span><br><span class="line">                    </span><br><span class="line">                    <span class="type">VStack</span>(alignment: .leading) &#123;</span><br><span class="line">                        <span class="type">Text</span>(room.name)</span><br><span class="line">                        <span class="type">Text</span>(<span class="string">&quot;\(room.capacity) people&quot;</span>)</span><br><span class="line">                            .font(.subheadline)</span><br><span class="line">                            .foregroundColor(.secondary)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            .navigationTitle(<span class="type">Text</span>(<span class="string">&quot;Rooms&quot;</span>))</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>进入实时模式，查看效果</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/4.gif"></p>
+</li>
+<li><p>将子视图提成一个单独的视图</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/5.gif"></p>
+</li>
+<li><p>创建新的页面：RoomDetail</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RoomDetail</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> room: <span class="type">Room</span></span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Image</span>(room.imageName)</span><br><span class="line">            .resizable()</span><br><span class="line">            .aspectRatio(contentMode: .fit)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RoomDetail_Previews</span>: <span class="title">PreviewProvider</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> previews: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">RoomDetail</span>(room: testData[<span class="number">0</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>设置<code>navigationBarTitle</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(room.imageName)</span><br><span class="line">            .resizable()</span><br><span class="line">            .aspectRatio(contentMode: .fit)</span><br><span class="line">            .navigationBarTitle(<span class="type">Text</span>(room.name))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时页面不会更新，因为RoomDetail中缺乏<code>NavigationView</code>作为上下文</p>
+</blockquote>
+</li>
+<li><p>在预览中添加<code>NavigationView</code>上下文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct RoomDetail_Previews: PreviewProvider &#123;</span><br><span class="line">    static var previews: some View &#123;</span><br><span class="line">        NavigationView &#123;</span><br><span class="line">            RoomDetail(room: testData[0])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调整<code>navigationBarTitle</code>的展示模式</p>
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/9.png" alt="截屏2021-07-04 下午2.08.47"></p>
+</li>
+</ul>
+</li>
+<li><p>将RoomCell的跳转修改为前往RoomDetail页面</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RoomCell</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> room: <span class="type">Room</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">NavigationLink</span>(destination: <span class="type">RoomDetail</span>(room: room)) &#123;</span><br><span class="line">            <span class="comment">// ···</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/6.gif"></p>
+</li>
+</ol>
+<h2 id="二：Swift-UI的工作方式"><a href="#二：Swift-UI的工作方式" class="headerlink" title="二：Swift UI的工作方式"></a>二：Swift UI的工作方式</h2><h3 id="2-1-View"><a href="#2-1-View" class="headerlink" title="2.1 View"></a>2.1 View</h3><ul>
+<li><p>A View Defines a Piece of UI</p>
+<p>在SwiftUI中，视图是一种遵守<code>View</code>协议的结构，而不是继承自基础类的类</p>
+</li>
+<li><p>A View Defines its Dependencies</p>
+</li>
+</ul>
+<h3 id="2-2-状态属性"><a href="#2-2-状态属性" class="headerlink" title="2.2 状态属性"></a>2.2 状态属性</h3><ul>
+<li><p><code>@State</code></p>
+</li>
+<li><p>当SwiftUI看到一个带<code>@State</code>状态变量的视图时，它会以视图的名义为那个变量分配存储空间。</p>
+<p>19:18</p>
+<ul>
+<li>绿色部分是APP的内存</li>
+<li>紫色是SwiftUI所管理的内存</li>
+</ul>
+<p>SwiftUI可以观察到<code>@State</code>变量合时被读写，同时SwiftUI知道<code>zoom</code>是从<code>body</code>中读取的，SwiftUI会在<code>@State</code>变量发生更改时，使用新的状态值，刷新渲染。</p>
+</li>
+</ul>
+<p>例：实现在RoomDetail中，点击图片修改填充模式</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RoomDetail</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> room: <span class="type">Room</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> zoomed = <span class="literal">false</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Image</span>(room.imageName)</span><br><span class="line">            .resizable()</span><br><span class="line">            .aspectRatio(contentMode: zoomed ? .fit : .fill) <span class="comment">// 根据zoomed值修改填充模式</span></span><br><span class="line">            .navigationBarTitle(<span class="type">Text</span>(room.name), displayMode: .inline)</span><br><span class="line">            .onTapGesture &#123;</span><br><span class="line">                <span class="keyword">self</span>.zoomed.toggle() <span class="comment">// 点击修改zoomed的值</span></span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-事实来源"><a href="#2-3-事实来源" class="headerlink" title="2.3 事实来源"></a>2.3 事实来源</h3><p>在SwiftUI中，UI可能因不同的数据，处于不同的状态，我们将这些用来绘制UI的数据称为“事实来源”，“事实来源“由<code>状态变量</code>和<code>模型</code>共同组成。</p>
+<ul>
+<li><p>属性可以简单地分为：事实来源（Source of Truth）和衍生值（Derived Value）</p>
+<p>21：49</p>
+<p><code>zoomed</code>变量是一个事实来源，<code>contentMode</code>衍生自它，当系统观察到<code>zoomed</code>变量发生变化时，SwiftUI框架会请求新的<code>body</code>，刷新渲染，重新生成一个新的宽高比视图，接下来覆盖<code>contentMode</code>。</p>
+<blockquote>
+<p>像RoomDetail中的，<code>room</code>属性，也是一个衍生值。</p>
+</blockquote>
+</li>
+<li><p>数据流原语（Data Flow Primitives）</p>
+<p>23:05</p>
+<blockquote>
+<p>关于数据流详细的介绍在：<a href>Data Flow Through SwiftUI WWDC 19</a></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>SwiftUI是数据驱动，而不是事件驱动</strong></p>
+<h2 id="三：完善Rooms-APP"><a href="#三：完善Rooms-APP" class="headerlink" title="三：完善Rooms APP"></a>三：完善Rooms APP</h2><ol>
+<li><p>增加动画</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.onTapGesture &#123;</span><br><span class="line">                withAnimation &#123;</span><br><span class="line">                    <span class="keyword">self</span>.zoomed.toggle()</span><br><span class="line">                &#125;   </span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加一个ZStack</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ZStack</span>(alignment: .topLeading) &#123;</span><br><span class="line">    <span class="type">Image</span>(room.imageName)</span><br><span class="line">        .resizable()</span><br><span class="line">        .aspectRatio(contentMode: zoomed ? .fit : .fill)</span><br><span class="line">        .navigationBarTitle(<span class="type">Text</span>(room.name), displayMode: .inline)</span><br><span class="line">        .onTapGesture &#123;</span><br><span class="line">            withAnimation &#123;</span><br><span class="line">                <span class="keyword">self</span>.zoomed.toggle()</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">Image</span>(systemName: <span class="string">&quot;video.fill&quot;</span>)</span><br><span class="line">        .font(.title)</span><br><span class="line">        .padding(.all)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/7.gif"></p>
+</li>
+<li><p>固定图标的位置</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(room.imageName)</span><br><span class="line">                .frame(minWidth:<span class="number">0</span>, maxWidth: .infinity, minHeight: <span class="number">0</span>, maxHeight: .infinity)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/8.gif"></p>
+<p>更多关于SwiftUI布局相关的内容 - &gt; <a href>Buiding Custom Views with SwiftUI</a></p>
+</li>
+<li><p>同时预览多个View</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RoomDetail_Previews</span>: <span class="title">PreviewProvider</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> previews: some <span class="type">View</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="type">Group</span> &#123;</span><br><span class="line">            <span class="type">NavigationView</span> &#123;</span><br><span class="line">                <span class="type">RoomDetail</span>(room: testData[<span class="number">0</span>])</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">NavigationView</span> &#123;</span><br><span class="line">                <span class="type">RoomDetail</span>(room: testData[<span class="number">1</span>])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加动效</p>
+<ul>
+<li>给视频图标增加过渡动效</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if room.hasVideo &amp;&amp; !zoomed &#123;</span><br><span class="line">                Image(systemName: &quot;video.fill&quot;)</span><br><span class="line">                    .font(.title)</span><br><span class="line">                    .padding(.all)</span><br><span class="line">                    .transition(.move(edge: .leading))</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/9.gif"></p>
+<ul>
+<li><p>给图片的动效延长时间</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.onTapGesture &#123;</span><br><span class="line">                    withAnimation(.easeInOut(duration: <span class="number">2</span>)) &#123;</span><br><span class="line">                        <span class="keyword">self</span>.zoomed.toggle()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>支持动态增加</p>
+<p>监测数据模型的改变，实时更新UI</p>
+<ul>
+<li><p>创建RoomStore储存Room模型</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> SwiftUI</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RoomStore</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> rooms: [<span class="type">Room</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(rooms: [<span class="type">Room</span>] = []) &#123;</span><br><span class="line">        <span class="keyword">self</span>.rooms = rooms</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遵守<code>ObservableObject</code>协议</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RoomStore</span>: <span class="title">ObservableObject</span> </span>&#123;</span><br><span class="line">  @<span class="type">Published</span> <span class="keyword">var</span> rooms: [<span class="type">Room</span>]</span><br><span class="line">	<span class="comment">// ···</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>声明<code>EnvironmentObject</code>类型变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnvironmentObject var store: RoomStore</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>传入<code>EnvironmentObject</code>类型变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView_Previews: PreviewProvider &#123;</span><br><span class="line">    static var previews: some View &#123;</span><br><span class="line">        ContentView()</span><br><span class="line">            .environmentObject(RoomStore(rooms: testData))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列表中增加一个按钮</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> &#123;</span><br><span class="line">                <span class="type">Button</span>(action:&#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;) &#123;</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">&quot;Add Room&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">  							<span class="comment">// ForEach为它的每个集合项都创建一个视图</span></span><br><span class="line">                <span class="type">ForEach</span>(store.rooms)  &#123; room <span class="keyword">in</span></span><br><span class="line">                    <span class="type">RoomCell</span>(room: room)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/10.png" alt="截屏2021-07-04 下午11.22.36"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Button</span>(action:addRoom) &#123;</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">&quot;Add Room&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addRoom</span><span class="params">()</span></span> &#123;</span><br><span class="line">        store.rooms.append(<span class="type">Room</span>(name: <span class="string">&quot;Hall 2&quot;</span>, capacity: <span class="number">2000</span>))</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/10.gif"></p>
+</li>
+</ul>
+</li>
+<li><p>修改List的样式</p>
+<ul>
+<li><p>修改<code>listStyle</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NavigationView &#123;</span><br><span class="line">            List &#123;</span><br><span class="line">          		&#x2F;&#x2F; ···    </span><br><span class="line">            &#125;</span><br><span class="line">            .navigationBarTitle(Text(&quot;Rooms&quot;))</span><br><span class="line">            .listStyle(GroupedListStyle())</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置分组</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> &#123;</span><br><span class="line">    <span class="type">Section</span> &#123;</span><br><span class="line">        <span class="type">Button</span>(action:addRoom) &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">&quot;Add Room&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">Section</span> &#123;</span><br><span class="line">        <span class="type">ForEach</span>(store.rooms)  &#123; room <span class="keyword">in</span></span><br><span class="line">            <span class="type">RoomCell</span>(room: room)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>支持动态删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">func delete(at offsets: IndexSet) &#123;</span><br><span class="line">        store.rooms.remove(atOffsets: offsets)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ForEach(store.rooms)  &#123; room in</span><br><span class="line">                        RoomCell(room: room)</span><br><span class="line">                    &#125;</span><br><span class="line">                    .onDelete(perform: delete)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/11.gif"></p>
+</li>
+<li><p>设置NavigationBarItem</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NavigationView &#123;</span><br><span class="line">    List &#123;</span><br><span class="line">    </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    .navigationBarItems(trailing: EditButton())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>支持列表重新排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func move(from source: IndexSet, to destination: Int) &#123;</span><br><span class="line">    store.rooms.move(fromOffsets: source, toOffset: destination)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ForEach(store.rooms)  &#123; room in</span><br><span class="line">                        RoomCell(room: room)</span><br><span class="line">                    &#125;</span><br><span class="line">                    .onDelete(perform: delete)</span><br><span class="line">                    .onMove(perform: move)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/04/What-s-New-in-Swift-WWDC19/12.gif"></p>
+</li>
+</ol>
+<ol start="11">
+<li><p>设置预览环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Group &#123;</span><br><span class="line">    ContentView()</span><br><span class="line">        .environmentObject(RoomStore(rooms: testData))</span><br><span class="line">    &#x2F;&#x2F; 大字号环境</span><br><span class="line">    ContentView()</span><br><span class="line">        .environmentObject(RoomStore(rooms: testData))</span><br><span class="line">        .environment(\.sizeCategory, .extraExtraLarge)</span><br><span class="line">    &#x2F;&#x2F; 深色模式</span><br><span class="line">    ContentView()</span><br><span class="line">        .environmentObject(RoomStore(rooms: testData))</span><br><span class="line">        .environment(\.colorScheme, .dark)</span><br><span class="line">    &#x2F;&#x2F; 布局方向</span><br><span class="line">    ContentView()</span><br><span class="line">        .environmentObject(RoomStore(rooms: testData))</span><br><span class="line">        .environment(\.layoutDirection, .rightToLeft)</span><br><span class="line">        .environment(\.locale, Locale(identifier: &quot;ar&quot;))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>SwiftUI四个主要设计原则：</p>
+<ul>
+<li>Declarative</li>
+<li>Compositional</li>
+<li>Automatic</li>
+<li>Consistent</li>
+</ul>
+</li>
+<li><p>SwiftUI使用陈述性语法</p>
+</li>
+<li><p>在SwiftUI中，Xcode预览可以让我们浏览、编辑和调试APP，我们甚至不需要运行项目工程</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/SwiftUI-WWDC19/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1213,301 +1553,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">检测和诊断内存问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-12 08:58:48" itemprop="dateCreated datePublished" datetime="2021-06-12T08:58:48+08:00">2021-06-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:19:07" itemprop="dateModified" datetime="2021-06-14T23:19:07+08:00">2021-06-14</time>
-              </span>
-
-          
-            <span id="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="检测和诊断内存问题" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>性能是客户端永恒的主题，我们希望用户在使用APP时，能够获得极致的性能体验，关注内存占用也正是因为这一点。<img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/1.png" alt="2:18"></p>
-<blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10180/">Detect and diagnose memory issues</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
-</blockquote>
-<ul>
-<li><p>Faster application activations</p>
-<p>减少APP的内存占用，可以提高APP在后台存活的机会，从而让APP更快的被激活。</p>
-<blockquote>
-<p>设备的内存空间是有限的，监控APP的内存使用情况，能够防止系统为了回收内存而主动终止APP。</p>
-<p>这样即使APP在后台运行，也能够保存当前用户的使用状态，从而避免再次从内存加载导致的耗时。</p>
-</blockquote>
-</li>
-<li><p>Responsive experience</p>
-<p>更好的响应速度</p>
-<blockquote>
-<p>策略性的将APP的内容加载到内存里，能够避免在用户使用APP时，因系统回收内存增加的等待耗时。</p>
-</blockquote>
-</li>
-<li><p>Complex features</p>
-<p>让用户体验更丰富的功能</p>
-<blockquote>
-<p>像加载视频、展示动画，这些复杂的功能往往需要占用更多的内存。因此有策略的使用内存，可以避免在用户使用APP的复杂功能时，被系统因内存占用问题而终止。</p>
-</blockquote>
-</li>
-<li><p>Wider device compatibility</p>
-<p>更好的设备兼容性</p>
-<blockquote>
-<p>让内存空间不太充足的老设备也能更好的使用APP的功能</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="内存占用结构"><a href="#内存占用结构" class="headerlink" title="内存占用结构"></a>内存占用结构</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/2.png" alt="2:26"></p>
-<ul>
-<li><p>Clean Memory</p>
-</li>
-<li><p>Dirty Memory</p>
-<blockquote>
-<p>Clean Memory被分配，并写入内容后成为”脏内存“，脏内存包括：</p>
-</blockquote>
-<ul>
-<li>所有的堆分配（malloc）</li>
-<li>解码图像缓冲区</li>
-<li>Frameworks</li>
-</ul>
-</li>
-<li><p>Compressed Memory</p>
-<blockquote>
-<p>压缩内存特指脏页（Dirty Pages）中暂未被访问的部分（Unaccessed pages），会在访问后解压，成为脏内存。</p>
-<p>（下文会详细介绍脏页（Dirty Pages）的概念）</p>
-</blockquote>
-<p>注：iOS中没有内存交换（Memory Swap）的概念，你可能在使用Instrument工具时，见到过<code>Swapped</code>字段，实际上所指的是<code>Compressed Memory</code></p>
-</li>
-</ul>
-<blockquote>
-<p>内存占用 = Dirty Memory + Compressed Memory</p>
-</blockquote>
-<h2 id="内存画像工具"><a href="#内存画像工具" class="headerlink" title="内存画像工具"></a>内存画像工具</h2><p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/3.png" alt="3:52"></p>
-<ul>
-<li><p>XCTest</p>
-<blockquote>
-<p>通过单元测试和U测试中的XCTest来检测开发环境的性能指标</p>
-</blockquote>
-<ul>
-<li><p>XCTest可以测量以下性能指标：</p>
-<ul>
-<li>内存使用情况</li>
-<li>CPU使用</li>
-<li>磁盘写入情况</li>
-<li>卡顿率</li>
-<li>执行时间（完成某一任务所花的全部时间）</li>
-<li>APP启动时间</li>
-</ul>
-</li>
-<li><p>通过XCTest检测内存使用情况</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSaveMeal</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">let</span> app = <span class="type">XCUIApplication</span>()</span><br><span class="line">	<span class="keyword">let</span> options = <span class="type">XCTMeasuireOptions</span>()</span><br><span class="line">	options.invocationOptions = [.manullyStart]</span><br><span class="line">	measure(metrics: [<span class="type">XCTMemoryMetric</span>(application: app)],</span><br><span class="line">					options:options) &#123;</span><br><span class="line">		app.launch()</span><br><span class="line">		startMeasureing()</span><br><span class="line">		app.cells.firstMatch.buttons[<span class="string">&quot;Save meal&quot;</span>].firstMatch.tap()</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">let</span> savedButton = app.cells.firstMatch.buttons[<span class="string">&quot;Saved&quot;</span>].firstMatch</span><br><span class="line">		<span class="type">XCTAssertTure</span>(savedButton.waitForExistence(timeout: <span class="number">30</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>XCTest在Xcode 13中新增的两项收集性能情况的诊断产物</p>
-<p>开启：<code>enablePerformanceTestsDiagnostics YES</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild test</span><br><span class="line">-project MealPannerApp.xcodeproj</span><br><span class="line">-scheme PerformanceTests</span><br><span class="line">-destination platform&#x3D;iOS,name&#x3D;&quot;iPhone&quot;</span><br><span class="line">-enablePerformanceTestsDiagnostics YES</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>Ktrace files</p>
-<p>Ktrace file能够打开，并展示以下分析报告：</p>
-<ul>
-<li>当卡顿发生时的渲染通道的状态</li>
-<li>因主线程阻塞，导致的Hang（APP无法响应用户的输入或者行为超过250ms，即记作一个hang）</li>
-</ul>
-</li>
-<li><p>Memory graphs</p>
-<blockquote>
-<p>Memory graph展示APP进程的地址空间的快照</p>
-</blockquote>
-<p>我们可以生成任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照，从而查看这一阶段内存占用的变化。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/4.png" alt="7:19"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>MetricKit &amp; Xcode Organizer</p>
-<p>检测线上环境的内存指标</p>
-</li>
-</ul>
-<h2 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h2><ul>
-<li><p>内存泄漏（Leaks）</p>
-<p>最常见内存泄漏的原因的是循环引用</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/5.png" alt="11:18"></p>
-<ul>
-<li><p>通过命令行查看memgraph文件</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/6.png" alt="12:28"></p>
-</li>
-</ul>
-</li>
-<li><p>堆大小问题（Heap size issues）</p>
-<blockquote>
-<p>堆是进程地址空间中储存动态分配的对象的段（section），有策略性的加载和释放内存，可以避免内存峰值过高引发OOM。</p>
-</blockquote>
-<ul>
-<li>堆分配回归（Heap allocation regressions）</li>
-<li>碎片化（Fragmentation）</li>
-</ul>
-</li>
-</ul>
-<h3 id="堆分配回归"><a href="#堆分配回归" class="headerlink" title="堆分配回归"></a>堆分配回归</h3><ul>
-<li>使用<code>vmmap -summary</code>对memgraph文件进行分析</li>
-</ul>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/7.png" alt="15:31"></p>
-<ul>
-<li><p>我们主要关心<code>Dirty Size</code>和<code>Swapped Size</code>两列数据</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/8.png" alt="16:09"></p>
-</li>
-</ul>
-<ul>
-<li><p>对任务开始（pre_XXX.memgraph）和结束（post_XXX.memgraph）两个时机的内存快照进行对比</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/9.png" alt="16:42"></p>
-</li>
-<li><p>可以在下方看到按类聚合的，各类对象占用内存的大小</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/10.png" alt="17:15"></p>
-<p>从图中可以看到，<code>non-object</code>类型的数据，占用内存约13M。在Swift中，<code>non-object</code>通常代表原始分配字节（raw malloced bytes）</p>
-</li>
-<li><p>打印memgraph文件中，类型为<code>non-object</code>且占用内存超过500k的对象</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/11.png" alt="17:36"></p>
-</li>
-<li><p>打印对象的引用树</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/12.png" alt="18:00"></p>
-</li>
-<li><p>可以通过<code>malloc_history -fullStacks</code>打印对象的分配调用栈</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/13.png" alt="19:42"></p>
-</li>
-<li><p>当不确定是哪个对象有问题时，可以通过<code>leaks --referenceTree</code>，自顶向下打印进程的所有内存中最可疑的对象</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/14.png" alt="18:40"></p>
-<ul>
-<li>可以通过<code>--groupByType</code>参数，按type聚合简化打印结果。</li>
-</ul>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/15.png" alt="19:08"></p>
-</li>
-</ul>
-<h3 id="碎片化"><a href="#碎片化" class="headerlink" title="碎片化"></a>碎片化</h3><blockquote>
-<p>先介绍两个概念：页和”脏页“</p>
-<ul>
-<li>页（Pages）：是最小的独立的内存单元</li>
-<li>一旦页中写入任何数据，都会使整页变成”脏页“</li>
-</ul>
-</blockquote>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/16.png" alt="21:37"></p>
-<p>当内存准备写入新的数据时，系统会优先尝试使用脏页中的空闲内存，而当即将分配的内存过大时，即使空闲内存的总大小足够，但其并不是一段连续的内存空间，仍会开辟一个新的脏页去写入这些数据。</p>
-<p>这些无法被使用的空闲内存就是”碎片化内存“</p>
-<p>再例如以下这种情况：我们分配的对象总共使用了4个页，但每个页的占用空间只占50%。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/25.png" alt="23:19"></p>
-<p>当我们释放这些对象后，这些4个脏页的内存空间仍有50%的碎片化内存。</p>
-<p>最理想化的状态应该将所有的分配的对象放在两页，如下图：</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/18.png" alt="23:42"></p>
-<p>这样一旦释放这些对象时，仅会留有两个脏页，并且不存在碎片化内存。</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/19.png" alt="23:52"></p>
-<ul>
-<li><p>我们的目标：</p>
-<ul>
-<li>让分配的对象尽可能连续且拥有同样的生命周期</li>
-<li>碎片化率保持在25%以下</li>
-<li>使用自动释放池</li>
-<li>特别注意长时间运行的进程</li>
-</ul>
-</li>
-<li><p><code>vmman -summary xx.memgraph</code>查看碎片化内存情况</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/20.png" alt="25:00"></p>
-<ul>
-<li><p>DefaultMallocZone</p>
-<p>平时开发者只需要关注这部分的内存空间，因为这是我们进行堆分配默认结束的地方</p>
-</li>
-<li><p>MallocStackLoggingLiteZone</p>
-<p>这个空间是所有堆分配结束的地方</p>
-</li>
-</ul>
-</li>
-<li><p>使用Instruments工具中的Allocations track查看内存情况</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/21.png" alt="26:41"></p>
-<p>其中的Destroyed和Persisted分别对应上面所描述的内存释放后的空闲内存（free memory）和仍未释放的内存（remaining objects）</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/22.png" alt="26:42"></p>
-</li>
-</ul>
-<p>回顾下我们的总体排查流程：</p>
-<p><img src="/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/23.png" alt="27:51"> </p>
-<h2 id="更多WWDC有关性能的Session"><a href="#更多WWDC有关性能的Session" class="headerlink" title="更多WWDC有关性能的Session"></a>更多WWDC有关性能的Session</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2018/416/">iOS memory deep dive WWDC18</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/411/">Getting started with Instruments WWDC19</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258/">Understand and eliminate hangs from your apps WWDC21</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1577,12 +1622,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
