@@ -145,6 +145,151 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/05/Building-Custom-Views-with-SwiftUI/" class="post-title-link" itemprop="url">用SwiftUI实现一个精美的App</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-05 23:13:34" itemprop="dateCreated datePublished" datetime="2021-07-05T23:13:34+08:00">2021-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-06 00:48:13" itemprop="dateModified" datetime="2021-07-06T00:48:13+08:00">2021-07-06</time>
+              </span>
+
+          
+            <span id="/2021/07/05/Building-Custom-Views-with-SwiftUI/" class="post-meta-item leancloud_visitors" data-flag-title="用SwiftUI实现一个精美的App" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/05/Building-Custom-Views-with-SwiftUI/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/05/Building-Custom-Views-with-SwiftUI/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="SwiftUI布局基础"><a href="#SwiftUI布局基础" class="headerlink" title="SwiftUI布局基础"></a>SwiftUI布局基础</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView: View &#123;</span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Text(&quot;Hello, world!&quot;)</span><br><span class="line">&#x2F;&#x2F;            .edgesIgnoringSafeArea(.all)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码包含三个视图：</p>
+<p>01:44</p>
+<ul>
+<li><p>视图等级底部的文本（图中Hello World）</p>
+</li>
+<li><p>内容视图（和文本的布局一致，即图中Hello World四周白线内）</p>
+</li>
+<li><p>根视图（屏幕Size - 安全区域）</p>
+<p>如果想将根视图扩展到安全区，可以使用<code>edgesIgnoringSafeArea(.all)</code>修饰器</p>
+</li>
+</ul>
+<p>当然，文本和文本的内容视图，我们通常当做同一个来操作</p>
+<p>2：18</p>
+<p><em>在SwiftUI中，不能给子视图强制规定一个尺寸，而是应该有父视图决定</em></p>
+<h3 id="布局步骤"><a href="#布局步骤" class="headerlink" title="布局步骤"></a>布局步骤</h3><ul>
+<li>父视图提供给子视图一个Size</li>
+<li>子视图决定自身的Size（子视图也许不能完全使用父视图的Size）</li>
+<li>父视图将子视图放在其坐标系中</li>
+<li>SwiftUI会让视图坐标像最接近的像素值取整</li>
+</ul>
+<p>例一：查看一段代码的布局：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Text</span>(<span class="string">&quot;Avocado Toast&quot;</span>)</span><br><span class="line">            .padding(<span class="number">10</span>)</span><br><span class="line">            .background(<span class="type">Color</span>.green)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在设置<code>background</code>、<code>padding</code>修饰器时，会在Text视图和根视图中间插入对应的背景视图和边距视图</p>
+<p> <img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/1.gif" alt="1"></p>
+<p>例二：图片的原尺寸为20x20，我们希望1.5倍尺寸展示图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView: View &#123;</span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Image(&quot;20x20_avoado&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.frame(width: 30, height: 30)</span><br></pre></td></tr></table></figure>
+
+<p>效果：图片尺寸不会发生变化，但是在图片周围会插入一个30x30尺寸的Frame视图</p>
+<p>9：39</p>
+<blockquote>
+<p>在SwiftUI中frame并不是一个重要的布局元素，它其实只是一个View。</p>
+</blockquote>
+<p>例三：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 子视图必须平等竞争一个空间</span><br><span class="line">HStack &#123;</span><br><span class="line">            Text(&quot;Delicious&quot;)</span><br><span class="line">            Image(&quot;20x20_avocado&quot;)</span><br><span class="line">            Text(&quot;Avocado Toast&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        .lineLimit(1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/2.1.gif"></p>
+<ul>
+<li><p>设置文字底基线对齐</p>
+<p>19：51</p>
+</li>
+<li><p>设置图片的底基线</p>
+<p>20：40</p>
+</li>
+</ul>
+<p>例四：让不同容器中的视图对齐</p>
+<p>21:14</p>
+<ul>
+<li><p>自定义对齐方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension VerticalAlignment &#123;</span><br><span class="line">    private enum MidStarAndTitle : AlignmentID &#123;</span><br><span class="line">        &#x2F;&#x2F; 告诉SwiftUI如何计算默认值</span><br><span class="line">        static func defaultValue(in d: ViewDimensions) -&gt; CGFloat &#123;</span><br><span class="line">            return d[.bottom]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    static let midStarAndTitle &#x3D; VerticalAlignment(MidStarAndTitle.self)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置文字的基线</p>
+<p>22:55</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1424,178 +1569,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" class="post-title-link" itemprop="url">iOS中的Hang是什么？该如何治理？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-06-14 21:27:04 / Modified: 23:22:25" itemprop="dateCreated datePublished" datetime="2021-06-14T21:27:04+08:00">2021-06-14</time>
-            </span>
-
-          
-            <span id="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="iOS中的Hang是什么？该如何治理？" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是Hang？"><a href="#什么是Hang？" class="headerlink" title="什么是Hang？"></a>什么是Hang？</h2><p>试想这样的场景：当用户在你的APP中进行交互时，APP却没有及时的响应用户的操作。</p>
-<p>这种体验可以被描述为延时、慢、卡顿，在Apple开发中，我们称这种无响应的表现为Hang。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/1.png" alt="1:35"></p>
-<blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10258">Understand and eliminate hangs from your app</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">诊断APP的电源和性能回归</a></p>
-</blockquote>
-<h2 id="理解main-runloop"><a href="#理解main-runloop" class="headerlink" title="理解main runloop"></a>理解main runloop</h2><p>用户的交互均在主线程的Runloop发生。当用户和APP交互，主线程会接受到这个事件，接下来处理这个事件，然后更新UI。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/2.png" alt="2:03"></p>
-<p>如果处理事件耗费的很长时间，就从用户交互到UI更新之间会发生延时（delay）。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/3.png" alt="2:31"></p>
-<h2 id="Hang通常由什么引起？"><a href="#Hang通常由什么引起？" class="headerlink" title="Hang通常由什么引起？"></a>Hang通常由什么引起？</h2><p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/4.png" alt="3:52"></p>
-<ul>
-<li><p>主线程任务忙（Busy）</p>
-<p>例如：过渡加载资源。当前页面中只需要展示前4个图片，但是却一次性加载了所有的图片。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/5.png" alt="4:35"></p>
-<p>例如：执行了与主线程不相关的任务。</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/6.png" alt="5:18"></p>
-<p>再比如了使用次优的API。像绘制图片圆角有两种方法：</p>
-<ul>
-<li><p>方法一：</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/7.png" alt="6:23"></p>
-</li>
-<li><p>方法二：</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/8.png" alt="6:38"></p>
-</li>
-</ul>
-<p>比较这两种方法，法一是CPU密集型操作，会消耗大量内存。法二使用GPU进行绘制，更快更及时。</p>
-</li>
-<li><p>主线程阻塞（Blocked）</p>
-<p>可能导致主线程阻塞的操作，例如：</p>
-<ul>
-<li><p>同步请求网络，并等待数据返回</p>
-</li>
-<li><p>文件IO等访问系统资源的行为</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/9.png" alt="10:29"></p>
-</li>
-<li><p>数据库操作</p>
-</li>
-<li><p>锁</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/10.png" alt="8:57"></p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/11.png" alt="9:02"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="如何诊断Hang"><a href="#如何诊断Hang" class="headerlink" title="如何诊断Hang"></a>如何诊断Hang</h2><ul>
-<li><p>使用Instruments，排查线下的问题</p>
-<ul>
-<li><p>Time Profile</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/12.png" alt="13:00"></p>
-</li>
-</ul>
-</li>
-<li><p>使用MetricKit，检测线上的情况</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/13.png" alt="13:38"></p>
-</li>
-</ul>
-<h2 id="如果治理Hang？"><a href="#如果治理Hang？" class="headerlink" title="如果治理Hang？"></a>如果治理Hang？</h2><p>核心目标：减轻主线程的工作</p>
-<ul>
-<li><p>优化必需在主线程中执行的任务</p>
-<ul>
-<li><p>使用缓存</p>
-<p>例如：由其他线程负责保存和更新缓存，主线程只负责读</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/14.png" alt="16:29"></p>
-</li>
-<li><p>使用Notification</p>
-<p>在主线程中发送通知，其他线程接受通知并异步处理数据</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/15.png" alt="17:47"></p>
-</li>
-</ul>
-</li>
-<li><p>移除主线程不必要的任务</p>
-<p>通常来说，为UI提供关键信息的任务，应该在主线程执行。此外，所有的View和View Controller必须在主线程创建、修改和销毁。</p>
-<p>而计算任务可以在其他线程执行，然后在主线程同步UI。一些不重要的维护、非时间敏感的任务应该在其他线程异步执行。</p>
-<p>例如：网络请求</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/16.png" alt="19:28"></p>
-<ul>
-<li><p>使用GCD异步处理任务</p>
-<p><img src="/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/17.png" alt="20:21"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2016/411/">System Trace in depth</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10081/">What’s new in MetricKit</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose power and performance regressions in your app</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/417/">Improving battery life and performance</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2017/706/">Modernizing Grand Central Dispatch</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1665,7 +1638,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
