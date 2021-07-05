@@ -20,16 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="3.10 栈段我们可以将长度为N(N &lt;&#x3D; 64k)的一组地址连续、起始地址为16的倍数的内存单元，当作栈来用，从而定义了一个栈段。   问题：3.11 如果我们将10000H~1FFFFH这段空间当做栈段，初始状态是空的，此时，SS&#x3D;1000H，SP&#x3D;? 换位思考： 栈为空，相当于栈中唯一的元素出栈，出栈后，SP&#x3D;SP+2。  SP原来为FFFEH，加2后SP&#x3D;0，所以，当栈为空的时候，S">
+<meta property="og:type" content="article">
 <meta property="og:title" content="汇编语言学习笔记（八）">
 <meta property="og:url" content="http://example.com/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/index.html">
 <meta property="og:site_name" content="Leoolin">
+<meta property="og:description" content="3.10 栈段我们可以将长度为N(N &lt;&#x3D; 64k)的一组地址连续、起始地址为16的倍数的内存单元，当作栈来用，从而定义了一个栈段。   问题：3.11 如果我们将10000H~1FFFFH这段空间当做栈段，初始状态是空的，此时，SS&#x3D;1000H，SP&#x3D;? 换位思考： 栈为空，相当于栈中唯一的元素出栈，出栈后，SP&#x3D;SP+2。  SP原来为FFFEH，加2后SP&#x3D;0，所以，当栈为空的时候，S">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/2.png">
+<meta property="og:image" content="http://example.com/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/3.png">
 <meta property="article:published_time" content="2021-06-26T03:25:01.000Z">
-<meta property="article:modified_time" content="2021-06-26T03:25:24.843Z">
+<meta property="article:modified_time" content="2021-07-05T05:07:02.770Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/2.png">
 
 <link rel="canonical" href="http://example.com/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/">
 
@@ -171,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-26 11:25:01 / Modified: 11:25:24" itemprop="dateCreated datePublished" datetime="2021-06-26T11:25:01+08:00">2021-06-26</time>
+              <time title="Created: 2021-06-26 11:25:01" itemprop="dateCreated datePublished" datetime="2021-06-26T11:25:01+08:00">2021-06-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-05 13:07:02" itemprop="dateModified" datetime="2021-07-05T13:07:02+08:00">2021-07-05</time>
+              </span>
 
           
             <span id="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（八）" title="Views">
@@ -208,7 +219,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="3-10-栈段"><a href="#3-10-栈段" class="headerlink" title="3.10 栈段"></a>3.10 栈段</h1><p>我们可以将长度为N(N &lt;= 64k)的一组地址连续、起始地址为16的倍数的内存单元，当作栈来用，从而定义了一个栈段。</p>
+<p><img src="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/2.png" alt="截屏2021-07-05 上午9.50.40"></p>
+<blockquote>
+<p>问题：3.11</p>
+<p>如果我们将10000H~1FFFFH这段空间当做栈段，初始状态是空的，此时，SS=1000H，SP=?</p>
+<p>换位思考：</p>
+<p>栈为空，相当于栈中唯一的元素出栈，出栈后，SP=SP+2。</p>
+<ul>
+<li>SP原来为FFFEH，加2后SP=0，所以，当栈为空的时候，SS=1000H，SP=0。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>问题：3.12</p>
+<p>一个栈段最大可以设为多少？</p>
+<p>所以栈顶的变化范围是0~FFFFH，所以一个栈段的容量最大是64KB</p>
+<p>(0<del>1H，容量为2， 0</del>FFFF，容量为10000H，即64KB = 2^16)</p>
+</blockquote>
+<p><img src="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/3.png" alt="截屏2021-07-05 下午12.33.47"></p>
+<ul>
+<li>数据段：段地址放在DS中</li>
+<li>代码段：段地址放在CS中，第一条指令的偏移地址放在IP中。</li>
+<li>栈段：段地址放在SS中，栈顶单元的偏移地址放在SP中</li>
+</ul>
+
     </div>
 
     
@@ -292,6 +326,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-10-%E6%A0%88%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">3.10 栈段</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -305,7 +340,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

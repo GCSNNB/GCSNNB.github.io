@@ -145,6 +145,137 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（九）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-05 12:46:11 / Modified: 13:07:32" itemprop="dateCreated datePublished" datetime="2021-07-05T12:46:11+08:00">2021-07-05</time>
+            </span>
+
+          
+            <span id="/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（九）" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="4-1-一个源程序从写出到执行的过程"><a href="#4-1-一个源程序从写出到执行的过程" class="headerlink" title="4.1 一个源程序从写出到执行的过程"></a>4.1 一个源程序从写出到执行的过程</h2><ul>
+<li>一个汇编语言程序从写出到最终执行的简要过程：<ul>
+<li>编写</li>
+<li>编译连接</li>
+<li>执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-源程序"><a href="#4-2-源程序" class="headerlink" title="4.2 源程序"></a>4.2 源程序</h2><ul>
+<li><p>汇编指令</p>
+<p>有对应机器码的指令，可以被编译为机器指令，最终为CPU所执行</p>
+</li>
+<li><p>伪指令</p>
+<p>没有对应的机器码的指令，最终不被CPU所执行。</p>
+<p>伪指令是由编译器来执行的指令，编译器根据伪指令来进行相关的编译工作。</p>
+</li>
+</ul>
+<ol>
+<li><p>定义一个段</p>
+<ul>
+<li><p>segment和ends是一对成对使用的伪指令，这是在写可被编译器编译的汇编程序时，必须要用到的一对伪指令</p>
+<ul>
+<li>segment和ends的功能是定义一个段，segment说明一个段开始，ends说明一个段结束</li>
+</ul>
+</li>
+<li><p>一个汇编程序是由多个段组成的，这些段被用来存放代码、数据或当做栈空间来使用。</p>
+<ul>
+<li>一个有意义的程序至少有一个段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>寄存器与段的关联假设</p>
+<p>assume：含义为“假设”</p>
+<ul>
+<li>它假设某一段寄存器和程序中的某一个用segment…ends定义的段相关联。</li>
+<li>通过assume说明这种关联，在需要的情况下，编译程序可以将段寄存器和某一个具体的段相联系。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>汇编源程序</p>
+<ul>
+<li>伪指令（编译器处理）</li>
+<li>汇编指令（编译为机器码）</li>
+</ul>
+</li>
+<li><p>程序：源程序中最终由计算机执行，处理的指令或数据。</p>
+<p><img src="/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/1.png" alt="截屏2021-07-05 下午1.04.45"></p>
+<p><img src="/2021/07/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89/2.png" alt="截屏2021-07-05 下午1.05.07"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/04/What-s-New-in-Swift-WWDC19/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -664,10 +795,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-26 11:25:01 / Modified: 11:25:24" itemprop="dateCreated datePublished" datetime="2021-06-26T11:25:01+08:00">2021-06-26</time>
+              <time title="Created: 2021-06-26 11:25:01" itemprop="dateCreated datePublished" datetime="2021-06-26T11:25:01+08:00">2021-06-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-05 13:07:02" itemprop="dateModified" datetime="2021-07-05T13:07:02+08:00">2021-07-05</time>
+              </span>
 
           
             <span id="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（八）" title="Views">
@@ -701,7 +838,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="3-10-栈段"><a href="#3-10-栈段" class="headerlink" title="3.10 栈段"></a>3.10 栈段</h1><p>我们可以将长度为N(N &lt;= 64k)的一组地址连续、起始地址为16的倍数的内存单元，当作栈来用，从而定义了一个栈段。</p>
+<p><img src="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/2.png" alt="截屏2021-07-05 上午9.50.40"></p>
+<blockquote>
+<p>问题：3.11</p>
+<p>如果我们将10000H~1FFFFH这段空间当做栈段，初始状态是空的，此时，SS=1000H，SP=?</p>
+<p>换位思考：</p>
+<p>栈为空，相当于栈中唯一的元素出栈，出栈后，SP=SP+2。</p>
+<ul>
+<li>SP原来为FFFEH，加2后SP=0，所以，当栈为空的时候，SS=1000H，SP=0。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>问题：3.12</p>
+<p>一个栈段最大可以设为多少？</p>
+<p>所以栈顶的变化范围是0~FFFFH，所以一个栈段的容量最大是64KB</p>
+<p>(0<del>1H，容量为2， 0</del>FFFF，容量为10000H，即64KB = 2^16)</p>
+</blockquote>
+<p><img src="/2021/06/26/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89/3.png" alt="截屏2021-07-05 下午12.33.47"></p>
+<ul>
+<li>数据段：段地址放在DS中</li>
+<li>代码段：段地址放在CS中，第一条指令的偏移地址放在IP中。</li>
+<li>栈段：段地址放在SS中，栈顶单元的偏移地址放在SP中</li>
+</ul>
+
       
     </div>
 
@@ -751,7 +911,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-28 11:01:20" itemprop="dateModified" datetime="2021-06-28T11:01:20+08:00">2021-06-28</time>
+                <time title="Modified: 2021-07-05 13:08:22" itemprop="dateModified" datetime="2021-07-05T13:08:22+08:00">2021-07-05</time>
               </span>
 
           
@@ -1435,124 +1595,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">诊断APP的电源和性能回归</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-13 20:24:09" itemprop="dateCreated datePublished" datetime="2021-06-13T20:24:09+08:00">2021-06-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-14 23:22:12" itemprop="dateModified" datetime="2021-06-14T23:22:12+08:00">2021-06-14</time>
-              </span>
-
-          
-            <span id="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" class="post-meta-item leancloud_visitors" data-flag-title="诊断APP的电源和性能回归" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Instruments工具包含了非常丰富的数据，可以自由选择查看各机型、各指标类目的具体性能数据，同样也正因为其展示的数据太过庞杂，可能让开发者不清楚该从如何入手去进行优化。</p>
-<p>Xcode 13中Instruments中新增了Regressions模块，它会突出需要优先处理的性能问题，来简化工作流。</p>
-<blockquote>
-<p>（温馨提示：本片内容来源自WWDC21：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Diagnose Power and Performance regressions in your app</a>）</p>
-<p>想了解更多WWDC2021内容的小伙伴，可以阅读我以下文章，欢迎多多交流和指正</p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/08/What-s-new-in-WWDC21/">一文带你读完WWDC21核心（新）技术点</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/09/APP%E6%80%A7%E8%83%BD%E7%BB%88%E6%9E%81%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/">APP终极性能生存指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/12/WWDC21-%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">检测和诊断内存问题</a></p>
-<p><a target="_blank" rel="noopener" href="https://gcsnnb.github.io/2021/06/14/iOS%E4%B8%AD%E7%9A%84Hang%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%88%E8%AF%A5%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86%EF%BC%9F/">iOS中的Hang是什么？该如何治理？</a></p>
-</blockquote>
-<h2 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h2><p>当一个APP相对与近期的版本，在性能或电量方面发生劣化，就称为回归（Regression）。</p>
-<p>比如在上线一个新版本后，APP启动时间增加。</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/1.png" alt="3:47"></p>
-<p>最新版本的启动时间，会与近期几个版本的启动时间的平均值进行比较，如果最新版本的启动时间更长，就会标记为回归。</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/2.png" alt="4:33"></p>
-<p>Regression左侧栏汇总了哪些指标被回归，以及相较上几个版本劣化了多少。</p>
-<ul>
-<li><p>Disk Writes</p>
-<p>磁盘和内存还有CPU一样都是受限制的资源，不检查磁盘写入会损耗和伤害底层设备，同时还可能造成Hang（用户操作超过250ms未响应记作一个Hang）和UI卡顿，甚至缩短电池寿命。</p>
-<ul>
-<li>Insights</li>
-</ul>
-<p>Organzier新增了一个叫做Insights区域的区域，来提供一些性能优化建议</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/4.png" alt="10:29"></p>
-</li>
-<li><p>File activities</p>
-<p>Instruments中的File activities也可以用来debug储存相关的问题。</p>
-<p><img src="/2021/06/13/%E8%AF%8A%E6%96%ADAPP%E7%9A%84%E7%94%B5%E6%BA%90%E5%92%8C%E6%80%A7%E8%83%BD%E5%9B%9E%E5%BD%92/3.png" alt="11:40"></p>
-</li>
-</ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2020/10078/">Why is my app getting killed?</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10203/">Triage TestFlight crashes with Xcode Organizer</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2021/10087/">Identify trends with the Power and Performace API</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1622,7 +1664,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
