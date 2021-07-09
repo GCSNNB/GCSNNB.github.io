@@ -20,21 +20,34 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="SwiftUI布局基础123456struct ContentView: View &amp;#123;    var body: some View &amp;#123;        Text(&quot;Hello, world!&quot;)&#x2F;&#x2F;            .edgesIgnoringSafeArea(.all)    &amp;#125;&amp;#125;  这段代码包含三个视图： 0">
+  <meta name="description" content="SwiftUI中的一切都是视图。 文章来源：Building Custom Views with SwiftUI  SwiftUI布局基础123456struct ContentView: View &amp;#123;    var body: some View &amp;#123;        Text(&quot;Hello, world!&quot;)&#x2F;&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用SwiftUI实现一个精美的App">
 <meta property="og:url" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/index.html">
 <meta property="og:site_name" content="Leoolin">
-<meta property="og:description" content="SwiftUI布局基础123456struct ContentView: View &amp;#123;    var body: some View &amp;#123;        Text(&quot;Hello, world!&quot;)&#x2F;&#x2F;            .edgesIgnoringSafeArea(.all)    &amp;#125;&amp;#125;  这段代码包含三个视图： 0">
+<meta property="og:description" content="SwiftUI中的一切都是视图。 文章来源：Building Custom Views with SwiftUI  SwiftUI布局基础123456struct ContentView: View &amp;#123;    var body: some View &amp;#123;        Text(&quot;Hello, world!&quot;)&#x2F;&#x2F;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/1.gif">
-<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/2.1.gif">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/1.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/2.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/1.gif">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/3.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/2.1.gif">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/4.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/5.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/6.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/7.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/8.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/9.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/10.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/11.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/12.png">
+<meta property="og:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/3.gif">
 <meta property="article:published_time" content="2021-07-05T15:13:34.000Z">
-<meta property="article:modified_time" content="2021-07-05T16:48:13.057Z">
+<meta property="article:modified_time" content="2021-07-09T02:16:42.851Z">
 <meta property="article:author" content="林辰">
 <meta property="article:tag" content="SwiftUI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/1.gif">
+<meta name="twitter:image" content="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/1.png">
 
 <link rel="canonical" href="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/">
 
@@ -184,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-06 00:48:13" itemprop="dateModified" datetime="2021-07-06T00:48:13+08:00">2021-07-06</time>
+                <time title="Modified: 2021-07-09 10:16:42" itemprop="dateModified" datetime="2021-07-09T10:16:42+08:00">2021-07-09</time>
               </span>
 
           
@@ -219,10 +232,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="SwiftUI布局基础"><a href="#SwiftUI布局基础" class="headerlink" title="SwiftUI布局基础"></a>SwiftUI布局基础</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView: View &#123;</span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Text(&quot;Hello, world!&quot;)</span><br><span class="line">&#x2F;&#x2F;            .edgesIgnoringSafeArea(.all)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>SwiftUI中的一切都是视图。</p>
+<p>文章来源：<a target="_blank" rel="noopener" href="https://developer.apple.com/videos/play/wwdc2019/237">Building Custom Views with SwiftUI</a></p>
+</blockquote>
+<h2 id="SwiftUI布局基础"><a href="#SwiftUI布局基础" class="headerlink" title="SwiftUI布局基础"></a>SwiftUI布局基础</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView: View &#123;</span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Text(&quot;Hello, world!&quot;)</span><br><span class="line">&#x2F;&#x2F;            .edgesIgnoringSafeArea(.all)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这段代码包含三个视图：</p>
-<p>01:44</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/1.png" alt="01:44"></p>
 <ul>
 <li><p>视图等级底部的文本（图中Hello World）</p>
 </li>
@@ -233,7 +250,7 @@
 </li>
 </ul>
 <p>当然，文本和文本的内容视图，我们通常当做同一个来操作</p>
-<p>2：18</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/2.png" alt="2：18"></p>
 <p><em>在SwiftUI中，不能给子视图强制规定一个尺寸，而是应该有父视图决定</em></p>
 <h3 id="布局步骤"><a href="#布局步骤" class="headerlink" title="布局步骤"></a>布局步骤</h3><ul>
 <li>父视图提供给子视图一个Size</li>
@@ -245,7 +262,7 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Text</span>(<span class="string">&quot;Avocado Toast&quot;</span>)</span><br><span class="line">            .padding(<span class="number">10</span>)</span><br><span class="line">            .background(<span class="type">Color</span>.green)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>在设置<code>background</code>、<code>padding</code>修饰器时，会在Text视图和根视图中间插入对应的背景视图和边距视图</p>
-<p> <img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/1.gif" alt="1"></p>
+<p> <img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/1.gif" alt="1"></p>
 <p>例二：图片的原尺寸为20x20，我们希望1.5倍尺寸展示图片</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView: View &#123;</span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Image(&quot;20x20_avoado&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -253,32 +270,129 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.frame(width: 30, height: 30)</span><br></pre></td></tr></table></figure>
 
 <p>效果：图片尺寸不会发生变化，但是在图片周围会插入一个30x30尺寸的Frame视图</p>
-<p>9：39</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/3.png" alt="9：39"></p>
 <blockquote>
 <p>在SwiftUI中frame并不是一个重要的布局元素，它其实只是一个View。</p>
 </blockquote>
 <p>例三：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 子视图必须平等竞争一个空间</span><br><span class="line">HStack &#123;</span><br><span class="line">            Text(&quot;Delicious&quot;)</span><br><span class="line">            Image(&quot;20x20_avocado&quot;)</span><br><span class="line">            Text(&quot;Avocado Toast&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        .lineLimit(1)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/Joshsone/GCBlog/source/_posts/Building-Custom-Views-with-SwiftUI/2.1.gif"></p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/2.1.gif"></p>
 <ul>
 <li><p>设置文字底基线对齐</p>
-<p>19：51</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/4.png" alt="19：51"></p>
 </li>
 <li><p>设置图片的底基线</p>
-<p>20：40</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/5.png" alt="20：40"></p>
 </li>
 </ul>
 <p>例四：让不同容器中的视图对齐</p>
-<p>21:14</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/6.png" alt="21:14"></p>
 <ul>
 <li><p>自定义对齐方式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension VerticalAlignment &#123;</span><br><span class="line">    private enum MidStarAndTitle : AlignmentID &#123;</span><br><span class="line">        &#x2F;&#x2F; 告诉SwiftUI如何计算默认值</span><br><span class="line">        static func defaultValue(in d: ViewDimensions) -&gt; CGFloat &#123;</span><br><span class="line">            return d[.bottom]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    static let midStarAndTitle &#x3D; VerticalAlignment(MidStarAndTitle.self)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置文字的基线</p>
-<p>22:55</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/7.png" alt="22:55"></p>
 </li>
 </ul>
+<h2 id="SwiftUI绘图"><a href="#SwiftUI绘图" class="headerlink" title="SwiftUI绘图"></a>SwiftUI绘图</h2><p>SwiftUI默认提供了多种样式的图形，比如圆形，胶囊和椭圆</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/8.png" alt="26：08"></p>
+<ul>
+<li><p>实现渐变色</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/9.png" alt="27：00"></p>
+<ul>
+<li><p>角渐变色</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/10.png" alt="27:06"></p>
+</li>
+<li><p>使用角渐变色填充圆</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/11.png" alt="27:26"></p>
+</li>
+<li><p>使用渐变色填充圆环</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/12.png" alt="27：39"></p>
+</li>
+</ul>
+</li>
+<li><p>实现复杂图形绘制</p>
+<p><img src="/2021/07/05/Building-Custom-Views-with-SwiftUI/3.gif"></p>
+<blockquote>
+<p>完整代码可参见：<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/swiftui/drawing_and_animation/building_custom_views_in_swiftui">官方Demo</a></p>
+</blockquote>
+<p>总体步骤主要包括：</p>
+<ol>
+<li>创建单个楔形的数据模型</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ring</span>: <span class="title">ObservableObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// A single wedge within a chart ring.</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Wedge</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">        <span class="comment">/// 弧度值（所有楔形的弧度值之合最大为2π，即360°）</span></span><br><span class="line">        <span class="keyword">var</span> width: <span class="type">Double</span></span><br><span class="line">        <span class="comment">/// 横轴深度比例 [0,1]. （用来计算楔形的长度）</span></span><br><span class="line">        <span class="keyword">var</span> depth: <span class="type">Double</span></span><br><span class="line">        <span class="comment">/// 颜色值</span></span><br><span class="line">        <span class="keyword">var</span> hue: <span class="type">Double</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>绘制单个子图形</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">WedgeShape</span>: <span class="title">Shape</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">path</span><span class="params">(<span class="keyword">in</span> rect: CGRect)</span></span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line">    		<span class="comment">// WedgeGeometry是用来计算绘制信息的类，详细代码见Demo。</span></span><br><span class="line">        <span class="keyword">let</span> points = <span class="type">WedgeGeometry</span>(wedge, <span class="keyword">in</span>: rect)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> path = <span class="type">Path</span>()</span><br><span class="line">        path.addArc(center: points.center, radius: points.innerRadius,</span><br><span class="line">            startAngle: .radians(wedge.start), endAngle: .radians(wedge.end),</span><br><span class="line">            clockwise: <span class="literal">false</span>)</span><br><span class="line">        path.addLine(to: points[.bottomTrailing])</span><br><span class="line">        path.addArc(center: points.center, radius: points.outerRadius,</span><br><span class="line">            startAngle: .radians(wedge.end), endAngle: .radians(wedge.start),</span><br><span class="line">            clockwise: <span class="literal">true</span>)</span><br><span class="line">        path.closeSubpath()</span><br><span class="line">        <span class="keyword">return</span> path</span><br><span class="line">    &#125;  </span><br><span class="line">  <span class="comment">// ···</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>用ZStack组装所有的楔形</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> wedges = <span class="type">ZStack</span> &#123;</span><br><span class="line">            <span class="type">ForEach</span>(ring.wedgeIDs, id: \.<span class="keyword">self</span>) &#123; wedgeID <span class="keyword">in</span></span><br><span class="line">                <span class="type">WedgeView</span>(wedge: <span class="keyword">self</span>.ring.wedges[wedgeID]!)</span><br><span class="line"></span><br><span class="line">                <span class="comment">// use a custom transition for insertions and deletions.</span></span><br><span class="line">                .transition(.scaleAndFade)</span><br><span class="line"></span><br><span class="line">                <span class="comment">// remove wedges when they&#x27;re tapped.</span></span><br><span class="line">                .onTapGesture &#123;</span><br><span class="line">                    withAnimation(.spring()) &#123;</span><br><span class="line">                        <span class="keyword">self</span>.ring.removeWedge(id: wedgeID)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果不加这个Spacer()，会使Mac程序，在没添加任何楔形时，APP尺寸为0。</span></span><br><span class="line">            <span class="type">Spacer</span>()</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了更好的理解这个工程，你还需要一些知识：</p>
+<h3 id="如何使用Animatable自定义复杂的动画"><a href="#如何使用Animatable自定义复杂的动画" class="headerlink" title="如何使用Animatable自定义复杂的动画"></a>如何使用<code>Animatable</code>自定义复杂的动画</h3><p>假如我们想实现一个简单的SwiftUI动画，比如点击Button按钮渐变消失，我们可以这样来实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@State private var hidden &#x3D; false</span><br><span class="line"></span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Button(&quot;Tap Me&quot;) &#123;</span><br><span class="line">            self.hidden &#x3D; true</span><br><span class="line">        &#125;</span><br><span class="line">        .opacity(hidden ? 0 : 1)</span><br><span class="line">        .animation(.easeInOut(duration: 2))</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们使用<code>@State</code>修饰变量<code>hidden</code>，当<code>hidden</code>的值发生变化时，SwiftUI会自动为我们处理渐变动画。而SwiftUI能够为我们自动执行动画的前提是：<strong>SwiftUI已经知道要如果展示该动画效果</strong>，那什么情况下，SwiftUI不知道要如何展示动画呢？</p>
+<p>比如：我们通过下面代码绘制出了多角形。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Shape(sides: 3)</span><br></pre></td></tr></table></figure>
+
+<p>该方法支持传入不同的值，生成不同的多边形。如果我们希望从三边形变成四边型，那么可以写如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Shape(sides: isSquare ? 4 : 3)</span><br><span class="line">    .stroke(Color.blue, lineWidth: 3)</span><br><span class="line">    .animation(.easeInOut(duration: duration))</span><br></pre></td></tr></table></figure>
+
+<p>但是运行代码后发现，这段代码并无动画过渡效果。这是因为在执行动画的过程中，SwiftUI会从起始状态到终止状态分成不同的阶段来绘制，像<code>opacity</code>从0-1，可能会分成0，0.1，0.2，0.3，···，0.9，1.0，SwiftUI依次进行绘制，从而展示过渡状态。</p>
+<p>同理，从三角形变到四边形，SwiftUI也需要绘制中间状态，但SwiftUI并不知道该如何绘制3.5边形。这时就需要我们自己来告诉SwiftUI该如何绘制了。</p>
+<ul>
+<li><p><code>animatableData</code>是<code>Animatable</code>协议中，唯一需要实现的方法，通过这个方法来告诉SwiftUI需要监听哪些属性的变化。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代表需要监听的值为Float类型</span></span><br><span class="line"><span class="keyword">var</span> animatableData: <span class="type">Float</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="comment">//··· &#125;</span></span><br><span class="line">        <span class="keyword">set</span> &#123; <span class="comment">//··· &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然而并不是所有类型的属性都能够被SwiftUI所监听，只有遵循<code>VectorArithmetic</code>协议的对象<code>AnimatablePair</code>, <code>CGFloat</code>, <code>Double</code>, <code>EmptyAnimatableData</code> and <code>Float</code>才能被SwiftUI监听。</p>
+</li>
+<li><p>要实现Demo中楔形图片变换的效果，需要监听的值有<code>start</code>，<code>end</code>，<code>depth</code>和<code>hue</code>这四个值。<code>animatableData</code>属性的返回值也应该包含这四个值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Ring</span>.<span class="title">Wedge</span>: <span class="title">Animatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">AnimatableData</span> = <span class="type">AnimatablePair</span>&lt;<span class="type">AnimatablePair</span>&lt;<span class="type">Double</span>, <span class="type">Double</span>&gt;, <span class="type">AnimatablePair</span>&lt;<span class="type">Double</span>, <span class="type">Double</span>&gt;&gt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">AnimatableData</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            .<span class="keyword">init</span>(.<span class="keyword">init</span>(start, end), .<span class="keyword">init</span>(depth, hue))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            start = newValue.first.first</span><br><span class="line">            end = newValue.first.second</span><br><span class="line">            depth = newValue.second.first</span><br><span class="line">            hue = newValue.second.second</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来在这四个属性发生变化时，SwiftUI会通过函数<code>func path(in rect: CGRect) -&gt; Path &#123;&#125;</code>重新绘制，这样就可以展示动画的过渡效果了</p>
+</li>
+</ul>
+<h3 id="一些琐碎的知识点"><a href="#一些琐碎的知识点" class="headerlink" title="一些琐碎的知识点"></a>一些琐碎的知识点</h3><ul>
+<li><p>使用<code>drawingGroup()</code>提高复杂UI的渲染效率</p>
+<p>以往每创建一个楔形，都是一个单独的View，当楔形数量非常多时，再加上每个View都在执行动画，非常耗费性能。在SwiftUI中，可以通过<code>drawingGroup()</code>将相同类型的View通过Metal绘制在一张画布上，从而减少渲染耗费的性能，避免卡顿。</p>
+</li>
+<li><p>使用<code>Equatable</code>防止视图的新值和旧值相同时，更新子视图</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Wedge</span>: <span class="title">Equatable</span> </span>&#123; </span><br><span class="line">	<span class="comment">// ···</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>PassthroughSubject</code>通知SwiftUI值发生变化</p>
+<ul>
+<li><p>PassthroughSubject</p>
+<ul>
+<li>使用<code>PassthroughSubject</code>通知绑定的属性的视图，属性发生变化，需要重新绘制。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let objectWillChange &#x3D; PassthroughSubject&lt;Void, Never&gt;()</span><br><span class="line"></span><br><span class="line">private(set) var wedgeIDs &#x3D; [Int]() &#123;</span><br><span class="line">        willSet &#123;</span><br><span class="line">            objectWillChange.send()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>contentView</code>中监听了<code>Ring</code>模型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnvironmentObject var ring: Ring</span><br></pre></td></tr></table></figure>
+
+<p>因此在Ring模型的<code>wedgeIDs</code>发生变化时，会发出通知告知<code>contentView</code>使用其绘制的地方，需要重新绘制</p>
+</li>
+<li><p>CurrentValueSubject</p>
+<p>我们常用的<code>@Published</code>属性包装器，实际上就是一种<code>CurrentValueSubject</code></p>
+</li>
+</ul>
+<p>简单来说：<code>PassthroughSubject</code>用于表示事件。<code>CurrentValueSubject</code>用于表示状态。用现实世界的案例进行类比。</p>
+<p><strong>PassthroughSubject = 门铃按钮</strong>，当有人按门时，只有在你在家时才会收到通知。<strong>CurrentValueSubject = 电灯开关</strong>，当你在外面时，有人打开了您家中的灯。你回到家，你知道有人打开了它们。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>  <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/60482737/what-is-passthroughsubject-currentvaluesubject">https://stackoverflow.com/questions/60482737/what-is-passthroughsubject-currentvaluesubject</a></p>
+<p>  <a target="_blank" rel="noopener" href="https://swiftui-lab.com/swiftui-animations-part1/">https://swiftui-lab.com/swiftui-animations-part1/</a></p>
 
     </div>
 
@@ -360,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SwiftUI%E5%B8%83%E5%B1%80%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">SwiftUI布局基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">布局步骤</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SwiftUI%E5%B8%83%E5%B1%80%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">SwiftUI布局基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">布局步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SwiftUI%E7%BB%98%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">SwiftUI绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Animatable%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%8D%E6%9D%82%E7%9A%84%E5%8A%A8%E7%94%BB"><span class="nav-number">2.1.</span> <span class="nav-text">如何使用Animatable自定义复杂的动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%90%90%E7%A2%8E%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">一些琐碎的知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
