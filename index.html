@@ -145,6 +145,146 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/13/Data-Flow-Through-SwiftUI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林辰">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leoolin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/13/Data-Flow-Through-SwiftUI/" class="post-title-link" itemprop="url">Data Flow Through SwiftUI</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-13 12:03:08" itemprop="dateCreated datePublished" datetime="2021-07-13T12:03:08+08:00">2021-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-16 23:41:48" itemprop="dateModified" datetime="2021-07-16T23:41:48+08:00">2021-07-16</time>
+              </span>
+
+          
+            <span id="/2021/07/13/Data-Flow-Through-SwiftUI/" class="post-meta-item leancloud_visitors" data-flag-title="Data Flow Through SwiftUI" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/07/13/Data-Flow-Through-SwiftUI/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/13/Data-Flow-Through-SwiftUI/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><p>两种设计模式</p>
+<ul>
+<li><p>每次在视图中读取数据时，都会在那个视图中创建一个依赖</p>
+<p>每次数据发生变化时，视图也会发生变化</p>
+</li>
+<li><p>在视图层级中个，读取的每一条数据，都只有一个数据源</p>
+<p>例如，在同级视图中，用同一个数据，你的实现是这样的：</p>
+<p>03：40</p>
+<p>这种实现会在不同的View中维护同一个数据来源，这一个过程很容易造成数据同步错误导致的BUG。不妨改成这样来实现：</p>
+<p>4:10</p>
+</li>
+</ul>
+</li>
+<li><p>@State</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@State var isPlaying: Bool &#x3D; false</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>@State告诉系统<code>isPlaying</code>是一个可以变化的值，视图也会随之改变</p>
+</blockquote>
+<p>9:08</p>
+<p>当你声明一个<code>@State</code>变量时，SwiftUI框架会为之分配永久存储，SwiftUI可以在变量发生变化时，重新渲染其关联的视图和其所有的SubvIew（只会重新渲染发生改变的地方）</p>
+<p>11：02</p>
+<p>在SwiftUI中，数据流向是单一向的</p>
+</li>
+<li><p>@Binding</p>
+<p>保持不同视图的数据同步</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PlayerView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> episode: <span class="type">Episode</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> isPlaying: <span class="type">Bool</span> = <span class="literal">false</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">Text</span>(episode.title).foregroundColor(isPlaying ?.white : .gray)</span><br><span class="line">            <span class="type">Text</span>(episode.showTitle).font(.caption).foregroundColor(.gray)</span><br><span class="line">            <span class="type">PlayButton</span>(isPlaying: $isPlaying)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PlayButton</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这里的isPlaying和👆的是同一个，所以无需同步数据</span></span><br><span class="line">    @<span class="type">Binding</span> <span class="keyword">var</span> isPlaying: <span class="type">Bool</span></span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Button</span>(action: &#123;</span><br><span class="line">            <span class="keyword">self</span>.isPlaying.toggle()</span><br><span class="line">        &#125;) &#123;</span><br><span class="line">            <span class="type">Image</span>(systemName: isPlaying ? <span class="string">&quot;pause.circle&quot;</span> : <span class="string">&quot;play.circle&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Publisher</p>
+<p>19:45</p>
+<p>在SwiftUI中，使用Publisher来表述这些例如Timer和通知的外部事件。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接受来自currentTimePublisher的事件</span></span><br><span class="line">.onReceive(<span class="type">PodcastPlayer</span>.currentTimePublisher, perform: &#123; newCurrentTime <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">self</span>.currentTime = newCurrentTime</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>BindableObject</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PodcastPlayerStore</span>: <span class="title">BindableObject</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> didChange = <span class="type">PassthroughSubject</span>&lt;<span class="type">Void</span>, <span class="type">Never</span>&gt;()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">advance</span><span class="params">()</span></span> &#123;</span><br><span class="line">        currentEpisode = nextEpisode</span><br><span class="line">        currentTime = <span class="number">0.0</span></span><br><span class="line">        </span><br><span class="line">        didChange.send()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>PassthroughSubject是一个Publisher，SwiftUI会订阅这个Publisher，来更新视图层级</p>
+<ul>
+<li><p>@ObjectBinding</p>
+<p>当使用<code>@ObjectBinding</code>声明模型时，SwiftUI会识别出这个属性，并给它设置依赖，一旦模型发生变化，框架就会自动明白什么时候刷新视图。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct MyView: View &#123;</span><br><span class="line">	@ObjectBinding var model: MyModelObject</span><br><span class="line">	&#x2F;&#x2F; ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyView(model: modelInstance)</span><br></pre></td></tr></table></figure>
+
+<p>26:08</p>
+<p>所有声明@ObjectBindng模型的视图，都会自动订阅模型，并在模型发生改变时，刷新视图。（即：依赖自动追踪）</p>
+</li>
+</ul>
+</li>
+<li><p>创建一个间接依赖</p>
+<p>上面声明的依赖关系，属于视图直接依赖，接下来看看如何生成一个视图的间接依赖</p>
+<p>27：01</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/Building-Custom-Views-with-SwiftUI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1536,140 +1676,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林辰">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leoolin">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" class="post-title-link" itemprop="url">汇编语言学习笔记（六）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-06-16 07:51:38" itemprop="dateCreated datePublished" datetime="2021-06-16T07:51:38+08:00">2021-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-22 08:18:00" itemprop="dateModified" datetime="2021-06-22T08:18:00+08:00">2021-06-22</time>
-              </span>
-
-          
-            <span id="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言学习笔记（六）" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="3-6栈"><a href="#3-6栈" class="headerlink" title="3.6栈"></a>3.6栈</h1><p>操作规则：LIFO（后进先出）</p>
-<p>8086CPU提供的入栈和出栈的指令：</p>
-<ul>
-<li><p>Push（入栈）</p>
-<p>push ax：将寄存器ax中的数据送入栈中</p>
-</li>
-<li><p>Pop（出栈）</p>
-<p>push ax：从栈顶取出数据送入ax。</p>
-</li>
-</ul>
-<blockquote>
-<p>8086CPU的入栈和出栈操作都是以字为单位进行的</p>
-</blockquote>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/1.png" alt="截屏2021-06-16 上午8.13.13"></p>
-<ul>
-<li><p>CPU如何知道当前要执行的指令所在的位置？</p>
-<p>寄存器CS和IP中存放着当前指令的段地址和偏移地址</p>
-</li>
-<li><p>执行push和pop的时候，如何知道哪个单元是栈顶单元？</p>
-<p>8086CPU中，有两个寄存器：</p>
-<ul>
-<li>段寄存器SS  存放栈顶的段地址</li>
-<li>寄存器SP 存放栈顶的偏移地址</li>
-</ul>
-<p>任何时刻，SS:SP指向栈顶元素</p>
-</li>
-</ul>
-<p>push ax时：</p>
-<ul>
-<li><p>SP = SP - 2</p>
-</li>
-<li><p>将ax中的内容送入SS:SP指向的内存单元处，SS:SP此时指向新栈顶</p>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/2.png" alt="截屏2021-06-16 上午8.23.02"></p>
-</li>
-<li><p>将10000H~1000FH这段空间当做栈，初始状态栈是空的，此时，SS=1000H，SP=多少？</p>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/3.png" alt="截屏2021-06-16 上午8.25.46"></p>
-<h1 id="pop指令的执行过程"><a href="#pop指令的执行过程" class="headerlink" title="pop指令的执行过程"></a>pop指令的执行过程</h1></li>
-</ul>
-<p><code>pop ax</code></p>
-<ul>
-<li>将SS:SP指向的内存单元处的数据放入ax中；</li>
-<li>SP=SP+2，SS:SP指向当前栈顶下面的单元，以当前栈顶下面的单元为新的栈顶。</li>
-</ul>
-<p><img src="/2021/06/16/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/4.png" alt="截屏2021-06-22 上午8.14.47"></p>
-<p>注意：</p>
-<ul>
-<li>出栈后，SS:SP指向新的栈顶1000EH，pop操作前的栈顶元素，1000CH处的2266H依然存在，但是，它已不再栈中。</li>
-<li>当再次执行push等入栈指令后，SS：SP移至1000CH，并在里面写入新的数据，它将被覆盖。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1739,7 +1745,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1771,7 +1777,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
